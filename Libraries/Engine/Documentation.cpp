@@ -444,6 +444,17 @@ MethodDoc::~MethodDoc()
   }
 }
 
+void MethodDoc::Serialize(Serializer& stream)
+{
+  SerializeNameDefault(mName, String());
+  SerializeNameDefault(mDescription, String());
+  SerializeNameDefault(mReturnType, cDefaultReturn);
+  SerializeNameDefault(mParameters, cDefaultParameters);
+  SerializeNameDefault(mParameterList, Array<ParameterDoc*>());
+  SerializeNameDefault(mPossibleExceptionThrows, Array<ExceptionDoc*>());
+  SerializeNameDefault(mStatic, false);
+}
+
 // AttributeDoc
 AttributeDoc::AttributeDoc(AttributeExtension* attribute)
 {
@@ -539,17 +550,6 @@ void AttributeDocList::Sort(void)
   Zero::Sort(mObjectAttributes.All(), AttributeDocCompareFn);
   Zero::Sort(mFunctionAttributes.All(), AttributeDocCompareFn);
   Zero::Sort(mPropertyAttributes.All(), AttributeDocCompareFn);
-}
-
-void MethodDoc::Serialize(Serializer& stream)
-{
-  SerializeNameDefault(mName, String());
-  SerializeNameDefault(mDescription, String());
-  SerializeNameDefault(mReturnType, String());
-  SerializeNameDefault(mParameters, String());
-  SerializeNameDefault(mParameterList, Array<ParameterDoc*>());
-  SerializeNameDefault(mPossibleExceptionThrows, Array<ExceptionDoc*>());
-  SerializeNameDefault(mStatic, false);
 }
 
 // ClassDoc
