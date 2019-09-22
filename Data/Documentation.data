@@ -79979,12 +79979,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "FrameUpdate"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LogicUpdate"
-					var value = ""
 				}
 			}
 		}
@@ -79996,12 +79994,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Completed"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Running"
-					var value = ""
 				}
 			}
 		}
@@ -80013,12 +80009,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Auto"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Manual"
-					var value = ""
 				}
 			}
 		}
@@ -80030,12 +80024,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Normalized"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Standard"
-					var value = ""
 				}
 			}
 		}
@@ -80047,17 +80039,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Loop"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Pingpong"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PlayOnce"
-					var value = ""
 				}
 			}
 		}
@@ -80069,12 +80058,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Arrow"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Cube"
-					var value = ""
 				}
 			}
 		}
@@ -80086,12 +80073,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "AngularAxis"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LinearAxis"
-					var value = ""
 				}
 			}
 		}
@@ -80103,17 +80088,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Grouped"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PerSound"
-					var value = ""
 				}
 			}
 		}
@@ -80125,25 +80107,21 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Auto"
-					var value = ""
 					var value = "This will choose whether to stream a file depending on its length. Files longer than 30 seconds will be streamed from memory, and those longer than 1 minute will be streamed from file."
 				}
 				Object
 				{
 					var key = "StreamFromFile"
-					var value = ""
 					var value = "The audio data will be read from the file and decompressed as it plays."
 				}
 				Object
 				{
 					var key = "StreamFromMemory"
-					var value = ""
 					var value = "The compressed audio data will be read into memory when the Sound resource is loaded and will be decompressed as it plays."
 				}
 				Object
 				{
 					var key = "Uncompressed"
-					var value = ""
 					var value = "The audio data will be decompressed and held in memory when the Sound resource is loaded."
 				}
 			}
@@ -80157,13 +80135,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "High"
-					var value = ""
 					var value = "Audio will have a higher latency. This can fix some audio problems in some cases."
 				}
 				Object
 				{
 					var key = "Low"
-					var value = ""
 					var value = "The default setting, where audio will have a low amount of latency."
 				}
 			}
@@ -80177,37 +80153,31 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "AutoDetect"
-					var value = ""
 					var value = "The audio system will match its channels to the default output device."
 				}
 				Object
 				{
 					var key = "FiveOne"
-					var value = ""
 					var value = "Audio will be produced using a typical 5.1 speaker configuration."
 				}
 				Object
 				{
 					var key = "Mono"
-					var value = ""
 					var value = "Audio will be produced using only a single channel."
 				}
 				Object
 				{
 					var key = "Quad"
-					var value = ""
 					var value = "Audio will be produced using two left channels and two right channels."
 				}
 				Object
 				{
 					var key = "SevenOne"
-					var value = ""
 					var value = "Audio will be produced using a typical 7.1 speaker configuration."
 				}
 				Object
 				{
 					var key = "Stereo"
-					var value = ""
 					var value = "Audio will be produced using two channels, one for the left speaker and one for the right."
 				}
 			}
@@ -80221,12 +80191,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Client"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Server"
-					var value = ""
 				}
 			}
 		}
@@ -80238,12 +80206,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Dynamic"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Fixed"
-					var value = ""
 				}
 			}
 		}
@@ -80255,17 +80221,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "X"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Y"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Z"
-					var value = ""
 				}
 			}
 			var Description = "Defines a primary direction for an axis."
@@ -80278,107 +80241,86 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Boolean"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Boolean2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Boolean3"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Boolean4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Byte"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DoubleInteger"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DoubleReal"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Integer"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Integer2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Integer3"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Integer4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Other"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Quaternion"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Real"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Real2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Real2x2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Real3"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Real3x3"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Real4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Real4x4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "String"
-					var value = ""
 				}
 			}
 			var Description = "Use Archetype \"ResourceId:Name\" String as ReplicaType? Otherwise we will use ResourceId u64 as ReplicaType (much more efficient). This impacts bandwidth performance when first spawning/cloning new NetObject types to remote peers."
@@ -80391,32 +80333,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "NegativeX"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NegativeY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NegativeZ"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveX"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveZ"
-					var value = ""
 				}
 			}
 		}
@@ -80428,31 +80364,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Add"
-					var value = ""
 					var value = "Source is added to destination."
 				}
 				Object
 				{
 					var key = "Max"
-					var value = ""
 					var value = "The maximum value between source and destination is kept."
 				}
 				Object
 				{
 					var key = "Min"
-					var value = ""
 					var value = "The minimum value between source and destination is kept."
 				}
 				Object
 				{
 					var key = "ReverseSubtract"
-					var value = ""
 					var value = "Destination is subtracted from source."
 				}
 				Object
 				{
 					var key = "Subtract"
-					var value = ""
 					var value = "Source is subtracted from destination."
 				}
 			}
@@ -80466,67 +80397,56 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "DestAlpha"
-					var value = ""
 					var value = "The alpha channel of the destination value."
 				}
 				Object
 				{
 					var key = "DestColor"
-					var value = ""
 					var value = "The RGB of the destination value."
 				}
 				Object
 				{
 					var key = "InvDestAlpha"
-					var value = ""
 					var value = "One minus the alpha channel of the destination value."
 				}
 				Object
 				{
 					var key = "InvDestColor"
-					var value = ""
 					var value = "One minus the RGB of the destination value."
 				}
 				Object
 				{
 					var key = "InvSourceAlpha"
-					var value = ""
 					var value = "One minus the alpha channel of the source value."
 				}
 				Object
 				{
 					var key = "InvSourceColor"
-					var value = ""
 					var value = "One minus the RGB of the source value."
 				}
 				Object
 				{
 					var key = "One"
-					var value = ""
 					var value = "Multiplied by one, operand is unchanged."
 				}
 				Object
 				{
 					var key = "SourceAlpha"
-					var value = ""
 					var value = "The alpha channel of the source value."
 				}
 				Object
 				{
 					var key = "SourceAlphaSaturate"
-					var value = ""
 					var value = "Minimum of source alpha and one minus destination alpha."
 				}
 				Object
 				{
 					var key = "SourceColor"
-					var value = ""
 					var value = "The RGB of the source value."
 				}
 				Object
 				{
 					var key = "Zero"
-					var value = ""
 				}
 			}
 			var Description = "Values that can be multiplied with the operands used in the blend equation."
@@ -80539,19 +80459,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Disabled"
-					var value = ""
 					var value = "Blending is not used."
 				}
 				Object
 				{
 					var key = "Enabled"
-					var value = ""
 					var value = "Blending is used, color and alpha use the same equations."
 				}
 				Object
 				{
 					var key = "Separate"
-					var value = ""
 					var value = "Blending is used, color and alpha use separate equations."
 				}
 			}
@@ -80565,22 +80482,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "PrismJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PrismJoint2d"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RevJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RevJoint2d"
-					var value = ""
 				}
 			}
 		}
@@ -80592,117 +80505,94 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "A"
-					var value = ""
 				}
 				Object
 				{
 					var key = "AnyButton"
-					var value = ""
 				}
 				Object
 				{
 					var key = "B"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Back"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DpadDown"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DpadDownFiltered"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DpadLeft"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DpadLeftFiltered"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DpadRight"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DpadRightFiltered"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DpadUp"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DpadUpFiltered"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LeftShoulder"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LeftThumb"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RightShoulder"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RightThumb"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Start"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StickDown"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StickLeft"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StickRight"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StickUp"
-					var value = ""
 				}
 				Object
 				{
 					var key = "X"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Y"
-					var value = ""
 				}
 			}
 		}
@@ -80714,22 +80604,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "NotActive"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Pan"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Rotation"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Zoom"
-					var value = ""
 				}
 			}
 		}
@@ -80741,13 +80627,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "PreserveHeight"
-					var value = ""
 					var value = "Scale applies to the height of the cylinder."
 				}
 				Object
 				{
 					var key = "PreserveScale"
-					var value = ""
 					var value = "Scale applies to the total size of the capsule."
 				}
 			}
@@ -80761,19 +80645,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Accept"
-					var value = ""
 					var value = "Always accept this object for testing."
 				}
 				Object
 				{
 					var key = "DefaultBehavior"
-					var value = ""
 					var value = "Run the rest of the filtering logic on the cast filter."
 				}
 				Object
 				{
 					var key = "Reject"
-					var value = ""
 					var value = "Always reject this object for testing."
 				}
 			}
@@ -80787,12 +80668,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Absoulte"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Local"
-					var value = ""
 				}
 			}
 		}
@@ -80804,17 +80683,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Absolute"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CogRelative"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SpaceRelative"
-					var value = ""
 				}
 			}
 		}
@@ -80826,57 +80702,46 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "cBox"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cCapsule"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cConvexMesh"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cCylinder"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cEllipsoid"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cHeightMap"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cInvalid"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cMesh"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cMultiConvexMesh"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cSize"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cSphere"
-					var value = ""
 				}
 			}
 			var Description = "All possible collider types. Needed mostly for collision detection. The order is somewhat important as collision detection currently assumes that all simple shapes (primitive types) are before the complex shapes."
@@ -80889,22 +80754,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "CollisionEndedBlock"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CollisionPersistedBlock"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CollisionStartedBlock"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PreSolveBlock"
-					var value = ""
 				}
 			}
 			var Description = "What kind of filter block this is. These blocks are used to send out/override collision group events of certain types (collision started, etc...)"
@@ -80917,19 +80778,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Resolve"
-					var value = ""
 					var value = "Run both collision detection and resolution as normal."
 				}
 				Object
 				{
 					var key = "SkipDetection"
-					var value = ""
 					var value = "Don't run collision detection. No events will be sent."
 				}
 				Object
 				{
 					var key = "SkipResolution"
-					var value = ""
 					var value = "Don't run collision resolution. Detection will still be run so events might be sent out."
 				}
 			}
@@ -80943,17 +80801,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "CollisionEnded"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CollisionPersisted"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CollisionStarted"
-					var value = ""
 				}
 			}
 			var Description = "Used to determine what kind of collision this is during event sending."
@@ -80966,12 +80821,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Replace"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Skip"
-					var value = ""
 				}
 			}
 		}
@@ -80983,22 +80836,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Accept"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Deny"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DenyFull"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DenyTimeout"
-					var value = ""
 				}
 			}
 		}
@@ -81010,17 +80859,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Accept"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Custom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Deny"
-					var value = ""
 				}
 			}
 		}
@@ -81032,19 +80878,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Baumgarte"
-					var value = ""
 					var value = "Use a baumgarte penalty force."
 				}
 				Object
 				{
 					var key = "Inherit"
-					var value = ""
 					var value = "Use the global position correction method."
 				}
 				Object
 				{
 					var key = "PostStabilization"
-					var value = ""
 					var value = "Directly fix position errors via translation."
 				}
 			}
@@ -81058,17 +80901,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "FirstPerson"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Orbit"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ZPlane"
-					var value = ""
 				}
 			}
 		}
@@ -81080,17 +80920,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Active"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Resting"
-					var value = ""
 				}
 			}
 		}
@@ -81102,19 +80939,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BackFace"
-					var value = ""
 					var value = "Clockwise triangles are not rendered."
 				}
 				Object
 				{
 					var key = "Disabled"
-					var value = ""
 					var value = "Triangles are always rendered."
 				}
 				Object
 				{
 					var key = "FrontFace"
-					var value = ""
 					var value = "Counter clockwise triangles are not rendered."
 				}
 			}
@@ -81128,57 +80962,46 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Arrow"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Cross"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Hand"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Invisible"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SizeAll"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SizeNESW"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SizeNS"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SizeNWSE"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SizeWE"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TextBeam"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Wait"
-					var value = ""
 				}
 			}
 			var Description = "Standard Mouse Cursors."
@@ -81191,17 +81014,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BSpline"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CatmullRom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Linear"
-					var value = ""
 				}
 			}
 		}
@@ -81213,32 +81033,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "AllAngularAxes"
-					var value = ""
 				}
 				Object
 				{
 					var key = "AllAxes"
-					var value = ""
 				}
 				Object
 				{
 					var key = "AllLinearAxes"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SingleAngularAxis"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SingleAxis"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SingleLinearAxis"
-					var value = ""
 				}
 			}
 		}
@@ -81250,19 +81064,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Disabled"
-					var value = ""
 					var value = "No depth testing."
 				}
 				Object
 				{
 					var key = "Read"
-					var value = ""
 					var value = "Depth values are compared to the depth buffer."
 				}
 				Object
 				{
 					var key = "Write"
-					var value = ""
 					var value = "Depth values are compared to the depth buffer, if comparison succeeds the new value is written to the buffer."
 				}
 			}
@@ -81276,22 +81087,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Assume"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Automatic"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Manual"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Manumatic"
-					var value = ""
 				}
 			}
 		}
@@ -81303,17 +81110,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Latency"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Request"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Timeout"
-					var value = ""
 				}
 			}
 		}
@@ -81325,47 +81129,38 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BotTool"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Bottom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Center"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Count"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Floating"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Left"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Top"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TopTool"
-					var value = ""
 				}
 			}
 		}
@@ -81377,97 +81172,78 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BackIn"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BackInOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BackOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BounceIn"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BounceInOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BounceOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ElasticIn"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ElasticInOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ElasticOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Linear"
-					var value = ""
 				}
 				Object
 				{
 					var key = "QuadIn"
-					var value = ""
 				}
 				Object
 				{
 					var key = "QuadInOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "QuadOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SinIn"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SinInOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SinOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WarpIn"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WarpInOut"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WarpOut"
-					var value = ""
 				}
 			}
 		}
@@ -81479,12 +81255,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Mode2D"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Mode3D"
-					var value = ""
 				}
 			}
 		}
@@ -81503,12 +81277,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "cInitialize"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cUpdate"
-					var value = ""
 				}
 			}
 			var Description = "Internal enum used for determining what kind of transform update is happening."
@@ -81521,37 +81293,31 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Custom"
-					var value = ""
 					var value = "Sets the volume reduction using a SampleCurve resource."
 				}
 				Object
 				{
 					var key = "Linear"
-					var value = ""
 					var value = "Volume reduces linearly with distance."
 				}
 				Object
 				{
 					var key = "Log"
-					var value = ""
 					var value = "Volume reduces logarithmically, mimicking sound in real life."
 				}
 				Object
 				{
 					var key = "Sine"
-					var value = ""
 					var value = "Volume reduces linearly at first then slowly."
 				}
 				Object
 				{
 					var key = "SquareRoot"
-					var value = ""
 					var value = "Volume reduces quickly at first then linearly."
 				}
 				Object
 				{
 					var key = "Squared"
-					var value = ""
 					var value = "Volume reduces slowly at first then linearly."
 				}
 			}
@@ -81565,17 +81331,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ActiveOffset"
-					var value = ""
 				}
 				Object
 				{
 					var key = "DefaultOffset"
-					var value = ""
 				}
 				Object
 				{
 					var key = "FilterFlag"
-					var value = ""
 				}
 			}
 		}
@@ -81587,17 +81350,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Left"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 				}
 			}
 		}
@@ -81609,32 +81369,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "FiveFragments"
-					var value = ""
 				}
 				Object
 				{
 					var key = "FourFragments"
-					var value = ""
 				}
 				Object
 				{
 					var key = "OneFragment"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SixFragments"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ThreeFragments"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TwoFragments"
-					var value = ""
 				}
 			}
 		}
@@ -81646,22 +81400,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "FreeAngularFragment"
-					var value = ""
 				}
 				Object
 				{
 					var key = "FreeLinearFragment"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NoFreeAxesFragment"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SingleFragment"
-					var value = ""
 				}
 			}
 		}
@@ -81673,37 +81423,30 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Albedo"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Depth"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Metallic"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Normal"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Roughness"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Specular"
-					var value = ""
 				}
 			}
 		}
@@ -81715,12 +81458,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Local"
-					var value = ""
 				}
 				Object
 				{
 					var key = "World"
-					var value = ""
 				}
 			}
 		}
@@ -81732,17 +81473,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Line"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Plane"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ViewPlane"
-					var value = ""
 				}
 			}
 		}
@@ -81754,12 +81492,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Hold"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Toggle"
-					var value = ""
 				}
 			}
 		}
@@ -81771,12 +81507,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Hold"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Toggle"
-					var value = ""
 				}
 			}
 		}
@@ -81788,17 +81522,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Average"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Center"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Primary"
-					var value = ""
 				}
 			}
 		}
@@ -81810,17 +81541,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Relative"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WorldAxes"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WorldGrid"
-					var value = ""
 				}
 			}
 		}
@@ -81832,25 +81560,21 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Linear"
-					var value = ""
 					var value = "A triangle-shaped linear envelope. Does not use attack and release times."
 				}
 				Object
 				{
 					var key = "Parabolic"
-					var value = ""
 					var value = "A smoothly curved envelope. Does not use attack and release times."
 				}
 				Object
 				{
 					var key = "RaisedCosine"
-					var value = ""
 					var value = "Uses cosine curves to smoothly ramp up and down during attack and release times."
 				}
 				Object
 				{
 					var key = "Trapezoid"
-					var value = ""
 					var value = "Uses linear ramps during attack and release times. More efficient than RaisedCosine but not as smooth."
 				}
 			}
@@ -81864,67 +81588,56 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BackToFrontView"
-					var value = ""
 					var value = "Uses the distance in the view direction, furthest to nearest."
 				}
 				Object
 				{
 					var key = "FrontToBackView"
-					var value = ""
 					var value = "Uses the distance in the view direction, nearest to furthest."
 				}
 				Object
 				{
 					var key = "GraphicalSortValue"
-					var value = ""
 					var value = "Uses the sort value on the graphical component, lowest to highest."
 				}
 				Object
 				{
 					var key = "NegativeToPositiveX"
-					var value = ""
 					var value = "Uses the world space X-coordinate."
 				}
 				Object
 				{
 					var key = "NegativeToPositiveY"
-					var value = ""
 					var value = "Uses the world space Y-coordinate."
 				}
 				Object
 				{
 					var key = "NegativeToPositiveZ"
-					var value = ""
 					var value = "Uses the world space Z-coordinate."
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 					var value = "Not sorted, draw order is undefined."
 				}
 				Object
 				{
 					var key = "PositiveToNegativeX"
-					var value = ""
 					var value = "Uses the world space X-coordinate."
 				}
 				Object
 				{
 					var key = "PositiveToNegativeY"
-					var value = ""
 					var value = "Uses the world space Y-coordinate."
 				}
 				Object
 				{
 					var key = "PositiveToNegativeZ"
-					var value = ""
 					var value = "Uses the world space Z-coordinate."
 				}
 				Object
 				{
 					var key = "SortEvent"
-					var value = ""
 					var value = "An event is sent on CameraViewport every frame for custom logic to determine the sort value."
 				}
 			}
@@ -81938,22 +81651,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Texture0"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Texture1"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Texture2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Texture3"
-					var value = ""
 				}
 			}
 		}
@@ -81965,27 +81674,22 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "CreateDestroy"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Flatten"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RaiseLower"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SmoothSharpen"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WeightPainter"
-					var value = ""
 				}
 			}
 		}
@@ -81997,17 +81701,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Center"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Left"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 				}
 			}
 		}
@@ -82019,12 +81720,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Sprites"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Textures"
-					var value = ""
 				}
 			}
 		}
@@ -82036,12 +81735,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "AllFrames"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SelectedFrames"
-					var value = ""
 				}
 			}
 		}
@@ -82053,12 +81750,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "FitToPatches"
-					var value = ""
 				}
 				Object
 				{
 					var key = "MaintainAspectRatio"
-					var value = ""
 				}
 			}
 		}
@@ -82070,12 +81765,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Children"
-					var value = ""
 				}
 				Object
 				{
 					var key = "OnlyRoot"
-					var value = ""
 				}
 			}
 		}
@@ -82087,22 +81780,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Bottom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Left"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Top"
-					var value = ""
 				}
 			}
 		}
@@ -82114,22 +81803,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Gamepad"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Joystick"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Keyboard"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Mouse"
-					var value = ""
 				}
 			}
 		}
@@ -82141,22 +81826,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "KeyHeld"
-					var value = ""
 				}
 				Object
 				{
 					var key = "KeyNotHeld"
-					var value = ""
 				}
 				Object
 				{
 					var key = "KeyPressed"
-					var value = ""
 				}
 				Object
 				{
 					var key = "KeyReleased"
-					var value = ""
 				}
 			}
 		}
@@ -82168,22 +81849,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Both"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Unspecified"
-					var value = ""
 				}
 				Object
 				{
 					var key = "V4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "V6"
-					var value = ""
 				}
 			}
 		}
@@ -82195,12 +81872,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ObjectA"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ObjectB"
-					var value = ""
 				}
 			}
 		}
@@ -82212,82 +81887,66 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "FixedAngleJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "GearJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LinearAxisJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ObjectLink"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositionJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PrismaticJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PrismaticJoint2d"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PulleyJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RevoluteJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RevoluteJoint2d"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StickJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "UniversalJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "UprightJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WeldJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WheelJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WheelJoint2d"
-					var value = ""
 				}
 			}
 		}
@@ -82299,97 +81958,78 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "CustomJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "FixedAngleJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "GearJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LinearAxisJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ManipulatorJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PhyGunJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositionJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PrismaticJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PrismaticJoint2d"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PulleyJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RelativeVelocityJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RevoluteJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RevoluteJoint2d"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StickJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "UniversalJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "UprightJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WeldJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WheelJoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WheelJoint2d"
-					var value = ""
 				}
 			}
 		}
@@ -82401,477 +82041,382 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "A"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Add"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Alt"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Apostrophe"
-					var value = ""
 				}
 				Object
 				{
 					var key = "B"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Back"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Backslash"
-					var value = ""
 				}
 				Object
 				{
 					var key = "C"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Capital"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Comma"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Control"
-					var value = ""
 				}
 				Object
 				{
 					var key = "D"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Decimal"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Delete"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Divide"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Down"
-					var value = ""
 				}
 				Object
 				{
 					var key = "E"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Eight"
-					var value = ""
 				}
 				Object
 				{
 					var key = "End"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Enter"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Equal"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Escape"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F1"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F10"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F11"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F12"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F3"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F5"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F6"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F7"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F8"
-					var value = ""
 				}
 				Object
 				{
 					var key = "F9"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Five"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Four"
-					var value = ""
 				}
 				Object
 				{
 					var key = "G"
-					var value = ""
 				}
 				Object
 				{
 					var key = "H"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Home"
-					var value = ""
 				}
 				Object
 				{
 					var key = "I"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Insert"
-					var value = ""
 				}
 				Object
 				{
 					var key = "J"
-					var value = ""
 				}
 				Object
 				{
 					var key = "K"
-					var value = ""
 				}
 				Object
 				{
 					var key = "L"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Left"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LeftBracket"
-					var value = ""
 				}
 				Object
 				{
 					var key = "M"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Minus"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Multiply"
-					var value = ""
 				}
 				Object
 				{
 					var key = "N"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Nine"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad0"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad1"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad3"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad5"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad6"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad7"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad8"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumPad9"
-					var value = ""
 				}
 				Object
 				{
 					var key = "O"
-					var value = ""
 				}
 				Object
 				{
 					var key = "One"
-					var value = ""
 				}
 				Object
 				{
 					var key = "P"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PageDown"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PageUp"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Period"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Q"
-					var value = ""
 				}
 				Object
 				{
 					var key = "R"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RightBracket"
-					var value = ""
 				}
 				Object
 				{
 					var key = "S"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Semicolon"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Seven"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Shift"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Six"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Slash"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Space"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Subtract"
-					var value = ""
 				}
 				Object
 				{
 					var key = "T"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Tab"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Three"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Tilde"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Two"
-					var value = ""
 				}
 				Object
 				{
 					var key = "U"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Unknown"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Up"
-					var value = ""
 				}
 				Object
 				{
 					var key = "V"
-					var value = ""
 				}
 				Object
 				{
 					var key = "W"
-					var value = ""
 				}
 				Object
 				{
 					var key = "X"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Y"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Z"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Zero"
-					var value = ""
 				}
 			}
 		}
@@ -82883,17 +82428,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Down"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Repeated"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Up"
-					var value = ""
 				}
 			}
 		}
@@ -82905,17 +82447,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "IfInstalled"
-					var value = ""
 				}
 				Object
 				{
 					var key = "InstallAndRun"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 			}
 		}
@@ -82927,47 +82466,38 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Connected"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Disconnected"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ReceivedConnectRequest"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ReceivedDisconnectNotice"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ReceivedNegativeConnectResponse"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SentConnectRequest"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SentDisconnectNotice"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SentNegativeConnectResponse"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Unspecified"
-					var value = ""
 				}
 			}
 		}
@@ -82979,22 +82509,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "AttemptingConnection"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Connected"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Disconnected"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Unspecified"
-					var value = ""
 				}
 			}
 		}
@@ -83006,47 +82532,38 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BottomCenter"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BottomLeft"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BottomRight"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Center"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CenterLeft"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CenterRight"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TopCenter"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TopLeft"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TopRight"
-					var value = ""
 				}
 			}
 		}
@@ -83058,17 +82575,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Default"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Looping"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Once"
-					var value = ""
 				}
 			}
 		}
@@ -83080,17 +82594,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Edge"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Face"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Vertex"
-					var value = ""
 				}
 			}
 		}
@@ -83102,17 +82613,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "MultiMesh"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NoMesh"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SingleMesh"
-					var value = ""
 				}
 			}
 		}
@@ -83124,19 +82632,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "InheritFromSpace"
-					var value = ""
 					var value = "Use the Mode2D state on the PhysicsSpace . This allows easy changing of the entire space between 2D/3D."
 				}
 				Object
 				{
 					var key = "Mode2D"
-					var value = ""
 					var value = "Restricts the object's movement through physics to 2D. This lowers the object's degrees of freedom down to 3 (x-linear, y-linear, z-angular)."
 				}
 				Object
 				{
 					var key = "Mode3D"
-					var value = ""
 					var value = "A regular 3D object (6 degrees of freedom)."
 				}
 			}
@@ -83150,32 +82655,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Left"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Middle"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 				}
 				Object
 				{
 					var key = "XOneBack"
-					var value = ""
 				}
 				Object
 				{
 					var key = "XTwoForward"
-					var value = ""
 				}
 			}
 			var Description = "As the extra mouse buttons are typically Back and Forward they have been named accordingly."
@@ -83188,12 +82687,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "MarchingSquares"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Pixels"
-					var value = ""
 				}
 			}
 		}
@@ -83205,12 +82702,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Alpha"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Intensity"
-					var value = ""
 				}
 			}
 		}
@@ -83222,17 +82717,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Edges"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Filled"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 			}
 		}
@@ -83244,17 +82736,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Always"
-					var value = ""
 				}
 				Object
 				{
 					var key = "IfClose"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 			}
 		}
@@ -83266,22 +82755,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "DirectBasicHostInfo"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ExtraHostInfo"
-					var value = ""
 				}
 				Object
 				{
 					var key = "IndirectBasicHostInfo"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NoResponse"
-					var value = ""
 				}
 			}
 			var Description = "Network refresh result."
@@ -83294,27 +82779,22 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Client"
-					var value = ""
 				}
 				Object
 				{
 					var key = "MasterServer"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Offline"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Server"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Unspecified"
-					var value = ""
 				}
 			}
 		}
@@ -83326,12 +82806,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Accept"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Deny"
-					var value = ""
 				}
 			}
 			var Description = "Network user add response."
@@ -83344,12 +82822,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Internet"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LAN"
-					var value = ""
 				}
 			}
 			var Description = "Network specification."
@@ -83362,12 +82838,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "IndexA"
-					var value = ""
 				}
 				Object
 				{
 					var key = "IndexB"
-					var value = ""
 				}
 			}
 		}
@@ -83379,32 +82853,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Custom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ForwardNegativeZUpY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ForwardXUpY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ForwardXUpZ"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ForwardYUpZ"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ForwardZUpY"
-					var value = ""
 				}
 			}
 		}
@@ -83416,13 +82884,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Orthographic"
-					var value = ""
 					var value = "Projection is parallel with the viewing direction."
 				}
 				Object
 				{
 					var key = "Perspective"
-					var value = ""
 					var value = "Projection towards a single view point, making distant objects appear smaller."
 				}
 			}
@@ -83436,17 +82902,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "OrthonormalTangents"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RandomTangents"
-					var value = ""
 				}
 				Object
 				{
 					var key = "VelocityTangents"
-					var value = ""
 				}
 			}
 			var Description = "How to compute the tangents for a contact point. Mainly for testing."
@@ -83459,19 +82922,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ClampToMax"
-					var value = ""
 					var value = "Clamps to the max force value"
 				}
 				Object
 				{
 					var key = "ContinueFalloff"
-					var value = ""
 					var value = "Continue the regular interpolation method"
 				}
 				Object
 				{
 					var key = "NoEffect"
-					var value = ""
 					var value = "Don't apply a force past the max distance"
 				}
 			}
@@ -83485,13 +82945,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Linear"
-					var value = ""
 					var value = "Linearly interpolate between values."
 				}
 				Object
 				{
 					var key = "Quadratic"
-					var value = ""
 					var value = "Quadratically interpolate between values (uses t^2)."
 				}
 			}
@@ -83505,67 +82963,54 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Buoyancy"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Custom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Drag"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Flow"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Force"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Gravity"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Invalid"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PointForce"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PointGravity"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Thrust"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Torque"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Vortex"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Wind"
-					var value = ""
 				}
 			}
 		}
@@ -83577,17 +83022,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ConvexMesh"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NoMesh"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StaticMesh"
-					var value = ""
 				}
 			}
 		}
@@ -83599,17 +83041,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ColliderCount"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ConstraintCount"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 			}
 			var Description = "What kind of pre-processing strategy should be used for merging islands."
@@ -83622,17 +83061,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Composites"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ForcedOne"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Kinematics"
-					var value = ""
 				}
 			}
 			var Description = "How should islands be built. Internal for testing (mostly legacy)."
@@ -83645,12 +83081,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ConvexMesh"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PhysicsMesh"
-					var value = ""
 				}
 			}
 		}
@@ -83662,13 +83096,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Baumgarte"
-					var value = ""
 					var value = "Use a baumgarte penalty force."
 				}
 				Object
 				{
 					var key = "PostStabilization"
-					var value = ""
 					var value = "Directly fix position errors via translation."
 				}
 			}
@@ -83682,12 +83114,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BasicSolving"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BlockSolving"
-					var value = ""
 				}
 			}
 			var Description = "What kind of solver technique to use for position correction. Mainly for testing."
@@ -83700,22 +83130,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Basic"
-					var value = ""
 				}
 				Object
 				{
 					var key = "GenericBasic"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Normal"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Threaded"
-					var value = ""
 				}
 			}
 			var Description = "What kind of a constraint solver should be used. A few pre-defined types meant for comparing performance."
@@ -83728,32 +83154,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "CameraLocation"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LookAtPlane"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LookAtPoint"
-					var value = ""
 				}
 				Object
 				{
 					var key = "OnTop"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PlaneXY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ViewAtDepth"
-					var value = ""
 				}
 			}
 		}
@@ -83765,12 +83185,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "MultipleInstances"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SingleInstance"
-					var value = ""
 				}
 			}
 		}
@@ -83782,17 +83200,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Lines"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Points"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Triangles"
-					var value = ""
 				}
 			}
 		}
@@ -83804,22 +83219,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ACK"
-					var value = ""
 				}
 				Object
 				{
 					var key = "EXPIRED"
-					var value = ""
 				}
 				Object
 				{
 					var key = "MAYBE"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NAK"
-					var value = ""
 				}
 			}
 		}
@@ -83831,17 +83242,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "cCloseConnection"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cDataReceived"
-					var value = ""
 				}
 				Object
 				{
 					var key = "cNextConnection"
-					var value = ""
 				}
 			}
 		}
@@ -83853,12 +83261,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Reliable"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Unreliable"
-					var value = ""
 				}
 			}
 		}
@@ -83870,17 +83276,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Change"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Initialization"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Uninitialization"
-					var value = ""
 				}
 			}
 		}
@@ -83892,19 +83295,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Dynamic"
-					var value = ""
 					var value = "A regular body that can be affected by forces."
 				}
 				Object
 				{
 					var key = "Kinematic"
-					var value = ""
 					var value = "An infinite mass body that approximates velocity when moved. Used for moving platforms and other movable infinite mass objects."
 				}
 				Object
 				{
 					var key = "Static"
-					var value = ""
 					var value = "An infinite mass body. Will not move via dynamics."
 				}
 			}
@@ -83918,12 +83318,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Exclude"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Include"
-					var value = ""
 				}
 			}
 		}
@@ -83935,37 +83333,30 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "CentimeterToInches"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CentimeterToMeter"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Custom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "InchesToCentimenters"
-					var value = ""
 				}
 				Object
 				{
 					var key = "InchesToMeters"
-					var value = ""
 				}
 				Object
 				{
 					var key = "MetersToCentimeters"
-					var value = ""
 				}
 				Object
 				{
 					var key = "MetersToInches"
-					var value = ""
 				}
 			}
 		}
@@ -83977,12 +83368,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "False"
-					var value = ""
 				}
 				Object
 				{
 					var key = "True"
-					var value = ""
 				}
 			}
 		}
@@ -83994,12 +83383,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "All"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Changed"
-					var value = ""
 				}
 			}
 		}
@@ -84011,17 +83398,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "High"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Low"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Medium"
-					var value = ""
 				}
 			}
 		}
@@ -84033,13 +83417,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Looping"
-					var value = ""
 					var value = "The sound will loop continuously between its LoopStartTime and LoopEndTime."
 				}
 				Object
 				{
 					var key = "Single"
-					var value = ""
 					var value = "The sound will play once to its EndTime and then stop."
 				}
 			}
@@ -84053,13 +83435,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Random"
-					var value = ""
 					var value = "The SoundCue will pick a Sound at random, taking into account the Weight values."
 				}
 				Object
 				{
 					var key = "Sequential"
-					var value = ""
 					var value = "Each time the SoundCue is played it will pick the next Sound in the order they are displayed."
 				}
 			}
@@ -84073,12 +83453,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Exact"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Spring"
-					var value = ""
 				}
 			}
 		}
@@ -84090,17 +83468,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BSpline"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CatmullRom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Linear"
-					var value = ""
 				}
 			}
 		}
@@ -84112,19 +83487,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Always"
-					var value = ""
 					var value = "Always debug draw."
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 					var value = "Never debug draw."
 				}
 				Object
 				{
 					var key = "WhenNoMesh"
-					var value = ""
 					var value = "Only debug draw if no graphical mesh is present."
 				}
 			}
@@ -84138,13 +83510,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Normal"
-					var value = ""
 					var value = "Draw all springs equally (same color)."
 				}
 				Object
 				{
 					var key = "Sorted"
-					var value = ""
 					var value = "Draw the springs in sorted order. This alters the color based upon the distance from an anchor point."
 				}
 			}
@@ -84158,19 +83528,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BottomUp"
-					var value = ""
 					var value = "Sort so that springs further away from anchors are solved first."
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 					var value = "No sorting is preserved."
 				}
 				Object
 				{
 					var key = "TopDown"
-					var value = ""
 					var value = "Sort so that springs closer to anchors are solved first."
 				}
 			}
@@ -84184,27 +83551,22 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Anchoring"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PointSelector"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RopeCreator"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SpringCreator"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SpringSelector"
-					var value = ""
 				}
 			}
 		}
@@ -84216,17 +83578,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "NineSlice"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Stretch"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Tiled"
-					var value = ""
 				}
 			}
 		}
@@ -84238,13 +83597,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ViewPlane"
-					var value = ""
 					var value = "Aligned to always face the camera."
 				}
 				Object
 				{
 					var key = "ZPlane"
-					var value = ""
 					var value = "Aligned with the object's z axis."
 				}
 			}
@@ -84258,27 +83615,22 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BottomCenter"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BottomLeft"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Center"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Custom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "UpperLeft"
-					var value = ""
 				}
 			}
 		}
@@ -84290,12 +83642,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Looping"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Single"
-					var value = ""
 				}
 			}
 		}
@@ -84307,27 +83657,22 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Beam"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Billboarded"
-					var value = ""
 				}
 				Object
 				{
 					var key = "FaceVelocity"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Flat"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Outward"
-					var value = ""
 				}
 			}
 			var Description = "Sprite  Particle  System Enums."
@@ -84340,47 +83685,38 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BackToFrontView"
-					var value = ""
 				}
 				Object
 				{
 					var key = "FrontToBackView"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NegativeToPositiveX"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NegativeToPositiveY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NegativeToPositiveZ"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveToNegativeX"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveToNegativeY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveToNegativeZ"
-					var value = ""
 				}
 			}
 		}
@@ -84392,12 +83728,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Linear"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Nearest"
-					var value = ""
 				}
 			}
 		}
@@ -84409,19 +83743,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Disabled"
-					var value = ""
 					var value = "No stencil testing."
 				}
 				Object
 				{
 					var key = "Enabled"
-					var value = ""
 					var value = "Stencil values will be tested with the active settings."
 				}
 				Object
 				{
 					var key = "Separate"
-					var value = ""
 					var value = "Stencil values will be tested, frontface/backface triangles will use separate settings."
 				}
 			}
@@ -84435,49 +83766,41 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Decrement"
-					var value = ""
 					var value = "Decrements the current stencil buffer value. Clamps to 0."
 				}
 				Object
 				{
 					var key = "DecrementWrap"
-					var value = ""
 					var value = "Decrements the current stencil buffer value. Wraps stencil buffer value to the maximum value when decrementing a stencil buffer value of zero."
 				}
 				Object
 				{
 					var key = "Increment"
-					var value = ""
 					var value = "Increments the current stencil buffer value. Clamps to the maximum value."
 				}
 				Object
 				{
 					var key = "IncrementWrap"
-					var value = ""
 					var value = "Increments the current stencil buffer value. Wraps stencil buffer value to zero when incrementing the maximum value."
 				}
 				Object
 				{
 					var key = "Invert"
-					var value = ""
 					var value = "Bitwise inverts the current stencil buffer value."
 				}
 				Object
 				{
 					var key = "Keep"
-					var value = ""
 					var value = "Keeps the current value."
 				}
 				Object
 				{
 					var key = "Replace"
-					var value = ""
 					var value = "Sets the stencil buffer value to the test value."
 				}
 				Object
 				{
 					var key = "Zero"
-					var value = ""
 				}
 			}
 			var Description = "Operations that can be applied to the stencil buffer."
@@ -84490,17 +83813,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Added"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Failed"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Replaced"
-					var value = ""
 				}
 			}
 		}
@@ -84512,17 +83832,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Current"
-					var value = ""
 				}
 				Object
 				{
 					var key = "End"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Start"
-					var value = ""
 				}
 			}
 		}
@@ -84534,17 +83851,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "StandardError"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StandardInput"
-					var value = ""
 				}
 				Object
 				{
 					var key = "StandardOutput"
-					var value = ""
 				}
 			}
 		}
@@ -84556,31 +83870,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Noise"
-					var value = ""
 					var value = "White noise produced by getting random values between -1 and 1."
 				}
 				Object
 				{
 					var key = "SawWave"
-					var value = ""
 					var value = "Audio generated by a saw wave (values go linearly from -1 to 1 then jump back to -1)."
 				}
 				Object
 				{
 					var key = "SineWave"
-					var value = ""
 					var value = "Audio generated by a Sine wave."
 				}
 				Object
 				{
 					var key = "SquareWave"
-					var value = ""
 					var value = "Audio generated by a square wave (values are either -1 or 1)."
 				}
 				Object
 				{
 					var key = "TriangleWave"
-					var value = ""
 					var value = "Audio generated by a triangle wave (values go linearly from -1 to 1 and back again)."
 				}
 			}
@@ -84594,12 +83903,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "LocalSpace"
-					var value = ""
 				}
 				Object
 				{
 					var key = "WorldSpace"
-					var value = ""
 				}
 			}
 		}
@@ -84611,12 +83918,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "FourSpaces"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TwoSpaces"
-					var value = ""
 				}
 			}
 		}
@@ -84628,12 +83933,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Any"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Loopback"
-					var value = ""
 				}
 			}
 		}
@@ -84645,19 +83948,16 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Center"
-					var value = ""
 					var value = "Center is aligned with the position."
 				}
 				Object
 				{
 					var key = "Left"
-					var value = ""
 					var value = "Left side is aligned with the position."
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 					var value = "Right side is aligned with the position."
 				}
 			}
@@ -84671,17 +83971,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Clamp"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Mirror"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Repeat"
-					var value = ""
 				}
 			}
 			var Description = "How to address the texture with uv's outside of the range [0, 1] Clamp - Uses the last pixel at the border of the image Repeat - Wraps to the opposite side and continues to sample the image Mirror - Similar to Repeat but reverses image direction."
@@ -84694,27 +83991,22 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "x1"
-					var value = ""
 				}
 				Object
 				{
 					var key = "x16"
-					var value = ""
 				}
 				Object
 				{
 					var key = "x2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "x4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "x8"
-					var value = ""
 				}
 			}
 			var Description = "How pixels are sampled when the ratio of pixels viewed along its u/v directions is not 1:1 (Typically when viewing a texture at an angle) The options represent how large of a ratio will be accounted for when sampling x1 = 1:1 (no anisotropy), x16 = 16:1 (high anisotropy), x16 being the best quality."
@@ -84727,49 +84019,41 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Always"
-					var value = ""
 					var value = "Compare always succeeds."
 				}
 				Object
 				{
 					var key = "Equal"
-					var value = ""
 					var value = "Compares if test value is equal to buffer value."
 				}
 				Object
 				{
 					var key = "Greater"
-					var value = ""
 					var value = "Compares if test value is greater than buffer value."
 				}
 				Object
 				{
 					var key = "GreaterEqual"
-					var value = ""
 					var value = "Compares if test value is greater than or equal to buffer value."
 				}
 				Object
 				{
 					var key = "Less"
-					var value = ""
 					var value = "Compares if test value is less than buffer value."
 				}
 				Object
 				{
 					var key = "LessEqual"
-					var value = ""
 					var value = "Compares if test value is less than or equal to buffer value."
 				}
 				Object
 				{
 					var key = "Never"
-					var value = ""
 					var value = "Compare never succeeds."
 				}
 				Object
 				{
 					var key = "NotEqual"
-					var value = ""
 					var value = "Compares if test value is not equal to buffer value."
 				}
 			}
@@ -84783,13 +84067,11 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Disabled"
-					var value = ""
 					var value = "Regular texture sampling."
 				}
 				Object
 				{
 					var key = "Enabled"
-					var value = ""
 					var value = "Sampling returns the result of a comparison."
 				}
 			}
@@ -84803,37 +84085,30 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BC1"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BC2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BC3"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BC4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BC5"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BC6"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 			}
 			var Description = "Block compression, lossy hardware supported formats with very high memory savings None - No compression will be used BC1 - RGB stored at 1/2 byte per pixel Used for color maps that don't need alpha, normal maps BC2 - RGB w/ low precision alpha stored at 1 byte per pixel No common usages BC3 - RGB w/ alpha stored at 1 byte per pixel Used for color maps that need alpha BC4 - R stored at 1/2 byte per pixel Used for single channel maps like height, specular, roughness BC5 - RG stored at 1 byte per pixel Used for two channel maps like normals with reconstructed Z BC6 - RGB floats stored at 1 byte per pixel Used for high dynamic range images."
@@ -84846,37 +84121,30 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "NegativeX"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NegativeY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NegativeZ"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveX"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveY"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PositiveZ"
-					var value = ""
 				}
 			}
 		}
@@ -84888,17 +84156,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Bilinear"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Nearest"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Trilinear"
-					var value = ""
 				}
 			}
 			var Description = "How pixels are sampled when viewing image at a different size Nearest - Gets the closest pixel unaltered Bilinear - Gets the 4 closest pixels and linearly blends between them Trilinear - Same as bilinear with an additional linear blend between mip levels."
@@ -84911,127 +84176,102 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Depth16"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Depth24"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Depth24Stencil8"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Depth32"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Depth32f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Depth32fStencil8Pad24"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "R16"
-					var value = ""
 				}
 				Object
 				{
 					var key = "R16f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "R32f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "R8"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RG16"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RG16f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RG32f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RG8"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RGB16"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RGB16f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RGB32f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RGB8"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RGBA16"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RGBA16f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RGBA32f"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RGBA8"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SRGB8"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SRGB8A8"
-					var value = ""
 				}
 			}
 		}
@@ -85043,17 +84283,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "GpuGenerated"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "PreGenerated"
-					var value = ""
 				}
 			}
 			var Description = "Progressively scaled down versions of the image are produced to preserve image integrity when viewed at smaller scales None - No mipmaps are generated PreGenerated - Mipmaps are generated by the engine Uses higher quality filtering than the gpu Required for cubemaps in order to get perspective correct filtering over face edges GpuGenerated - Mipmaps are generated by the gpu at load time."
@@ -85066,12 +84303,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Texture2D"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TextureCube"
-					var value = ""
 				}
 			}
 			var Description = "Type of the texture, must match sampler type in shaders Texture2D - Standard 2 dimensional texture TextureCube - Uses texture as a cubemap Faces are extracted from the image using aspect ratio to determine layout."
@@ -85084,12 +84319,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "DrawTool"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SelectionTool"
-					var value = ""
 				}
 			}
 		}
@@ -85101,12 +84334,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Frames"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Timecodes"
-					var value = ""
 				}
 			}
 		}
@@ -85118,12 +84349,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ActualFrametime"
-					var value = ""
 				}
 				Object
 				{
 					var key = "FixedFrametime"
-					var value = ""
 				}
 			}
 		}
@@ -85135,32 +84364,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Default"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Gray"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Green"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Orange"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Red"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Yellow"
-					var value = ""
 				}
 			}
 		}
@@ -85172,27 +84395,22 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Component"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Invalid"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Object"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Property"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SubProperty"
-					var value = ""
 				}
 			}
 		}
@@ -85204,17 +84422,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Immediate"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Ordered"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Sequenced"
-					var value = ""
 				}
 			}
 		}
@@ -85226,17 +84441,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Incoming"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Outgoing"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Unspecified"
-					var value = ""
 				}
 			}
 		}
@@ -85248,17 +84460,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Tcp"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Udp"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Unspecified"
-					var value = ""
 				}
 			}
 		}
@@ -85270,22 +84479,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Bottom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Left"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Top"
-					var value = ""
 				}
 			}
 		}
@@ -85297,12 +84502,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Backward"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Forward"
-					var value = ""
 				}
 			}
 		}
@@ -85314,12 +84517,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Hierarchy"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Local"
-					var value = ""
 				}
 			}
 		}
@@ -85331,17 +84532,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Add"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Multiply"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Set"
-					var value = ""
 				}
 			}
 		}
@@ -85353,17 +84551,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Enter"
-					var value = ""
 				}
 				Object
 				{
 					var key = "EnterHierarchy"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Hover"
-					var value = ""
 				}
 			}
 		}
@@ -85375,17 +84570,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Center"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Left"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Right"
-					var value = ""
 				}
 			}
 		}
@@ -85397,12 +84589,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "X"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Y"
-					var value = ""
 				}
 			}
 		}
@@ -85414,17 +84604,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Auto"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Fixed"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Flex"
-					var value = ""
 				}
 			}
 		}
@@ -85436,22 +84623,18 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "BottomToTop"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LeftToRight"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RightToLeft"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TopToBottom"
-					var value = ""
 				}
 			}
 		}
@@ -85463,17 +84646,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Bottom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Center"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Top"
-					var value = ""
 				}
 			}
 		}
@@ -85485,17 +84665,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TranslateRoot"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TranslateSelf"
-					var value = ""
 				}
 			}
 		}
@@ -85507,17 +84684,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Accept"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Deny"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Pending"
-					var value = ""
 				}
 			}
 		}
@@ -85529,12 +84703,10 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Detailed"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Minimal"
-					var value = ""
 				}
 			}
 		}
@@ -85546,32 +84718,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Byte"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Half"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NormByte"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NormShort"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Real"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Short"
-					var value = ""
 				}
 			}
 		}
@@ -85583,87 +84749,70 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Aux0"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Aux1"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Aux2"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Aux3"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Aux4"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Aux5"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Bitangent"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BoneIndices"
-					var value = ""
 				}
 				Object
 				{
 					var key = "BoneWeights"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Color"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ColorAux"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Normal"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Position"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Tangent"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Uv"
-					var value = ""
 				}
 				Object
 				{
 					var key = "UvAux"
-					var value = ""
 				}
 			}
 		}
@@ -85675,17 +84824,14 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Bottom"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Center"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Top"
-					var value = ""
 				}
 			}
 		}
@@ -85697,25 +84843,21 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Exact"
-					var value = ""
 					var value = "Viewport is not scaled."
 				}
 				Object
 				{
 					var key = "Fill"
-					var value = ""
 					var value = "Viewport fills the whole size."
 				}
 				Object
 				{
 					var key = "LargestMultiple"
-					var value = ""
 					var value = "Viewport is the largest multiple of the set resolution that fits in the window."
 				}
 				Object
 				{
 					var key = "Letterbox"
-					var value = ""
 					var value = "Viewport aspect ratio is always preserved."
 				}
 			}
@@ -85729,62 +84871,50 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Alt"
-					var value = ""
 				}
 				Object
 				{
 					var key = "CapsLock"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Command"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Control"
-					var value = ""
 				}
 				Object
 				{
 					var key = "IsKeyPad"
-					var value = ""
 				}
 				Object
 				{
 					var key = "IsLeft"
-					var value = ""
 				}
 				Object
 				{
 					var key = "IsRight"
-					var value = ""
 				}
 				Object
 				{
 					var key = "LeftMouse"
-					var value = ""
 				}
 				Object
 				{
 					var key = "MiddleMouse"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NumLock"
-					var value = ""
 				}
 				Object
 				{
 					var key = "RightMouse"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Shift"
-					var value = ""
 				}
 			}
 		}
@@ -85796,27 +84926,22 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Fullscreen"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Maximized"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Minimized"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Restore"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Windowed"
-					var value = ""
 				}
 			}
 			var Description = "The state of the window for minimizing / maximizing."
@@ -85829,37 +84954,30 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "ClientOnly"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Close"
-					var value = ""
 				}
 				Object
 				{
 					var key = "MainWindow"
-					var value = ""
 				}
 				Object
 				{
 					var key = "NotVisible"
-					var value = ""
 				}
 				Object
 				{
 					var key = "OnTaskBar"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Resizable"
-					var value = ""
 				}
 				Object
 				{
 					var key = "TitleBar"
-					var value = ""
 				}
 			}
 		}
@@ -85874,37 +84992,30 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "Append"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Read"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Sequential"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ShareDelete"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ShareRead"
-					var value = ""
 				}
 				Object
 				{
 					var key = "ShareWrite"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Write"
-					var value = ""
 				}
 			}
 		}
@@ -85916,47 +85027,38 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "All"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Extension"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Inherited"
-					var value = ""
 				}
 				Object
 				{
 					var key = "InheritedInstance"
-					var value = ""
 				}
 				Object
 				{
 					var key = "InheritedInstanceStatic"
-					var value = ""
 				}
 				Object
 				{
 					var key = "InheritedStatic"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Instance"
-					var value = ""
 				}
 				Object
 				{
 					var key = "InstanceStatic"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Static"
-					var value = ""
 				}
 			}
 		}
@@ -85968,32 +85070,26 @@ Example: ('Content\\Powerups\\') results in 'Content\\Powerups'
 				Object
 				{
 					var key = "GetCount"
-					var value = ""
 				}
 				Object
 				{
 					var key = "None"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Read"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Seek"
-					var value = ""
 				}
 				Object
 				{
 					var key = "SetCount"
-					var value = ""
 				}
 				Object
 				{
 					var key = "Write"
-					var value = ""
 				}
 			}
 		}
