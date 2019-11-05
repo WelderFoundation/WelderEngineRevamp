@@ -11,6 +11,10 @@ namespace Zero
 // ramifications if used.
 void YieldToOs();
 
+// If we require a call stack to run to completion without yielding, we can purposfully disable
+// yeilding to the operating system.
+void SetYieldToOsEnabled(bool enabled);
+
 typedef void (*MainLoopFn)(void* userData);
 
 // Runs a loop in a continuous update until 'StopMainLoop' is called.

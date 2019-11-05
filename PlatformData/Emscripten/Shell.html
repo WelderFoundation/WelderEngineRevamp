@@ -265,6 +265,31 @@
         temp.textContent = html;
         return temp.innerHTML;
       }
+
+      window.addEventListener('paste', (e) => {
+        const text = e.clipboardData.getData('text/plain')
+        if (!text) {
+          return;
+        }
+
+        const textPointer = mallocStringUTF8(text);
+        ccall('EmscriptenOnPaste', null, ['number'], [textPointer]);
+        e.preventDefault();
+      })
+
+      const onCutOrCopy = (e) => {
+        const textPointer = ccall('EmscriptenOnCopy', 'number', ['number'], [e.type === 'cut']);
+        if (textPointer)
+        {
+          const text = UTF8ToString(textPointer);
+          Module._free(textPointer);
+          e.clipboardData.setData('text/plain', text);
+          e.preventDefault();
+        }
+      };
+
+      window.addEventListener('cut', onCutOrCopy)
+      window.addEventListener('copy', onCutOrCopy)
       
       var userInitiatedActions = [];
       
@@ -511,7 +536,7 @@
           string = '';
         
         var lengthBytes = lengthBytesUTF8(string) + 1;
-        var stringOnWasmHeap = _malloc(lengthBytes);
+        var stringOnWasmHeap = Module._malloc(lengthBytes);
         stringToUTF8(string, stringOnWasmHeap, lengthBytes);
         return stringOnWasmHeap;
       }
@@ -630,12 +655,12 @@
         var ctrlKey = e.ctrlKey || e.metaKey;
         var key = e.which || e.keyCode;
         
-        // Prevent all Ctrl key combos (except Ctrl itself).
-        if (ctrlKey && key != 17)
+        // Prevent all Ctrl key combos (except Ctrl itself as well as cut/copy/paste).
+        if (ctrlKey && key !== 17 && key !== 88 && key !== 67 && key !== 86)
           e.preventDefault();
         
         // Prevent all Alt key combos (except Alt itself).
-        if (e.altKey && key != 18)
+        if (e.altKey && key !== 18)
           e.preventDefault();
         
         // Block Refresh

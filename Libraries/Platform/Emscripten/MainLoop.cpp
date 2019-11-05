@@ -3,9 +3,16 @@
 
 namespace Zero
 {
+bool gYieldToOsEnabled = true;
 void YieldToOs()
 {
-  emscripten_sleep(0);
+  if (gYieldToOsEnabled)
+    emscripten_sleep(0);
+}
+
+void SetYieldToOsEnabled(bool enabled)
+{
+  gYieldToOsEnabled = enabled;
 }
 
 ZeroThreadLocal bool gStopMainLoop = false;

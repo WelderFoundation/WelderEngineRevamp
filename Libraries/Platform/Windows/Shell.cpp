@@ -3,6 +3,7 @@
 
 namespace Zero
 {
+Shell* Shell::sInstance;
 
 // These values must be defined to handle the WM_MOUSEHWHEEL on
 // Windows 2000 and Windows XP, the first two values will be defined
@@ -993,7 +994,6 @@ LRESULT CALLBACK ShellWindowWndProc(ShellWindow* window, HWND hwnd, UINT msg, WP
     return MessageHandled;
   }
 
-  // Key has been pressed
   case WM_KEYUP:
   case WM_SYSKEYUP:
   {
@@ -1006,16 +1006,33 @@ LRESULT CALLBACK ShellWindowWndProc(ShellWindow* window, HWND hwnd, UINT msg, WP
     return MessageHandled;
   }
 
-  // Key has been released
   case WM_KEYDOWN:
   case WM_SYSKEYDOWN:
   {
     bool repeated = (lParam & (1 << 30)) != 0;
 
+    Keys::Enum key = VKToKey(wParam);
     if (window->mOnKeyDown)
-    {
-      Keys::Enum key = VKToKey(wParam);
       window->mOnKeyDown(key, wParam, repeated, window);
+
+    // Handle paste explicitly to be more like a browser platform
+    if (IsKeyDown(Keys::Control) && key == Keys::V && mOnPaste)
+    {
+      ClipboardData data;
+      data.mHasText = WindowsGetClipboardText(&data.mText);
+      data.mHasImage = WindowsGetClipboardImage(&data.mImage);
+      mOnPaste(data, this);
+    }
+
+    // Handle cut/copy explicitly to be more like a browser platform
+    if (IsKeyDown(Keys::Control) && (key == Keys::C || key == Keys::X) && mOnCopy)
+    {
+      ClipboardData data;
+      mOnCopy(data, key == Keys::X, this);
+      ErrorIf(!data.mHasText && !data.mText.Empty(), "Clipboard Text was not empty, but HasText was not set");
+      if (data.mHasText)
+        WindowsSetClipboardText(data.mText.c_str());
+      ErrorIf(data.mHasImage, "Copying image data not yet supported");
     }
 
     return MessageHandled;
@@ -1178,8 +1195,9 @@ LRESULT CALLBACK ShellWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
   }
 }
 
-Shell::Shell() : mCursor(Cursor::Arrow), mMainWindow(nullptr), mUserData(nullptr)
+Shell::Shell() : mCursor(Cursor::Arrow), mMainWindow(nullptr), mUserData(nullptr), mOnCopy(nullptr), mOnPaste(nullptr)
 {
+  sInstance = this;
   DisableProcessWindowsGhosting();
 
   ZeroConstructPrivateData(ShellPrivateData);
@@ -1350,39 +1368,40 @@ void Shell::SetMouseCursor(Cursor::Enum cursor)
   mCursor = cursor;
 }
 
-bool Shell::IsClipboardText()
+bool WindowsOpenClipboard(UINT format)
 {
   if (!OpenClipboard((HWND)0))
     return false;
-  bool result = (IsClipboardFormatAvailable(CF_UNICODETEXT) != 0);
+  if (!IsClipboardFormatAvailable(CF_UNICODETEXT))
+  {
+    CloseClipboard();
+    return false;
+  }
+  return true;
+}
+
+bool WindowsGetClipboardText(String* out)
+{
+  if (!WindowsOpenClipboard(CF_UNICODETEXT))
+    return false;
+
+  bool result = false;
+  HGLOBAL globalHandle = GetClipboardData(CF_UNICODETEXT);
+  if (globalHandle != nullptr)
+  {
+    LPWSTR clipboardCstr = (LPWSTR)GlobalLock(globalHandle);
+    if (clipboardCstr != nullptr)
+    {
+      *out = Narrow(clipboardCstr);
+      GlobalUnlock(globalHandle);
+      result = true;
+    }
+  }
   CloseClipboard();
   return result;
 }
 
-String Shell::GetClipboardText()
-{
-  if (!IsClipboardFormatAvailable(CF_UNICODETEXT))
-    return String();
-  if (!OpenClipboard((HWND)0))
-    return String();
-
-  LPWSTR clipboardCstr = NULL;
-
-  // Get OS global handle
-  HGLOBAL globalHandle = GetClipboardData(CF_UNICODETEXT);
-  if (globalHandle != NULL)
-  {
-    clipboardCstr = (LPWSTR)GlobalLock(globalHandle);
-    if (clipboardCstr != NULL)
-    {
-      GlobalUnlock(globalHandle);
-    }
-  }
-  CloseClipboard();
-  return Narrow(clipboardCstr);
-}
-
-void Shell::SetClipboardText(StringParam text)
+void WindowsSetClipboardText(StringParam text)
 {
   WString wideText = Widen(text);
   if (!OpenClipboard((HWND)0))
@@ -1413,25 +1432,10 @@ void Shell::SetClipboardText(StringParam text)
   CloseClipboard();
 }
 
-bool Shell::IsClipboardImage()
+bool WindowsGetClipboardImage(Image* image)
 {
-  if (!OpenClipboard((HWND)0))
+  if (!WindowsOpenClipboard(CF_BITMAP))
     return false;
-
-  bool result = (IsClipboardFormatAvailable(CF_BITMAP) != 0);
-  CloseClipboard();
-  return result;
-}
-
-bool Shell::GetClipboardImage(Image* image)
-{
-  if (!OpenClipboard((HWND)0))
-    return false;
-  if (!IsClipboardFormatAvailable(CF_BITMAP))
-  {
-    CloseClipboard();
-    return false;
-  }
 
   HBITMAP hbmScreen = (HBITMAP)GetClipboardData(CF_BITMAP);
   HDC hdcScreen = GetDC(NULL);
