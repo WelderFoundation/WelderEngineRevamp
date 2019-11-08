@@ -1094,7 +1094,7 @@ LRESULT CALLBACK ShellWindowWndProc(ShellWindow* window, HWND hwnd, UINT msg, WP
       window->mOnKeyDown(key, wParam, repeated, window);
 
     // Handle paste explicitly to be more like a browser platform
-    if (shell->IsKeyDown(Keys::Control) && key == Keys::V && mOnPaste)
+    if (shell->IsKeyDown(Keys::Control) && key == Keys::V && shell->mOnPaste)
     {
       ClipboardData data;
       data.mHasText = WindowsGetClipboardText(&data.mText);
@@ -1103,7 +1103,7 @@ LRESULT CALLBACK ShellWindowWndProc(ShellWindow* window, HWND hwnd, UINT msg, WP
     }
 
     // Handle cut/copy explicitly to be more like a browser platform
-    if (shell->IsKeyDown(Keys::Control) && (key == Keys::C || key == Keys::X) && mOnCopy)
+    if (shell->IsKeyDown(Keys::Control) && (key == Keys::C || key == Keys::X) && shell->mOnCopy)
     {
       ClipboardData data;
       shell->mOnCopy(data, key == Keys::X, shell);
