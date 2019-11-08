@@ -267,10 +267,11 @@
         // cannot allow async calls, so we trick emscripten into letting us make sync calls.
         // Another way we could cludge this problme is to go back to using Emscripten's main loop,
         // and only use emscripten_sleep when we're inside of the Zilch debugger.
-        const previous = Asyncify.currData
-        Asyncify.currData = null
-        ccall(...args);
-        Asyncify.currData = previous
+        const previous = Asyncify.currData;
+        Asyncify.currData = null;
+        const result = ccall(...args);
+        Asyncify.currData = previous;
+        return result;
       }
 
       function sanitizeHTML(html)
