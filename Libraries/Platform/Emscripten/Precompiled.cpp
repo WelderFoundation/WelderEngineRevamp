@@ -114,19 +114,16 @@ extern "C" EMSCRIPTEN_KEEPALIVE void EmscriptenOnPaste(const char* text)
 {
   if (!Shell::sInstance->mOnPaste)
     return;
-  SetYieldToOsEnabled(false);
   ClipboardData data;
   data.mHasText = true;
   data.mText = text;
   Shell::sInstance->mOnPaste(data, Shell::sInstance);
-  SetYieldToOsEnabled(true);
 }
 
 extern "C" EMSCRIPTEN_KEEPALIVE char* EmscriptenOnCopy(int cut)
 {
   if (!Shell::sInstance->mOnCopy)
     return nullptr;
-  SetYieldToOsEnabled(false);
   ClipboardData data;
   Shell::sInstance->mOnCopy(data, !!cut, Shell::sInstance);
   ErrorIf(!data.mHasText && !data.mText.Empty(), "Clipboard Text was not empty, but HasText was not set");
@@ -137,7 +134,6 @@ extern "C" EMSCRIPTEN_KEEPALIVE char* EmscriptenOnCopy(int cut)
     memcpy(buffer, data.mText.c_str(), size);
     return buffer;
   }
-  SetYieldToOsEnabled(true);
   return nullptr;
 }
 
