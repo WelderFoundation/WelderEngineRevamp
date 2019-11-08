@@ -797,8 +797,86 @@ void RawInputMessage(ShellWindow* window, WPARAM wParam, LPARAM lParam)
 
 const uint MessageHandled = 0;
 
+bool WindowsOpenClipboard(UINT format)
+{
+  if (!OpenClipboard((HWND)0))
+    return false;
+  if (!IsClipboardFormatAvailable(CF_UNICODETEXT))
+  {
+    CloseClipboard();
+    return false;
+  }
+  return true;
+}
+
+bool WindowsGetClipboardText(String* out)
+{
+  if (!WindowsOpenClipboard(CF_UNICODETEXT))
+    return false;
+
+  bool result = false;
+  HGLOBAL globalHandle = GetClipboardData(CF_UNICODETEXT);
+  if (globalHandle != nullptr)
+  {
+    LPWSTR clipboardCstr = (LPWSTR)GlobalLock(globalHandle);
+    if (clipboardCstr != nullptr)
+    {
+      *out = Narrow(clipboardCstr);
+      GlobalUnlock(globalHandle);
+      result = true;
+    }
+  }
+  CloseClipboard();
+  return result;
+}
+
+void WindowsSetClipboardText(StringParam text)
+{
+  WString wideText = Widen(text);
+  if (!OpenClipboard((HWND)0))
+    return;
+  EmptyClipboard();
+
+  uint numCharacters = wideText.SizeInBytes();
+  // Allocate a global memory object for the text.
+
+  HGLOBAL hglbCopy = GlobalAlloc(GMEM_MOVEABLE, (numCharacters + 1) * sizeof(wchar_t));
+  if (hglbCopy == NULL)
+  {
+    CloseClipboard();
+    return;
+  }
+
+  // Lock the handle and copy the text to the buffer.
+  wchar_t* data = (wchar_t*)GlobalLock(hglbCopy);
+  memcpy(data, wideText.Data(), wideText.SizeInBytes());
+
+  // Null terminate the buffer
+  data[numCharacters] = (wchar_t)0;
+  GlobalUnlock(hglbCopy);
+
+  // Place the handle on the clipboard.
+  SetClipboardData(CF_UNICODETEXT, hglbCopy);
+
+  CloseClipboard();
+}
+
+bool WindowsGetClipboardImage(Image* image)
+{
+  if (!WindowsOpenClipboard(CF_BITMAP))
+    return false;
+
+  HBITMAP hbmScreen = (HBITMAP)GetClipboardData(CF_BITMAP);
+  HDC hdcScreen = GetDC(NULL);
+  ConvertImage(hdcScreen, hbmScreen, image);
+
+  CloseClipboard();
+  return true;
+}
+
 LRESULT CALLBACK ShellWindowWndProc(ShellWindow* window, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+  Shell* shell = window->mShell;
   switch (msg)
   {
   case WM_CLOSE:
@@ -1016,19 +1094,19 @@ LRESULT CALLBACK ShellWindowWndProc(ShellWindow* window, HWND hwnd, UINT msg, WP
       window->mOnKeyDown(key, wParam, repeated, window);
 
     // Handle paste explicitly to be more like a browser platform
-    if (IsKeyDown(Keys::Control) && key == Keys::V && mOnPaste)
+    if (shell->IsKeyDown(Keys::Control) && key == Keys::V && mOnPaste)
     {
       ClipboardData data;
       data.mHasText = WindowsGetClipboardText(&data.mText);
       data.mHasImage = WindowsGetClipboardImage(&data.mImage);
-      mOnPaste(data, this);
+      shell->mOnPaste(data, shell);
     }
 
     // Handle cut/copy explicitly to be more like a browser platform
-    if (IsKeyDown(Keys::Control) && (key == Keys::C || key == Keys::X) && mOnCopy)
+    if (shell->IsKeyDown(Keys::Control) && (key == Keys::C || key == Keys::X) && mOnCopy)
     {
       ClipboardData data;
-      mOnCopy(data, key == Keys::X, this);
+      shell->mOnCopy(data, key == Keys::X, shell);
       ErrorIf(!data.mHasText && !data.mText.Empty(), "Clipboard Text was not empty, but HasText was not set");
       if (data.mHasText)
         WindowsSetClipboardText(data.mText.c_str());
@@ -1366,83 +1444,6 @@ void Shell::SetMouseCursor(Cursor::Enum cursor)
 
   SetCursor(hCursor);
   mCursor = cursor;
-}
-
-bool WindowsOpenClipboard(UINT format)
-{
-  if (!OpenClipboard((HWND)0))
-    return false;
-  if (!IsClipboardFormatAvailable(CF_UNICODETEXT))
-  {
-    CloseClipboard();
-    return false;
-  }
-  return true;
-}
-
-bool WindowsGetClipboardText(String* out)
-{
-  if (!WindowsOpenClipboard(CF_UNICODETEXT))
-    return false;
-
-  bool result = false;
-  HGLOBAL globalHandle = GetClipboardData(CF_UNICODETEXT);
-  if (globalHandle != nullptr)
-  {
-    LPWSTR clipboardCstr = (LPWSTR)GlobalLock(globalHandle);
-    if (clipboardCstr != nullptr)
-    {
-      *out = Narrow(clipboardCstr);
-      GlobalUnlock(globalHandle);
-      result = true;
-    }
-  }
-  CloseClipboard();
-  return result;
-}
-
-void WindowsSetClipboardText(StringParam text)
-{
-  WString wideText = Widen(text);
-  if (!OpenClipboard((HWND)0))
-    return;
-  EmptyClipboard();
-
-  uint numCharacters = wideText.SizeInBytes();
-  // Allocate a global memory object for the text.
-
-  HGLOBAL hglbCopy = GlobalAlloc(GMEM_MOVEABLE, (numCharacters + 1) * sizeof(wchar_t));
-  if (hglbCopy == NULL)
-  {
-    CloseClipboard();
-    return;
-  }
-
-  // Lock the handle and copy the text to the buffer.
-  wchar_t* data = (wchar_t*)GlobalLock(hglbCopy);
-  memcpy(data, wideText.Data(), wideText.SizeInBytes());
-
-  // Null terminate the buffer
-  data[numCharacters] = (wchar_t)0;
-  GlobalUnlock(hglbCopy);
-
-  // Place the handle on the clipboard.
-  SetClipboardData(CF_UNICODETEXT, hglbCopy);
-
-  CloseClipboard();
-}
-
-bool WindowsGetClipboardImage(Image* image)
-{
-  if (!WindowsOpenClipboard(CF_BITMAP))
-    return false;
-
-  HBITMAP hbmScreen = (HBITMAP)GetClipboardData(CF_BITMAP);
-  HDC hdcScreen = GetDC(NULL);
-  ConvertImage(hdcScreen, hbmScreen, image);
-
-  CloseClipboard();
-  return true;
 }
 
 bool Shell::GetPrimaryMonitorImage(Image* image)
