@@ -1,4 +1,7 @@
 set(SDL_SHARED_ENABLED_BY_DEFAULT OFF)
+set(SDL_TEST_ENABLED_BY_DEFAULT OFF)
+set(SDL_TESTS OFF)
+set(SDL_TEST OFF)
 
 # Only done as a hack because we can't find main for some reason (Ubuntu).
 if(WELDER_TARGETOS STREQUAL "Linux")
