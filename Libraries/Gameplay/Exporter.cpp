@@ -13,7 +13,7 @@ namespace ExportUtility
 HashSet<String>& GetExcludedFiles()
 {
   static HashSet<String> files;
-  files.Insert("ZeroEditor.exe");
+  files.Insert(GetEditorExecutableFileName());
   files.Insert("exp");
   files.Insert("ilk");
   files.Insert("lib");
