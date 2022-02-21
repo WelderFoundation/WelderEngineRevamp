@@ -1,6 +1,9 @@
 // MIT Licensed (see LICENSE.md).
 #include "Precompiled.hpp"
 
+#include "extensions.h"
+#include "enum_string_mapping.h"
+
 namespace Zero
 {
 
@@ -452,7 +455,7 @@ void ZilchShaderSpirVBinaryBackend::WriteHeader(ZilchShaderToSpirVContext* conte
 
   streamWriter.Write(spv::MagicNumber);
   // Major
-  streamWriter.Write(0, 1, 2, 0);
+  streamWriter.Write(0, 1, 4, 0);
   // Generator id
   streamWriter.Write(0);
   // Bound
@@ -474,6 +477,23 @@ void ZilchShaderSpirVBinaryBackend::WriteHeader(ZilchShaderToSpirVContext* conte
   for (; !capabilitiesRange.Empty(); capabilitiesRange.PopFront())
   {
     streamWriter.WriteInstruction(2, OpType::OpCapability, capabilitiesRange.Front());
+  }
+
+  // Write Extensions
+  AutoDeclare(extensionsRange, typeCollector.mRequiredExtensions.All());
+  for (; !extensionsRange.Empty(); extensionsRange.PopFront())
+  {
+    // Convert the extension instruction id to a string (OpExtension requires
+    // the extension string name instead of id for some reason)
+    spvtools::Extension extensionId = (spvtools::Extension)extensionsRange.Front();
+    String extString = spvtools::ExtensionToString(extensionId);
+
+    // Compute the word count required for the op
+    uint16 byteCount = (uint16)streamWriter.GetPaddedByteCount(extString);
+    uint16 wordCount = byteCount / 4;
+
+    streamWriter.Write(1 + wordCount, OpType::OpExtension);
+    streamWriter.Write(extString);
   }
 
   // Imports
@@ -551,21 +571,29 @@ void ZilchShaderSpirVBinaryBackend::WriteDebug(ZilchShaderIRType* type, ZilchSha
 {
   WriteDebugName(type, type->mDebugResultName, context);
 
-  // @JoshD: Fix to be a consistent order (this is hashmap order)
+  // Get indices to names for members
+  HashMap<int, String> memberIndicesToNames;
   AutoDeclare(memberNameRange, type->mMemberNamesToIndex.All());
   for (; !memberNameRange.Empty(); memberNameRange.PopFront())
   {
     AutoDeclare(pair, memberNameRange.Front());
+    memberIndicesToNames[pair.second] = pair.first;
+  }
+
+  // Walk all the member names in order
+  for (int i = 0; i < (int)memberIndicesToNames.Size(); ++i)
+  {
+    String name = memberIndicesToNames.FindValue(i, String());
 
     ShaderStreamWriter& streamWriter = *context->mStreamWriter;
-    size_t byteCount = streamWriter.GetPaddedByteCount(pair.first);
+    size_t byteCount = streamWriter.GetPaddedByteCount(name);
     size_t wordCount = byteCount / 4;
 
     int typeId = context->FindId(type);
     streamWriter.WriteInstruction(3 + (int16)wordCount, OpType::OpMemberName);
     streamWriter.Write(typeId);
-    streamWriter.Write(pair.second);
-    streamWriter.Write(pair.first);
+    streamWriter.Write(i);
+    streamWriter.Write(name);
   }
 }
 
@@ -734,6 +762,8 @@ void ZilchShaderSpirVBinaryBackend::WriteType(ZilchShaderIRType* type, ZilchShad
     streamWriter.WriteInstruction(2, OpType::OpTypeBool, context->FindId(type));
   else if (type->mBaseType == ShaderIRTypeBaseType::Int)
     streamWriter.WriteInstruction(4, OpType::OpTypeInt, context->FindId(type), 32, 1);
+  else if (type->mBaseType == ShaderIRTypeBaseType::Uint)
+    streamWriter.WriteInstruction(4, OpType::OpTypeInt, context->FindId(type), 32, 0);
   else if (type->mBaseType == ShaderIRTypeBaseType::Float)
     streamWriter.WriteInstruction(3, OpType::OpTypeFloat, context->FindId(type), 32);
   else if (type->mBaseType == ShaderIRTypeBaseType::Vector)

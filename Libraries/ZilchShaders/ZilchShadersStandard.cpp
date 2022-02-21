@@ -171,6 +171,8 @@ ZilchDefineStaticLibrary(ShaderIntrinsicsLibrary)
 {
   builder.CreatableInScriptDefault = false;
 
+  ZilchInitializeType(UnsignedInt);
+
   // BoundType Components
   ZilchInitializeType(GeometryStreamUserData);
   ZilchInitializeType(GeometryFragmentUserData);
@@ -198,6 +200,16 @@ ZilchDefineStaticLibrary(ShaderIntrinsicsLibrary)
     sizeParam.Name = "Size";
     sizeParam.Type = ConstantType::Integer;
     builder.AddTemplateInstantiator("FixedArray", InstantiateFixedArray, templateTypes, nullptr);
+  }
+
+  {
+    Zilch::Array<Zilch::Constant> fixedArrayTemplateParams;
+    fixedArrayTemplateParams.PushBack(ZilchTypeId(Zilch::Real4x4));
+    fixedArrayTemplateParams.PushBack(80);
+
+    Zilch::InstantiatedTemplate templateData = builder.InstantiateTemplate(
+        "FixedArray", fixedArrayTemplateParams, LibraryArray(ZeroInit, builder.BuiltLibrary));
+    Zilch::BoundType* boneTransformsType = templateData.Type;
   }
 
   // Bind the runtime array type instantiator (creates the different arrays when

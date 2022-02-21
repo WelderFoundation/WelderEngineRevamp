@@ -80,6 +80,7 @@ SpirVNameSettings::SpirVNameSettings()
   mUnitTestAttribute = "UnitTest";
   mSpecializationConstantAttribute = "SpecConstant";
   mSpecializationConstantInputAttribute = BuildString(mSpecializationConstantAttribute, "Input");
+  mFragmentSharedAttribute = "FragmentShared";
 
   // Create the implied sub-attributes for [Input]
   mInputSubAttributes.PushBack(mFragmentInputAttribute);
@@ -105,6 +106,7 @@ SpirVNameSettings::SpirVNameSettings()
   mAllowedFieldAttributes.Insert(mStaticAttribute, AttributeInfo());
   mAllowedFieldAttributes.Insert(mSpecializationConstantAttribute, AttributeInfo());
   mAllowedFieldAttributes.Insert(mSpecializationConstantInputAttribute, AttributeInfo());
+  mAllowedFieldAttributes.Insert(mFragmentSharedAttribute, AttributeInfo());
 
   mAllowedFunctionAttributes.Insert(mStaticAttribute, AttributeInfo());
   mAllowedFunctionAttributes.Insert(mExtensionAttribute, AttributeInfo());
@@ -129,7 +131,7 @@ UniformBufferDescription::UniformBufferDescription()
   Set(0, 0, mAllStagesMask, "Uniform");
 }
 
-UniformBufferDescription::UniformBufferDescription(int bindingId, int descriptorSetId)
+UniformBufferDescription::UniformBufferDescription(u32 bindingId, u32 descriptorSetId)
 {
   Set(bindingId, descriptorSetId, mAllStagesMask, "Uniform");
 }
@@ -167,8 +169,8 @@ void UniformBufferDescription::CopyFrom(const UniformBufferDescription& source)
   }
 }
 
-void UniformBufferDescription::Set(int bindingId,
-                                   int descriptorSetId,
+void UniformBufferDescription::Set(u32 bindingId,
+                                   u32 descriptorSetId,
                                    ShaderStage::Enum allowedStages,
                                    StringParam debugName)
 {

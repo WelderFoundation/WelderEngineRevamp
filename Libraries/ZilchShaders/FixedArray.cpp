@@ -66,8 +66,8 @@ void ResolveFixedArrayGet(ZilchSpirVFrontEnd* translator,
   // Generate the access chain to get the element within the array
   IZilchShaderIR* leftOperand = translator->WalkAndGetResult(memberAccessNode->LeftOperand, context);
   ZilchShaderIROp* selfInstance = translator->GetOrGeneratePointerTypeFromIR(leftOperand, context);
-  IZilchShaderIR* accessChainOp = translator->BuildCurrentBlockIROp(
-      OpType::OpAccessChain, elementType->mPointerType, selfInstance, indexOperand, context);
+  IZilchShaderIR* accessChainOp =
+      translator->BuildCurrentBlockAccessChain(elementType, selfInstance, indexOperand, context);
 
   context->PushIRStack(accessChainOp);
 }
@@ -93,8 +93,8 @@ void ResolveFixedArraySet(ZilchSpirVFrontEnd* translator,
   // Generate the access chain to get the element within the array
   IZilchShaderIR* leftOperand = translator->WalkAndGetResult(memberAccessNode->LeftOperand, context);
   ZilchShaderIROp* selfInstance = translator->GetOrGeneratePointerTypeFromIR(leftOperand, context);
-  IZilchShaderIR* accessChainOp = translator->BuildCurrentBlockIROp(
-      OpType::OpAccessChain, elementType->mPointerType, selfInstance, indexOperand, context);
+  IZilchShaderIR* accessChainOp =
+      translator->BuildCurrentBlockAccessChain(elementType, selfInstance, indexOperand, context);
 
   // Get the source value
   IZilchShaderIR* sourceIR = translator->WalkAndGetResult(functionCallNode->Arguments[1], context);
@@ -330,15 +330,21 @@ void ResolveRuntimeArrayCount(ZilchSpirVFrontEnd* translator,
   // The runtime array length instruction is a bit odd as it requires the struct
   // the array is contained in as well as the member index offset into the
   // struct for where the runtime array is actually contained.
+  // for where the runtime array is actually contained. Additionally, the return type
+  // is required to be an unsigned int (which doesn't exist in zilch).
+  // So a hack unsigned int type is returned and immediately casted to a signed int.
   ZilchShaderIRType* intType = translator->FindType(ZilchTypeId(int), functionCallNode);
+  ZilchShaderIRType* uintType = translator->FindType(ZilchTypeId(Zilch::UnsignedInt), functionCallNode);
   // Get the wrapper struct instance that contains the real runtime array
   IZilchShaderIR* structOwnerOp = translator->WalkAndGetResult(memberAccessNode->LeftOperand, context);
-  // We create the runtime array wrapper struct such that the real array is
-  // always at member index 0
+  // We create the runtime array wrapper struct such that the real array is always at member index 0
   ZilchShaderIRConstantLiteral* zeroLiteral = translator->GetOrCreateConstantIntegerLiteral(0);
-  IZilchShaderIR* lengthResult =
-      translator->BuildCurrentBlockIROp(OpType::OpArrayLength, intType, structOwnerOp, zeroLiteral, context);
-  context->PushIRStack(lengthResult);
+  IZilchShaderIR* uintLengthResult =
+      translator->BuildCurrentBlockIROp(OpType::OpArrayLength, uintType, structOwnerOp, zeroLiteral, context);
+  // Cast to a signed int. Note: This will do very bad things if the sign bit is set on the unsigned int.
+  IZilchShaderIR* intLengthResult =
+      translator->BuildCurrentBlockIROp(OpType::OpBitcast, intType, uintLengthResult, context);
+  context->PushIRStack(intLengthResult);
 }
 
 void RuntimeArrayResolver(ZilchSpirVFrontEnd* translator, Zilch::BoundType* zilchRuntimeArrayType)

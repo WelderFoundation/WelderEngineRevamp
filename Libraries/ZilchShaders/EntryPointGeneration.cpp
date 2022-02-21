@@ -184,10 +184,10 @@ void ShaderInterfaceStruct::DefineInterfaceType(EntryPointGeneration* entryPoint
   // Write decoration on the block instance
   entryPointGeneration->WriteTypeDecorations(interfaceGroup.mInstanceDecorations, decorationBlock, interfaceInstance);
 
-  // If this is an input/output (e.g. not uniform) then add it to the entry
-  // point's interface
-  if (interfaceGroup.mStorageClass == spv::StorageClassInput || interfaceGroup.mStorageClass == spv::StorageClassOutput)
-    entryPointInfo->mInterface.PushBack(interfaceInstance);
+  // As of version 1.4 of spirv, all global variables of all storage classes
+  // must be declared in the entry point's interface list
+  entryPointInfo->mInterface.PushBack(interfaceInstance);
+  entryPointGeneration->mUniqueOps.Insert(interfaceInstance);
 }
 
 void ShaderInterfaceStruct::CopyInterfaceType(EntryPointGeneration* entryPointGeneration,
@@ -376,7 +376,10 @@ void ShaderInterfaceGlobals::DefineInterfaceType(EntryPointGeneration* entryPoin
     // (required to declare OpEntryPoint) if it's an input or output
     if (interfaceGroup.mStorageClass == spv::StorageClassInput ||
         interfaceGroup.mStorageClass == spv::StorageClassOutput)
+    {
       entryPointInfo->mInterface.PushBack(varOp);
+      entryPointGeneration->mUniqueOps.Insert(varOp);
+    }
   }
 }
 
@@ -520,7 +523,7 @@ void EntryPointGeneration::DeclareVertexInterface(ZilchSpirVFrontEnd* translator
   ShaderInterfaceInfo interfaceInfo;
   CollectInterfaceVariables(function, interfaceInfo, ShaderStage::Vertex);
 
-  // Mark the inputs of pixel shaders as a non-struct non-block set of inputs.
+  // Mark the inputs of vertex shaders as a non-struct non-block set of inputs.
   interfaceInfo.mInputs.mIsStruct = false;
   interfaceInfo.mInputs.mStorageClass = spv::StorageClassInput;
   // Vertex inputs also must have locations specified
@@ -595,12 +598,10 @@ void EntryPointGeneration::DeclareGeometryInterface(ZilchSpirVFrontEnd* translat
     entryPointArguments.PushBack(outputVar);
 
     // Create the function call to the entry point
-    translator->BuildIROp(
-        currentBlock, OpType::OpFunctionCall, voidType, copyInputsData.mFunction, selfVar, inputVar, context);
-    ZilchShaderIROp* fnCallOp = translator->BuildIROpNoBlockAdd(OpType::OpFunctionCall, voidType, context);
-    fnCallOp->mArguments.PushBack(function);
-    translator->WriteFunctionCallArguments(entryPointArguments, voidType, function->mFunctionType, fnCallOp, context);
-    currentBlock->AddOp(fnCallOp);
+    translator->BuildIROp(currentBlock, OpType::OpFunctionCall, voidType, copyInputsData.mFunction, selfVar, inputVar, context);
+    
+    // Call the generated entry point function
+    translator->WriteFunctionCall(entryPointArguments, function, context);
 
     // Add the termination statement
     translator->BuildIROp(currentBlock, OpType::OpReturn, nullptr, context);
@@ -767,6 +768,9 @@ void EntryPointGeneration::Clear()
   DeleteObjectsIn(mBuiltIns);
   DeleteObjectsIn(mInputs);
   DeleteObjectsIn(mOutputs);
+  mUniqueTypes.Clear();
+  mUniqueOps.Clear();
+  mUsedBindingIds.Clear();
 }
 
 void EntryPointGeneration::CreateEntryPointFunction(Zilch::GenericFunctionNode* node,
@@ -1792,7 +1796,7 @@ EntryPointGeneration::ProcessUniformBlock(ZilchShaderIRFunction* function,
     uniformGroup.mStorageClass = spv::StorageClassUniform;
     uniformGroup.mIsStruct = true;
 
-    int bindingId = uniformBlock->mBindingId;
+    u32 bindingId = uniformBlock->mBindingId;
     // If this is the material buffer and we don't allow id overlap
     // then offset the binding id by the fragment type
     if (isDefaultBuffer && !settings->mAllowUniformMaterialBufferIndexOverap)
@@ -1804,9 +1808,12 @@ EntryPointGeneration::ProcessUniformBlock(ZilchShaderIRFunction* function,
     // Set the reflection data for the buffer
     ShaderResourceReflectionData& reflectionData = uniformGroup.mReflectionData;
     reflectionData.mDescriptorSet = uniformBlock->mDescriptorSetId;
-    reflectionData.mBinding = uniformBlock->mBindingId;
+    reflectionData.mBinding = bindingId;
     reflectionData.mInstanceName = uniformGroup.mName;
   }
+
+  // Mark that we've used this binding id
+  mUsedBindingIds.Insert(uniformGroup.mReflectionData.mBinding);
 
   // If this is a user defined buffer then the entire buffer must match all at
   // once. This means we just copy all fields from the user defined description.
@@ -2373,8 +2380,23 @@ void EntryPointGeneration::FindAndDecorateGlobals(ZilchShaderIRType* currentType
   TypeDependencyCollector collector(currentType->mShaderLibrary);
   collector.Collect(currentType);
 
+  AddInterfaceTypesToEntryPoint(collector, entryPointInfo);
   DecorateImagesAndSamplers(collector, entryPointInfo);
   DecorateRuntimeArrays(collector, entryPointInfo);
+}
+
+void EntryPointGeneration::AddInterfaceTypesToEntryPoint(TypeDependencyCollector& collector,
+                                                         EntryPointInfo* entryPointInfo)
+{
+  auto range = collector.mReferencedGlobals.All();
+  for (; !range.Empty(); range.PopFront())
+  {
+    ZilchShaderIROp* globalVarInstance = range.Front();
+    if (!mUniqueOps.Contains(globalVarInstance))
+      // Add the instance to the list of interface variables
+      entryPointInfo->mInterface.PushBack(globalVarInstance);
+    mUniqueOps.Insert(globalVarInstance);
+  }
 }
 
 void EntryPointGeneration::DecorateImagesAndSamplers(TypeDependencyCollector& collector, EntryPointInfo* entryPointInfo)
@@ -2382,9 +2404,6 @@ void EntryPointGeneration::DecorateImagesAndSamplers(TypeDependencyCollector& co
   ZilchSpirVFrontEnd* translator = mTranslator;
   ZilchSpirVFrontEndContext* context = mContext;
 
-  // Keep track of used sampler and image ids (they can overlap).
-  HashSet<int> samplerIds;
-  HashSet<int> imageIds;
   ShaderStageInterfaceReflection& stageReflectionData = entryPointInfo->mStageReflectionData;
 
   AutoDeclare(range, collector.mReferencedGlobals.All());
@@ -2412,13 +2431,13 @@ void EntryPointGeneration::DecorateImagesAndSamplers(TypeDependencyCollector& co
       else
         resourceInfo = &stageReflectionData.mImages.PushBack();
 
-      resourceBindingId = FindBindingId(imageIds);
+      resourceBindingId = FindBindingId();
       remappings = &stageReflectionData.mImageRemappings[resourceName];
       remappings->mImageRemappings.PushBack(resourceName);
     }
     else if (baseType == ShaderIRTypeBaseType::Sampler)
     {
-      resourceBindingId = FindBindingId(samplerIds);
+      resourceBindingId = FindBindingId();
       resourceInfo = &stageReflectionData.mSamplers.PushBack();
       remappings = &stageReflectionData.mSamplerRemappings[resourceName];
       remappings->mSamplerRemappings.PushBack(resourceName);
@@ -2427,7 +2446,7 @@ void EntryPointGeneration::DecorateImagesAndSamplers(TypeDependencyCollector& co
     {
       // Sampled images are special as they use an image and sampler id.
       // We need to find an id that is empty in both the sampler and image sets.
-      resourceBindingId = FindBindingId(imageIds, samplerIds);
+      resourceBindingId = FindBindingId();
       resourceInfo = &stageReflectionData.mSampledImages.PushBack();
       remappings = &stageReflectionData.mSampledImageRemappings[resourceName];
       remappings->mSampledImageRemappings.PushBack(resourceName);
@@ -2464,8 +2483,7 @@ void EntryPointGeneration::DecorateRuntimeArrays(TypeDependencyCollector& collec
   ZilchSpirVFrontEndContext* context = mContext;
   BasicBlock* decorationBlock = &entryPointInfo->mDecorations;
 
-  int bindingId = 0;
-  int descriptorSetId = 0;
+  u32 descriptorSetId = 0;
   AutoDeclare(range, collector.mReferencedGlobals.All());
   for (; !range.Empty(); range.PopFront())
   {
@@ -2485,15 +2503,18 @@ void EntryPointGeneration::DecorateRuntimeArrays(TypeDependencyCollector& collec
     ZilchShaderIRType* elementType = spirvRuntimeArrayType->mParameters[0]->As<ZilchShaderIRType>();
 
     // Decorate the instance with the correct binding and descriptor set
+    u32 bindingId = FindBindingId();
     translator->BuildDecorationOp(decorationBlock, globalVarInstance, spv::DecorationBinding, bindingId, context);
     translator->BuildDecorationOp(
         decorationBlock, globalVarInstance, spv::DecorationDescriptorSet, descriptorSetId, context);
-    ++bindingId;
 
-    // Decorate the struct wrapper type. This requires
-    // marking it as a block and adding the offset of the actual runtime array.
-    translator->BuildDecorationOp(decorationBlock, opValueType, spv::DecorationBlock, context);
-    translator->BuildMemberDecorationOp(decorationBlock, opValueType, 0, spv::DecorationOffset, 0, context);
+    // Decorate the struct wrapper type. This requires marking it as a block and
+    // adding the offset of the actual runtime array. Make sure this decoration is unique
+    if (!mUniqueTypes.Contains(spirvRuntimeArrayType))
+    {
+      translator->BuildDecorationOp(decorationBlock, opValueType, spv::DecorationBlock, context);
+      translator->BuildMemberDecorationOp(decorationBlock, opValueType, 0, spv::DecorationOffset, 0, context);
+    }
 
     // Create a new reflection object for the runtime array.
     ShaderStageInterfaceReflection& stageReflectionData = entryPointInfo->mStageReflectionData;
@@ -2509,6 +2530,8 @@ void EntryPointGeneration::DecorateRuntimeArrays(TypeDependencyCollector& collec
     // this can be a struct of structs or other complicated things.
     AddRuntimeArrayDecorations(
         decorationBlock, zilchRuntimeArrayType, spirvRuntimeArrayType, elementType, stageResource);
+    // Finally mark that we've visited this array type so we don't duplicately decorate it.
+    mUniqueTypes.Insert(spirvRuntimeArrayType);
   }
 }
 
@@ -2576,8 +2599,12 @@ void EntryPointGeneration::AddRuntimeArrayDecorations(BasicBlock* decorationBloc
   int stride = GetSizeAfterAlignment(totalSize, maxAlignment);
   reflectionData.mSizeInBytes = totalSize;
   reflectionData.mStride = stride;
-  // Now we can actually decorate the runtime array's rull stride
-  translator->BuildDecorationOp(decorationBlock, spirvRuntimeArrayType, spv::DecorationArrayStride, stride, context);
+  
+  // Now we can actually decorate the runtime array's stride (make sure to only decorate a type once)
+  if (!mUniqueTypes.Contains(spirvRuntimeArrayType))
+  {
+    translator->BuildDecorationOp(decorationBlock, spirvRuntimeArrayType, spv::DecorationArrayStride, stride, context);
+  }
 }
 
 void EntryPointGeneration::RecursivelyDecorateStructType(BasicBlock* decorationBlock,
@@ -2613,9 +2640,13 @@ void EntryPointGeneration::RecursivelyDecorateStructType(BasicBlock* decorationB
     maxAlignment = Math::Max(requiredAlignment, maxAlignment);
     currentByteOffset = GetSizeAfterAlignment(currentByteOffset, requiredAlignment);
 
-    // Decorate the offset of this member within the struct
-    translator->BuildMemberDecorationOp(
-        decorationBlock, structType, i, spv::DecorationOffset, currentByteOffset, context);
+    // Decorate the offset of this member within the struct.
+    // This has to be uniquely defined per type (no duplicatees).
+    if (!mUniqueTypes.Contains(structType))
+    {
+      translator->BuildMemberDecorationOp(
+          decorationBlock, structType, i, spv::DecorationOffset, currentByteOffset, context);
+    }
 
     // Store the offset and size of this field in the reflection data
     ShaderResourceReflectionData& fieldReflectionData = stageResource.mMembers.PushBack();
@@ -2673,37 +2704,26 @@ void EntryPointGeneration::RecursivelyDecorateStructType(BasicBlock* decorationB
   int stride = GetSizeAfterAlignment(totalSize, maxAlignment);
   reflectionData.mSizeInBytes = totalSize;
   reflectionData.mStride = stride;
+
+  // Mark that this type has been visited for decorations
+  mUniqueTypes.Insert(structType);
 }
 
-int EntryPointGeneration::FindBindingId(HashSet<int>& usedIds)
+u32 EntryPointGeneration::FindBindingId()
 {
   // Find the first unused id in the map
-  int id = 0;
+  u32 id = 0;
   while (true)
   {
-    if (!usedIds.Contains(id))
+    if (!mUsedBindingIds.Contains(id))
     {
-      usedIds.Insert(id);
+      mUsedBindingIds.Insert(id);
       return id;
     }
     ++id;
   }
-}
-
-int EntryPointGeneration::FindBindingId(HashSet<int>& usedIds1, HashSet<int>& usedIds2)
-{
-  // Find the first unused id in both maps
-  int id = 0;
-  while (true)
-  {
-    if (!usedIds1.Contains(id) && !usedIds2.Contains(id))
-    {
-      usedIds1.Insert(id);
-      usedIds2.Insert(id);
-      return id;
-    }
-    ++id;
-  }
+  Error("This should never happen");
+  return 0;
 }
 
 void EntryPointGeneration::CopyReflectionDataToEntryPoint(EntryPointInfo* entryPointInfo,

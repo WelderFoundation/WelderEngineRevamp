@@ -520,6 +520,7 @@ public:
                               IZilchShaderIR* toDecorate,
                               ZilchShaderIRConstantLiteral* memberIndexLiteral);
   void FindAndDecorateGlobals(ZilchShaderIRType* currentType, EntryPointInfo* entryPointInfo);
+  void AddInterfaceTypesToEntryPoint(TypeDependencyCollector& collector, EntryPointInfo* entryPointInfo);
   void DecorateImagesAndSamplers(TypeDependencyCollector& collector, EntryPointInfo* entryPointInfo);
   void DecorateRuntimeArrays(TypeDependencyCollector& collector, EntryPointInfo* entryPointInfo);
   /// Add decorations for a runtime array struct.
@@ -533,8 +534,7 @@ public:
                                      ZilchShaderIRType* structType,
                                      ShaderStageResource& stageResource);
 
-  int FindBindingId(HashSet<int>& usedIds);
-  int FindBindingId(HashSet<int>& usedIds1, HashSet<int>& usedIds2);
+  u32 FindBindingId();
 
   // Copy reflection data from the internal interface info to the entry point
   void CopyReflectionDataToEntryPoint(EntryPointInfo* entryPointInfo, ShaderInterfaceInfo& interfaceInfo);
@@ -582,6 +582,9 @@ public:
   Array<ShaderInterfaceType*> mBuiltIns;
   Array<ShaderInterfaceType*> mInputs;
   Array<ShaderInterfaceType*> mOutputs;
+  HashSet<ZilchShaderIRType*> mUniqueTypes;
+  HashSet<ZilchShaderIROp*> mUniqueOps;
+  HashSet<u32> mUsedBindingIds;
 };
 
 } // namespace Zero

@@ -45,6 +45,12 @@ FragmentType::Enum ShaderStageToFragmentType(ShaderStage::Enum shaderStage);
 /// Currently only used to hide attributes from code completion.
 struct AttributeInfo
 {
+  typedef Zilch::ConstantType::Enum ParamType;
+  struct ParameterSignature
+  {
+    Array<ParamType> mTypes;
+  };
+
   AttributeInfo()
   {
     mHidden = false;
@@ -54,7 +60,33 @@ struct AttributeInfo
     mHidden = hidden;
   }
 
+  AttributeInfo& AddSignature(ParamType p0)
+  {
+    return AddSignature(Array<ParamType>(ZeroInit, p0));
+  }
+  AttributeInfo& AddSignature(ParamType p0, ParamType p1)
+  {
+    return AddSignature(Array<ParamType>(ZeroInit, p0, p1));
+  }
+  AttributeInfo& AddSignature(ParamType p0, ParamType p1, ParamType p2)
+  {
+    return AddSignature(Array<ParamType>(ZeroInit, p0, p1, p2));
+  }
+  AttributeInfo& AddSignature(ParamType p0, ParamType p1, ParamType p2, ParamType p3)
+  {
+    return AddSignature(Array<ParamType>(ZeroInit, p0, p1, p2, p3));
+  }
+  AttributeInfo& AddSignature(Array<ParamType> types)
+  {
+    ParameterSignature& signature = mOverloads.PushBack();
+    signature.mTypes = types;
+    return *this;
+  }
+
   bool mHidden;
+  bool mCheckSignature = true;
+
+  Array<ParameterSignature> mOverloads;
 };
 
 /// Name settings used in the ZilchSpirV translator. This allows
@@ -77,6 +109,10 @@ public:
   String mAppBuiltInInputAttribute;
   String mPropertyInputAttribute;
   String mSpecializationConstantInputAttribute;
+  /// Used to represent that a property should be shared between all
+  /// fragments (instead of a unique copy per fragments). For instance,
+  /// this can be used to have multiple fragments reference the same RuntimeArrays.
+  String mFragmentSharedAttribute;
 
   String mOutputAttribute;
   String mFragmentOutputAttribute;
@@ -123,7 +159,7 @@ class UniformBufferDescription
 {
 public:
   UniformBufferDescription();
-  UniformBufferDescription(int bindingId, int descriptorSetId = 0);
+  UniformBufferDescription(u32 bindingId, u32 descriptorSetId = 0);
   UniformBufferDescription(const UniformBufferDescription& rhs);
   ~UniformBufferDescription();
 
@@ -131,16 +167,16 @@ public:
   void CopyFrom(const UniformBufferDescription& source);
 
   /// Set the common description terms for this uniform buffer.
-  void Set(int bindingId, int descriptorSetId, ShaderStage::Enum allowedStages, StringParam debugName = String());
+  void Set(u32 bindingId, u32 descriptorSetId, ShaderStage::Enum allowedStages, StringParam debugName = String());
 
   /// Add a field to this buffer. Fields are laid out in the order they are
   /// added.
   void AddField(Zilch::BoundType* type, StringParam fieldName);
 
   /// The register id that this buffer will be bound to.
-  int mBindingId;
+  u32 mBindingId;
   /// The descriptor set (hlsl: space) for this buffer.
-  int mDescriptorSetId;
+  u32 mDescriptorSetId;
   /// Debug name to emit this buffer with.
   String mDebugName;
   /// The fields that belong to this buffer.

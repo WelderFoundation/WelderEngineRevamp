@@ -39,6 +39,7 @@ public:
 protected:
   // Helper functions that allow inherited classes to re-use a ton of code.
   void FixInterfaceBlockNames(GlslBackendInternalData& internalData);
+  void FixUniformBufferNameoverlaps(GlslBackendInternalData& internalData);
   void FindUsedSampledImageBindings(GlslBackendInternalData& internalData);
   void HandleCompiledSampledImages(GlslBackendInternalData& internalData);
   void PopulateTypeName(GlslBackendInternalData& internalData,
@@ -57,8 +58,9 @@ protected:
                                  spirv_cross::Resource& resource,
                                  Array<ShaderStageResource>& results,
                                  bool isInterfaceType);
+  template <typename VectorType>
   void ExtractResourcesReflection(GlslBackendInternalData& internalData,
-                                  std::vector<spirv_cross::Resource>& resources,
+                                  VectorType& resources,
                                   Array<ShaderStageResource>& results,
                                   bool isInterfaceType);
   void ExtractResourceReflectionData(GlslBackendInternalData& internalData);

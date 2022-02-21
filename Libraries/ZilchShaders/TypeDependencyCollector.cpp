@@ -1,13 +1,16 @@
 // MIT Licensed (see LICENSE.md).
 #include "Precompiled.hpp"
 
+#include "extensions.h"
+
 namespace Zero
 {
 
 TypeDependencyCollector::TypeDependencyCollector(ZilchShaderIRLibrary* owningLibrary)
 {
   mOwningLibrary = owningLibrary;
-  mCapabilities.InsertOrIgnore(spv::CapabilityLinkage);
+  // @JoshD: This can't always be on in vulkan. Figure out how to experiment with linkage later.
+  // mCapabilities.InsertOrIgnore(spv::CapabilityLinkage);
   mCapabilities.InsertOrIgnore(spv::CapabilityShader);
   // @JoshD: Parse from spirv grammar later. Just prototyping now.
   mRequiredCapabilities[spv::OpImageQuerySize] = spv::CapabilityImageQuery;
@@ -155,6 +158,12 @@ void TypeDependencyCollector::AddTypeReference(ZilchShaderIRType* type)
 {
   mReferencedTypes.InsertOrIgnore(type);
   mTypesConstantsAndGlobals.InsertOrIgnore(type);
+
+  // Storage buffers require an extension specification
+  if (type->mStorageClass == spv::StorageClassStorageBuffer)
+  {
+    mRequiredExtensions.InsertOrIgnore(spvtools::kSPV_KHR_storage_buffer_storage_class);
+  }
 }
 
 void TypeDependencyCollector::AddConstantReference(ZilchShaderIROp* op)

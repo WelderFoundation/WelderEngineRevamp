@@ -8,7 +8,7 @@ namespace Zero
 
 BaseSpirVOptimizerPass::BaseSpirVOptimizerPass()
 {
-  mTargetEnv = SPV_ENV_UNIVERSAL_1_3;
+  mTargetEnv = SPV_ENV_UNIVERSAL_1_4;
 }
 
 bool BaseSpirVOptimizerPass::RunOptimizer(int primaryPass,
@@ -118,7 +118,7 @@ bool SpirVOptimizerPass::RunTranslationPass(ShaderTranslationPassResult& inputDa
                                             ShaderTranslationPassResult& outputData)
 {
   Array<String> flags;
-  bool success = RunOptimizer(SPV_OPTIMIZER_SIZE_PASS, flags, inputData.mByteStream, outputData.mByteStream);
+  bool success = RunOptimizer(SPV_OPTIMIZER_PERFORMANCE_PASS, flags, inputData.mByteStream, outputData.mByteStream);
 
   // By default, all of the reflection data is the same as the input stage
   if (success)
@@ -128,7 +128,7 @@ bool SpirVOptimizerPass::RunTranslationPass(ShaderTranslationPassResult& inputDa
 
 SpirVValidatorPass::SpirVValidatorPass()
 {
-  mTargetEnv = SPV_ENV_UNIVERSAL_1_3;
+  mTargetEnv = SPV_ENV_UNIVERSAL_1_4;
 }
 
 bool SpirVValidatorPass::RunTranslationPass(ShaderTranslationPassResult& inputData,

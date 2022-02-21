@@ -51,6 +51,10 @@ void ZilchShaderGenerator::Initialize()
 
 void ZilchShaderGenerator::InitializeSpirV()
 {
+  // Initialize the libraries first. We need to do this so that we can access the FixedArray type.
+  ZilchShaderIRCore::InitializeInstance();
+  Zilch::ShaderIntrinsicsLibrary::GetInstance().GetLibrary();
+
   SpirVNameSettings nameSettings;
 
   nameSettings.mPerspectiveToApiPerspectiveName = "ZeroPerspectiveToApiPerspective";
@@ -61,9 +65,14 @@ void ZilchShaderGenerator::InitializeSpirV()
   // Temporarily make compute fragments illegal (not supported in zero yet)
   nameSettings.mAllowedClassAttributes.Erase(nameSettings.mComputeAttribute);
   nameSettings.mAllowedFieldAttributes.Insert("Hidden", AttributeInfo());
-  nameSettings.mAllowedFieldAttributes.Insert(PropertyAttributes::cGroup, AttributeInfo());
-  nameSettings.mAllowedFieldAttributes.Insert(PropertyAttributes::cRange, AttributeInfo());
-  nameSettings.mAllowedFieldAttributes.Insert(PropertyAttributes::cSlider, AttributeInfo());
+  AttributeInfo& groupInfo = nameSettings.mAllowedFieldAttributes[PropertyAttributes::cGroup];
+  groupInfo.AddSignature(Zilch::ConstantType::String);
+  AttributeInfo& rangeInfo = nameSettings.mAllowedFieldAttributes[PropertyAttributes::cRange];
+  rangeInfo.AddSignature(Zilch::ConstantType::Real, Zilch::ConstantType::Real);
+  rangeInfo.AddSignature(Zilch::ConstantType::Real, Zilch::ConstantType::Real, Zilch::ConstantType::Real);
+  AttributeInfo& sliderInfo = nameSettings.mAllowedFieldAttributes[PropertyAttributes::cSlider];
+  sliderInfo.AddSignature(Zilch::ConstantType::Real, Zilch::ConstantType::Real);
+  sliderInfo.AddSignature(Zilch::ConstantType::Real, Zilch::ConstantType::Real, Zilch::ConstantType::Real);
 
   // Add names to list of allowed attributes in zilch fragments
   forRange (String& attribute, mSamplerAttributeValues.Keys())
@@ -98,7 +107,7 @@ void ZilchShaderGenerator::InitializeSpirV()
   vertexDefDesc.AddField(real2Type, "UvAux");
   vertexDefDesc.AddField(real4Type, "Color");
   vertexDefDesc.AddField(real4Type, "ColorAux");
-  vertexDefDesc.AddField(intType, "BoneIndices");
+  vertexDefDesc.AddField(int4Type, "BoneIndices");
   vertexDefDesc.AddField(real4Type, "BoneWeights");
   vertexDefDesc.AddField(real4Type, "Aux0");
   vertexDefDesc.AddField(real4Type, "Aux1");
@@ -143,16 +152,17 @@ void ZilchShaderGenerator::InitializeSpirV()
   transformData.AddField(real4x4Type, nameSettings.mPerspectiveToApiPerspectiveName);
   settings->AddUniformBufferDescription(transformData);
 
-  // UniformBufferDescription miscData(3);
-  // miscData.mDebugName = "MiscData";
-  // settings->mShaderDefinitionSettings.AddBuiltIn("BoneTransforms",
-  // "FixedArray[Real4x4, 80]");
-  // SpriteSource input
-  // settings->mShaderDefinitionSettings.AddBuiltIn("SpriteSource",
-  // "Sampler2d");
-  //// HeightMap input
-  // settings->mShaderDefinitionSettings.AddBuiltIn("HeightMapWeights",
-  // "Sampler2d");
+  Zilch::BoundType* boneTransformsType =
+      Zilch::ShaderIntrinsicsLibrary::GetInstance().GetLibrary()->BoundTypes["FixedArray[Real4x4, 80]"];
+  UniformBufferDescription miscData(3);
+  miscData.mDebugName = "MiscData";
+  miscData.AddField(boneTransformsType, "BoneTransforms");
+  // Legacy did this, but you can't put samplers in a uniform buffer so this is illegal
+  // Zilch::BoundType* sampledImage2dType =
+  // Zilch::ShaderIntrinsicsLibrary::GetInstance().GetLibrary()->BoundTypes["SampledImage2d"];
+  // miscData.AddField(sampledImage2dType, "SpriteSource");
+  // miscData.AddField(sampledImage2dType, "HeightMapWeights");
+  settings->AddUniformBufferDescription(miscData);
 
   settings->AutoSetDefaultUniformBufferDescription();
 
@@ -172,7 +182,7 @@ void ZilchShaderGenerator::InitializeSpirV()
   mFrontEndTranslator->SetSettings(mSpirVSettings);
   mFrontEndTranslator->Setup();
   // Create the core library and parse it
-  ZilchShaderIRCore::InitializeInstance();
+  
   ZilchShaderIRCore& coreLibrary = ZilchShaderIRCore::GetInstance();
   coreLibrary.Parse(mFrontEndTranslator);
   mCoreLibrary = coreLibrary.GetLibrary();
@@ -437,7 +447,12 @@ LibraryRef ZilchShaderGenerator::BuildFragmentsLibrary(Module& dependencies,
     if (shaderTypeMeta == nullptr)
       continue;
 
-    Resource* resource = (Resource*)shaderTypeMeta->mZilchType->Location.CodeUserData;
+    // Not all types have backing zilch types either (runtime arrays have an internal type with no backing zilch type)
+    Zilch::BoundType* zilchType = shaderTypeMeta->mZilchType;
+    if (zilchType == nullptr)
+      continue;
+
+    Resource* resource = (Resource*)zilchType->Location.CodeUserData;
     // If we have a valid user data (some types won't, like arrays that are
     // generated in your library)
     if (resource == nullptr)
@@ -813,7 +828,7 @@ ShaderInput ZilchShaderGenerator::CreateShaderInput(StringParam fragmentName,
   }
   else
   {
-    shaderInput.mTranslatedInputName = BuildString("Material.", GenerateSpirVPropertyName(inputName, fragmentName));
+    shaderInput.mTranslatedInputName = BuildString("Material_", FragmentType::Names[shaderTypeMeta->mFragmentType], ".", GenerateSpirVPropertyName(inputName, fragmentName));
     // SPIR-V doesn't allow boolean uniforms so we convert boolean inputs from
     // Zilch to integers.
     if (type == ShaderInputType::Bool)

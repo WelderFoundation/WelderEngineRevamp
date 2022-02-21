@@ -31,6 +31,27 @@ public:
   ZilchShaderIRFunction* mCurrentFunction;
 
   ZilchShaderDebugInfo mDebugInfo;
+
+  /// Some function calls need to write some instructions after the
+  /// function call (storage class differences). This data is used to keep
+  /// track of the copies that need to happen afterwards.
+  struct PostableCopy
+  {
+    PostableCopy()
+    {
+      mSource = mDestination = nullptr;
+    }
+    PostableCopy(ZilchShaderIROp* dest, ZilchShaderIROp* source)
+    {
+      mSource = source;
+      mDestination = dest;
+    }
+
+    ZilchShaderIROp* mSource;
+    ZilchShaderIROp* mDestination;
+  };
+
+  Array<PostableCopy> mFunctionPostambleCopies;
 };
 
 class ZilchSpirVFrontEnd : public BaseShaderIRTranslator
@@ -121,6 +142,12 @@ public:
                                     Zilch::ConstantType::Enum expectedParamType,
                                     bool allowEmptyName);
   void ValidateAttributeNoParameters(ShaderIRAttribute* shaderAttribute);
+  void ValidateAttributeParameters(ShaderIRAttribute* shaderAttribute,
+                                   HashMap<String, AttributeInfo>& allowedAttributes,
+                                   StringParam errorTypeName);
+  bool ValidateAttributeParameterSignature(ShaderIRAttribute* shaderAttribute,
+                                           const AttributeInfo::ParameterSignature& signature) const;
+  bool DoTypesMatch(const AttributeInfo::ParamType& actualType, const AttributeInfo::ParamType& expectedType) const;
   // Validates that the given attribute has all dependency attributes specified
   void ValidateAttributeDependencies(ShaderIRAttribute* shaderAttribute,
                                      ShaderIRAttributeList& shaderAttributeList,
@@ -166,11 +193,19 @@ public:
   void PreWalkTemplateTypes(ZilchSpirVFrontEndContext* context);
   void PreWalkTemplateType(Zilch::BoundType* zilchType, ZilchSpirVFrontEndContext* context);
   void PreWalkClassVariables(Zilch::MemberVariableNode*& node, ZilchSpirVFrontEndContext* context);
-  void AddRuntimeArray(Zilch::MemberVariableNode* node, ZilchShaderIRType* varType, ZilchSpirVFrontEndContext* context);
+  void AddRuntimeArray(Zilch::MemberVariableNode* node,
+                       ZilchShaderIRType* varType,
+                       ShaderIRFieldMeta* fieldMeta,
+                       ZilchSpirVFrontEndContext* context);
   void AddGlobalVariable(Zilch::MemberVariableNode* node,
                          ZilchShaderIRType* varType,
+                         ShaderIRFieldMeta* fieldMeta,
                          spv::StorageClass storageClass,
                          ZilchSpirVFrontEndContext* context);
+  GlobalVariableData* CreateGlobalVariable(spv::StorageClass storageClass,
+                                           ZilchShaderIRType* varType,
+                                           StringParam varName,
+                                           ZilchSpirVFrontEndContext* context);
   void PreWalkClassConstructor(Zilch::ConstructorNode*& node, ZilchSpirVFrontEndContext* context);
   void PreWalkClassFunction(Zilch::FunctionNode*& node, ZilchSpirVFrontEndContext* context);
   void PreWalkMainFunction(Zilch::FunctionNode*& node, ZilchSpirVFrontEndContext* context);
@@ -208,14 +243,6 @@ public:
                                 ZilchSpirVFrontEndContext* context);
   void WalkMemberAccessFunctionCallNode(Zilch::FunctionCallNode*& node,
                                         Zilch::MemberAccessNode* memberAccessNode,
-                                        ZilchShaderIRFunction* shaderFunction,
-                                        ZilchSpirVFrontEndContext* context);
-  void WalkMemberAccessFunctionCall(Array<IZilchShaderIR*>& arguments,
-                                    Zilch::MemberAccessNode* memberAccessNode,
-                                    ZilchShaderIRFunction* shaderFunction,
-                                    ZilchSpirVFrontEndContext* context);
-  ZilchShaderIROp* GenerateFunctionCall(ZilchShaderIRFunction* shaderFunction, ZilchSpirVFrontEndContext* context);
-  ZilchShaderIROp* GenerateFunctionCall(BasicBlock* block,
                                         ZilchShaderIRFunction* shaderFunction,
                                         ZilchSpirVFrontEndContext* context);
   void WalkMemberAccessExtensionInstructionCallNode(Zilch::FunctionCallNode*& node,
@@ -455,15 +482,15 @@ public:
                                 IZilchShaderIR* source,
                                 ZilchSpirVFrontEndContext* context,
                                 bool forceLoadStore = true);
-  void WriteFunctionCallArguments(Zilch::FunctionCallNode*& node,
-                                  ZilchShaderIROp* functionCallOp,
-                                  ZilchSpirVFrontEndContext* context);
-  void WriteFunctionCallArguments(Zilch::FunctionCallNode*& node,
-                                  Zilch::Type* returnType,
-                                  ZilchShaderIROp* functionCallOp,
-                                  ZilchSpirVFrontEndContext* context);
+  void GetFunctionCallArguments(Zilch::FunctionCallNode* node,
+                                Zilch::MemberAccessNode* memberAccessNode,
+                                Array<IZilchShaderIR*>& arguments,
+                                ZilchSpirVFrontEndContext* context);
+  void GetFunctionCallArguments(Zilch::FunctionCallNode* node,
+                                IZilchShaderIR* thisOp,
+                                Array<IZilchShaderIR*>& arguments,
+                                ZilchSpirVFrontEndContext* context);
   void WriteFunctionCallArguments(Array<IZilchShaderIR*> arguments,
-                                  ZilchShaderIRType* returnType,
                                   ZilchShaderIRType* functionType,
                                   ZilchShaderIROp* functionCallOp,
                                   ZilchSpirVFrontEndContext* context);
@@ -471,6 +498,11 @@ public:
                                  ZilchShaderIROp* functionCallOp,
                                  ZilchShaderIRType* paramType,
                                  ZilchSpirVFrontEndContext* context);
+  ZilchShaderIROp* GenerateFunctionCall(ZilchShaderIRFunction* shaderFunction, ZilchSpirVFrontEndContext* context);
+  void WriteFunctionCallPostamble(ZilchSpirVFrontEndContext* context);
+  void WriteFunctionCall(Array<IZilchShaderIR*> arguments,
+                         ZilchShaderIRFunction* shaderFunction,
+                         ZilchSpirVFrontEndContext* context);
 
   // Helpers
   ZilchShaderIROp* GenerateBoolToIntegerCast(BasicBlock* block,

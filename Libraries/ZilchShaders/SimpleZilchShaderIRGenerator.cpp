@@ -114,7 +114,7 @@ void SimplifiedShaderReflectionData::CreateUniformReflectionData(ZilchShaderIRLi
   HashMap<String, UniformReflectionData> memberRemappings;
   HashMap<String, SimpleResourceRemappingData> bufferRenames;
   ShaderStageInterfaceReflection& firstStageData = passResults[0]->mReflectionData;
-  ShaderStageInterfaceReflection* lastStageData = &firstStageData;
+  ShaderStageInterfaceReflection* lastStageData = &passResults[passResults.Size() - 1]->mReflectionData;
 
   // Walk all uniforms in the first stage, building a mapping of the
   // buffer names and the member names within each buffer
@@ -485,6 +485,16 @@ void SimplifiedShaderReflectionData::CreateSimpleOpaqueTypeReflectionData(ZilchS
         // Store the remapped data if it exists
         if (remappingData != nullptr)
           fragLookup.mStructedStorageBuffers[fieldName] = *remappingData;
+        else
+        {
+          // @JoshD: Currently opaque types when shared will have a name mangling that
+          // doesn't always map as it should. Temporarily try both names when resolving
+          // and pick the first one that works. Fix later.
+          remappingData = storageBufferMappings.FindPointer(fieldName);
+          // Store the remapped data if it exists
+          if (remappingData != nullptr)
+            fragLookup.mStructedStorageBuffers[fieldName] = *remappingData;
+        }
         continue;
       }
       // Check if this is a storage image
@@ -611,6 +621,23 @@ bool SimpleZilchShaderIRGenerator::ComposeShader(ZilchShaderIRCompositor::Shader
   EventConnect(&compositor, Events::ValidationError, &SimpleZilchShaderIRGenerator::OnForwardEvent, this);
 
   bool success = compositor.Composite(shaderDef, capabilities, mSettings);
+
+  mShaderDefinitionMap[shaderDef.mShaderName] = shaderDef;
+
+  return success;
+}
+
+bool SimpleZilchShaderIRGenerator::ComposeComputeShader(
+    ZilchShaderIRCompositor::ShaderDefinition& shaderDef,
+    ShaderCapabilities& capabilities,
+    ZilchShaderIRCompositor::ComputeShaderProperties* computeProperties)
+{
+  ZilchShaderIRCompositor compositor;
+  EventConnect(&compositor, Events::TranslationError, &SimpleZilchShaderIRGenerator::OnForwardEvent, this);
+  EventConnect(&compositor, Zilch::Events::CompilationError, &SimpleZilchShaderIRGenerator::OnForwardEvent, this);
+  EventConnect(&compositor, Events::ValidationError, &SimpleZilchShaderIRGenerator::OnForwardEvent, this);
+
+  bool success = compositor.CompositeCompute(shaderDef, computeProperties, capabilities, mSettings);
 
   mShaderDefinitionMap[shaderDef.mShaderName] = shaderDef;
 

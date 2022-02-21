@@ -166,13 +166,20 @@ ZilchShaderIRType* ZilchSpirVFrontEnd::FindOrCreateInterfaceType(ZilchShaderIRLi
   if (baseType == ShaderIRTypeBaseType::Pointer)
     builder.Append("_ptr");
   if (storageClass == spv::StorageClassFunction)
-    builder.Append("_Function");
+  {
+    // Don't add any special name here (otherwise duplicate pointer types will be created).
+    // @JoshD: Cleanup later.
+  }
+  else if (storageClass == spv::StorageClassPrivate)
+    builder.Append("_Private");
   else if (storageClass == spv::StorageClassInput)
     builder.Append("_Input");
   else if (storageClass == spv::StorageClassOutput)
     builder.Append("_Output");
   else if (storageClass == spv::StorageClassUniform)
     builder.Append("_Uniform");
+  else if (storageClass == spv::StorageClassUniformConstant)
+    builder.Append("_UniformConstant");
   else if (storageClass == spv::StorageClassStorageBuffer)
     builder.Append("_StorageBuffer");
   else
@@ -343,7 +350,7 @@ void ZilchSpirVFrontEnd::ParseAttributes(Zilch::Array<Zilch::Attribute>& zilchAt
       ValidateSingleParamAttribute(shaderAttribute, String(), Zilch::ConstantType::Integer, true);
     }
     else
-      ValidateAttributeNoParameters(shaderAttribute);
+      ValidateAttributeParameters(shaderAttribute, nameSettings.mAllowedClassAttributes, "types");
   }
 
   // If we found more than one fragment type attribute
@@ -377,7 +384,7 @@ void ZilchSpirVFrontEnd::ParseAttributes(Zilch::Array<Zilch::Attribute>& zilchAt
     if (attributeName == nameSettings.mExtensionAttribute)
       continue;
     else
-      ValidateAttributeNoParameters(shaderAttribute);
+      ValidateAttributeParameters(shaderAttribute, nameSettings.mAllowedFunctionAttributes, "functions");
   }
 }
 
@@ -459,6 +466,25 @@ void ZilchSpirVFrontEnd::ParseAttributes(Zilch::Array<Zilch::Attribute>& zilchAt
       ValidateNameOverrideAttribute(shaderAttribute);
       ValidateAttributeExclusions(shaderAttribute, shaderAttributes, staticExclusions);
     }
+    else if (attributeName == nameSettings.mFragmentSharedAttribute)
+    {
+      ZilchShaderIRType* fieldShaderType = FindType(fieldMeta->mZilchType, nullptr);
+      ShaderIRAttribute* storageClassAttribute =
+          fieldShaderType->FindFirstAttribute(SpirVNameSettings::mStorageClassAttribute);
+
+      // Currently, fragment shared is only allowed on types that are stored
+      // globally (aka, types with non function storage class)
+      bool valid = false;
+      if (storageClassAttribute != nullptr)
+      {
+        spv::StorageClass forcedStorageClass = (spv::StorageClass)storageClassAttribute->mParameters[0].GetIntValue();
+        if (forcedStorageClass != spv::StorageClassFunction)
+          continue;
+      }
+      // Otherwise this type either doesn't have a forced storage class or is function storage class.
+      String msg = String::Format("Attribute [%s] is only valid on opaque data types", attributeName.c_str());
+      SendTranslationError(shaderAttribute->GetLocation(), msg);
+    }
     // Outputs
     else if (attributeName == nameSettings.mOutputAttribute)
     {
@@ -489,9 +515,8 @@ void ZilchSpirVFrontEnd::ParseAttributes(Zilch::Array<Zilch::Attribute>& zilchAt
       dependencies.PushBack(nameSettings.mStaticAttribute);
       ValidateAttributeDependencies(shaderAttribute, shaderAttributes, dependencies);
     }
-    // Assume all other attribute don't take any parameters
     else
-      ValidateAttributeNoParameters(shaderAttribute);
+      ValidateAttributeParameters(shaderAttribute, nameSettings.mAllowedFieldAttributes, "fields");
   }
 }
 
@@ -714,6 +739,98 @@ void ZilchSpirVFrontEnd::ValidateAttributeNoParameters(ShaderIRAttribute* shader
                                 shaderAttribute->mAttributeName.c_str());
     SendTranslationError(shaderAttribute->GetLocation(), msg);
   }
+}
+
+void ZilchSpirVFrontEnd::ValidateAttributeParameters(ShaderIRAttribute* shaderAttribute,
+                                                     HashMap<String, AttributeInfo>& allowedAttributes,
+                                                     StringParam errorTypeName)
+{
+  // First find the attribute's info so we know what it allows
+  AttributeInfo* attributeInfo = allowedAttributes.FindPointer(shaderAttribute->mAttributeName);
+  if (attributeInfo == nullptr)
+  {
+    // This is often a redundant error check, but whatever
+    String msg = String::Format(
+        "Attribute '%s' is not allowed on %s", shaderAttribute->mAttributeName.c_str(), errorTypeName.c_str());
+    SendTranslationError(shaderAttribute->GetLocation(), msg);
+    return;
+  }
+
+  // If the attribute doesn't care about signature checking then ignore it. Mostly for legacy
+  if (attributeInfo->mCheckSignature == false)
+    return;
+
+  // Handle zero params first
+  if (attributeInfo->mOverloads.Size() == 0 && shaderAttribute->mParameters.Size() == 0)
+    return;
+
+  // Check all of the overloads
+  bool isValid = false;
+  for (size_t i = 0; i < attributeInfo->mOverloads.Size(); ++i)
+  {
+    isValid |= ValidateAttributeParameterSignature(shaderAttribute, attributeInfo->mOverloads[i]);
+    if (isValid)
+      break;
+  }
+
+  // If any overload matches then we're cool
+  if (isValid)
+    return;
+
+  // Otherwise print the error message
+  StringBuilder builder;
+  builder.AppendFormat("No matching signature for attribute '%s'.\n", shaderAttribute->mAttributeName.c_str());
+  builder.AppendFormat("Provided signature is %s(", shaderAttribute->mAttributeName.c_str());
+  for (size_t i = 0; i < shaderAttribute->mParameters.Size(); ++i)
+  {
+    const ShaderIRAttributeParameter& param = shaderAttribute->mParameters[i];
+    shaderAttribute->mParameters[i].GetType();
+    String typeName = Zilch::ConstantType::Names[param.GetType()];
+    builder.Append(typeName);
+    if (i != shaderAttribute->mParameters.Size() - 1)
+      builder.Append(", ");
+  }
+  builder.Append(")\n");
+  builder.AppendFormat("Possible signatures are:\n");
+  for (size_t i = 0; i < attributeInfo->mOverloads.Size(); ++i)
+  {
+    builder.AppendFormat("%s(", shaderAttribute->mAttributeName.c_str());
+    const AttributeInfo::ParameterSignature& signature = attributeInfo->mOverloads[i];
+    for (size_t i = 0; i < signature.mTypes.Size(); ++i)
+    {
+      String typeName = Zilch::ConstantType::Names[signature.mTypes[i]];
+      builder.Append(typeName);
+      if (i != signature.mTypes.Size() - 1)
+        builder.Append(", ");
+    }
+    builder.Append(")\n");
+  }
+  SendTranslationError(shaderAttribute->GetLocation(), builder.ToString());
+}
+
+bool ZilchSpirVFrontEnd::ValidateAttributeParameterSignature(ShaderIRAttribute* shaderAttribute,
+                                                             const AttributeInfo::ParameterSignature& signature) const
+{
+  if (shaderAttribute->mParameters.Size() != signature.mTypes.Size())
+    return false;
+
+  for (size_t i = 0; i < shaderAttribute->mParameters.Size(); ++i)
+  {
+    const ShaderIRAttributeParameter& attributeParam = shaderAttribute->mParameters[i];
+    if (!DoTypesMatch(attributeParam.GetType(), signature.mTypes[i]))
+      return false;
+  }
+  return true;
+}
+
+bool ZilchSpirVFrontEnd::DoTypesMatch(const AttributeInfo::ParamType& actualType,
+                                      const AttributeInfo::ParamType& expectedType) const
+{
+  if (actualType == expectedType)
+    return true;
+  if (expectedType == AttributeInfo::ParamType::Real && actualType == AttributeInfo::ParamType::Integer)
+    return true;
+  return false;
 }
 
 void ZilchSpirVFrontEnd::ValidateAttributeDependencies(ShaderIRAttribute* shaderAttribute,
@@ -1319,7 +1436,7 @@ void ZilchSpirVFrontEnd::PreWalkClassVariables(Zilch::MemberVariableNode*& node,
   // zilch type's template name) then add a global runtime array.
   if (memberType->mZilchType->TemplateBaseName == SpirVNameSettings::mRuntimeArrayTypeName)
   {
-    AddRuntimeArray(node, memberType, context);
+    AddRuntimeArray(node, memberType, fieldMeta, context);
     return;
   }
 
@@ -1330,7 +1447,7 @@ void ZilchSpirVFrontEnd::PreWalkClassVariables(Zilch::MemberVariableNode*& node,
     // @JoshD: Right now I'm assuming this isn't a function storage class.
     // Change later?
     spv::StorageClass forcedStorageClass = (spv::StorageClass)storageClassAttribute->mParameters[0].GetIntValue();
-    AddGlobalVariable(node, memberType, forcedStorageClass, context);
+    AddGlobalVariable(node, memberType, fieldMeta, forcedStorageClass, context);
     return;
   }
 
@@ -1343,7 +1460,7 @@ void ZilchSpirVFrontEnd::PreWalkClassVariables(Zilch::MemberVariableNode*& node,
       AddSpecializationConstant(node, memberType, context);
     // Otherwise, add it as a global variables
     else
-      AddGlobalVariable(node, memberType, spv::StorageClassPrivate, context);
+      AddGlobalVariable(node, memberType, fieldMeta, spv::StorageClassPrivate, context);
     return;
   }
 
@@ -1353,6 +1470,7 @@ void ZilchSpirVFrontEnd::PreWalkClassVariables(Zilch::MemberVariableNode*& node,
 
 void ZilchSpirVFrontEnd::AddRuntimeArray(Zilch::MemberVariableNode* node,
                                          ZilchShaderIRType* varType,
+                                         ShaderIRFieldMeta* fieldMeta,
                                          ZilchSpirVFrontEndContext* context)
 {
   // Make sure no constructor call exists (illegal as this type
@@ -1387,45 +1505,79 @@ void ZilchSpirVFrontEnd::AddRuntimeArray(Zilch::MemberVariableNode* node,
     return;
   }
 
-  // Make a variable of the wrapper struct type
-  ZilchShaderIROp* globalVar = BuildIROpNoBlockAdd(OpType::OpVariable, zilchRuntimeArrayType->mPointerType, context);
-  // Runtime array structs must be of storage class storage buffer
-  ZilchShaderIRConstantLiteral* storageClassLiteral =
-      GetOrCreateConstantIntegerLiteral((int)spv::StorageClassStorageBuffer);
-  globalVar->mArguments.PushBack(storageClassLiteral);
-  // Mangle the variable name like other globals (including the fragment type
-  // name).
-  globalVar->mDebugResultName = GenerateSpirVPropertyName(node->Name.Token, context->mCurrentType);
-  // Add this field to our globals (so we can find it later)
-  ErrorIf(mLibrary->mZilchFieldToGlobalVariable.ContainsKey(node->CreatedField), "Global variable already exists");
-
-  // Create global variable data to store the instance and initializer function
-  GlobalVariableData* globalData = new GlobalVariableData();
-  mLibrary->mZilchFieldToGlobalVariable[node->CreatedField] = globalData;
-  globalData->mInstance = globalVar;
-  // Also map the instance for the backend
-  mLibrary->mGlobalVariableToZilchField[globalData->mInstance] = node->CreatedField;
+  // Otherwise we can create the runtime array (which is the same as creating a global)
+  AddGlobalVariable(node, varType, fieldMeta, spv::StorageClassStorageBuffer, context);
 }
 
 void ZilchSpirVFrontEnd::AddGlobalVariable(Zilch::MemberVariableNode* node,
                                            ZilchShaderIRType* varType,
+                                           ShaderIRFieldMeta* fieldMeta,
                                            spv::StorageClass storageClass,
                                            ZilchSpirVFrontEndContext* context)
 {
-  // Make a member variable with the specified storage class
-  ZilchShaderIROp* globalVar = BuildIROpNoBlockAdd(OpType::OpVariable, varType->mPointerType, context);
-  globalVar->mArguments.PushBack(GetOrCreateConstantIntegerLiteral(storageClass));
-  // Name the variable. Include the owning type's name for clarity.
-  globalVar->mDebugResultName = GenerateSpirVPropertyName(node->Name.Token, context->mCurrentType);
-  // Add this field to our globals (so we can find it later)
+  String varName = node->Name.Token;
+  SpirVNameSettings& nameSettings = mSettings->mNameSettings;
+
+  // Error check to make sure this global was only created once
   ErrorIf(mLibrary->mZilchFieldToGlobalVariable.ContainsKey(node->CreatedField), "Global variable already exists");
 
-  // Create global variable data to store the instance and initializer function
-  GlobalVariableData* globalData = new GlobalVariableData();
+  GlobalVariableData* globalData = nullptr;
+  // Check if this field is marked as being shared across fragments
+  if (fieldMeta->ContainsAttribute(nameSettings.mFragmentSharedAttribute))
+  {
+    // Find if this shared field was already created
+    // (use the raw field name instead of a mangled name by fragment type)
+    FragmentSharedKey fragmentSharedKey(storageClass, varType, varName);
+    globalData = mLibrary->FindFragmentSharedVariable(fragmentSharedKey);
+    // If not, create the variable and map it by its key
+    if (globalData == nullptr)
+    {
+      globalData = CreateGlobalVariable(storageClass, varType, varName, context);
+      mLibrary->mFragmentSharedGlobalVariables[fragmentSharedKey] = globalData;
+    }
+  }
+  // Otherwise always create the field
+  else
+  {
+    // Update the name to be a proper property name (mangled by fragment name). Purely for debugging.
+    varName = GenerateSpirVPropertyName(varName, context->mCurrentType);
+    globalData = CreateGlobalVariable(storageClass, varType, varName, context);
+  }
+
+  // In either case, record how to look up the global variable from the field.
+  // This is necessary when we come across a member access later.
   mLibrary->mZilchFieldToGlobalVariable[node->CreatedField] = globalData;
+}
+
+GlobalVariableData* ZilchSpirVFrontEnd::CreateGlobalVariable(spv::StorageClass storageClass,
+                                                             ZilchShaderIRType* varType,
+                                                             StringParam varName,
+                                                             ZilchSpirVFrontEndContext* context)
+{
+  // Get the pointer type of this variable. We need to make sure the pointer types is
+  // of the correct storage class (e.g. globals have to be Private, uniforms, etc...)
+  ZilchShaderIRType* pointerType = varType->mPointerType;
+  if (pointerType->mStorageClass != storageClass)
+    pointerType = FindOrCreatePointerInterfaceType(mLibrary, varType, storageClass);
+
+  // Make a member variable with the specified storage class and name
+  ZilchShaderIROp* globalVar = BuildIROpNoBlockAdd(OpType::OpVariable, pointerType, context);
+  globalVar->mArguments.PushBack(GetOrCreateConstantIntegerLiteral(storageClass));
+  globalVar->mDebugResultName = varName;
+
+  // Create global variable data to store the instance and
+  // initializer function (by default, the function is empty)
+  GlobalVariableData* globalData = new GlobalVariableData();
   globalData->mInstance = globalVar;
-  // Also map the instance for the backend
-  mLibrary->mGlobalVariableToZilchField[globalData->mInstance] = node->CreatedField;
+
+  // Mark that this library owns the global
+  mLibrary->mOwnedGlobals.PushBack(globalData);
+
+  // Always map the variable for the backend so it can know if how to
+  // find the initializer function for a random op-code (if it's global)
+  mLibrary->mVariableOpLookupMap[globalVar] = globalData;
+
+  return globalData;
 }
 
 void ZilchSpirVFrontEnd::PreWalkClassConstructor(Zilch::ConstructorNode*& node, ZilchSpirVFrontEndContext* context)
@@ -1632,8 +1784,9 @@ void ZilchSpirVFrontEnd::GenerateDefaultConstructor(Zilch::ClassNode*& node, Zil
 
   // Manually invoke the pre-constructor
   ZilchShaderIRFunction* preConstructorFn = mLibrary->mFunctions.FindValue(node->PreConstructor, nullptr);
-  ZilchShaderIROp* preConstructorCallOp = GenerateFunctionCall(currentBlock, preConstructorFn, context);
-  preConstructorCallOp->mArguments.PushBack(selfOp);
+  Array<IZilchShaderIR*> arguments;
+  arguments.PushBack(selfOp);
+  WriteFunctionCall(arguments, preConstructorFn, context);
   currentType->mAutoDefaultConstructor = function;
 
   // Manually generate the terminator
@@ -1723,9 +1876,9 @@ void ZilchSpirVFrontEnd::WalkClassConstructor(Zilch::ConstructorNode*& node, Zil
 
   // Manually invoke the pre-constructor
   IZilchShaderIR* selfType = context->mZilchVariableToIR[node->DefinedFunction->This];
-  ZilchShaderIRType* preConstructorReturnType = preConstructorFn->GetReturnType();
-  ZilchShaderIROp* preConstructorCallOp = GenerateFunctionCall(currentBlock, preConstructorFn, context);
-  preConstructorCallOp->mArguments.PushBack(selfType);
+  Array<IZilchShaderIR*> arguments;
+  arguments.PushBack(selfType);
+  WriteFunctionCall(arguments, preConstructorFn, context);
 
   GenerateFunctionBody(node, context);
 }
@@ -1747,8 +1900,9 @@ void ZilchSpirVFrontEnd::DefaultConstructType(Zilch::SyntaxNode* locationNode,
   if (autoDefaultConstructor != nullptr)
   {
     ZilchShaderIRType* returnType = autoDefaultConstructor->GetReturnType();
-    ZilchShaderIROp* preConstructorCallOp = GenerateFunctionCall(currentBlock, autoDefaultConstructor, context);
-    preConstructorCallOp->mArguments.PushBack(selfVar);
+    Array<IZilchShaderIR*> arguments;
+    arguments.PushBack(selfVar);
+    WriteFunctionCall(arguments, autoDefaultConstructor, context);
     return;
   }
 
@@ -1954,13 +2108,11 @@ void ZilchSpirVFrontEnd::WalkConstructorCallNode(Zilch::FunctionCallNode*& node,
   {
     ZilchShaderIROp* classVarOp = BuildOpVariable(resultType->mPointerType, context);
 
-    // Generate the function call but don't add it to the block yet (so we can
-    // collect all arguments first)
-    ZilchShaderIROp* constructorCallOp = GenerateFunctionCall(shaderConstructorFn, context);
-    constructorCallOp->mArguments.PushBack(classVarOp);
-    WriteFunctionCallArguments(node, ZilchTypeId(void), constructorCallOp, context);
+    // Collect the arguments and generate the function call
+    Array<IZilchShaderIR*> arguments;
+    GetFunctionCallArguments(node, classVarOp, arguments, context);
+    WriteFunctionCall(arguments, shaderConstructorFn, context);
 
-    currentBlock->AddOp(constructorCallOp);
     context->PushIRStack(classVarOp);
     return;
   }
@@ -2014,74 +2166,12 @@ void ZilchSpirVFrontEnd::WalkMemberAccessFunctionCallNode(Zilch::FunctionCallNod
                                                           ZilchShaderIRFunction* shaderFunction,
                                                           ZilchSpirVFrontEndContext* context)
 {
-  BasicBlock* currentBlock = context->GetCurrentBlock();
-
   // Fill out an array with all of the arguments this function takes
   Array<IZilchShaderIR*> arguments;
-
-  // If this is an instance function call then add the self type as the first
-  // argument
-  Zilch::Function* zilchFunction = memberAccessNode->AccessedFunction;
-  if (!zilchFunction->IsStatic)
-  {
-    IZilchShaderIR* thisOp = WalkAndGetResult(memberAccessNode->LeftOperand, context);
-    arguments.PushBack(thisOp);
-  }
-
-  // Add all of the regular arguments as well
-  for (size_t i = 0; i < node->Arguments.Size(); ++i)
-  {
-    IZilchShaderIR* argument = WalkAndGetResult(node->Arguments[i], context);
-    arguments.PushBack(argument);
-  }
+  GetFunctionCallArguments(node, memberAccessNode, arguments, context);
 
   // Now generate a function call from the arguments
-  WalkMemberAccessFunctionCall(arguments, memberAccessNode, shaderFunction, context);
-}
-
-void ZilchSpirVFrontEnd::WalkMemberAccessFunctionCall(Array<IZilchShaderIR*>& arguments,
-                                                      Zilch::MemberAccessNode* memberAccessNode,
-                                                      ZilchShaderIRFunction* shaderFunction,
-                                                      ZilchSpirVFrontEndContext* context)
-{
-  BasicBlock* currentBlock = context->GetCurrentBlock();
-
-  // Generate the function call but don't add it to the block yet (so we can
-  // collect all arguments first)
-  ZilchShaderIROp* functionCallOp = GenerateFunctionCall(shaderFunction, context);
-
-  // The first argument is always the function type
-  ZilchShaderIRType* returnType = shaderFunction->GetReturnType();
-  WriteFunctionCallArguments(arguments, returnType, shaderFunction->mFunctionType, functionCallOp, context);
-
-  // Now add the function since we have all arguments
-  currentBlock->AddOp(functionCallOp);
-}
-
-ZilchShaderIROp* ZilchSpirVFrontEnd::GenerateFunctionCall(ZilchShaderIRFunction* shaderFunction,
-                                                          ZilchSpirVFrontEndContext* context)
-{
-  BasicBlock* currentBlock = context->GetCurrentBlock();
-
-  ZilchShaderIRType* functionType = shaderFunction->mFunctionType;
-  ZilchShaderIRType* returnType = shaderFunction->GetReturnType();
-
-  // Generate the function call but don't add it to the block yet (so we can
-  // collect all arguments first)
-  ZilchShaderIROp* functionCallOp = BuildIROpNoBlockAdd(OpType::OpFunctionCall, returnType, context);
-
-  // The first argument is always the function type
-  functionCallOp->mArguments.PushBack(shaderFunction);
-  return functionCallOp;
-}
-
-ZilchShaderIROp* ZilchSpirVFrontEnd::GenerateFunctionCall(BasicBlock* block,
-                                                          ZilchShaderIRFunction* shaderFunction,
-                                                          ZilchSpirVFrontEndContext* context)
-{
-  ZilchShaderIROp* functionCallOp = GenerateFunctionCall(shaderFunction, context);
-  block->AddOp(functionCallOp);
-  return functionCallOp;
+  WriteFunctionCall(arguments, shaderFunction, context);
 }
 
 void ZilchSpirVFrontEnd::WalkMemberAccessExtensionInstructionCallNode(Zilch::FunctionCallNode*& node,
@@ -2402,7 +2492,7 @@ void ZilchSpirVFrontEnd::WalkMemberAccessNode(Zilch::MemberAccessNode*& node, Zi
           if (!zilchGetFunction->IsStatic)
             arguments.PushBack(WalkAndGetResult(node->LeftOperand, context));
 
-          WalkMemberAccessFunctionCall(arguments, node, shaderFunction, context);
+          WriteFunctionCall(arguments, shaderFunction, context);
           return;
         }
       }
@@ -3006,8 +3096,7 @@ bool ZilchSpirVFrontEnd::ResolveSetter(Zilch::BinaryOperatorNode* node,
     arguments.PushBack(resultValue);
 
     // Turn this into a function call
-    ZilchShaderIROp* functionCallOp = GenerateFunctionCall(context->mCurrentBlock, shaderFunction, context);
-    WalkMemberAccessFunctionCall(arguments, memberAccessNode, shaderFunction, context);
+    WriteFunctionCall(arguments, shaderFunction, context);
     return true;
   }
 
@@ -3399,9 +3488,14 @@ ZilchShaderIROp* ZilchSpirVFrontEnd::BuildIROpNoBlockAdd(OpType opType,
 {
   ZilchShaderIROp* result = new ZilchShaderIROp(opType);
 
-  result->mDebugInfo = context->mDebugInfo;
-  result->mResultType = resultType;
-  context->mDebugInfo.Clear();
+  if (context != nullptr)
+  {
+    result->mDebugInfo = context->mDebugInfo;
+    result->mResultType = resultType;
+    context->mDebugInfo.Clear();
+  }
+  else
+    result->mResultType = resultType;
 
   return result;
 }
@@ -3717,57 +3811,55 @@ ZilchShaderIROp* ZilchSpirVFrontEnd::BuildStoreOp(BasicBlock* block,
     return BuildIROp(block, OpType::OpStore, nullptr, target, sourceOp, context);
 }
 
-void ZilchSpirVFrontEnd::WriteFunctionCallArguments(Zilch::FunctionCallNode*& node,
-                                                    ZilchShaderIROp* functionCallOp,
-                                                    ZilchSpirVFrontEndContext* context)
+void ZilchSpirVFrontEnd::GetFunctionCallArguments(Zilch::FunctionCallNode* node,
+                                                  Zilch::MemberAccessNode* memberAccessNode,
+                                                  Array<IZilchShaderIR*>& arguments,
+                                                  ZilchSpirVFrontEndContext* context)
 {
-  WriteFunctionCallArguments(node, node->ResultType, functionCallOp, context);
-}
-
-void ZilchSpirVFrontEnd::WriteFunctionCallArguments(Zilch::FunctionCallNode*& node,
-                                                    Zilch::Type* returnType,
-                                                    ZilchShaderIROp* functionCallOp,
-                                                    ZilchSpirVFrontEndContext* context)
-{
-  // @JoshD: This function is somewhat legacy and would be nice to remove
-  // eventually and unify with the below one. The issue right now is with
-  // calling extended instructions.
-  BasicBlock* currentBlock = context->GetCurrentBlock();
-
-  for (size_t i = 0; i < node->Arguments.Size(); ++i)
+  IZilchShaderIR* thisOp = nullptr;
+  // Get the this operand if the function isn't static
+  if (memberAccessNode != nullptr)
   {
-    IZilchShaderIR* argument = WalkAndGetResult(node->Arguments[i], context);
-    WriteFunctionCallArgument(argument, functionCallOp, nullptr, context);
+    Zilch::Function* zilchFunction = memberAccessNode->AccessedFunction;
+    if (!zilchFunction->IsStatic)
+      thisOp = WalkAndGetResult(memberAccessNode->LeftOperand, context);
   }
 
-  // If there is a return then we have to push the result onto a stack so any
-  // assignments can get the value
-  if (returnType != ZilchTypeId(void))
+  GetFunctionCallArguments(node, thisOp, arguments, context);
+}
+
+void ZilchSpirVFrontEnd::GetFunctionCallArguments(Zilch::FunctionCallNode* node,
+                                                  IZilchShaderIR* thisOp,
+                                                  Array<IZilchShaderIR*>& arguments,
+                                                  ZilchSpirVFrontEndContext* context)
+{
+  // Always add the this operand as the first argument if it exists
+  if (thisOp != nullptr)
+    arguments.PushBack(thisOp);
+
+  // Add all remaining arguments from the node
+  if (node != nullptr)
   {
-    context->PushIRStack(functionCallOp);
+    for (size_t i = 0; i < node->Arguments.Size(); ++i)
+    {
+      IZilchShaderIR* argument = WalkAndGetResult(node->Arguments[i], context);
+      arguments.PushBack(argument);
+    }
   }
 }
 
 void ZilchSpirVFrontEnd::WriteFunctionCallArguments(Array<IZilchShaderIR*> arguments,
-                                                    ZilchShaderIRType* returnType,
                                                     ZilchShaderIRType* functionType,
                                                     ZilchShaderIROp* functionCallOp,
                                                     ZilchSpirVFrontEndContext* context)
 {
-  BasicBlock* currentBlock = context->GetCurrentBlock();
+  // Add all arguments, making sure to convert types if necessary
 
   for (size_t i = 0; i < arguments.Size(); ++i)
   {
     IZilchShaderIR* argument = arguments[i];
     ZilchShaderIRType* paramType = functionType->GetSubType(i + 1);
     WriteFunctionCallArgument(argument, functionCallOp, paramType, context);
-  }
-
-  // If there is a return then we have to push the result onto a stack so any
-  // assignments can get the value
-  if (returnType != nullptr && returnType->mZilchType != ZilchTypeId(void))
-  {
-    context->PushIRStack(functionCallOp);
   }
 }
 
@@ -3779,15 +3871,102 @@ void ZilchSpirVFrontEnd::WriteFunctionCallArgument(IZilchShaderIR* argument,
   ZilchShaderIROp* paramOp = argument->As<ZilchShaderIROp>();
 
   // If we know the function parameter's expected type is a value type while
-  // the given parameter op is a pointer the convert the pointer to a value
+  // the given parameter op is a pointer then convert the pointer to a value
   // type.
   if (paramType == nullptr || !paramType->IsPointerType())
   {
     if (paramOp->IsResultPointerType())
       paramOp = GetOrGenerateValueTypeFromIR(paramOp, context);
   }
+  // Otherwise, if the parameter is a pointer type it might require creating a
+  // temporary variable to pass through to the function and then copy the result back out.
+  else if (paramType->IsPointerType())
+  {
+    bool requiresCopyArgument = false;
+
+    // The storage class is the wrong type, we have to create a new variable to pass in-out
+    if (paramOp->mResultType->mStorageClass != paramType->mStorageClass)
+      requiresCopyArgument = true;
+    // Pointer arguments must be a memory object declaration or a pointer
+    // to an element in an array of type sampler or image (per validation rules)
+    else if (paramOp->mOpType != OpType::OpVariable && paramOp->mOpType != OpType::OpFunctionParameter)
+    {
+      ZilchShaderIRType* dereferencedType = paramOp->mResultType->mDereferenceType;
+      if (dereferencedType->mBaseType != ShaderIRTypeBaseType::Image &&
+          dereferencedType->mBaseType != ShaderIRTypeBaseType::Sampler)
+        requiresCopyArgument = true;
+    }
+
+    if (requiresCopyArgument)
+    {
+      // Create a local variable and copy the parameter into it (this will now have the correct storage class)
+      ZilchShaderIRType* localVarPointerType =
+          FindOrCreatePointerInterfaceType(mLibrary, paramType->mDereferenceType, paramType->mStorageClass);
+      ZilchShaderIROp* localVarOp = BuildOpVariable(localVarPointerType, context);
+      BuildStoreOp(localVarOp, paramOp, context);
+      // Additionally, we'll need to copy the result back out of the function call to set the original paramter.
+      // Unfortunately this has to happen after the function call is made so we just queue up what copies need to
+      // happen.
+      context->mFunctionPostambleCopies.PushBack(ZilchSpirVFrontEndContext::PostableCopy(paramOp, localVarOp));
+      // Replace the paramter with the local temporary
+      paramOp = localVarOp;
+    }
+  }
 
   functionCallOp->mArguments.PushBack(paramOp);
+}
+
+ZilchShaderIROp* ZilchSpirVFrontEnd::GenerateFunctionCall(ZilchShaderIRFunction* shaderFunction,
+                                                          ZilchSpirVFrontEndContext* context)
+{
+  BasicBlock* currentBlock = context->GetCurrentBlock();
+
+  ZilchShaderIRType* functionType = shaderFunction->mFunctionType;
+  ZilchShaderIRType* returnType = shaderFunction->GetReturnType();
+
+  // Generate the function call but don't add it to the block yet (so we can collect all arguments first)
+  ZilchShaderIROp* functionCallOp = BuildIROpNoBlockAdd(OpType::OpFunctionCall, returnType, context);
+
+  // The first argument is always the function type
+  functionCallOp->mArguments.PushBack(shaderFunction);
+  return functionCallOp;
+}
+
+void ZilchSpirVFrontEnd::WriteFunctionCallPostamble(ZilchSpirVFrontEndContext* context)
+{
+  // Write out any postamble copies (needed to deal with varying
+  // storage class types of function parameters such as globals)
+  for (size_t i = 0; i < context->mFunctionPostambleCopies.Size(); ++i)
+  {
+    ZilchSpirVFrontEndContext::PostableCopy& copy = context->mFunctionPostambleCopies[i];
+    BuildStoreOp(copy.mDestination, copy.mSource, context);
+  }
+  context->mFunctionPostambleCopies.Clear();
+}
+
+void ZilchSpirVFrontEnd::WriteFunctionCall(Array<IZilchShaderIR*> arguments,
+                                           ZilchShaderIRFunction* shaderFunction,
+                                           ZilchSpirVFrontEndContext* context)
+{
+  // Generate the function call but don't add it to the block yet (so we can collect all arguments first)
+  ZilchShaderIROp* functionCallOp = GenerateFunctionCall(shaderFunction, context);
+
+  // Write the function call arguments out
+  WriteFunctionCallArguments(arguments, shaderFunction->mFunctionType, functionCallOp, context);
+
+  // Now add the function since we have all arguments
+  BasicBlock* currentBlock = context->GetCurrentBlock();
+  currentBlock->AddOp(functionCallOp);
+
+  // Now we need to invoke any pre-ample copies
+  WriteFunctionCallPostamble(context);
+
+  // If there is a return then we have to push the result onto a stack so any assignments can get the value
+  ZilchShaderIRType* returnType = shaderFunction->GetReturnType();
+  if (returnType != nullptr && returnType->mZilchType != ZilchTypeId(void))
+  {
+    context->PushIRStack(functionCallOp);
+  }
 }
 
 ZilchShaderIROp* ZilchSpirVFrontEnd::GenerateBoolToIntegerCast(BasicBlock* block,
