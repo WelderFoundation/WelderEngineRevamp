@@ -66,7 +66,7 @@ set(WELDER_C_CXX_FLAGS_MINSIZEREL "\
   -Oz\
 ")
 
-function(welder_toolchain_setup_library target)
+function(welder_toolchain_setup_library target internal)
 endfunction()
 
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}\

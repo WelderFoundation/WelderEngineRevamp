@@ -34,7 +34,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Xlinker --start-group")
 
 set(WELDER_C_CXX_EXTERNAL_FLAGS -Wno-everything)
 
-function(welder_toolchain_setup_library target)
+function(welder_toolchain_setup_library target internal)
 endfunction()
 
 function(welder_use_precompiled_header target directory)

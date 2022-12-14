@@ -60,7 +60,7 @@ function(welder_setup_library target directory internal)
     #set_property(TARGET ${target} PROPERTY C_INCLUDE_WHAT_YOU_USE ${WELDER_IWYU_PATH})
     #set_property(TARGET ${target} PROPERTY CXX_INCLUDE_WHAT_YOU_USE ${WELDER_IWYU_PATH})
   endif()
-  welder_toolchain_setup_library(${target})
+  welder_toolchain_setup_library(${target} ${internal})
 endfunction()
 
 function(welder_get_all_dependencies outputList TARGET)

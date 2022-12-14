@@ -53,11 +53,16 @@ set(WELDER_C_CXX_FLAGS_MINSIZEREL "\
 set(WELDER_LINKER_FLAGS "/ignore:4099,4221,4075,4251")
 set(WELDER_LINKER_FLAGS_RELEASE "/LTCG")
 
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO /SUBSYSTEM:WINDOWS /STACK:8388608")
+#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO /SUBSYSTEM:WINDOWS /STACK:8388608")
 
 set(WELDER_C_CXX_EXTERNAL_FLAGS /W0 /wd4267)
 
-function(welder_toolchain_setup_library target)
+function(welder_toolchain_setup_library target internal)
+    set(TARGET_CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO /STACK:8388608")
+    if (${internal})
+        set(TARGET_CMAKE_EXE_LINKER_FLAGS "${TARGET_CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+    endif()
+    set_target_properties(${target} PROPERTIES LINK_FLAGS "${TARGET_CMAKE_EXE_LINKER_FLAGS}")
 endfunction()
 
 function(welder_use_precompiled_header target directory)
