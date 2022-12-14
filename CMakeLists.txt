@@ -51,16 +51,23 @@ set(WELDER_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(WELDER_CMAKE_DIR ${WELDER_CORE_DIR}/CMakeFiles/)
 set(WELDER_TOOLCHAIN_DIR ${WELDER_CMAKE_DIR}/Toolchain/)
 set(WELDER_TARGETOS_DIR ${WELDER_CMAKE_DIR}/TargetOs/)
-set(WELDER_LIBRARIES_DIR ${WELDER_CORE_DIR}/Libraries/)
 set(WELDER_PLATFORM_DATA_DIR ${WELDER_CORE_DIR}/PlatformData/${WELDER_TOOLCHAIN})
 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 function(welder_setup_library target directory internal)
-  target_include_directories(${target} PUBLIC ${directory} ${WELDER_LIBRARIES_DIR})
+  get_filename_component(PARENT_DIR ${directory} DIRECTORY)
+  target_include_directories(${target} PUBLIC ${directory} ${PARENT_DIR})
   if (${internal})
     #set_property(TARGET ${target} PROPERTY C_INCLUDE_WHAT_YOU_USE ${WELDER_IWYU_PATH})
     #set_property(TARGET ${target} PROPERTY CXX_INCLUDE_WHAT_YOU_USE ${WELDER_IWYU_PATH})
   endif()
   welder_toolchain_setup_library(${target} ${internal})
+  
+  # globally enable sorting targets into folders in IDEs
+  get_filename_component (PARENT_FOLDER ${directory} PATH)
+  get_filename_component (FOLDER_NAME ${PARENT_FOLDER} NAME)
+  set_property(TARGET ${target} PROPERTY FOLDER ${FOLDER_NAME})
 endfunction()
 
 function(welder_get_all_dependencies outputList TARGET)
