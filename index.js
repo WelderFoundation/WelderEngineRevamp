@@ -1066,7 +1066,7 @@ const disk = () => {
 };
 
 const all = async (options) => {
-  await format({...options, validate: true});
+  //await format({...options, validate: true});
   await cmake(options);
   // Build the executable so we can prebuild content (no prebuilt content or included builds for the launcher yet)
   await build(options);
