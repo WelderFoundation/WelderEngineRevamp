@@ -33,7 +33,7 @@ void EmscriptenExportTarget::ExportApplication()
 {
   {
     ProfileScopeFunction();
-    String outputDirectory = FilePath::Combine(GetTemporaryDirectory(), "Web", "ZeroExport");
+    String outputDirectory = mExporter->mOutputDirectory;
 
     Status status;
     mExporter->CopyContent(status, outputDirectory, this);
