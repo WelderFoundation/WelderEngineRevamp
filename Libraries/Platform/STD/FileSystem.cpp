@@ -2,6 +2,7 @@
 #include "Precompiled.hpp"
 
 #if __has_include(<experimental/filesystem>)
+#  define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #  include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 #else
