@@ -162,7 +162,7 @@ set(CMAKE_EXE_LINKER_FLAGS_MINSIZEREL         "${CMAKE_EXE_LINKER_FLAGS_MINSIZER
 #Emscripten
 #SDLSTDEmpty
 #Stub
-add_subdirectory(Libraries/Platform/${WELDER_PLATFORM})
+#add_subdirectory(Libraries/Platform/${WELDER_PLATFORM})
 
 add_subdirectory(External)
 add_subdirectory(Libraries)
