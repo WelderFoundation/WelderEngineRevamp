@@ -654,7 +654,7 @@ void Exporter::CopyContent(Status& status, String outputDirectory, ExportTarget*
   HashSet<String>& additionalExcludes = target->GetAdditionalExcludedFiles();
 
   // Copy default configuration
-  ExportUtility::RelativeCopyFile(outputDirectory, appDirectory, "Configuration.data");
+  // ExportUtility::RelativeCopyFile(outputDirectory, appDirectory, "Configuration.data");
 
   // Copy Inno Setup Template
   target->CopyInstallerSetupFile(
