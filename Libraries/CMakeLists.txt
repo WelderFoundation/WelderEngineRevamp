@@ -2,6 +2,7 @@
 add_subdirectory(CodeTranslator)
 add_subdirectory(Common)
 add_subdirectory(Platform)
+add_subdirectory(Renderer)
 add_subdirectory(Content)
 add_subdirectory(Editor)
 add_subdirectory(Engine)

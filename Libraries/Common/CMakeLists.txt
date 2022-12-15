@@ -185,9 +185,6 @@ target_sources(Common
     ${CMAKE_CURRENT_LIST_DIR}/Rect.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Regex.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Regex.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Renderer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Renderer.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/RendererEnumerations.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Resolution.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Rune.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Rune.hpp

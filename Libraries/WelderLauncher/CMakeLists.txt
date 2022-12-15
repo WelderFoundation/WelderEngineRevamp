@@ -71,6 +71,8 @@ target_link_libraries(WelderLauncher
     Opus
     Physics
     Platform
+    RendererBase
+    RendererImpl
     Replication
     Scintilla
     Serialization

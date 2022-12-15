@@ -6,10 +6,6 @@
 
 #include "SDL.h"
 
-#include <GL/glew.h>
-
-#include <GL/gl.h>
-
 #ifdef WelderTargetOsMac
 #  include <CoreServices/CoreServices.h>
 #  include <mach/mach.h>

@@ -119,4 +119,5 @@ welder_target_includes(Graphics
     Geometry
     ZilchShaders
     FreeType
+    RendererBase
 )

@@ -34,6 +34,8 @@ target_link_libraries(WelderEditor
     Opus
     Physics
     Platform
+    RendererBase
+    RendererImpl
     Replication
     Scintilla
     Serialization

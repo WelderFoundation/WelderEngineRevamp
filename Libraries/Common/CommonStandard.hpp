@@ -234,8 +234,6 @@ namespace Zero
 #include "Shell.hpp"
 #include "ComPort.hpp"
 #include "Intrinsics.hpp"
-#include "RendererEnumerations.hpp"
-#include "Renderer.hpp"
 #include "Audio.hpp"
 #include "CallStack.hpp"
 #include "WebRequest.hpp"

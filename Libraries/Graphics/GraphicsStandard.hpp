@@ -4,6 +4,7 @@
 
 // Other projects
 #include "Common/CommonStandard.hpp"
+#include "Renderer/RendererBase/RendererBaseStandard.hpp"
 #include "PlatformStandard.hpp"
 #include "Engine/EngineStandard.hpp"
 #include "Meta/MetaStandard.hpp"

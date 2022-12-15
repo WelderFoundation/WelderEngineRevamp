@@ -36,6 +36,7 @@ target_sources(Support
 welder_target_includes(Support
   PUBLIC
     Common
+    RendererBase
     Libpng
     ZLib
 )
