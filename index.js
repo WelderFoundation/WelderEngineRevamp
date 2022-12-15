@@ -472,7 +472,7 @@ const determineCmakeCombo = (options) => {
       vfs: false
     },
     Windows: {
-      builder: "Visual Studio 15 2017",
+      builder: "Visual Studio 17 2022",
       config: "Release",
       platform: "Windows",
       targetos: "Windows",
