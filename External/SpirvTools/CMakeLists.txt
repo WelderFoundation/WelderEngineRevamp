@@ -11,6 +11,7 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/spirv-tools/libspirv.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/spirv-tools/libspirv.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/spirv-tools/linker.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/spirv-tools/linter.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/spirv-tools/optimizer.hpp
 	
 	#/source/comp
@@ -29,14 +30,28 @@ target_sources(SpirvTools
     #${CMAKE_CURRENT_LIST_DIR}/Repo/source/comp/move_to_front.cpp
     #${CMAKE_CURRENT_LIST_DIR}/Repo/source/comp/move_to_front.h
 	
+    #/source/diff
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/diff/diff.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/diff/diff.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/diff/lcs.h
+    
 	#/source/link
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/link/linker.cpp
+    
+	#/source/lint
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/lint/divergence_analysis.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/lint/divergence_analysis.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/lint/lint_divergent_derivatives.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/lint/linter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/lint/lints.h
 	
 	#/source/opt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/aggressive_dead_code_elim_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/aggressive_dead_code_elim_pass.h
 	${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/amd_ext_to_khr.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/amd_ext_to_khr.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/analyze_live_input_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/analyze_live_input_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/basic_block.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/basic_block.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/block_merge_pass.cpp
@@ -61,14 +76,20 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/compact_ids_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/composite.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/composite.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/constants.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/constants.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/const_folding_rules.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/const_folding_rules.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/constants.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/constants.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/control_dependence.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/control_dependence.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/convert_to_half_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/convert_to_half_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/convert_to_sampled_image_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/convert_to_sampled_image_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/copy_prop_arrays.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/copy_prop_arrays.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/dataflow.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/dataflow.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/dead_branch_elim_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/dead_branch_elim_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/dead_insert_elim_pass.cpp
@@ -83,6 +104,8 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/def_use_manager.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/desc_sroa.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/desc_sroa.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/desc_sroa_util.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/desc_sroa_util.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/dominator_analysis.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/dominator_analysis.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/dominator_tree.cpp
@@ -93,21 +116,27 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_functions_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_functions_util.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_functions_util.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_io_components_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_io_components_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_members_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_members_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_output_stores_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/eliminate_dead_output_stores_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/empty_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/feature_manager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/feature_manager.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/fix_func_call_arguments.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/fix_func_call_arguments.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/fix_storage_class.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/fix_storage_class.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/flatten_decoration_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/flatten_decoration_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/fold.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/fold.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/folding_rules.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/folding_rules.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/fold_spec_constant_op_and_composite_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/fold_spec_constant_op_and_composite_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/folding_rules.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/folding_rules.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/freeze_spec_constant_value_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/freeze_spec_constant_value_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/function.cpp
@@ -123,18 +152,22 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inline_opaque_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inline_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inline_pass.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instruction.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instruction.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instruction_list.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instruction_list.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instrument_pass.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instrument_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inst_bindless_check_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inst_bindless_check_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inst_buff_addr_check_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inst_buff_addr_check_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inst_debug_printf_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/inst_debug_printf_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instruction.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instruction.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instruction_list.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instruction_list.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instrument_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/instrument_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/interface_var_sroa.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/interface_var_sroa.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/interp_fixup_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/interp_fixup_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/ir_builder.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/ir_context.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/ir_context.h
@@ -143,6 +176,8 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/iterator.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/licm_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/licm_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/liveness.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/liveness.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/local_access_chain_convert_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/local_access_chain_convert_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/local_redundancy_elimination.cpp
@@ -181,9 +216,9 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/optimizer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/pass.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/passes.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/pass_manager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/pass_manager.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/passes.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/pch_source_opt.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/pch_source_opt.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/private_to_local_pass.cpp
@@ -199,8 +234,14 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/register_pressure.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/relax_float_ops_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/relax_float_ops_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/remove_dontinline_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/remove_dontinline_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/remove_duplicates_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/remove_duplicates_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/remove_unused_interface_variables_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/remove_unused_interface_variables_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/replace_desc_array_access_using_var_index.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/replace_desc_array_access_using_var_index.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/replace_invalid_opc.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/replace_invalid_opc.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/scalar_analysis.cpp
@@ -213,21 +254,25 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/set_spec_constant_default_value_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/simplification_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/simplification_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/spread_volatile_semantics.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/spread_volatile_semantics.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/ssa_rewrite_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/ssa_rewrite_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strength_reduction_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strength_reduction_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strip_debug_info_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strip_debug_info_pass.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strip_reflect_info_pass.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strip_reflect_info_pass.h
+    #${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strip_reflect_info_pass.cpp
+    #${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strip_reflect_info_pass.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strip_nonsemantic_info_pass.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/strip_nonsemantic_info_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/struct_cfg_analysis.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/struct_cfg_analysis.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/tree_iterator.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/types.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/types.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/type_manager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/type_manager.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/types.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/types.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/unify_const_pass.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/unify_const_pass.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/upgrade_memory_model.cpp
@@ -368,9 +413,10 @@ target_sources(SpirvTools
     #${CMAKE_CURRENT_LIST_DIR}/Repo/source/opt/workaround1209.h
 	
 	#/source/util
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/util/bitutils.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/util/bit_vector.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/util/bit_vector.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/util/bitutils.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/util/hash_combine.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/util/hex_float.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/util/ilist.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/util/ilist_node.h
@@ -424,10 +470,14 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_memory.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_memory_semantics.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_memory_semantics.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_mesh_shading.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_misc.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_mode_setting.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_non_uniform.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_primitives.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_ray_query.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_ray_tracing.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_ray_tracing_reorder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_scopes.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_scopes.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/val/validate_small_type_uses.cpp
@@ -441,6 +491,7 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/binary.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/binary.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/cfa.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/common_debug_info.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/diagnostic.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/diagnostic.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/disassemble.cpp
@@ -448,6 +499,8 @@ target_sources(SpirvTools
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/enum_set.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/enum_string_mapping.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/enum_string_mapping.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/ext_inst.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/source/ext_inst.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/extensions.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/extensions.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/source/ext_inst.cpp
@@ -493,6 +546,7 @@ target_sources(SpirvTools
     #${CMAKE_CURRENT_LIST_DIR}/Repo/source/id_descriptor.h
 		
     ${CMAKE_CURRENT_LIST_DIR}/Build/DebugInfo.h
+    ${CMAKE_CURRENT_LIST_DIR}/Build/NonSemanticShaderDebugInfo100.h
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.hpp
 )
