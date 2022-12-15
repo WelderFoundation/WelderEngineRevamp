@@ -193,8 +193,10 @@ bool ShellEditFile(StringParam file)
 }
 
 #if !defined(ZeroPlatformNoShellOpenApplication)
-bool ShellOpenApplication(StringParam file, StringParam parameters)
+bool ShellOpenApplication(StringParam file, StringParam parameters, StringParam workingDirectory)
 {
+  // todo: use workingDirectory directory
+  // chdir(workingDirectory.c_str());
   String commandLine = String::Format("\"%s\" %s &", file.c_str(), parameters.c_str());
   int result = system(commandLine.c_str());
   return result == 0;
