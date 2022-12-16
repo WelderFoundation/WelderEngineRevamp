@@ -434,6 +434,24 @@ TemplateProject* VersionSelector::CreateTemplateProjectFromMeta(StringParam meta
   DataTreeLoader loader;
   Status status;
   loader.OpenFile(status, metaFilePath);
+
+  // Template meta files must be text
+  if (loader.GetType() != SerializerType::Text)
+  {
+    return nullptr;
+  }
+
+  // Ensure the top level structure is a Cog
+  // Some meta files like Game.data will are DataContent
+  // which cannot be instantiated because no constructors are available.
+  ObjectLoader* objectLoader = (ObjectLoader*)&loader;
+  DataNode* cogDataNode = objectLoader->GetNext();
+  BoundType* cogType = ZilchTypeId(Cog);
+  if (cogDataNode->mTypeName != cogType->Name)
+  {
+    return nullptr;
+  }
+
   Cog* metaCog = Z::gFactory->CreateFromStream(Z::gEngine->GetEngineSpace(), loader, 0, nullptr);
   return CreateTemplateProjectFromMeta(metaCog, FilePath::GetDirectoryPath(metaFilePath), fullBuildId);
 }
