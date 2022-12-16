@@ -1,6 +1,6 @@
 // MIT Licensed (see LICENSE.md).
 #include "Precompiled.hpp"
-#include "Common/FpControl.hpp"
+#include "Common/Platform/FpControl.hpp"
 
 namespace Zero
 {

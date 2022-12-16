@@ -1,8 +1,8 @@
 // MIT Licensed (see LICENSE.md).
 #pragma once
 #include "Engine/EngineStandard.hpp"
-#include "Utilities.hpp"
-#include "Thread.hpp"
+#include "Platform/Utilities.hpp"
+#include "Platform/Thread.hpp"
 #include "Meta/Event.hpp"
 
 namespace Zero

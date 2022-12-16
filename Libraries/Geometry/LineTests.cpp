@@ -2,8 +2,8 @@
 #include "Precompiled.hpp"
 #include "Geometry/Intersection.hpp"
 #include "Geometry/Geometry.hpp"
-#include "Numerical.hpp"
-#include "Math.hpp"
+#include "Math/Numerical.hpp"
+#include "Math/Math.hpp"
 
 namespace Intersection
 {

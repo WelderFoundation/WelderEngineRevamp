@@ -3,7 +3,7 @@
 
 #include "Common/CommonStandard.hpp"
 #include "Renderer/RendererBase/RendererBaseStandard.hpp"
-#include "PlatformStandard.hpp"
+#include "Common/Platform/PlatformStandard.hpp"
 
 #include "ImageSupport.hpp"
 #include "PngSupport.hpp"

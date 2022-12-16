@@ -2,7 +2,7 @@
 #pragma once
 
 #include "Common/CommonStandard.hpp"
-#include "Common/PlatformStandard.hpp"
+#include "Common/Platform/PlatformStandard.hpp"
 
 #include "SDL.h"
 
