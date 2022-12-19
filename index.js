@@ -61,6 +61,7 @@ const dirs = (() => {
 const executables = [
   {
     copyToIncludedBuilds: true,
+    directory: "",
     name: "WelderEditor",
     nonResourceDependencies: [
       "Data",
@@ -82,6 +83,7 @@ const executables = [
   {
     // Since the launcher includes the editor build, it must come afterwards.
     copyToIncludedBuilds: false,
+    directory: "",
     name: "WelderLauncher",
     nonResourceDependencies: [
       "Data",
@@ -574,7 +576,7 @@ const buildvfs = async (cmakeVariablesOptional, buildDir, combo) => {
   for (const executable of executables) {
     console.log(`Building virtual file system for ${executable.name}`);
 
-    const libraryDir = path.join(buildDir, "Libraries", executable.name);
+    const libraryDir = path.join(buildDir, "Libraries", executable.directory, executable.name);
     mkdirp.sync(libraryDir);
 
     const makeFsBuffer = async () => {
@@ -752,12 +754,12 @@ const preventNoOutputTimeout = () => {
   return () => clearInterval(interval);
 };
 
-const findExecutableDir = (buildDir, config, library) => [
-  path.join(buildDir, "Libraries", library, config),
-  path.join(buildDir, "Libraries", library)
+const findExecutableDir = (buildDir, config, directory, library) => [
+  path.join(buildDir, "Libraries", directory, library, config),
+  path.join(buildDir, "Libraries", directory, library)
 ].filter((filePath) => fs.existsSync(filePath))[0];
 
-const findExecutable = (buildDir, config, library) => path.join(findExecutableDir(buildDir, config, library), `${library}${executableExtension}`);
+const findExecutable = (buildDir, config, directory, library) => path.join(findExecutableDir(buildDir, config, directory, library), `${library}${executableExtension}`);
 
 const format = async (options) => {
   console.log("Formatting");
@@ -823,7 +825,7 @@ const build = async (options) => {
   console.log("Built");
 };
 
-const executeBuiltProcess = async (buildDir, combo, library, args) => {
+const executeBuiltProcess = async (buildDir, combo, directory, library, args) => {
   if (combo.toolchain === "Emscripten") {
     const pageDirectory = path.join(buildDir, "Libraries", library);
     if (!fs.existsSync(pageDirectory)) {
@@ -880,7 +882,7 @@ const executeBuiltProcess = async (buildDir, combo, library, args) => {
     return downloadPaths;
   }
 
-  const executablePath = findExecutable(buildDir, combo.config, library);
+  const executablePath = findExecutable(buildDir, combo.config, directory, library);
 
   if (!fs.existsSync(executablePath)) {
     printErrorLine(`Executable does not exist ${executablePath}`);
@@ -913,7 +915,7 @@ const prebuilt = async (options) => {
       continue;
     }
 
-    const downloadPaths = await executeBuiltProcess(buildDir, combo, executable.name, [
+    const downloadPaths = await executeBuiltProcess(buildDir, combo, executable.directory, executable.name, [
       "-CopyPrebuiltContent",
       "-Exit"
     ]);
@@ -962,7 +964,7 @@ const pack = async (options) => {
     const library = executable.name;
     console.log(`Packaging library ${library}`);
 
-    const executableDir = findExecutableDir(buildDir, combo.config, library);
+    const executableDir = findExecutableDir(buildDir, combo.config, executable.directory, library);
     if (!fs.existsSync(executableDir)) {
       printErrorLine(`Library directory does not exist ${executableDir}`);
       continue;
