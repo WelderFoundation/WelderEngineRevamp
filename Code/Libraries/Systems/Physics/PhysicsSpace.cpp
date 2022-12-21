@@ -792,8 +792,8 @@ void PhysicsSpace::NarrowPhase()
   Array<NodePointerPair> Collisions;
   Collisions.SetAllocator(allocator);
 
-  uint size = mPossiblePairs.Size();
-  for (unsigned pairIndex = 0; pairIndex < size; ++pairIndex)
+  size_t size = mPossiblePairs.Size();
+  for (size_t pairIndex = 0; pairIndex < size; ++pairIndex)
   {
     ClientPair* clientPair = &mPossiblePairs[pairIndex];
     Collider* collider1 = static_cast<Collider*>(clientPair->mClientData[0]);
@@ -816,7 +816,7 @@ void PhysicsSpace::NarrowPhase()
     }
 
     // Add all manifolds to the contact manager
-    for (uint i = 0; i < tempManifolds.Size(); ++i)
+    for (size_t i = 0; i < tempManifolds.Size(); ++i)
     {
       Physics::Manifold& manifold = tempManifolds[i];
       mContactManager->AddManifold(tempManifolds[i]);
@@ -1051,7 +1051,7 @@ void PhysicsSpace::CastCollider(Vec3Param offset,
   mBroadPhase->QueryBoth(data, possiblePairs);
 
   // Run narrow phase
-  for (uint i = 0; i < possiblePairs.Size(); ++i)
+  for (size_t i = 0; i < possiblePairs.Size(); ++i)
   {
     ClientPair* clientPair = &possiblePairs[i];
     Collider* collider1 = static_cast<Collider*>(clientPair->mClientData[0]);

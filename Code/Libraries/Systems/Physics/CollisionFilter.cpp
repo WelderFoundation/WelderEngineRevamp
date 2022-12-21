@@ -225,7 +225,7 @@ bool CollisionFilter::Remove(const HandleOf<CollisionFilterBlock>& blockHandle)
 {
   CollisionFilterBlock* block = blockHandle;
   // Try to find the index of this block
-  uint index = mBlocks.FindIndex(block);
+  size_t index = mBlocks.FindIndex(block);
   if (index >= mBlocks.Size())
     return false;
 

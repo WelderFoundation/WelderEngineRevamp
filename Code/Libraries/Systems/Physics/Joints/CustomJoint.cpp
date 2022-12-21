@@ -221,7 +221,7 @@ void CustomJoint::UpdateAtoms()
 
 uint CustomJoint::MoleculeCount() const
 {
-  size_t activeCount = 0;
+  uint activeCount = 0;
   if (!GetActive())
     return activeCount;
 

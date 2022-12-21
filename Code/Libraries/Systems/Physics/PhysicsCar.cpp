@@ -116,7 +116,7 @@ void PhysicsCar::TransformUpdate(TransformUpdateInfo& info)
   }
 
   // Update each wheel's position
-  for (uint i = 0; i < mWheelRefs.Size(); ++i)
+  for (size_t i = 0; i < mWheelRefs.Size(); ++i)
   {
     PhysicsCarWheel* carWheel = mWheelRefs[i].GetCarWheel();
     if (carWheel != nullptr)
@@ -323,7 +323,7 @@ void PhysicsCar::SetBrake(real brake)
 uint PhysicsCar::NumberOfWheelsInContact()
 {
   uint numberInContact = 0;
-  for (uint i = 0; i < mActiveWheels.Size(); ++i)
+  for (size_t i = 0; i < mActiveWheels.Size(); ++i)
   {
     if (mActiveWheels[i]->GetIsInContact())
       ++numberInContact;
