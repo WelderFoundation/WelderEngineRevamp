@@ -273,7 +273,8 @@ void ZeroStartup::Startup()
   IntVec2 size = mWindowSize;
   if (mWindowSize == IntVec2::cZero)
   {
-    size = osShell->GetPrimaryMonitorSize();
+    IntRect rect = osShell->GetPrimaryMonitorRectangle();
+    size = IntVec2(rect.SizeX, rect.SizeY);
   }
   WindowState::Enum state = mWindowState;
 
