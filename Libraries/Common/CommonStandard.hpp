@@ -120,7 +120,6 @@ typedef double MaxAlignmentType;
 #include "ForEachRange.hpp"
 #include "Misc.hpp"
 #include "Standard.hpp"
-#include "Typedefs.hpp"
 #include "UintNType.hpp"
 #include "UniquePointer.hpp"
 #include "Functor.hpp"
@@ -137,11 +136,6 @@ typedef double MaxAlignmentType;
 #include "Stream.hpp"
 #include "Singleton.hpp"
 #include "BuildVersion.hpp"
-
-namespace Math
-{
-#include "Typedefs.hpp"
-} // namespace Math
 
 #include "Reals.hpp"
 #include "MatrixStorage.hpp"
