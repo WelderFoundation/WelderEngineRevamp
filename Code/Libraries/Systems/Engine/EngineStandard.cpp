@@ -45,6 +45,7 @@ ZilchDefineEnum(TabWidth);
 ZilchDefineEnum(TimeMode);
 ZilchDefineEnum(WindowState);
 ZilchDefineEnum(WindowStyleFlags);
+ZilchDefineEnum(TrackType);
 
 void LocationBind(LibraryBuilder& builder, BoundType* type)
 {
@@ -133,6 +134,7 @@ ZilchDefineStaticLibrary(EngineLibrary)
   ZilchInitializeEnum(TimeMode);
   ZilchInitializeEnum(WindowState);
   ZilchInitializeEnum(WindowStyleFlags);
+  ZilchInitializeEnum(TrackType);
 
   // Arrays
   ZeroInitializeArrayTypeAs(Array<ContentLibraryReference>, "ContentLibraryReferenceArray");
@@ -165,6 +167,10 @@ ZilchDefineStaticLibrary(EngineLibrary)
   ZilchInitializeType(MetaDependency);
   ZilchInitializeType(MetaInterface);
   ZilchInitializeType(RaycasterMetaComposition);
+
+  // Content Meta Components
+  ZilchInitializeType(ContentMetaComposition);
+  ZilchInitializeType(ContentItemMetaOperations);
 
   // Events
   ZilchInitializeType(CogPathEvent);
@@ -205,6 +211,11 @@ ZilchDefineStaticLibrary(EngineLibrary)
   ZilchInitializeType(SplineEvent);
   ZilchInitializeType(BlockingTaskEvent);
   ZilchInitializeType(AsyncProcessEvent);
+
+  // Content Events
+  ZilchInitializeType(ContentSystemEvent);
+  ZilchInitializeType(KeyFrameEvent);
+  ZilchInitializeType(TrackEvent);
 
   // Components
   ZilchInitializeType(Component);
@@ -370,6 +381,29 @@ ZilchDefineStaticLibrary(EngineLibrary)
   ZilchInitializeType(ZilchLibraryResource);
   ZilchInitializeType(ZilchDocumentResource);
 
+  // Content
+  ZilchInitializeType(ContentItem);
+  ZilchInitializeType(ContentLibrary);
+  ZilchInitializeType(ContentSystem);
+  ZilchInitializeType(ContentComposition);
+  ZilchInitializeType(ContentComponent);
+  ZilchInitializeType(BuilderComponent);
+  ZilchInitializeType(DataContent);
+  ZilchInitializeType(DataBuilder);
+  ZilchInitializeType(ContentTags);
+  ZilchInitializeType(FontContent);
+  ZilchInitializeType(FontBuilder);
+  ZilchInitializeType(ContentCopyright);
+  ZilchInitializeType(ContentHistory);
+  ZilchInitializeType(ContentNotes);
+  ZilchInitializeType(ContentEditorOptions);
+  ZilchInitializeType(ResourceTemplate);
+  ZilchInitializeType(RichAnimation);
+  ZilchInitializeType(RichAnimationBuilder);
+  ZilchInitializeType(TrackNode);
+  ZilchInitializeType(BinaryContent);
+  ZilchInitializeType(BinaryBuilder);
+
   BindActionFunctions(builder);
 
   EngineLibraryExtensions::AddNativeExtensions(builder);
@@ -377,6 +411,9 @@ ZilchDefineStaticLibrary(EngineLibrary)
 
 bool EngineLibrary::Initialize()
 {
+  ContentSystem::Initialize();
+  Z::gContentSystem = ContentSystem::GetInstance();
+
   // Build meta
   BuildStaticLibrary();
   MetaDatabase::GetInstance()->AddNativeLibrary(GetLibrary());
@@ -512,6 +549,7 @@ void EngineLibrary::Shutdown()
   SafeDelete(Z::gTweakables);
 
   GetLibrary()->ClearComponents();
+  ContentSystem::Destroy();
 }
 
 } // namespace Zero

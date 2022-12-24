@@ -16,7 +16,6 @@ ZilchDefineEnum(PhysicsMeshType);
 ZilchDefineEnum(ScaleConversion);
 ZilchDefineEnum(SpriteFill);
 ZilchDefineEnum(SpriteSampling);
-ZilchDefineEnum(TrackType);
 ZilchDefineEnum(TextureAddressing);
 ZilchDefineEnum(TextureAnisotropy);
 ZilchDefineEnum(TextureCompression);
@@ -45,7 +44,6 @@ ZilchDefineStaticLibrary(ContentMetaLibrary)
   ZilchInitializeEnum(ScaleConversion);
   ZilchInitializeEnum(SpriteFill);
   ZilchInitializeEnum(SpriteSampling);
-  ZilchInitializeEnum(TrackType);
   ZilchInitializeEnum(TextureAddressing);
   ZilchInitializeEnum(TextureAnisotropy);
   ZilchInitializeEnum(TextureCompression);
@@ -58,27 +56,10 @@ ZilchDefineStaticLibrary(ContentMetaLibrary)
 
   ZeroInitializeArrayTypeAs(Array<AnimationClip>, "AnimationClips");
 
-  // Meta Components
-  ZilchInitializeType(ContentMetaComposition);
-  ZilchInitializeType(ContentItemMetaOperations);
 
-  // Events
-  ZilchInitializeType(ContentSystemEvent);
-  ZilchInitializeType(KeyFrameEvent);
-  ZilchInitializeType(TrackEvent);
 
-  ZilchInitializeType(ContentItem);
-  ZilchInitializeType(ContentLibrary);
-  ZilchInitializeType(ContentSystem);
-  ZilchInitializeType(ContentComposition);
-  ZilchInitializeType(ContentComponent);
-  ZilchInitializeType(BuilderComponent);
-  ZilchInitializeType(DataContent);
-  ZilchInitializeType(DataBuilder);
-  ZilchInitializeType(ContentTags);
+
   ZilchInitializeType(ZilchPluginBuilder);
-  ZilchInitializeType(FontContent);
-  ZilchInitializeType(FontBuilder);
   ZilchInitializeType(ImageContent);
   ZilchInitializeType(ImageOptions);
   ZilchInitializeType(ShowNormalGenerationOptionsFilter);
@@ -96,14 +77,6 @@ ZilchDefineStaticLibrary(ContentMetaLibrary)
   ZilchInitializeType(TextBuilder);
   ZilchInitializeType(ZilchScriptBuilder);
   ZilchInitializeType(ZilchFragmentBuilder);
-  ZilchInitializeType(ContentCopyright);
-  ZilchInitializeType(ContentHistory);
-  ZilchInitializeType(ContentNotes);
-  ZilchInitializeType(ContentEditorOptions);
-  ZilchInitializeType(ResourceTemplate);
-  ZilchInitializeType(RichAnimation);
-  ZilchInitializeType(RichAnimationBuilder);
-  ZilchInitializeType(TrackNode);
   ZilchInitializeType(GeometryImport);
   ZilchInitializeType(GeometryResourceEntry);
   ZilchInitializeType(MeshBuilder);
@@ -115,24 +88,19 @@ ZilchDefineStaticLibrary(ContentMetaLibrary)
   ZilchInitializeType(AudioContent);
   ZilchInitializeType(TextureInfo);
   ZilchInitializeType(SoundBuilder);
-  ZilchInitializeType(BinaryContent);
-  ZilchInitializeType(BinaryBuilder);
   ZilchInitializeType(GeneratedArchetype);
 
   // @trevor.sundberg: The content and engine libraries are co-dependent, and
   // since content references the Archetype type, we get an error that it hasn't
   // yet been initialized since Content is initialized first. This prevents the
   // assert:
-  ZilchTypeId(Archetype)->AssertOnInvalidBinding = &IgnoreOnInvalidBinding;
+  ZilchTypeId(Archetype)->AssertOnInvalidBinding = &IgnoreOnInvalidBinding; // todo wu: Should I still do this?
 
   MetaLibraryExtensions::AddNativeExtensions(builder);
 }
 
 void ContentMetaLibrary::Initialize()
 {
-  ContentSystem::Initialize();
-  Z::gContentSystem = ContentSystem::GetInstance();
-
   BuildStaticLibrary();
   MetaDatabase::GetInstance()->AddNativeLibrary(GetLibrary());
 }
@@ -140,7 +108,6 @@ void ContentMetaLibrary::Initialize()
 void ContentMetaLibrary::Shutdown()
 {
   GetLibrary()->ClearComponents();
-  ContentSystem::Destroy();
 }
 
 } // namespace Zero

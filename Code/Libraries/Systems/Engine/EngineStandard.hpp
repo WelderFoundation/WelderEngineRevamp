@@ -30,6 +30,12 @@ class ActionSpace;
 class SavingEvent;
 class DocumentResource;
 
+class ContentLibrary;
+class ContentItem;
+class ContentComponent;
+class BuildOptions;
+class ContentComposition;
+
 // Engine library
 class ZeroNoImportExport EngineLibrary : public Zilch::StaticLibrary
 {
@@ -148,4 +154,20 @@ private:
 #include "CopyOnWrite.hpp"
 
 // Co-dependent libraries
-#include "Content/ContentStandard.hpp"
+//#include "Systems/Content/ContentStandard.hpp"
+
+#include "Content/ContentItem.hpp"
+#include "Content/ContentLibrary.hpp"
+#include "Content/BuildOptions.hpp"
+#include "Content/ContentSystem.hpp"
+#include "Content/ContentUtility.hpp"
+#include "Content/ContentComposition.hpp"
+#include "Content/DataContent.hpp"
+#include "Content/TagsContent.hpp"
+#include "Content/BaseBuilders.hpp"
+#include "Content/VectorContent.hpp"
+#include "Content/ArchetypeProcessor.hpp"
+#include "Content/SupportComponents.hpp"
+#include "Content/RichAnimation.hpp"
+#include "Content/BinaryContent.hpp"
+#include "Content/ResourceLoaderTemplates.hpp"
