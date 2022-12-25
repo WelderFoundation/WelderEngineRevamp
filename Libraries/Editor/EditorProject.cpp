@@ -260,7 +260,8 @@ bool LauncherOpenProjectComposite::RunLauncherExe(StringParam exePath)
   if (Os::IsDebuggerAttached())
     cmd = BuildString(cmd, " -", LauncherStartupArguments::Names[LauncherStartupArguments::DebuggerMode]);
 
-  return Os::ShellOpenApplication(exePath, cmd);
+  String workingDirectory = FilePath::GetDirectoryPath(exePath);
+  return Os::ShellOpenApplication(exePath, cmd, workingDirectory);
 }
 
 bool LauncherOpenProjectComposite::RunFromInstalledPath()
