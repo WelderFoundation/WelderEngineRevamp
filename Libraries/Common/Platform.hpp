@@ -207,7 +207,7 @@
 
 #  pragma clang diagnostic ignored "-Wlogical-op-parentheses"
 
-#  undef __STDC__
+//#  undef __STDC__
 #endif
 
 #if defined(WelderCompilerGcc)

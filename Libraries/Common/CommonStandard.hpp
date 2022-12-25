@@ -33,6 +33,7 @@
 #include <cstdlib>
 #include <cfloat>
 #include <malloc.h>
+#include <stdexcept>
 
 using namespace std;
 
