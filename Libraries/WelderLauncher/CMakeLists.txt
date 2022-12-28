@@ -64,6 +64,7 @@ target_link_libraries(WelderLauncher
     Gameplay
     Geometry
     Graphics
+    Image
     Libpng
     Meta
     Networking

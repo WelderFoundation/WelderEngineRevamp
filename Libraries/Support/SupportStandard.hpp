@@ -2,7 +2,6 @@
 #pragma once
 
 #include "Common/CommonStandard.hpp"
-#include "Renderer/RendererBase/RendererBaseStandard.hpp"
 #include "PlatformStandard.hpp"
 
 #include "Urls.hpp"
@@ -15,6 +14,3 @@
 #include "PartialMatch.hpp"
 #include "Archive.hpp"
 #include "FileConsoleListener.hpp"
-#include "ImageSupport.hpp"
-#include "PngSupport.hpp"
-#include "HdrSupport.hpp"

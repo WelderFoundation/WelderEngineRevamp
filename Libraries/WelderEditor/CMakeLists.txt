@@ -27,6 +27,7 @@ target_link_libraries(WelderEditor
     Gameplay
     Geometry
     Graphics
+    Image
     Libpng
     Meta
     Networking

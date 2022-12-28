@@ -6,6 +6,7 @@
 #include "Serialization/SerializationStandard.hpp"
 #include "Meta/MetaStandard.hpp"
 #include "Support/SupportStandard.hpp"
+#include "Image/ImageStandard.hpp"
 
 namespace Zero
 {

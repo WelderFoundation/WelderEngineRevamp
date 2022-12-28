@@ -7,6 +7,7 @@
 #include "Geometry/GeometryStandard.hpp"
 #include "Meta/MetaStandard.hpp"
 #include "Support/SupportStandard.hpp"
+#include "Image/ImageStandard.hpp"
 
 // Zilch Library Dependencies
 #include "Zilch/Precompiled.hpp"
