@@ -2,7 +2,6 @@
 #pragma once
 
 #include "Common/CommonStandard.hpp"
-#include "Renderer/RendererBase/RendererBaseStandard.hpp"
 #include "Platform/PlatformStandard.hpp"
 
 // Prevent including winsock1.
