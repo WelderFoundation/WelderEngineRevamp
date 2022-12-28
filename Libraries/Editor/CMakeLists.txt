@@ -3,8 +3,38 @@ add_library(Editor)
 welder_setup_library(Editor ${CMAKE_CURRENT_LIST_DIR} TRUE)
 welder_use_precompiled_header(Editor ${CMAKE_CURRENT_LIST_DIR})
 
+set(Editor_Property_Sources 
+    ${CMAKE_CURRENT_LIST_DIR}/Property/BasicPropertyEditors.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/BasicPropertyEditors.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/DataBaseTemplate.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/EnginePropertyEditors.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/GraphView.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/GraphView.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/PropertyView.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/PropertyView.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/PropertyWidget.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/PropertyWidget.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/PropertyWidgetObject.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/PropertyWidgetObject.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/PropertyWidgets.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/PropertyWidgets.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/TileView.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/TileView.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/TreeView.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/TreeView.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/VariantEditor.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Property/VariantEditor.hpp
+)
+
+set(Editor_Scintilla_Sources 
+    ${CMAKE_CURRENT_LIST_DIR}/Scintilla/ScintillaPlatformZero.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Scintilla/ScintillaPlatformZero.hpp
+)
+
 target_sources(Editor
   PRIVATE
+    ${Editor_Property_Sources}
+    ${Editor_Scintilla_Sources}
     ${CMAKE_CURRENT_LIST_DIR}/AddRemoveListBox.cpp
     ${CMAKE_CURRENT_LIST_DIR}/AddRemoveListBox.hpp
     ${CMAKE_CURRENT_LIST_DIR}/AddWindow.cpp
@@ -32,10 +62,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/BackgroundTaskUi.hpp
     ${CMAKE_CURRENT_LIST_DIR}/BasicGizmos.cpp
     ${CMAKE_CURRENT_LIST_DIR}/BasicGizmos.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/BasicPropertyEditors.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/BasicPropertyEditors.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/BasicPropertyEditors.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/BasicPropertyEditors.hpp
     ${CMAKE_CURRENT_LIST_DIR}/BroadPhaseEditor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/BroadPhaseEditor.hpp
     ${CMAKE_CURRENT_LIST_DIR}/BugReport.cpp
@@ -69,8 +95,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/CreationCommands.cpp
     ${CMAKE_CURRENT_LIST_DIR}/CurveEditor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/CurveEditor.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/DataBaseTemplate.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/DataBaseTemplate.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Document.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Document.hpp
     ${CMAKE_CURRENT_LIST_DIR}/DocumentationCommands.cpp
@@ -107,8 +131,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/EditorViewport.hpp
     ${CMAKE_CURRENT_LIST_DIR}/EditorViewportMenu.cpp
     ${CMAKE_CURRENT_LIST_DIR}/EditorViewportMenu.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/EnginePropertyEditors.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/EnginePropertyEditors.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ErrorList.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ErrorList.hpp
     ${CMAKE_CURRENT_LIST_DIR}/ExtraWidgets.cpp
@@ -119,10 +141,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/Gizmo.hpp
     ${CMAKE_CURRENT_LIST_DIR}/GizmoDrag.cpp
     ${CMAKE_CURRENT_LIST_DIR}/GizmoDrag.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/GraphView.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/GraphView.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/GraphView.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/GraphView.hpp
     ${CMAKE_CURRENT_LIST_DIR}/GraphWidget.cpp
     ${CMAKE_CURRENT_LIST_DIR}/GraphWidget.hpp
     ${CMAKE_CURRENT_LIST_DIR}/GraphicsCommands.cpp
@@ -190,22 +208,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/PreviewWidgets.hpp
     ${CMAKE_CURRENT_LIST_DIR}/PropertyInterface.cpp
     ${CMAKE_CURRENT_LIST_DIR}/PropertyInterface.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyView.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyView.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyView.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyView.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidget.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidget.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidget.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidget.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidgetObject.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidgetObject.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidgetObject.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidgetObject.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidgets.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidgets.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidgets.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/PropertyWidgets.hpp
     ${CMAKE_CURRENT_LIST_DIR}/RenderGroupHierarchies.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ResourceCommands.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ResourceEditors.cpp
@@ -218,8 +220,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/RotationBasisGizmos.hpp
     ${CMAKE_CURRENT_LIST_DIR}/SampleCurveEditor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/SampleCurveEditor.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/ScintillaPlatformZero.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/ScintillaPlatformZero.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Scratchboard.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Scratchboard.hpp
     ${CMAKE_CURRENT_LIST_DIR}/ScriptEditor.cpp
@@ -249,10 +249,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/TilePaletteSource.hpp
     ${CMAKE_CURRENT_LIST_DIR}/TilePaletteView.cpp
     ${CMAKE_CURRENT_LIST_DIR}/TilePaletteView.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/TileView.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/TileView.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/TileView.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/TileView.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Tool.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tool.hpp
     ${CMAKE_CURRENT_LIST_DIR}/ToolControl.cpp
@@ -263,10 +259,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/TransformGizmos.hpp
     ${CMAKE_CURRENT_LIST_DIR}/TransformTools.cpp
     ${CMAKE_CURRENT_LIST_DIR}/TransformTools.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/TreeView.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/TreeView.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/TreeView.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/TreeView.hpp
     ${CMAKE_CURRENT_LIST_DIR}/TreeViewFilter.hpp
     ${CMAKE_CURRENT_LIST_DIR}/TreeViewSearch.cpp
     ${CMAKE_CURRENT_LIST_DIR}/TreeViewSearch.hpp
@@ -274,10 +266,6 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/UiLegacyToolTip.hpp
     ${CMAKE_CURRENT_LIST_DIR}/UndoPropertyInterface.cpp
     ${CMAKE_CURRENT_LIST_DIR}/UndoPropertyInterface.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/VariantEditor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/VariantEditor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/VariantEditor.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/VariantEditor.hpp
     ${CMAKE_CURRENT_LIST_DIR}/WatchView.cpp
     ${CMAKE_CURRENT_LIST_DIR}/WatchView.hpp
 )
