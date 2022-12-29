@@ -67,6 +67,7 @@ target_link_libraries(Gameplay
     Common
     Engine
     Geometry
+    Graphics
     Meta
     Physics
     Platform

@@ -5,6 +5,7 @@
 #include "Platform/PlatformStandard.hpp"
 #include "Engine/EngineStandard.hpp"
 #include "SpatialPartition/SpatialPartitionStandard.hpp"
+#include "Image/ImageStandard.hpp"
 
 namespace Zero
 {

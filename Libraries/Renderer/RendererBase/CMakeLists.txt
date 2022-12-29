@@ -14,10 +14,6 @@ target_sources(RendererBase
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.hpp
 )
 
-welder_target_includes(RendererBase
-  PUBLIC
-    Common
-)
 target_link_libraries(RendererBase
   PUBLIC
     Common

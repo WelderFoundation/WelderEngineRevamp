@@ -94,6 +94,7 @@ target_link_libraries(Content
     Image
     Meta
     Platform
+    RendererBase
     Serialization
     Zilch
     assimp
@@ -104,5 +105,5 @@ target_link_libraries(Content
 
 target_include_directories(Content
   PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}/../../
+    ${CMAKE_CURRENT_LIST_DIR}/../../Core/
 )

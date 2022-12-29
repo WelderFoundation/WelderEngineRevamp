@@ -28,5 +28,6 @@ target_sources(UiWidget
 target_link_libraries(UiWidget
   PUBLIC
     Engine
+    Graphics
     ZilchShaders
 )

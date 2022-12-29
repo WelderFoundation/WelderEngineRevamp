@@ -2,7 +2,7 @@
 #pragma once
 
 #include "Common/CommonStandard.hpp"
-#include "Renderer/RendererBase/RendererBaseStandard.hpp"
+#include "RendererBase/RendererBaseStandard.hpp"
 #include "Common/Platform/PlatformStandard.hpp"
 
 #include "ImageSupport.hpp"

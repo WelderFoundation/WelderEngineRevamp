@@ -93,5 +93,6 @@ target_sources(Widget
 target_link_libraries(Widget
   PUBLIC
     Engine
+    Graphics
     ZilchShaders
 )

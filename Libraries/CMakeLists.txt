@@ -1,8 +1,7 @@
 # Libraries.
 add_subdirectory(Foundation)
 add_subdirectory(Renderer)
-add_subdirectory(Image)
-add_subdirectory(Engine)
+add_subdirectory(Core)
 add_subdirectory(Systems)
 add_subdirectory(Extensions)
 
