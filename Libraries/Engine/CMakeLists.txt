@@ -240,3 +240,8 @@ target_link_libraries(Engine
     SpatialPartition
     Zilch
 )
+
+target_include_directories(Engine
+  PUBLIC
+    ${CMAKE_CURRENT_LIST_DIR}/../Systems/
+)
