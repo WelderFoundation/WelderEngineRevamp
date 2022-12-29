@@ -27,8 +27,10 @@ target_sources(Support
     ${CMAKE_CURRENT_LIST_DIR}/Urls.hpp
 )
 
-welder_target_includes(Support
+target_link_libraries(Support
   PUBLIC
     Common
+    Zilch
+    Platform
     ZLib
 )

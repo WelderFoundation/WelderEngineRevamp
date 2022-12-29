@@ -45,7 +45,10 @@ target_sources(Serialization
     ${CMAKE_CURRENT_LIST_DIR}/ZeroContainers.hpp
 )
 
-welder_target_includes(Serialization
+target_link_libraries(Serialization
   PUBLIC
     Common
+    Zilch
+    Platform
+    Meta
 )

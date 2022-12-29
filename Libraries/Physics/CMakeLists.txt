@@ -256,7 +256,13 @@ target_sources(Physics
     ${CMAKE_CURRENT_LIST_DIR}/WorldTransformation.hpp
 )
 
-welder_target_includes(Physics
+target_link_libraries(Physics
   PUBLIC
+    Common
+    Engine
+    Geometry
+    Meta
+    Serialization
+    SpatialPartition
     Zilch
 )

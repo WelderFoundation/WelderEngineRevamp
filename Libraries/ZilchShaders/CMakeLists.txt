@@ -92,7 +92,7 @@ target_sources(ZilchShaders
     ${CMAKE_CURRENT_LIST_DIR}/ZilchSpirVSettings.hpp
 )
 
-welder_target_includes(ZilchShaders
+target_link_libraries(ZilchShaders
   PUBLIC
     Common
     Geometry

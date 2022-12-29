@@ -230,9 +230,13 @@ target_sources(Engine
     ${CMAKE_CURRENT_LIST_DIR}/Tweakables.inl
 )
 
-welder_target_includes(Engine
+target_link_libraries(Engine
   PUBLIC
     Common
     Geometry
+    Meta
+    Platform
+    Serialization
+    SpatialPartition
     Zilch
 )

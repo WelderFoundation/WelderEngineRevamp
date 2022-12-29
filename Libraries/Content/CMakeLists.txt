@@ -88,9 +88,13 @@ target_sources(Content
     ${CMAKE_CURRENT_LIST_DIR}/stb_vorbis.h
 )
 
-welder_target_includes(Content
+target_link_libraries(Content
   PUBLIC
     Common
+    Image
+    Meta
+    Platform
+    Serialization
     Zilch
     assimp
     ZLib

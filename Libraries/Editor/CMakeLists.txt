@@ -270,9 +270,13 @@ target_sources(Editor
     ${CMAKE_CURRENT_LIST_DIR}/WatchView.hpp
 )
 
-welder_target_includes(Editor
+target_link_libraries(Editor
   PUBLIC
+    Engine
+    Gameplay
+    Geometry
+    Sound
+    Widget
+    UiWidget
     Scintilla
-    Common
-    ZilchShaders
 )

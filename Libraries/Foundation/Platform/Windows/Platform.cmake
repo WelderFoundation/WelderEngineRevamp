@@ -48,13 +48,9 @@ target_sources(Platform
     ${CMAKE_CURRENT_LIST_DIR}/WindowsError.hpp
 )
 
-welder_target_includes(Platform
-  PUBLIC
-    Common
-)
-
 target_link_libraries(Platform
   PUBLIC
+    Common
     Curl
     Libgit2
 )

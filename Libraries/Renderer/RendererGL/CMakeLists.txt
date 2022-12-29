@@ -40,7 +40,7 @@ target_sources(RendererGL
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.hpp
 )
 
-welder_target_includes(RendererGL
+target_link_libraries(RendererGL
   PUBLIC
     RendererBase
 )

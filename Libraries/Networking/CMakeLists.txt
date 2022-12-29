@@ -62,8 +62,9 @@ target_sources(Networking
     ${CMAKE_CURRENT_LIST_DIR}/WebServer.hpp
 )
 
-welder_target_includes(Networking
+target_link_libraries(Networking
   PUBLIC
     Common
+    Engine
     Geometry
 )

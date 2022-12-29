@@ -16,8 +16,9 @@ target_sources(CodeTranslator
     ${CMAKE_CURRENT_LIST_DIR}/ShaderTranslationDebugHelper.hpp
 )
 
-welder_target_includes(CodeTranslator
+target_link_libraries(CodeTranslator
   PUBLIC
-    Engine
+    Editor
+    Zilch
     ZilchShaders
 )

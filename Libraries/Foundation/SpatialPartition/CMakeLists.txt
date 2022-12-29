@@ -62,7 +62,8 @@ target_sources(SpatialPartition
     ${CMAKE_CURRENT_LIST_DIR}/StaticAabbTreeBroadPhase.hpp
 )
 
-welder_target_includes(SpatialPartition
+target_link_libraries(SpatialPartition
   PUBLIC
-    Zilch
+    Common
+    Serialization
 )

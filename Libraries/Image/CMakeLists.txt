@@ -16,7 +16,7 @@ target_sources(Image
     ${CMAKE_CURRENT_LIST_DIR}/ImageStandard.hpp
 )
 
-welder_target_includes(Image
+target_link_libraries(Image
   PUBLIC
     Common
     RendererBase

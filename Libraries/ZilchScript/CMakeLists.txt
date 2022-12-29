@@ -17,9 +17,12 @@ target_sources(ZilchScript
     ${CMAKE_CURRENT_LIST_DIR}/ZilchZero.hpp
 )
 
-welder_target_includes(ZilchScript
+target_link_libraries(ZilchScript
   PUBLIC
     Common
-    Geometry
     Editor
+    Meta
+    Serialization
+    Zilch
+    ZilchShaders
 )

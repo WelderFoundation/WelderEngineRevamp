@@ -12,9 +12,14 @@ target_sources(Startup
     ${CMAKE_CURRENT_LIST_DIR}/StartupStandard.hpp
 )
 
-welder_target_includes(Startup
+target_link_libraries(Startup
   PUBLIC
     Common
+    Engine
     Geometry
     Graphics
+    Meta
+    Physics
+    Sound
+    ZilchShaders
 )

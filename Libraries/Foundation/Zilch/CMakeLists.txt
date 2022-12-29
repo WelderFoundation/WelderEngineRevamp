@@ -140,7 +140,7 @@ target_sources(Zilch
     ${CMAKE_CURRENT_LIST_DIR}/Wrapper.hpp
 )
 
-welder_target_includes(Zilch
+target_link_libraries(Zilch
   PUBLIC
     Common
 )

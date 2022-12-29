@@ -56,7 +56,9 @@ target_sources(Meta
     ${CMAKE_CURRENT_LIST_DIR}/ZeroMetaArray.hpp
 )
 
-welder_target_includes(Meta
+target_link_libraries(Meta
   PUBLIC
+    Common
     Zilch
+    Platform
 )

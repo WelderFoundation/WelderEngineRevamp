@@ -35,7 +35,7 @@ target_sources(Platform
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.hpp
 )
 
-welder_target_includes(Platform
+target_link_libraries(Platform
   PUBLIC
     Common
 )
