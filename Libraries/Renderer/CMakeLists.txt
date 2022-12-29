@@ -4,10 +4,11 @@ add_subdirectory(RendererBase)
 #Emscripten
 #SDLSTDEmpty
 #Windows
+#Linux
 
 add_library(RendererImpl INTERFACE)
 
-if(${WELDER_PLATFORM} STREQUAL "Windows" OR ${WELDER_PLATFORM} STREQUAL "Emscripten" OR ${WELDER_PLATFORM} STREQUAL "SDLSTDEmpty")
+if(${WELDER_PLATFORM} STREQUAL "Windows" OR ${WELDER_PLATFORM} STREQUAL "Emscripten" OR ${WELDER_PLATFORM} STREQUAL "SDLSTDEmpty" OR ${WELDER_PLATFORM} STREQUAL "Linux")
   add_subdirectory(RendererGL)
   target_link_libraries(RendererImpl INTERFACE RendererGL)
 elseif(${WELDER_PLATFORM} STREQUAL "Stub")

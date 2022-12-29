@@ -468,7 +468,7 @@ const determineCmakeCombo = (options) => {
     Linux: {
       builder: "Ninja",
       config: "Release",
-      platform: "SDLSTDEmpty",
+      platform: "Linux",
       targetos: "Linux",
       toolchain: "Clang",
       vfs: false

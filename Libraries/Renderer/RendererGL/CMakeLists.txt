@@ -6,6 +6,7 @@ welder_use_precompiled_header(RendererGL ${CMAKE_CURRENT_LIST_DIR})
 #Emscripten
 #SDLSTDEmpty
 #Windows
+#Linux
 
 if(${WELDER_TARGETOS} STREQUAL "Windows")
   if(${WELDER_PLATFORM} STREQUAL "SDLSTDEmpty")
