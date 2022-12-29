@@ -61,7 +61,7 @@ const dirs = (() => {
 const executables = [
   {
     copyToIncludedBuilds: true,
-    directory: "",
+    directory: "Projects",
     name: "WelderEditor",
     nonResourceDependencies: [
       "Data",
@@ -83,7 +83,7 @@ const executables = [
   {
     // Since the launcher includes the editor build, it must come afterwards.
     copyToIncludedBuilds: false,
-    directory: "",
+    directory: "Projects",
     name: "WelderLauncher",
     nonResourceDependencies: [
       "Data",
