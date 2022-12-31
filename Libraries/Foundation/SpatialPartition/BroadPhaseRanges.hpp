@@ -482,10 +482,8 @@ struct BroadPhaseTreeSelfRange : public QueryCheck
 // users perspective. Unfortunately, this range cannot be used multiple
 // times in the same scope.
 #define forRangeBroadphaseTree(treeType, tree, queryType, queryObj)                                                    \
-  Array<treeType::NodeType*, LocalStackAllocator> nodeArray_;                                                          \
+  Array<treeType::NodeType*> nodeArray_;                                                                               \
   uint totalProxyCount_ = tree.GetTotalProxyCount();                                                                   \
-  LocalStackAllocator stackAllocator_(alloca(totalProxyCount_ * sizeof(void*)));                                       \
-  nodeArray_.SetAllocator(stackAllocator_);                                                                            \
   nodeArray_.Reserve(totalProxyCount_);                                                                                \
   typedef decltype(tree.Query(queryObj, nodeArray_)) _RangeType;                                                       \
   _RangeType range = tree.Query(queryObj, nodeArray_);                                                                 \
@@ -494,10 +492,8 @@ struct BroadPhaseTreeSelfRange : public QueryCheck
 // Same as above, but allows the user to provide a policy object to customize
 // how we check a node against the query object type.
 #define forRangeBroadphaseTreePolicy(treeType, tree, queryType, queryObj, policy)                                      \
-  Array<treeType::NodeType*, LocalStackAllocator> nodeArray_;                                                          \
+  Array<treeType::NodeType*> nodeArray_;                                                                               \
   uint totalProxyCount_ = tree.GetTotalProxyCount();                                                                   \
-  LocalStackAllocator stackAllocator_(alloca(totalProxyCount_ * sizeof(void*)));                                       \
-  nodeArray_.SetAllocator(stackAllocator_);                                                                            \
   nodeArray_.Reserve(totalProxyCount_);                                                                                \
   typedef decltype(tree.QueryWithPolicy(queryObj, nodeArray_, policy)) _RangeType;                                     \
   _RangeType range = tree.QueryWithPolicy(queryObj, nodeArray_, policy);                                               \
