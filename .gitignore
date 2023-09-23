@@ -36,3 +36,4 @@ node_modules/
 enc_temp_folder/
 .vs
 .vscode/ipch
+package-lock.json
