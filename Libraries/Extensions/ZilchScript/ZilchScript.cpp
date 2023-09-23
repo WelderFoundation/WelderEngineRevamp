@@ -300,7 +300,7 @@ void ZilchScriptManager::OnMemoryLeak(MemoryLeakEvent* event)
     typeName = type->ToString();
 
     StringBuilderExtended builder;
-    Zilch::Console::DumpValue(builder, type, (const byte*)leakedObject, 5, 0);
+    Zilch::Console::DumpValue(builder, type, (const ::byte*)leakedObject, 5, 0);
     dump = builder.ToString();
 
     isTypeNative = type->IsTypeOrBaseNative();

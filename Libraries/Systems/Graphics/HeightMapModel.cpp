@@ -339,7 +339,7 @@ void HeightMapModel::CreateGraphicalPatchMesh(HeightPatch* heightPatch)
     {
       PatchLayer* patchLayer = mMap->mSource->GetLayerData(heightPatch->Index, PatchLayerType::Weights);
       if (patchLayer->Data)
-        graphicalPatch.mWeightTexture->SetAll((byte*)patchLayer->Data);
+        graphicalPatch.mWeightTexture->SetAll((::byte*)patchLayer->Data);
     }
   }
 }

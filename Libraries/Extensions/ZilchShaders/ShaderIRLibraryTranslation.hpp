@@ -156,7 +156,7 @@ void TranslateCompositeSplatConstructor(ZilchSpirVFrontEnd* translator,
 bool IsVectorSwizzle(StringParam memberName);
 void ResolveScalarComponentAccess(ZilchSpirVFrontEnd* translator,
                                   Zilch::MemberAccessNode* memberAccessNode,
-                                  byte componentName,
+                                  ::byte componentName,
                                   ZilchSpirVFrontEndContext* context);
 void ResolveScalarSwizzle(ZilchSpirVFrontEnd* translator,
                           Zilch::MemberAccessNode* memberAccessNode,
@@ -172,11 +172,11 @@ void ResolveVectorCopyConstructor(ZilchSpirVFrontEnd* translator,
 void ResolveVectorComponentAccess(ZilchSpirVFrontEnd* translator,
                                   ZilchShaderIROp* selfInstance,
                                   ZilchShaderIRType* componentType,
-                                  byte componentName,
+                                  ::byte componentName,
                                   ZilchSpirVFrontEndContext* context);
 void ResolveVectorComponentAccess(ZilchSpirVFrontEnd* translator,
                                   Zilch::MemberAccessNode* memberAccessNode,
-                                  byte componentName,
+                                  ::byte componentName,
                                   ZilchSpirVFrontEndContext* context);
 void ResolveVectorSwizzle(ZilchSpirVFrontEnd* translator,
                           IZilchShaderIR* selfInstance,

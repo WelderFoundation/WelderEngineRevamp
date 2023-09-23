@@ -217,7 +217,7 @@ Any ConvertBasicVariantToAny(const Variant& variantValue)
   if (zilchType->IsHandle())
   {
     // Create a handle containing our value data
-    Handle handle((const byte*)variantData, Type::GetBoundType(zilchType));
+    Handle handle((const ::byte*)variantData, Type::GetBoundType(zilchType));
 
     // Copy handle to new any
     Any result(handle);
@@ -226,7 +226,7 @@ Any ConvertBasicVariantToAny(const Variant& variantValue)
   else
   {
     // Copy value to new any
-    Any result((const byte*)variantData, zilchType);
+    Any result((const ::byte*)variantData, zilchType);
     return result;
   }
 }

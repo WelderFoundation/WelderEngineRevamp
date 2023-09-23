@@ -129,7 +129,7 @@ void EmscriptenExportTarget::ExportApplication()
       return;
     }
 
-    outputFile.Write((byte*)outputZeroJsFile.Data(), outputZeroJsFile.SizeInBytes());
+    outputFile.Write((::byte*)outputZeroJsFile.Data(), outputZeroJsFile.SizeInBytes());
     outputFile.Close();
   }
 

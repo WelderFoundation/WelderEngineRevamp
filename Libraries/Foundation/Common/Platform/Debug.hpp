@@ -5,6 +5,6 @@ namespace Zero
 {
 
 // Check class for uninitialized memory.
-void CheckClassMemory(cstr className, byte* classMemory);
+void CheckClassMemory(cstr className, ::byte* classMemory);
 
 } // namespace Zero

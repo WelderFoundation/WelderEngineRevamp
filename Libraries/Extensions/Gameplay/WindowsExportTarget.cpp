@@ -103,8 +103,8 @@ void WindowsExportTarget::ExportApplication()
 
     ByteBufferBlock final(totalSizePacked);
     u32 size = (u32)uniqueName.SizeInBytes();
-    final.Write((byte*)&size, sizeof(size));
-    final.Write((byte*)uniqueName.Data(), size);
+    final.Write((::byte*)&size, sizeof(size));
+    final.Write((::byte*)uniqueName.Data(), size);
 
     engineArchive.WriteBuffer(final);
     engineArchive.Clear();
@@ -193,7 +193,7 @@ void WindowsExportTarget::CopyInstallerSetupFile(StringParam dest,
 
   // Make a buffer to hold the template data
   size_t filesize = setup.Size();
-  byte* buffer = new byte[filesize];
+  ::byte* buffer = new ::byte[filesize];
 
   // Read the template from the file
   Status status;
@@ -221,7 +221,7 @@ void WindowsExportTarget::CopyInstallerSetupFile(StringParam dest,
   outputFile.Open(FilePath::CombineWithExtension(dest, BuildString(projectName, "InstallerSetup"), ".iss"),
                   FileMode::Write,
                   FileAccessPattern::Sequential);
-  outputFile.Write((byte*)outputFileContent.Data(), outputFileContent.SizeInBytes());
+  outputFile.Write((::byte*)outputFileContent.Data(), outputFileContent.SizeInBytes());
   outputFile.Close();
 }
 

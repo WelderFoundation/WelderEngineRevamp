@@ -83,7 +83,7 @@ class AudioByteDataEvent : public Event
 public:
   ZilchDeclareType(AudioByteDataEvent, TypeCopyMode::ReferenceType);
 
-  HandleOf<ArrayClass<byte>> AudioData;
+  HandleOf<ArrayClass<::byte>> AudioData;
 };
 
 // Enums

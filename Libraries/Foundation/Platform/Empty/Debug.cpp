@@ -4,7 +4,7 @@
 namespace Zero
 {
 
-void CheckClassMemory(cstr className, byte* classMemory)
+void CheckClassMemory(cstr className, ::byte* classMemory)
 {
 }
 

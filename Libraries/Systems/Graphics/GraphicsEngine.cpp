@@ -643,7 +643,7 @@ void GraphicsEngine::CheckTextureYInvert(Texture* texture)
       for (uint i = 0; i < texture->mMipCount; ++i)
       {
         MipHeader* mipHeader = texture->mMipHeaders + i;
-        byte* mipData = texture->mImageData + mipHeader->mDataOffset;
+        ::byte* mipData = texture->mImageData + mipHeader->mDataOffset;
         YInvertNonCompressed(mipData, mipHeader->mWidth, mipHeader->mHeight, GetPixelSize(texture->mFormat));
       }
     }
@@ -652,7 +652,7 @@ void GraphicsEngine::CheckTextureYInvert(Texture* texture)
       for (uint i = 0; i < texture->mMipCount; ++i)
       {
         MipHeader* mipHeader = texture->mMipHeaders + i;
-        byte* mipData = texture->mImageData + mipHeader->mDataOffset;
+        ::byte* mipData = texture->mImageData + mipHeader->mDataOffset;
         YInvertBlockCompressed(
             mipData, mipHeader->mWidth, mipHeader->mHeight, mipHeader->mDataSize, texture->mCompression);
       }
@@ -739,7 +739,7 @@ void GraphicsEngine::AddMesh(Mesh* mesh)
     if (rendererJob->mVertexCount > 0)
     {
       uint vertexDataSize = rendererJob->mVertexSize * rendererJob->mVertexCount;
-      rendererJob->mVertexData = new byte[vertexDataSize];
+      rendererJob->mVertexData = new ::byte[vertexDataSize];
       memcpy(rendererJob->mVertexData, vertices->mData, vertexDataSize);
     }
 
@@ -758,7 +758,7 @@ void GraphicsEngine::AddMesh(Mesh* mesh)
   if (indices->mData.Empty() == false)
   {
     uint indexDataSize = rendererJob->mIndexSize * rendererJob->mIndexCount;
-    rendererJob->mIndexData = new byte[indexDataSize];
+    rendererJob->mIndexData = new ::byte[indexDataSize];
     memcpy(rendererJob->mIndexData, &indices->mData[0], indexDataSize);
   }
 

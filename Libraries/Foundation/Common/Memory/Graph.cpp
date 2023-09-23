@@ -35,8 +35,8 @@ void zDeallocate(void* ptr)
 }
 
 const uint cStaticMemoryBufferSize = 5000;
-byte StaticMemoryGraphBuffer[cStaticMemoryBufferSize];
-byte* BufferLocation = StaticMemoryGraphBuffer;
+::byte StaticMemoryGraphBuffer[cStaticMemoryBufferSize];
+::byte* BufferLocation = StaticMemoryGraphBuffer;
 
 MemPtr zStaticAllocate(size_t size)
 {
@@ -46,7 +46,7 @@ MemPtr zStaticAllocate(size_t size)
   ErrorIf(BufferLocation + size >= StaticMemoryGraphBuffer + cStaticMemoryBufferSize,
           "Allocated too many memory graph objects. Increase "
           "cStaticMemoryBufferSize.");
-  byte* current = BufferLocation;
+  ::byte* current = BufferLocation;
   BufferLocation += size;
   // DebugPrint("Max Static Memory %d\n", uint(BufferLocation -
   // StaticMemoryGraphBuffer));

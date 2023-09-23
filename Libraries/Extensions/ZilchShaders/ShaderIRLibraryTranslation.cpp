@@ -19,7 +19,7 @@ void DummyBoundFunction(Zilch::Call& call, Zilch::ExceptionReport& report)
   Zilch::DelegateType* functionType = call.GetFunction()->FunctionType;
   Zilch::Type* returnType = functionType->Return;
   size_t byteSize = returnType->GetAllocatedSize();
-  byte* returnValue = call.GetReturnUnchecked();
+  ::byte* returnValue = call.GetReturnUnchecked();
   memset(returnValue, 0, byteSize);
   call.MarkReturnAsSet();
 }
@@ -401,7 +401,7 @@ bool IsVectorSwizzle(StringParam memberName)
   // Verify that all components are in the valid range
   for (size_t i = 0; i < memberName.SizeInBytes(); ++i)
   {
-    byte memberValue = *(memberName.Data() + i);
+    ::byte memberValue = *(memberName.Data() + i);
 
     if (memberValue < 'W' || memberValue > 'Z')
       return false;
@@ -411,7 +411,7 @@ bool IsVectorSwizzle(StringParam memberName)
 
 void ResolveScalarComponentAccess(ZilchSpirVFrontEnd* translator,
                                   Zilch::MemberAccessNode* memberAccessNode,
-                                  byte componentName,
+                                  ::byte componentName,
                                   ZilchSpirVFrontEndContext* context)
 {
   // A scalar component access on a scalar type is just the scalar itself (e.g.
@@ -451,7 +451,7 @@ void ScalarBackupFieldResolver(ZilchSpirVFrontEnd* translator,
   // Deal with single component access
   if (memberName.SizeInBytes() == 1)
   {
-    byte memberValue = *memberName.Data();
+    ::byte memberValue = *memberName.Data();
     ResolveScalarComponentAccess(translator, memberAccessNode, memberValue, context);
     return;
   }
@@ -500,7 +500,7 @@ void ResolveVectorCopyConstructor(ZilchSpirVFrontEnd* translator,
 void ResolveVectorComponentAccess(ZilchSpirVFrontEnd* translator,
                                   ZilchShaderIROp* selfInstance,
                                   ZilchShaderIRType* componentType,
-                                  byte componentName,
+                                  ::byte componentName,
                                   ZilchSpirVFrontEndContext* context)
 {
   // Convert the index to [0, 3] using a nice modulus trick
@@ -529,7 +529,7 @@ void ResolveVectorComponentAccess(ZilchSpirVFrontEnd* translator,
 
 void ResolveVectorComponentAccess(ZilchSpirVFrontEnd* translator,
                                   Zilch::MemberAccessNode* memberAccessNode,
-                                  byte componentName,
+                                  ::byte componentName,
                                   ZilchSpirVFrontEndContext* context)
 {
   // Walk the left hand side of the member access node
@@ -561,7 +561,7 @@ void ResolveVectorSwizzle(ZilchSpirVFrontEnd* translator,
   // that as an argument
   for (size_t i = 0; i < memberName.SizeInBytes(); ++i)
   {
-    byte memberValue = *(memberName.Data() + i);
+    ::byte memberValue = *(memberName.Data() + i);
     int index = (memberValue - 'X' + 4) % 4;
     ZilchShaderIRConstantLiteral* indexLiteral = translator->GetOrCreateConstantLiteral(index);
     swizzleOp->mArguments.PushBack(indexLiteral);
@@ -593,7 +593,7 @@ void VectorBackupFieldResolver(ZilchSpirVFrontEnd* translator,
   // Deal with single component access
   if (memberName.SizeInBytes() == 1)
   {
-    byte memberValue = *memberName.Data();
+    ::byte memberValue = *memberName.Data();
     ResolveVectorComponentAccess(translator, memberAccessNode, memberValue, context);
     return;
   }
@@ -641,7 +641,7 @@ void ResolverVectorSwizzleSetter(ZilchSpirVFrontEnd* translator,
 
   for (size_t i = 0; i < memberName.SizeInBytes(); ++i)
   {
-    byte memberValue = *(memberName.Data() + i);
+    ::byte memberValue = *(memberName.Data() + i);
     int index = (memberValue - 'X' + 4) % 4;
     indices[index] = i + instanceComponentCount;
   }
@@ -812,7 +812,7 @@ void QuaternionBackupFieldResolver(ZilchSpirVFrontEnd* translator,
   // Deal with single component access
   if (memberName.SizeInBytes() == 1)
   {
-    byte memberValue = *memberName.Data();
+    ::byte memberValue = *memberName.Data();
     ResolveVectorComponentAccess(translator, vec4Instance, realType, memberValue, context);
     return;
   }
@@ -850,7 +850,7 @@ void QuaternionBackupPropertySetter(ZilchSpirVFrontEnd* translator,
   // Deal with single component access
   if (memberName.SizeInBytes() == 1)
   {
-    byte memberValue = *memberName.Data();
+    ::byte memberValue = *memberName.Data();
     ResolveVectorComponentAccess(translator, vec4Instance, realType, memberValue, context);
     translator->BuildStoreOp(context->GetCurrentBlock(), context->PopIRStack(), resultValue, context);
     return;

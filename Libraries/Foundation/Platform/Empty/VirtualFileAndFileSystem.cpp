@@ -32,7 +32,7 @@ public:
   String mName;
   typedef BaseInList<LinkBase, SystemEntry> EntryList;
   EntryList mChildren;
-  Array<byte> mFileData;
+  Array<::byte> mFileData;
   TimeType mModifiedTime;
 };
 
@@ -605,7 +605,7 @@ bool File::Seek(FilePosition pos, SeekOrigin::Enum rel)
   return true;
 }
 
-size_t File::Write(byte* data, size_t sizeInBytes)
+size_t File::Write(::byte* data, size_t sizeInBytes)
 {
   ZeroGetPrivateData(FilePrivateData);
   SystemEntry* entry = self->mEntry;
@@ -620,7 +620,7 @@ size_t File::Write(byte* data, size_t sizeInBytes)
   return sizeInBytes;
 }
 
-size_t File::Read(Status& status, byte* data, size_t sizeInBytes)
+size_t File::Read(Status& status, ::byte* data, size_t sizeInBytes)
 {
   ZeroGetPrivateData(FilePrivateData);
   if (!self->mEntry)

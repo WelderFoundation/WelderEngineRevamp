@@ -12,7 +12,7 @@ TransformAction::TransformAction()
   EmptyState();
 }
 
-void TransformAction::QueueState(byte state)
+void TransformAction::QueueState(::byte state)
 {
   mState |= state;
 }
@@ -71,7 +71,7 @@ MassAction::MassAction()
   EmptyState();
 }
 
-void MassAction::QueueState(byte state)
+void MassAction::QueueState(::byte state)
 {
   mState |= state;
 }
@@ -104,7 +104,7 @@ BroadPhaseAction::BroadPhaseAction()
   mState = Empty;
 }
 
-void BroadPhaseAction::PushAction(byte state)
+void BroadPhaseAction::PushAction(::byte state)
 {
   QueueState(state);
 }
@@ -130,7 +130,7 @@ void BroadPhaseAction::UpdateAction(Collider* collider)
   PushAction(Update);
 }
 
-void BroadPhaseAction::QueueState(byte state)
+void BroadPhaseAction::QueueState(::byte state)
 {
   // deal with dynamic states
   if (state & DynamicInsert)
@@ -200,17 +200,17 @@ void BroadPhaseAction::ClearAction()
   mState = Empty;
 }
 
-bool BroadPhaseAction::IsSet(byte state) const
+bool BroadPhaseAction::IsSet(::byte state) const
 {
   return (mState & state) != 0;
 }
 
-void BroadPhaseAction::SetState(byte state)
+void BroadPhaseAction::SetState(::byte state)
 {
   mState |= state;
 }
 
-void BroadPhaseAction::ClearState(byte state)
+void BroadPhaseAction::ClearState(::byte state)
 {
   mState = mState & ~state;
 }

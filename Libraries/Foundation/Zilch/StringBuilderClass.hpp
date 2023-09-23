@@ -20,7 +20,7 @@ public:
   Rune(const Zero::Rune zeroRune);
   operator Zero::Rune() const;
 
-  static String ToString(const BoundType* type, const byte* data);
+  static String ToString(const BoundType* type, const ::byte* data);
 
   int GetValue();
   void SetValue(int value);
@@ -100,7 +100,7 @@ class ZeroShared RuneIterator
 public:
   ZilchDeclareType(RuneIterator, TypeCopyMode::ReferenceType);
 
-  static String ToString(const BoundType* type, const byte* data);
+  static String ToString(const BoundType* type, const ::byte* data);
 
   // Range interface
   static void All(Call& call, ExceptionReport& report);
@@ -131,7 +131,7 @@ class ZeroShared StringRangeExtended
 {
   ZilchDeclareType(StringRangeExtended, TypeCopyMode::ReferenceType);
 
-  static String ToString(const BoundType* type, const byte* data);
+  static String ToString(const BoundType* type, const ::byte* data);
 
   // Range interface
   static void All(Call& call, ExceptionReport& report);

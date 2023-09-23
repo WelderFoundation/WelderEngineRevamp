@@ -209,7 +209,7 @@ void EndTracing(Editor* editor)
   String json = builder.ToString();
 
   Archive archive(ArchiveMode::Compressing, CompressionLevel::MaxCompression);
-  archive.AddFileBlock("trace.json", DataBlock((byte*)json.Data(), json.SizeInBytes()));
+  archive.AddFileBlock("trace.json", DataBlock((::byte*)json.Data(), json.SizeInBytes()));
   ByteBufferBlock block(archive.ComputeZipSize());
   archive.WriteBuffer(block);
 

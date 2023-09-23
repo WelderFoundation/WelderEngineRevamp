@@ -177,7 +177,7 @@ inline R_ENABLE_IF(sizeof(T) > 1, T) EndianFlip(T value)
   // Reverse byte order
   T flipped = T();
   for (Bytes i = 0; i < sizeof(value); ++i)
-    ((byte*)&flipped)[i] = ((byte*)&value)[sizeof(value) - 1 - i];
+    ((::byte*)&flipped)[i] = ((::byte*)&value)[sizeof(value) - 1 - i];
 
   return flipped;
 }
@@ -210,17 +210,17 @@ inline R_ENABLE_IF(is_integral<T>::value&& is_signed<T>::value, Bits) BitsNeeded
 /// (Note: Incurs static memory overhead equal to specified buffer size.
 /// Optimized for speed.)
 template <size_t N>
-inline bool BufferIsZeroed(const byte (&buffer)[N])
+inline bool BufferIsZeroed(const ::byte (&buffer)[N])
 {
   // Statically allocate zero-initialized buffer of same size
-  static const byte zeroBuffer[N] = {};
+  static const ::byte zeroBuffer[N] = {};
 
   // Given buffer is identical to zero buffer?
   return (memcmp(buffer, zeroBuffer, N) == 0);
 }
 
 /// Returns true if memA and memB are overlapping
-inline bool MemoryIsOverlapping(const byte* memA, Bytes memASize, const byte* memB, Bytes memBSize)
+inline bool MemoryIsOverlapping(const ::byte* memA, Bytes memASize, const ::byte* memB, Bytes memBSize)
 {
   if ((memA - memB <= 0 && memB - (memA + memASize) <= 0) //    memB starting point is within memA?
       || (memA - (memB + memBSize) <= 0 &&

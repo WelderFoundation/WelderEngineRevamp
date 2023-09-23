@@ -268,7 +268,7 @@ void ZilchScriptConnection::Invoke(Event* e)
 
 DataBlock ZilchScriptConnection::GetFunctionPointer()
 {
-  return DataBlock((byte*)&mDelegate.BoundFunction, sizeof(Function*));
+  return DataBlock((::byte*)&mDelegate.BoundFunction, sizeof(Function*));
 }
 
 } // namespace Zero

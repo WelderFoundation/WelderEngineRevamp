@@ -159,7 +159,7 @@ private:
   Transform* mTransform;
   float mVerticalAngle;
   float mHorizontalAngle;
-  byte mMovement[ControllerButton::NumButtons];
+  ::byte mMovement[ControllerButton::NumButtons];
   bool mMoving;
   bool mMouseDragging;
   uint mDragMode;

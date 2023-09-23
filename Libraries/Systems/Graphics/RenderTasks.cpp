@@ -99,8 +99,8 @@ void SubRenderGroupPass::AddSubSettings(GraphicsRenderSettings& subSettings,
   subData.mRenderPass = ZilchAllocate(MaterialBlock, derivedType);
 
   // Copy data from derived type.
-  byte* source = (byte*)&subPass + sizeof(MaterialBlock);
-  byte* dest = (byte*)(MaterialBlock*)subData.mRenderPass + sizeof(MaterialBlock);
+  ::byte* source = (::byte*)&subPass + sizeof(MaterialBlock);
+  ::byte* dest = (::byte*)(MaterialBlock*)subData.mRenderPass + sizeof(MaterialBlock);
   size_t fragmentSize = derivedType->Size - sizeof(MaterialBlock);
   memcpy(dest, source, fragmentSize);
 }

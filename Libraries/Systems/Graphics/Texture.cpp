@@ -201,7 +201,7 @@ void Texture::Upload(TextureData& textureData)
   mMipCount = 1;
   mTotalDataSize = textureData.mDataSize;
 
-  mImageData = new byte[mTotalDataSize];
+  mImageData = new ::byte[mTotalDataSize];
   memcpy(mImageData, textureData.mData, mTotalDataSize);
 
   mMipHeaders = new MipHeader[1];
@@ -233,7 +233,7 @@ void Texture::SubUpload(TextureData& textureData, int xOffset, int yOffset)
 
   mMipCount = 1;
 
-  mImageData = new byte[textureData.mDataSize];
+  mImageData = new ::byte[textureData.mDataSize];
   memcpy(mImageData, textureData.mData, textureData.mDataSize);
 
   mMipHeaders = new MipHeader[1];
@@ -247,7 +247,7 @@ void Texture::SubUpload(TextureData& textureData, int xOffset, int yOffset)
   Z::gEngine->has(GraphicsEngine)->AddTexture(this, true, xOffset, yOffset);
 }
 
-void Texture::Upload(uint width, uint height, TextureFormat::Enum format, byte* data, uint size, bool copyData)
+void Texture::Upload(uint width, uint height, TextureFormat::Enum format, ::byte* data, uint size, bool copyData)
 {
   mWidth = width;
   mHeight = height;
@@ -260,7 +260,7 @@ void Texture::Upload(uint width, uint height, TextureFormat::Enum format, byte* 
 
     if (copyData)
     {
-      mImageData = new byte[mTotalDataSize];
+      mImageData = new ::byte[mTotalDataSize];
       memcpy(mImageData, data, mTotalDataSize);
     }
     else
@@ -289,7 +289,7 @@ void Texture::Upload(Image& image)
   mMipCount = 1;
   mTotalDataSize = image.SizeInBytes;
 
-  mImageData = new byte[image.SizeInBytes];
+  mImageData = new ::byte[image.SizeInBytes];
   memcpy(mImageData, image.Data, image.SizeInBytes);
 
   mMipHeaders = new MipHeader[1];
@@ -316,7 +316,7 @@ void Texture::SubUpload(Image& image, int xOffset, int yOffset)
 
   mMipCount = 1;
 
-  mImageData = new byte[image.SizeInBytes];
+  mImageData = new ::byte[image.SizeInBytes];
   memcpy(mImageData, image.Data, image.SizeInBytes);
 
   mMipHeaders = new MipHeader[1];

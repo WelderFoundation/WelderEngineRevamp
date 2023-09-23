@@ -1350,7 +1350,7 @@ void OpenglRenderer::AddTexture(AddTextureInfo* info)
       for (uint i = 0; i < info->mMipCount; ++i)
       {
         MipHeader* mipHeader = info->mMipHeaders + i;
-        byte* mipData = info->mImageData + mipHeader->mDataOffset;
+        ::byte* mipData = info->mImageData + mipHeader->mDataOffset;
 
         if (info->mSubImage)
         {
@@ -1524,7 +1524,7 @@ void OpenglRenderer::GetTextureData(GetTextureDataInfo* info)
   SetSingleRenderTargets(mSingleTargetFbo, &info->mRenderData, nullptr);
 
   uint imageSize = info->mWidth * info->mHeight * GetPixelSize(info->mFormat);
-  info->mImage = new byte[imageSize];
+  info->mImage = new ::byte[imageSize];
 
   GlTextureEnums textureEnums = gTextureEnums[info->mFormat];
   glReadPixels(0, 0, info->mWidth, info->mHeight, textureEnums.mFormat, textureEnums.mType, info->mImage);

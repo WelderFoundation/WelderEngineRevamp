@@ -97,7 +97,7 @@ public:
   void SubUpload(TextureData& textureData, int xOffset, int yOffset);
 
   // Used by graphics engine to upload data directly.
-  void Upload(uint width, uint height, TextureFormat::Enum format, byte* data, uint size, bool copyData = true);
+  void Upload(uint width, uint height, TextureFormat::Enum format, ::byte* data, uint size, bool copyData = true);
 
   // Internal
 
@@ -109,7 +109,7 @@ public:
   uint mMipCount;
   uint mTotalDataSize;
   MipHeader* mMipHeaders;
-  byte* mImageData;
+  ::byte* mImageData;
 
   bool mProtected;
   bool mDirty;

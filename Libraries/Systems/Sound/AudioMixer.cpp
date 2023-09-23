@@ -696,12 +696,12 @@ void AudioMixer::DispatchMicrophoneInput()
       PreviousInputSamples.Erase(PreviousInputSamples.SubRange(0, totalPacketSamples));
 
       // Encode the packet
-      Zero::Array<byte> dataArray;
+      Zero::Array<::byte> dataArray;
       Encoder.EncodePacket(monoSamples.Data(), AudioFileEncoder::cPacketFrames, dataArray);
 
       // Send the event with the encoded data
       AudioByteDataEvent event;
-      event.AudioData = ZilchAllocate(ArrayClass<byte>);
+      event.AudioData = ZilchAllocate(ArrayClass<::byte>);
       event.AudioData->NativeArray = dataArray;
       Z::gSound->DispatchEvent(Events::MicrophoneCompressedByteData, &event);
     }

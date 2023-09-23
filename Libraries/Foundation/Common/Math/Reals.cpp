@@ -329,14 +329,14 @@ ZeroShared double DoublePositiveMin()
   return DBL_MIN;
 }
 
-ZeroShared byte BytePositiveMax()
+ZeroShared ::byte BytePositiveMax()
 {
   return UCHAR_MAX;
 }
 
-ZeroShared byte BytePositiveMin()
+ZeroShared ::byte BytePositiveMin()
 {
-  return (byte)0;
+  return (::byte)0;
 }
 
 int IntegerPositiveMax()

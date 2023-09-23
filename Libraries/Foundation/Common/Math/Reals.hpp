@@ -106,8 +106,8 @@ ZeroShared bool IsValid(real val);
 
 ZeroShared double DoublePositiveMax();
 ZeroShared double DoublePositiveMin();
-ZeroShared byte BytePositiveMax();
-ZeroShared byte BytePositiveMin();
+ZeroShared ::byte BytePositiveMax();
+ZeroShared ::byte BytePositiveMin();
 ZeroShared int IntegerPositiveMax();
 ZeroShared int IntegerNegativeMin();
 ZeroShared long long int DoubleIntegerPositiveMax();

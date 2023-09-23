@@ -205,7 +205,7 @@ void ZilchPluginSource::ForceCopyPluginDependencies()
                           "   \n"
                           "    Zilch::Delegate delegate;                                           "
                           "   \n"
-                          "    delegate.ThisHandle = Zilch::Handle((byte*)receiver, type);         "
+                          "    delegate.ThisHandle = Zilch::Handle((::byte*)receiver, type);         "
                           "   \n"
                           "    delegate.BoundFunction = (*instanceFunctions)[0];                   "
                           "   \n"
