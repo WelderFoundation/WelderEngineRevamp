@@ -8,7 +8,7 @@ struct ImGui_Impl_Zero_data
 {
 };
 
-DearImgui::DearImgui()
+DearImgui::DearImgui() : mAngle{0}, mTranslation{0, 0, 0}
 {
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
@@ -18,11 +18,10 @@ DearImgui::DearImgui()
   io.BackendLanguageUserData = (void*)bd;
   io.BackendPlatformName = "ZeroEngine";
 
-  io.BackendFlags = 0;
-  //|= ImGuiBackendFlags_RendererHasVtxOffset;
+  io.BackendFlags |= ImGuiBackendFlags_RendererHasVtxOffset;
 
-  io.DisplaySize.x = 2000;
-  io.DisplaySize.y = 900;
+  io.DisplaySize.x = 1280;
+  io.DisplaySize.y = 720;
 
   Connect(Z::gEngine->has(TimeSystem), "UiUpdate", this, &DearImgui::OnUpdate);
   Connect(Z::gEngine->has(GraphicsEngine), "UiRenderUpdate", this, &DearImgui::OnRender);
@@ -99,13 +98,6 @@ struct ColorTransform
 
 void DearImgui::OnRender(Event* event)
 {
-  ColorTransform colorTx = {Vec4(1, 1, 1, 1)};
-  Mat4 localTx;
-  this->mTranslation = Vec3{0, 0, 0};
-  this->mAngle = 0;
-  Build2dTransform(localTx, this->mTranslation, this->mAngle);
-  mWorldTx = localTx * Mat4::cIdentity;
-
   mCurrentRenderFrame++;
 
   Assert(mCurrentRenderFrame == mCurrentUpdateFrame, "Update and Render are not in sync.");
@@ -124,12 +116,19 @@ void DearImgui::OnRender(Event* event)
   if (data->DisplaySize.x <= 0.0f || data->DisplaySize.y <= 0.0f)
     return;
 
+  ColorTransform colorTx = {Vec4(1, 1, 1, 1)};
+  Mat4 localTx;
+  this->mTranslation = Vec3{0, 0, 0};
+  this->mAngle = 0;
+  Build2dTransform(localTx, this->mTranslation, this->mAngle);
+  mWorldTx = localTx * Mat4::cIdentity;
+
   Vec2 size = Vec2{data->DisplaySize.x, data->DisplaySize.y};
   Vec2 pos = Vec2{data->DisplayPos.x, data->DisplayPos.y};
 
   Rectangle clipRect = Rectangle::PointAndSize(Vec2(pos.x, pos.y), Vec2(size.x, size.y));
 
-  Vec4 clearColor = Vec4{0, 0, 0, 1};
+  Vec4 clearColor = Vec4{0.5, 0.7, 0.3, 0};
 
   GraphicsEngine* graphics = Z::gEngine->has(GraphicsEngine);
   RenderTasks& renderTasks = *graphics->mRenderTasksBack;
@@ -204,11 +203,11 @@ void DearImgui::OnRender(Event* event)
 
   Z::gEngine->has(GraphicsEngine)->ClearRenderTargets();
 
-  //if (renderTarget && renderTarget->mTexture)
-  //{
-  //  Texture* texture = renderTarget->mTexture;
-  //  graphics->WriteTextureToFile(texture, "output2.png");
-  //}
+  // if (renderTarget && renderTarget->mTexture)
+  // {
+  //   Texture* texture = renderTarget->mTexture;
+  //   graphics->WriteTextureToFile(texture, "output2.png");
+  // }
 }
 
 void DearImgui::RenderDrawData(ViewBlock& viewBlock, FrameBlock& frameBlock, ImDrawData* data, RectangleParam clipRect)
@@ -221,7 +220,7 @@ void DearImgui::RenderDrawData(ViewBlock& viewBlock, FrameBlock& frameBlock, ImD
   {
     const ImDrawList* cmdList = data->CmdLists[i];
 
-  // Extract vertex data
+    // Extract vertex data
     for (int i = 0; i < cmdList->IdxBuffer.Size; i++)
     {
       const ImDrawVert* srcVertex = &cmdList->VtxBuffer[cmdList->IdxBuffer[i]];
@@ -256,7 +255,7 @@ void DearImgui::RenderDrawData(ViewBlock& viewBlock, FrameBlock& frameBlock, ImD
       }
     }
   }
-  //CreateRenderData(viewBlock, frameBlock, clipRect, vertices, mFontTexture, PrimitiveType::Triangles);
+  // CreateRenderData(viewBlock, frameBlock, clipRect, vertices, mFontTexture, PrimitiveType::Triangles);
 }
 
 void DearImgui::CreateRenderData(ViewBlock& viewBlock,
@@ -284,8 +283,8 @@ void DearImgui::CreateRenderData(ViewBlock& viewBlock,
   viewNode.mStreamedVertexCount = streamedVertices.Size() - viewNode.mStreamedVertexStart;
 
   
-  //viewNode.mStreamedVertexStart = offset;
-  //viewNode.mStreamedVertexCount = count;
+  // viewNode.mStreamedVertexStart = offset;
+  // viewNode.mStreamedVertexCount = count;
 }
 
 ViewNode&
