@@ -12,5 +12,6 @@
 #include "Gameplay/GameplayStandard.hpp"
 #include "ZilchScript/ZilchScriptStandard.hpp"
 #include "Platform/PlatformStandard.hpp"
+#include "DearImgui/DearImguiStandard.hpp"
 
 #include "Startup.hpp"

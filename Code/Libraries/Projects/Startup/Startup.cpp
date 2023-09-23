@@ -279,6 +279,8 @@ void ZeroStartup::Startup()
   // Initialize all systems.
   engine->Initialize(initializer);
 
+  DearImgui::Initialize();
+
   if (mLoadContent)
     LoadContentConfig();
 
@@ -386,6 +388,7 @@ void ZeroStartup::Shutdown()
 {
   {
     ProfileScopeFunction();
+    DearImgui::Destroy();
     Z::gEngine->Shutdown();
 
     UserShutdownLibraries();

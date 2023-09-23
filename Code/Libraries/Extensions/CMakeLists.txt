@@ -1,5 +1,6 @@
 # Libraries.
 add_subdirectory(CodeTranslator)
+add_subdirectory(DearImgui)
 add_subdirectory(Gameplay)
 add_subdirectory(Editor)
 add_subdirectory(UiWidget)
