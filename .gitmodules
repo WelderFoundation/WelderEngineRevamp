@@ -54,3 +54,7 @@
 	path = Code/External/ZLib/Repo
 	url = https://github.com/WelderFoundation/zlib.git
     branch = welder_updates
+[submodule "Code/External/IMGUI/Repo"]
+	path = Code/External/IMGUI/Repo
+	url = https://github.com/WelderFoundation/imgui.git
+    branch = master
