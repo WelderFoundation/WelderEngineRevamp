@@ -97,7 +97,7 @@ target_link_libraries(Content
     RendererBase
     Serialization
     Zilch
-    assimp
+    Assimp
     ZLib
     Opus
     Nvtt
