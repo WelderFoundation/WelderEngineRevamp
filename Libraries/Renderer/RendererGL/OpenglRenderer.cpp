@@ -3,12 +3,6 @@
 #include "Precompiled.hpp"
 #include "OpenglRenderer.hpp"
 
-#ifdef WelderTargetOsEmscripten
-#  define ZeroWebgl
-#else
-#  define ZeroGl
-#endif
-
 #ifdef ZeroGl
 #  define ZeroIfGl(X) X
 #else
@@ -1039,9 +1033,6 @@ void OpenglRenderer::Initialize(OsHandle windowHandle, OsHandle deviceContext, O
 #if !defined(ZeroWebgl)
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_TEXTURE_CUBE_MAP);
-#endif
-
-#ifndef ZeroWebgl
   if (glewIsSupported("GL_ARB_seamless_cube_map"))
     glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 #endif
