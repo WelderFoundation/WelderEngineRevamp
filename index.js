@@ -670,7 +670,7 @@ const cmake = async (options) => {
 
     const toolchainFile = path.join(process.env.EMSCRIPTEN, "cmake/Modules/Platform/Emscripten.cmake");
     toolchainArgs.push(`-DCMAKE_TOOLCHAIN_FILE=${toolchainFile}`);
-    toolchainArgs.push("-DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1");
+    toolchainArgs.push("-DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=0");
   }
 
   if (combo.toolchain === "Clang") {
@@ -828,7 +828,7 @@ const build = async (options) => {
 
 const executeBuiltProcess = async (buildDir, combo, directory, library, args) => {
   if (combo.toolchain === "Emscripten") {
-    const pageDirectory = path.join(buildDir, "Libraries", library);
+    const pageDirectory = path.join(buildDir, "Libraries", directory, library);
     if (!fs.existsSync(pageDirectory)) {
       printErrorLine(`Directory does not exist ${pageDirectory}`);
       return [];
@@ -842,6 +842,11 @@ const executeBuiltProcess = async (buildDir, combo, directory, library, args) =>
     const url = `http://localhost:${port}/${library}.html?${argString}`;
 
     const browser = await puppeteer.launch({
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox"
+      ],
+      headless: false,
       timeout: 0
     });
     const page = await browser.newPage();
