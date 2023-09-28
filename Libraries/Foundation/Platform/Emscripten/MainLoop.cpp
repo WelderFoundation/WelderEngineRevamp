@@ -40,4 +40,13 @@ void StopMainLoop()
   emscripten_cancel_main_loop();
 }
 #endif
+
+EM_JS(void, JSInitialLoadingCompleted, (), {
+  window.parent.postMessage({type: 'initialLoadingCompleted'}, '*');
+});
+
+void InitialLoadingCompleted() {
+  JSInitialLoadingCompleted();
+}
+
 } // namespace Zero
