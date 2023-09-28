@@ -1,5 +1,11 @@
 add_definitions(-DWelderCompilerMsvc=1 -DWelderCompilerName="Msvc")
 
+if (WELDER_EXCEPTIONS)
+  set(MSVC_EXCEPTION_OPTION "-EHsc")
+else()
+  set(MSVC_EXCEPTION_OPTION "-EHs-c-")
+endif()
+
 set(WELDER_C_CXX_FLAGS "\
   -W3\
   -Zc:wchar_t\
@@ -8,7 +14,7 @@ set(WELDER_C_CXX_FLAGS "\
   -fp:fast\
   -errorReport:prompt\
   -Gd\
-  -EHsc\
+  ${MSVC_EXCEPTION_OPTION}\
   -nologo\
   -analyze-\
   -bigobj\
