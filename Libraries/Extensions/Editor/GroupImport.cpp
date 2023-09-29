@@ -39,7 +39,7 @@ String StripResourceExtension(StringParam filename)
     MetaDatabase* metaDatabase = MetaDatabase::GetInstance();
     BoundType* type = metaDatabase->FindType(resourceExtension);
     // If it is a Zero Engine resource strip it from the filename
-    if (type->IsA(ZilchTypeId(Resource)))
+    if (type && type->IsA(ZilchTypeId(Resource)))
     {
       // Replace the .ResourceType with nothing and return that filename to
       // import Zero Engine created resources files from another project and get
