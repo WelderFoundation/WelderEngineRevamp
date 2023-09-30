@@ -5,7 +5,7 @@ Building on Windows:
 - Run the following in cmd:
 
 ```shell
-git clone https://github.com/WelderUpdates/WelderEngineRevamp.git
+git clone https://github.com/WelderFoundation/WelderEngineRevamp.git
 cd WelderEngineRevamp
 git submodule update --init --recursive
 npm install
