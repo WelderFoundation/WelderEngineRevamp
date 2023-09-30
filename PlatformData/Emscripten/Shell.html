@@ -161,7 +161,7 @@
     </style>
   </head>
   <body>
-    <canvas id='canvas' class='full-screen' oncontextmenu='event.preventDefault()'></canvas>
+    <canvas tabindex='0' id='canvas' class='full-screen' oncontextmenu='event.preventDefault()'></canvas>
 
     <div id='shell-open' class='full-screen modal' tabindex='1' style='display: none'>
       <div class='dialog' style="width: 400px; height: 300px; display: flex; flex-direction: column; flex: auto">
@@ -187,6 +187,8 @@
       </div>
     </div>
     <script type='text/javascript'>
+      SDL_TRUE = true
+      SDL_FALSE = false
       if (Error && Error.stackTraceLimit)
         Error.stackTraceLimit = Infinity;
 
@@ -219,6 +221,7 @@
       }
       
       var canvasElement = document.getElementById('canvas');
+      canvasElement.focus();
       
       // Emscripten doesn't use SDL's flags to disable antialising/multisampling,
       // and we don't want to have to continuously modify the .js file that Emscripten outputs

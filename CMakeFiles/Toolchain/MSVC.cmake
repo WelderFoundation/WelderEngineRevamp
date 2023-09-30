@@ -1,5 +1,11 @@
 add_definitions(-DWelderCompilerMsvc=1 -DWelderCompilerName="Msvc")
 
+if (WELDER_EXCEPTIONS)
+  set(MSVC_EXCEPTION_OPTION "-EHsc")
+else()
+  set(MSVC_EXCEPTION_OPTION "-EHs-c-")
+endif()
+
 set(WELDER_C_CXX_FLAGS "\
   -W3\
   -Zc:wchar_t\
@@ -8,7 +14,7 @@ set(WELDER_C_CXX_FLAGS "\
   -fp:fast\
   -errorReport:prompt\
   -Gd\
-  -EHsc\
+  ${MSVC_EXCEPTION_OPTION}\
   -nologo\
   -analyze-\
   -bigobj\
@@ -16,7 +22,6 @@ set(WELDER_C_CXX_FLAGS "\
 
 set(WELDER_C_CXX_FLAGS_DEBUG "\
   -Zi\
-  -Gm\
   -MDd\
   -GS\
   -Od\
@@ -26,7 +31,6 @@ set(WELDER_C_CXX_FLAGS_DEBUG "\
 
 set(WELDER_C_CXX_FLAGS_RELWITHDEBINFO "\
   -Zi\
-  -Gm\
   -MT\
   -MP\
   -GS\
@@ -36,7 +40,6 @@ set(WELDER_C_CXX_FLAGS_RELWITHDEBINFO "\
 ")
 
 set(WELDER_C_CXX_FLAGS_RELEASE "\
-  -Gm-\
   -MT\
   -MP\
   -GL\
@@ -46,7 +49,6 @@ set(WELDER_C_CXX_FLAGS_RELEASE "\
 ")
 
 set(WELDER_C_CXX_FLAGS_MINSIZEREL "\
-  -Gm-\
   -MT\
   -MP\
   -GL\
@@ -57,11 +59,16 @@ set(WELDER_C_CXX_FLAGS_MINSIZEREL "\
 set(WELDER_LINKER_FLAGS "/ignore:4099,4221,4075,4251")
 set(WELDER_LINKER_FLAGS_RELEASE "/LTCG")
 
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO /SUBSYSTEM:WINDOWS /STACK:8388608")
+#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO /SUBSYSTEM:WINDOWS /STACK:8388608")
 
 set(WELDER_C_CXX_EXTERNAL_FLAGS /W0 /wd4267)
 
-function(welder_toolchain_setup_library target)
+function(welder_toolchain_setup_library target internal)
+    set(TARGET_CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO /STACK:8388608")
+    if (${internal})
+        set(TARGET_CMAKE_EXE_LINKER_FLAGS "${TARGET_CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+    endif()
+    set_target_properties(${target} PROPERTIES LINK_FLAGS "${TARGET_CMAKE_EXE_LINKER_FLAGS}")
 endfunction()
 
 function(welder_use_precompiled_header target directory)

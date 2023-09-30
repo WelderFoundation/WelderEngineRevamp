@@ -1,10 +1,16 @@
 add_definitions(-DWelderCompilerClang=1 -DWelderCompilerName="Clang")
 
+if (WELDER_EXCEPTIONS)
+  set(CLANG_EXCEPTION_OPTION "-fexceptions")
+else()
+  set(CLANG_EXCEPTION_OPTION "-fno-exceptions")
+endif()
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 set(WELDER_C_CXX_FLAGS "\
   -Wno-address-of-packed-member\
   -Wno-empty-body\
-  -fexceptions\
+  ${CLANG_EXCEPTION_OPTION}\
   -frtti\
   -fno-vectorize\
   -fno-slp-vectorize\
@@ -34,7 +40,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Xlinker --start-group")
 
 set(WELDER_C_CXX_EXTERNAL_FLAGS -Wno-everything)
 
-function(welder_toolchain_setup_library target)
+function(welder_toolchain_setup_library target internal)
 endfunction()
 
 function(welder_use_precompiled_header target directory)

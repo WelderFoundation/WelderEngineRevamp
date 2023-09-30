@@ -31,8 +31,9 @@ syntax: glob
 compile_commands.json
 
 Temp/
-Build/
+/Build/
 node_modules/
 enc_temp_folder/
 .vs
 .vscode/ipch
+package-lock.json

@@ -8,6 +8,7 @@ target_sources(Nvtt
   PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/Repo/extern/poshlib/posh.c
     ${CMAKE_CURRENT_LIST_DIR}/Repo/extern/poshlib/posh.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc6h/bits.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc6h/shapes_two.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc6h/tile.h
@@ -17,6 +18,7 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc6h/zoh_utils.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc6h/zohone.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc6h/zohtwo.cpp
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc7/avpcl.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc7/avpcl.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc7/avpcl_mode0.cpp
@@ -34,6 +36,7 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc7/shapes_three.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc7/shapes_two.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/bc7/tile.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Array.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Debug.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/DefsGnucDarwin.h
@@ -43,6 +46,8 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/FileSystem.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/FileSystem.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/ForEach.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Library.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Library.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Memory.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Memory.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Ptr.h
@@ -56,6 +61,7 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Timer.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/Utils.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvcore/nvcore.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/BlockDXT.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/BlockDXT.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/ColorBlock.cpp
@@ -73,7 +79,6 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/ImageIO.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/ImageIO.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/KtxFile.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/KtxFile.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/KtxFile.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/NormalMap.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/NormalMap.h
@@ -81,6 +86,7 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/PsdFile.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/TgaFile.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvimage/nvimage.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvmath/Box.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvmath/Box.inl
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvmath/Color.h
@@ -102,6 +108,7 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvmath/Vector.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvmath/Vector.inl
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvmath/nvmath.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvthread/Atomic.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvthread/Event.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvthread/Event.h
@@ -115,10 +122,11 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvthread/ThreadPool.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvthread/nvthread.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvthread/nvthread.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/BlockCompressor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/BlockCompressor.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/ClusterFit.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/ClusterFit.h
+    #${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/ClusterFit.cpp
+    #${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/ClusterFit.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressionOptions.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressionOptions.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/Compressor.h
@@ -128,8 +136,8 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDX11.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDX9.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDX9.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDXT1.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDXT1.h
+    #${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDXT1.cpp
+    #${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDXT1.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDXT5_RGBM.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorDXT5_RGBM.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/CompressorETC.cpp
@@ -154,16 +162,22 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/Surface.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/TaskDispatcher.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/TaskDispatcher.h
+    
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/icbc.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/icbc.h
+    
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/nvtt.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/nvtt.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/nvtt_wrapper.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/nvtt_wrapper.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/cuda/BitmapTable.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/cuda/CudaCompressorDXT.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/cuda/CudaCompressorDXT.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/cuda/CudaMath.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/cuda/CudaUtils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/cuda/CudaUtils.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/nvtt.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/nvtt.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/nvtt_wrapper.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/nvtt_wrapper.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/squish/colourblock.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/squish/colourblock.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/squish/colourfit.cpp
@@ -177,6 +191,7 @@ target_sources(Nvtt
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/squish/maths.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/squish/weightedclusterfit.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/src/nvtt/squish/weightedclusterfit.h
+    
     ${CMAKE_CURRENT_LIST_DIR}/nvconfig.h
     ${CMAKE_CURRENT_LIST_DIR}/Debug.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.cpp

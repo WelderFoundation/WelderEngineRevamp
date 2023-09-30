@@ -11,6 +11,7 @@ target_compile_definitions(Assimp
     OPENDDL_STATIC_LIBARY
     ASSIMP_BUILD_NO_OWN_ZLIB
     ASSIMP_BUILD_NO_C4D_IMPORTER
+    ASSIMP_BUILD_NO_EXPORT
 )
 
 target_sources(Assimp
@@ -21,12 +22,14 @@ target_sources(Assimp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Compiler/pstdint.h
 #Includes
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/anim.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/aabb.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/ai_assert.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/camera.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/color4.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/color4.inl
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/ColladaMetaData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/commonMetaData.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/defs.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Defines.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/cfileio.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/light.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/material.h
@@ -36,6 +39,8 @@ target_sources(Assimp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/matrix4x4.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/matrix4x4.inl
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/mesh.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/pbrmaterial.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/GltfMaterial.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/postprocess.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/quaternion.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/quaternion.inl
@@ -62,455 +67,482 @@ target_sources(Assimp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Exporter.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/DefaultIOStream.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/DefaultIOSystem.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/ZipArchiveIOSystem.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/SceneCombiner.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/fast_atof.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/qnan.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/BaseImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Hash.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/MemoryIOWrapper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/ParsingUtils.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/StreamReader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/StreamWriter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/StringComparison.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/StringUtils.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/SGSpatialSort.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/GenericProperty.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/SpatialSort.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/SkeletonMeshBuilder.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/SmallVector.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/SmoothingGroups.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/SmoothingGroups.inl
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/StandardShapes.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/RemoveComments.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Subdivision.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Vertex.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/LineSplitter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/TinyFormatter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Profiler.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/LogAux.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Bitmap.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/XMLTools.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/IOStreamBuffer.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/CreateAnimMesh.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/XmlParser.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/BlobIOSystem.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/MathFunctions.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Exceptional.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/ByteSwapper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/include/assimp/Base64.hpp
 #Core
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Assimp.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Assimp.cpp
 #Logging
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DefaultLogger.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FileLogStream.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StdOStreamLogStream.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/DefaultLogger.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/FileLogStream.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/StdOStreamLogStream.h
 #Common
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/fast_atof.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/qnan.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BaseImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BaseImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BaseProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BaseProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Importer.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ScenePrivate.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostStepRegistry.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ImporterRegistry.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ByteSwapper.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DefaultProgressHandler.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DefaultIOStream.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DefaultIOSystem.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CInterfaceIOWrapper.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CInterfaceIOWrapper.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Hash.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Importer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFF.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MemoryIOWrapper.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ParsingUtils.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StreamReader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StreamWriter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StringComparison.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StringUtils.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SGSpatialSort.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SGSpatialSort.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/VertexTriangleAdjacency.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/VertexTriangleAdjacency.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/GenericProperty.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SpatialSort.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SpatialSort.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SceneCombiner.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ScenePreprocessor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ScenePreprocessor.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SkeletonMeshBuilder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SkeletonMeshBuilder.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SplitByBoneCountProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SplitByBoneCountProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ScaleProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ScaleProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SmoothingGroups.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StandardShapes.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StandardShapes.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TargetAnimation.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TargetAnimation.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/RemoveComments.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/RemoveComments.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Subdivision.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Subdivision.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/scene.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Vertex.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LineSplitter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TinyFormatter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Profiler.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LogAux.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Bitmap.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Bitmap.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XMLTools.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Version.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IOStreamBuffer.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CreateAnimMesh.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CreateAnimMesh.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Compression.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Compression.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/BaseImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/BaseProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/BaseProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Importer.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/ScenePrivate.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/PostStepRegistry.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/ImporterRegistry.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/DefaultProgressHandler.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/DefaultIOStream.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/IOSystem.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/DefaultIOSystem.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/ZipArchiveIOSystem.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/PolyTools.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Importer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/IFF.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/SGSpatialSort.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/VertexTriangleAdjacency.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/VertexTriangleAdjacency.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/SpatialSort.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/SceneCombiner.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/ScenePreprocessor.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/ScenePreprocessor.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/SkeletonMeshBuilder.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/StandardShapes.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/TargetAnimation.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/TargetAnimation.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/RemoveComments.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Subdivision.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/scene.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Bitmap.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Version.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/CreateAnimMesh.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/simd.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/simd.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/material.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/AssertHandler.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Exceptional.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Common/Base64.cpp
+#Geometry
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Geometry/GeometryUtils.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Geometry/GeometryUtils.h
+#CApi
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CApi/CInterfaceIOWrapper.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CApi/CInterfaceIOWrapper.h
+#STEP
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/STEPParser/STEPFileReader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/STEPParser/STEPFileReader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/STEPParser/STEPFileEncoding.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/STEPParser/STEPFileEncoding.h
 #AMF
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AMFImporter.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AMFImporter_Macro.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AMFImporter_Node.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AMFImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AMFImporter_Geometry.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AMFImporter_Material.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AMFImporter_Postprocess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/AMF/AMFImporter.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/AMF/AMFImporter_Node.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/AMF/AMFImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/AMF/AMFImporter_Geometry.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/AMF/AMFImporter_Material.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/AMF/AMFImporter_Postprocess.cpp
 #3DS
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/3DSConverter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/3DSHelper.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/3DSLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/3DSLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/3DSExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/3DSExporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3DS/3DSConverter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3DS/3DSHelper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3DS/3DSLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3DS/3DSLoader.h
 #AC
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ACLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ACLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/AC/ACLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/AC/ACLoader.h
 #ASE
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ASELoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ASELoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ASEParser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ASEParser.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/ASE/ASELoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/ASE/ASELoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/ASE/ASEParser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/ASE/ASEParser.h
 #ASSBIN
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssbinExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssbinExporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssbinLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssbinLoader.cpp
-#ASSXML
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssxmlExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssxmlExporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Assbin/AssbinLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Assbin/AssbinLoader.cpp
 #B3D
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/B3DImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/B3DImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/B3D/B3DImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/B3D/B3DImporter.h
 #BVH
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BVHLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BVHLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/BVH/BVHLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/BVH/BVHLoader.h
 #COLLADA
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ColladaHelper.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ColladaLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ColladaLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ColladaParser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ColladaParser.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ColladaExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ColladaExporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Collada/ColladaHelper.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Collada/ColladaHelper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Collada/ColladaLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Collada/ColladaLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Collada/ColladaParser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Collada/ColladaParser.h
 #DXF
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DXFLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DXFLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DXFHelper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/DXF/DXFLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/DXF/DXFLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/DXF/DXFHelper.h
 #CSM
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CSMLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CSMLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/CSM/CSMLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/CSM/CSMLoader.h
 #HMP
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/HMPFileData.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/HMPLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/HMPLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/HalfLifeFileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/HMP/HMPFileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/HMP/HMPLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/HMP/HMPLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/HMP/HalfLifeFileData.h
 #IRRMESH
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IRRMeshLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IRRMeshLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IRRShared.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IRRShared.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Irr/IRRMeshLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Irr/IRRMeshLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Irr/IRRShared.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Irr/IRRShared.h
+#IQM
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IQM/IQMImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IQM/iqm.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IQM/IQMImporter.h
 #IRR
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IRRLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IRRLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IRRShared.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IRRShared.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Irr/IRRLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Irr/IRRLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Irr/IRRShared.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Irr/IRRShared.h
 #LWO
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWOAnimation.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWOAnimation.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWOBLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWOFileData.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWOLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWOLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWOMaterial.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWO/LWOAnimation.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWO/LWOAnimation.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWO/LWOBLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWO/LWOFileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWO/LWOLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWO/LWOLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWO/LWOMaterial.cpp
 #LWS
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWSLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LWSLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWS/LWSLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/LWS/LWSLoader.h
+#M3D
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/M3D/M3DMaterials.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/M3D/M3DImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/M3D/M3DImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/M3D/M3DWrapper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/M3D/M3DWrapper.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/M3D/m3d.h
 #MD2
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD2FileData.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD2Loader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD2Loader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD2NormalTable.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD2/MD2FileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD2/MD2Loader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD2/MD2Loader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD2/MD2NormalTable.h
 #MD3
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD3FileData.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD3Loader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD3Loader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD3/MD3FileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD3/MD3Loader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD3/MD3Loader.h
 #MD5
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD5Loader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD5Loader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD5Parser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD5Parser.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD5/MD5Loader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD5/MD5Loader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD5/MD5Parser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD5/MD5Parser.h
 #MDC
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDCFileData.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDCLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDCLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDCNormalTable.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDC/MDCFileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDC/MDCLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDC/MDCLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDC/MDCNormalTable.h
 #MDL
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDLDefaultColorMap.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDLFileData.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDLLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDLLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MDLMaterialLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/MDLDefaultColorMap.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/MDLFileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/MDLLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/MDLLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/MDLMaterialLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/HalfLifeMDLBaseHeader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/HL1FileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/HL1MDLLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/HL1MDLLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/HL1ImportDefinitions.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/HL1ImportSettings.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/HL1MeshTrivert.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/LogFunctions.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/UniqueNameGenerator.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MDL/HalfLife/UniqueNameGenerator.h
 #MaterialSystem
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MaterialSystem.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MaterialSystem.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Material/MaterialSystem.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Material/MaterialSystem.h
 #NFF
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/NFFLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/NFFLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/NFF/NFFLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/NFF/NFFLoader.h
 #NDO
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/NDOLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/NDOLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/NDO/NDOLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/NDO/NDOLoader.h
 #OFF
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OFFLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OFFLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/OFF/OFFLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/OFF/OFFLoader.h
 #OBJ
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjFileData.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjFileImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjFileImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjFileMtlImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjFileMtlImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjFileParser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjFileParser.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjTools.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ObjExporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Obj/ObjFileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Obj/ObjFileImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Obj/ObjFileImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Obj/ObjFileMtlImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Obj/ObjFileMtlImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Obj/ObjFileParser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Obj/ObjFileParser.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Obj/ObjTools.h
 #OGRE
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreStructs.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreParsingUtils.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreBinarySerializer.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreXmlSerializer.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreStructs.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreBinarySerializer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreXmlSerializer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OgreMaterial.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreStructs.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreParsingUtils.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreBinarySerializer.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreXmlSerializer.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreStructs.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreBinarySerializer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreXmlSerializer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ogre/OgreMaterial.cpp
 #OPENGEX
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OpenGEXExporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OpenGEXExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OpenGEXImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OpenGEXImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OpenGEXStructs.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/OpenGEX/OpenGEXImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/OpenGEX/OpenGEXImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/OpenGEX/OpenGEXStructs.h
 #PLY
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PlyLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PlyLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PlyParser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PlyParser.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PlyExporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PlyExporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ply/PlyLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ply/PlyLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ply/PlyParser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Ply/PlyParser.h
 #MS3D
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MS3DLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MS3DLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MS3D/MS3DLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MS3D/MS3DLoader.h
 #COB
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/COBLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/COBLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/COBScene.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/COB/COBLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/COB/COBLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/COB/COBScene.h
 #BLEND
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderDNA.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderDNA.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderDNA.inl
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderScene.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderScene.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderSceneGen.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderIntermediate.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderModifier.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderModifier.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderBMesh.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderBMesh.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderTessellator.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlenderTessellator.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderDNA.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderDNA.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderDNA.inl
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderScene.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderScene.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderSceneGen.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderIntermediate.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderModifier.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderModifier.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderBMesh.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderBMesh.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderTessellator.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderTessellator.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderCustomData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Blender/BlenderCustomData.cpp
 #IFC
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCReaderGen1.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCReaderGen2.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCReaderGen.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCUtil.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCUtil.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCGeometry.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCMaterial.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCProfile.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCCurve.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCBoolean.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/IFCOpenings.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STEPFile.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STEPFileReader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STEPFileReader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STEPFileEncoding.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STEPFileEncoding.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCReaderGen1_2x3.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCReaderGen2_2x3.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCReaderGen_2x3.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCUtil.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCUtil.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCGeometry.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCMaterial.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCProfile.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCCurve.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCBoolean.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/IFC/IFCOpenings.cpp
 #XGL
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XGLLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XGLLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/XGL/XGLLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/XGL/XGLLoader.h
 #FBX
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXCompileConfig.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXParser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXParser.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXTokenizer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXTokenizer.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXImportSettings.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXConverter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXConverter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXUtil.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXUtil.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXDocument.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXDocument.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXProperties.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXProperties.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXMeshGeometry.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXMeshGeometry.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXMaterial.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXModel.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXAnimation.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXNodeAttribute.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXDeformer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXBinaryTokenizer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FBXDocumentUtil.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXCompileConfig.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXParser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXParser.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXTokenizer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXTokenizer.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXImportSettings.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXConverter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXConverter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXUtil.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXUtil.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXDocument.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXDocument.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXProperties.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXProperties.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXMeshGeometry.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXMeshGeometry.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXMaterial.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXModel.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXAnimation.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXNodeAttribute.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXDeformer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXBinaryTokenizer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXDocumentUtil.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/FBX/FBXCommon.h
 #PostProcessing
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CalcTangentsProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/CalcTangentsProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ComputeUVMappingProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ComputeUVMappingProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ConvertToLHProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ConvertToLHProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FindDegenerates.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FindDegenerates.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FindInstancesProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FindInstancesProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FindInvalidDataProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FindInvalidDataProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FixNormalsStep.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FixNormalsStep.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/GenFaceNormalsProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/GenFaceNormalsProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/GenVertexNormalsProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/GenVertexNormalsProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PretransformVertices.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PretransformVertices.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ImproveCacheLocality.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ImproveCacheLocality.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/JoinVerticesProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/JoinVerticesProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LimitBoneWeightsProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/LimitBoneWeightsProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/RemoveRedundantMaterials.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/RemoveRedundantMaterials.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/RemoveVCProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/RemoveVCProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SortByPTypeProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SortByPTypeProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SplitLargeMeshes.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SplitLargeMeshes.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TextureTransform.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TextureTransform.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TriangulateProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TriangulateProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ValidateDataStructure.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ValidateDataStructure.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OptimizeGraph.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OptimizeGraph.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OptimizeMeshes.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/OptimizeMeshes.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DeboneProcess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/DeboneProcess.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ProcessHelper.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/ProcessHelper.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PolyTools.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MakeVerboseFormat.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MakeVerboseFormat.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/CalcTangentsProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/CalcTangentsProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ComputeUVMappingProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ComputeUVMappingProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ConvertToLHProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ConvertToLHProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/EmbedTexturesProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/EmbedTexturesProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/FindDegenerates.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/FindDegenerates.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/FindInstancesProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/FindInstancesProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/FindInvalidDataProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/FindInvalidDataProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/FixNormalsStep.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/FixNormalsStep.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/DropFaceNormalsProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/DropFaceNormalsProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/GenFaceNormalsProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/GenFaceNormalsProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/GenVertexNormalsProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/GenVertexNormalsProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/PretransformVertices.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/PretransformVertices.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ImproveCacheLocality.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ImproveCacheLocality.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/JoinVerticesProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/JoinVerticesProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/LimitBoneWeightsProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/LimitBoneWeightsProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/RemoveRedundantMaterials.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/RemoveRedundantMaterials.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/RemoveVCProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/RemoveVCProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/SortByPTypeProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/SortByPTypeProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/SplitLargeMeshes.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/SplitLargeMeshes.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/TextureTransform.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/TextureTransform.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/TriangulateProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/TriangulateProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ValidateDataStructure.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ValidateDataStructure.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/OptimizeGraph.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/OptimizeGraph.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/OptimizeMeshes.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/OptimizeMeshes.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/DeboneProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/DeboneProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ProcessHelper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ProcessHelper.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/MakeVerboseFormat.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/MakeVerboseFormat.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ScaleProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ScaleProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ArmaturePopulate.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/ArmaturePopulate.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/GenBoundingBoxesProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/GenBoundingBoxesProcess.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/SplitByBoneCountProcess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/PostProcessing/SplitByBoneCountProcess.h
+
 #Q3D
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3DLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3DLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Q3D/Q3DLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Q3D/Q3DLoader.h
 #Q3BSP
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3BSPFileData.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3BSPFileParser.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3BSPFileParser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3BSPFileImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3BSPFileImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3BSPZipArchive.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Q3BSPZipArchive.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Q3BSP/Q3BSPFileData.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Q3BSP/Q3BSPFileParser.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Q3BSP/Q3BSPFileParser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Q3BSP/Q3BSPFileImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Q3BSP/Q3BSPFileImporter.cpp
 #RAW
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/RawLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/RawLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Raw/RawLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Raw/RawLoader.h
 #SIB
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SIBImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SIBImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/SIB/SIBImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/SIB/SIBImporter.h
 #SMD
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SMDLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/SMDLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/SMD/SMDLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/SMD/SMDLoader.h
 #STL
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STLLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STLLoader.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STLExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/STLExporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/STL/STLLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/STL/STLLoader.h
 #TERRAGEN
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TerragenLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/TerragenLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Terragen/TerragenLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Terragen/TerragenLoader.h
 #3D
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/UnrealLoader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/UnrealLoader.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Unreal/UnrealLoader.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/Unreal/UnrealLoader.h
 #X
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XFileHelper.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XFileImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XFileImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XFileParser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XFileParser.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XFileExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/XFileExporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X/XFileHelper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X/XFileImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X/XFileImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X/XFileParser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X/XFileParser.h
 #X3D
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DExporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DExporter.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Geometry2D.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Geometry3D.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Group.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Light.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Macro.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Metadata.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Networking.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Node.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Postprocess.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Rendering.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Shape.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DImporter_Texturing.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FIReader.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/FIReader.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/X3DVocabulary.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Geometry2D.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Geometry3D.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Group.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Light.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Metadata.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Networking.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Postprocess.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Rendering.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Shape.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Texturing.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Macro.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DImporter_Node.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DGeoHelper.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DGeoHelper.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DXmlHelper.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/X3D/X3DXmlHelper.h
 #GLTF
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTFAsset.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTFAsset.inl
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTFAssetWriter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTFAssetWriter.inl
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTFImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTFImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTFExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTFExporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTF2Asset.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTF2Asset.inl
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTF2AssetWriter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTF2AssetWriter.inl
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTF2Importer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTF2Importer.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTF2Exporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/glTF2Exporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF/glTFCommon.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF/glTFCommon.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF/glTFAsset.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF/glTFAsset.inl
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF/glTFAssetWriter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF/glTFAssetWriter.inl
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF/glTFImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF/glTFImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF2/glTF2Asset.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF2/glTF2Asset.inl
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF2/glTF2Importer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/glTF2/glTF2Importer.h
 #3MF
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/D3MFImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/D3MFImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/D3MFExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/D3MFExporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/D3MFOpcPackage.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/D3MFOpcPackage.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/3MFXmlTags.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3MF/3MFTypes.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3MF/XmlSerializer.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3MF/XmlSerializer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3MF/D3MFImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3MF/D3MFImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3MF/D3MFOpcPackage.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3MF/D3MFOpcPackage.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/3MF/3MFXmlTags.h
 #MMD
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MMDCpp14.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MMDImporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MMDImporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MMDPmdParser.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MMDPmxParser.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MMDPmxParser.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MMDVmdParser.h
-#Step
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StepExporter.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/StepExporter.cpp
-#Exporter
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/Exporter.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssimpCExport.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/BlobIOSystem.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MMD/MMDCpp14.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MMD/MMDImporter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MMD/MMDImporter.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MMD/MMDPmdParser.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MMD/MMDPmxParser.h
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MMD/MMDPmxParser.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MMD/MMDVmdParser.h
 #Extra
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/MD4FileData.h
-#Clipper
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/AssetLib/MD4/MD4FileData.h
+
+#Pugixml
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/pugixml/src/pugiconfig.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/pugixml/src/pugixml.hpp
+# Clipper
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/clipper/clipper.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/clipper/clipper.cpp
-#Poly2Tri
+# Poly2Tri
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/poly2tri/poly2tri/common/shapes.cc
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/poly2tri/poly2tri/common/shapes.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/poly2tri/poly2tri/common/utils.h
@@ -528,11 +560,7 @@ target_sources(Assimp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/unzip/ioapi.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/unzip/unzip.c
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/unzip/unzip.h
-#zip
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/zip/src/miniz.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/zip/src/zip.c
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/zip/src/zip.h
-#openddl_parser
+#openddlparser
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/openddlparser/code/OpenDDLParser.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/openddlparser/code/DDLNode.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/openddlparser/code/OpenDDLCommon.cpp
@@ -576,15 +604,6 @@ target_sources(Assimp
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/Open3DGC/o3dgcTriangleListEncoder.inl
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/Open3DGC/o3dgcVector.h
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/Open3DGC/o3dgcVector.inl
-#IrrXML
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/irrXMLWrapper.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/irrXML/CXMLReaderImpl.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/irrXML/heapsort.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/irrXML/irrArray.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/irrXML/irrString.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/irrXML/irrTypes.h
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/irrXML/irrXML.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/irrXML/irrXML.h
 #Precompiled
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.hpp
@@ -598,8 +617,11 @@ welder_target_includes(Assimp
 target_include_directories(Assimp
   PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/Repo/
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/code/
     ${CMAKE_CURRENT_LIST_DIR}/Repo/include/
-    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/irrXML/
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/unzip/
+    ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/pugixml/src/
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/rapidjson/include/
     ${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/openddlparser/include/
 )

@@ -1,4 +1,13 @@
-cmake_minimum_required(VERSION 3.12.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.25.1 FATAL_ERROR)
+
+if (POLICY CMP0077)
+  cmake_policy(SET CMP0077 NEW)
+  set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+endif ()
+
+# Configure CMake global variables
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CONFIGURATION_TYPES Debug RelWithDebInfo Release MinSizeRel)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
@@ -38,20 +47,32 @@ add_definitions(-DWelderPlatformName="${WELDER_PLATFORM}")
 add_definitions(-DWelderToolchain${WELDER_TOOLCHAIN}=1)
 add_definitions(-DWelderToolchainName="${WELDER_TOOLCHAIN}")
 
+option(WELDER_EXCEPTIONS "Enable exception throwing/catching" ON)
+if (WELDER_EXCEPTIONS)
+  add_definitions(-DWelderExceptions)
+endif()
+
 set(WELDER_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(WELDER_CMAKE_DIR ${WELDER_CORE_DIR}/CMakeFiles/)
 set(WELDER_TOOLCHAIN_DIR ${WELDER_CMAKE_DIR}/Toolchain/)
 set(WELDER_TARGETOS_DIR ${WELDER_CMAKE_DIR}/TargetOs/)
-set(WELDER_LIBRARIES_DIR ${WELDER_CORE_DIR}/Libraries/)
 set(WELDER_PLATFORM_DATA_DIR ${WELDER_CORE_DIR}/PlatformData/${WELDER_TOOLCHAIN})
 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 function(welder_setup_library target directory internal)
-  target_include_directories(${target} PUBLIC ${directory} ${WELDER_LIBRARIES_DIR})
+  get_filename_component(PARENT_DIR ${directory} DIRECTORY)
+  target_include_directories(${target} PUBLIC ${directory} ${PARENT_DIR})
   if (${internal})
     #set_property(TARGET ${target} PROPERTY C_INCLUDE_WHAT_YOU_USE ${WELDER_IWYU_PATH})
     #set_property(TARGET ${target} PROPERTY CXX_INCLUDE_WHAT_YOU_USE ${WELDER_IWYU_PATH})
   endif()
-  welder_toolchain_setup_library(${target})
+  welder_toolchain_setup_library(${target} ${internal})
+  
+  # globally enable sorting targets into folders in IDEs
+  get_filename_component (PARENT_FOLDER ${directory} PATH)
+  get_filename_component (FOLDER_NAME ${PARENT_FOLDER} NAME)
+  set_property(TARGET ${target} PROPERTY FOLDER ${FOLDER_NAME})
 endfunction()
 
 function(welder_get_all_dependencies outputList TARGET)
@@ -146,7 +167,7 @@ set(CMAKE_EXE_LINKER_FLAGS_MINSIZEREL         "${CMAKE_EXE_LINKER_FLAGS_MINSIZER
 #Emscripten
 #SDLSTDEmpty
 #Stub
-add_subdirectory(Libraries/Platform/${WELDER_PLATFORM})
+#add_subdirectory(Libraries/Platform/${WELDER_PLATFORM})
 
 add_subdirectory(External)
 add_subdirectory(Libraries)

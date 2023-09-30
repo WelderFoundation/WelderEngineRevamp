@@ -61,6 +61,7 @@ const dirs = (() => {
 const executables = [
   {
     copyToIncludedBuilds: true,
+    directory: "Projects",
     name: "WelderEditor",
     nonResourceDependencies: [
       "Data",
@@ -82,6 +83,7 @@ const executables = [
   {
     // Since the launcher includes the editor build, it must come afterwards.
     copyToIncludedBuilds: false,
+    directory: "Projects",
     name: "WelderLauncher",
     nonResourceDependencies: [
       "Data",
@@ -466,13 +468,13 @@ const determineCmakeCombo = (options) => {
     Linux: {
       builder: "Ninja",
       config: "Release",
-      platform: "SDLSTDEmpty",
+      platform: "Linux",
       targetos: "Linux",
       toolchain: "Clang",
       vfs: false
     },
     Windows: {
-      builder: "Visual Studio 15 2017",
+      builder: "Visual Studio 17 2022",
       config: "Release",
       platform: "Windows",
       targetos: "Windows",
@@ -574,7 +576,7 @@ const buildvfs = async (cmakeVariablesOptional, buildDir, combo) => {
   for (const executable of executables) {
     console.log(`Building virtual file system for ${executable.name}`);
 
-    const libraryDir = path.join(buildDir, "Libraries", executable.name);
+    const libraryDir = path.join(buildDir, "Libraries", executable.directory, executable.name);
     mkdirp.sync(libraryDir);
 
     const makeFsBuffer = async () => {
@@ -668,7 +670,7 @@ const cmake = async (options) => {
 
     const toolchainFile = path.join(process.env.EMSCRIPTEN, "cmake/Modules/Platform/Emscripten.cmake");
     toolchainArgs.push(`-DCMAKE_TOOLCHAIN_FILE=${toolchainFile}`);
-    toolchainArgs.push("-DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=1");
+    toolchainArgs.push("-DEMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES=0");
   }
 
   if (combo.toolchain === "Clang") {
@@ -746,18 +748,19 @@ const cmake = async (options) => {
 };
 
 const preventNoOutputTimeout = () => {
+  const start = Date.now();
   const interval = setInterval(() => {
-    printLogLine("Working...");
+    printLogLine(`Working... (${Math.floor((Date.now() - start) / 1000)} seconds)`);
   }, 1000 * 10);
   return () => clearInterval(interval);
 };
 
-const findExecutableDir = (buildDir, config, library) => [
-  path.join(buildDir, "Libraries", library, config),
-  path.join(buildDir, "Libraries", library)
+const findExecutableDir = (buildDir, config, directory, library) => [
+  path.join(buildDir, "Libraries", directory, library, config),
+  path.join(buildDir, "Libraries", directory, library)
 ].filter((filePath) => fs.existsSync(filePath))[0];
 
-const findExecutable = (buildDir, config, library) => path.join(findExecutableDir(buildDir, config, library), `${library}${executableExtension}`);
+const findExecutable = (buildDir, config, directory, library) => path.join(findExecutableDir(buildDir, config, directory, library), `${library}${executableExtension}`);
 
 const format = async (options) => {
   console.log("Formatting");
@@ -823,9 +826,9 @@ const build = async (options) => {
   console.log("Built");
 };
 
-const executeBuiltProcess = async (buildDir, combo, library, args) => {
+const executeBuiltProcess = async (buildDir, combo, directory, library, args) => {
   if (combo.toolchain === "Emscripten") {
-    const pageDirectory = path.join(buildDir, "Libraries", library);
+    const pageDirectory = path.join(buildDir, "Libraries", directory, library);
     if (!fs.existsSync(pageDirectory)) {
       printErrorLine(`Directory does not exist ${pageDirectory}`);
       return [];
@@ -839,6 +842,11 @@ const executeBuiltProcess = async (buildDir, combo, library, args) => {
     const url = `http://localhost:${port}/${library}.html?${argString}`;
 
     const browser = await puppeteer.launch({
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox"
+      ],
+      headless: false,
       timeout: 0
     });
     const page = await browser.newPage();
@@ -880,7 +888,7 @@ const executeBuiltProcess = async (buildDir, combo, library, args) => {
     return downloadPaths;
   }
 
-  const executablePath = findExecutable(buildDir, combo.config, library);
+  const executablePath = findExecutable(buildDir, combo.config, directory, library);
 
   if (!fs.existsSync(executablePath)) {
     printErrorLine(`Executable does not exist ${executablePath}`);
@@ -904,6 +912,7 @@ const executeBuiltProcess = async (buildDir, combo, library, args) => {
 
 const prebuilt = async (options) => {
   console.log("Copying Prebuilt Content");
+  const endPnot = preventNoOutputTimeout();
   const combo = determineCmakeCombo(options);
   rimraf.sync(dirs.prebuiltContent);
 
@@ -913,7 +922,7 @@ const prebuilt = async (options) => {
       continue;
     }
 
-    const downloadPaths = await executeBuiltProcess(buildDir, combo, executable.name, [
+    const downloadPaths = await executeBuiltProcess(buildDir, combo, executable.directory, executable.name, [
       "-CopyPrebuiltContent",
       "-Exit"
     ]);
@@ -929,6 +938,7 @@ const prebuilt = async (options) => {
     printLogLine("Prebuilt content directory did not exist or was empty");
   }
   console.log("Copied Prebuilt Content");
+  endPnot();
 };
 
 const pack = async (options) => {
@@ -962,7 +972,7 @@ const pack = async (options) => {
     const library = executable.name;
     console.log(`Packaging library ${library}`);
 
-    const executableDir = findExecutableDir(buildDir, combo.config, library);
+    const executableDir = findExecutableDir(buildDir, combo.config, executable.directory, library);
     if (!fs.existsSync(executableDir)) {
       printErrorLine(`Library directory does not exist ${executableDir}`);
       continue;
@@ -1064,7 +1074,7 @@ const disk = () => {
 };
 
 const all = async (options) => {
-  await format({...options, validate: true});
+  //await format({...options, validate: true});
   await cmake(options);
   // Build the executable so we can prebuild content (no prebuilt content or included builds for the launcher yet)
   await build(options);
