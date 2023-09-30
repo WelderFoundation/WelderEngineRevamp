@@ -7,6 +7,8 @@ AnimatePropertyType<propertyType>::AnimatePropertyType(StringParam componentName
   mPropertyName = propertyName;
   TypeId = ZilchTypeId(propertyType);
 
+  Name = BuildString(componentName, ".", propertyName);
+
   // Look up the type name
   TypeName = TypeId->Name;
 }
