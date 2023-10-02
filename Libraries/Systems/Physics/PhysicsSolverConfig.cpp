@@ -273,7 +273,7 @@ ZilchDefineType(ContactBlock, builder, type)
     type->Add(new MetaSerialization());                                                                                \
     ZeroBindSetup(SetupMode::DefaultSerialization);                                                                    \
   }
-#include "JointList.hpp"
+#include "Joints/JointList.hpp"
 #undef JointType
 
 // Config Factory
