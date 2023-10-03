@@ -152,7 +152,8 @@ GeometryProcessorCodes::Enum GeometryImporter::ProcessModelFiles()
   MeshBuilder* meshBuilder = mGeometryContent->has(MeshBuilder);
   if (meshBuilder && mScene->HasMeshes())
   {
-    MeshProcessor meshProcessor(meshBuilder, mMeshDataMap);
+    MeshProcessor meshProcessor(meshBuilder, mMeshDataMap, mMaterialDataMap);
+    meshProcessor.ExtractMaterialData(mScene);
     meshProcessor.ExtractAndProcessMeshData(mScene);
     meshProcessor.ExportMeshData(mOutputPath);
   }
@@ -186,7 +187,7 @@ GeometryProcessorCodes::Enum GeometryImporter::ProcessModelFiles()
   GeneratedArchetype* generatedArchetype = mGeometryContent->has(GeneratedArchetype);
   if (generatedArchetype)
   {
-    ArchetypeProcessor archetypeProcessor(generatedArchetype, mHierarchyDataMap);
+    ArchetypeProcessor archetypeProcessor(generatedArchetype, mHierarchyDataMap, mMaterialDataMap);
     archetypeProcessor.BuildSceneGraph(mRootNodeName);
     archetypeProcessor.ExportSceneGraph(FilePath::GetFileName(mInputFile), mOutputPath);
   }
@@ -292,6 +293,7 @@ String GeometryImporter::ExtractDataFromNodesRescursive(aiNode* node, String par
 void GeometryImporter::SingleMeshHierarchyEntry(HierarchyData& hierarchyData, uint meshIndex)
 {
   hierarchyData.mHasMesh = true;
+  hierarchyData.mMaterialIndex = mScene->mMeshes[meshIndex]->mMaterialIndex;
 
   if (mMeshDataMap.ContainsKey(meshIndex))
   {

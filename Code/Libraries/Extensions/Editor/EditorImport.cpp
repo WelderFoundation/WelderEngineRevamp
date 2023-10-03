@@ -12,6 +12,65 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
 
   Material* material = (Material*)MaterialManager::FindOrNull(graphMaterialName);
 
+  if (material)
+  {
+    return material;
+  }
+
+  material = MaterialManager::GetInstance()->CreateNewResource(graphMaterialName);
+
+  RenderGroup* opaqueRenderGroup = RenderGroupManager::FindOrNull("Opaque");
+  if (opaqueRenderGroup != nullptr)
+  {
+    material->mSerializedList.AddResource(opaqueRenderGroup->ResourceIdName);
+  }
+
+  RenderGroup* shadowCasterRenderGroup = RenderGroupManager::FindOrNull("ShadowCasters");
+  if (shadowCasterRenderGroup != nullptr)
+  {
+    material->mSerializedList.AddResource(shadowCasterRenderGroup->ResourceIdName);
+  }
+
+  String diffuseColor = "DiffuseColor";
+  if (sceneMaterial->Attributes.ContainsKey(diffuseColor))
+  {
+    BoundType* materialNodeType = MetaDatabase::FindType("AlbedoValue");
+    if (materialNodeType != nullptr)
+    {
+      MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
+      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[diffuseColor].GetOrError<Vec4>()))
+      {
+        material->Add(block, -1);
+      }
+    }
+  }
+
+  String diffuseMap = "DiffuseMap";
+  if (sceneMaterial->Attributes.ContainsKey(diffuseMap))
+  {
+    BoundType* materialNodeType = MetaDatabase::FindType("AlbedoMap");
+    if (materialNodeType != nullptr)
+    {
+      MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
+      if (block->SetProperty("AlbedoMap", sceneMaterial->Attributes[diffuseMap].GetOrError<String>()))
+      {
+        material->Add(block, -1);
+      }
+    }
+  }
+
+  material->Initialize();
+
+  ContentLibrary* library = Z::gEditor->mProjectLibrary;
+  ResourceAdd resourceAdd;
+  resourceAdd.Library = library;
+  resourceAdd.Name = graphMaterialName;
+  resourceAdd.SourceResource = material;
+  AddNewResource(MaterialManager::GetInstance(), resourceAdd);
+
+  if(!resourceAdd.WasSuccessful())
+    SafeDelete(material);
+
   // if(material != NULL)
   //{
   //  //Already loaded

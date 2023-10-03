@@ -4,9 +4,12 @@
 namespace Zero
 {
 
-ArchetypeProcessor::ArchetypeProcessor(GeneratedArchetype* generatedArchetype, HierarchyDataMap& hierarchyData) :
+ArchetypeProcessor::ArchetypeProcessor(GeneratedArchetype* generatedArchetype,
+                                       HierarchyDataMap& hierarchyData,
+                                       MaterialDataMap& materialDataMap) :
     mGeneratedArchetype(generatedArchetype),
-    mHierarchyDataMap(hierarchyData)
+    mHierarchyDataMap(hierarchyData), 
+    mMaterialDataMap(materialDataMap)
 {
 }
 
@@ -47,6 +50,33 @@ SceneGraphNode* ArchetypeProcessor::BuildSceneNodes(HierarchyData nodeData)
     graphNode->MeshName = nodeData.mMeshName;
     graphNode->PhysicsMeshName = nodeData.mPhysicsMeshName;
     graphNode->SkeletonRootNodePath = nodeData.mSkeletonRootNodePath;
+    MaterialData materialData;
+    if (nodeData.mMaterialIndex >= 0 && mMaterialDataMap.TryGetValue((uint)nodeData.mMaterialIndex, materialData))
+    {
+      graphNode->Materials.Append(materialData.mMaterialName);
+
+      SceneGraphMaterial* sgMaterial = new SceneGraphMaterial();
+      sgMaterial->Name = materialData.mMaterialName;
+      forRange (const auto& property, materialData.mMaterialProperties)
+      {
+        String semantic = String("Unknown");
+        switch (property.first)
+        {
+        case MaterialPropertySemantic::DiffuseColor:
+          semantic = "DiffuseColor";
+          break;
+        case MaterialPropertySemantic::DiffuseMap:
+          semantic = "DiffuseMap";
+          break;
+        }
+        sgMaterial->Attributes[semantic] = property.second;
+      }
+
+      mSceneSource.Materials.Append(sgMaterial);
+      // todo:
+      // graphNode->Materials = ...;
+      // graphNode->Attributes = ...;
+    }
   }
 
   for (size_t i = 0; i < numChildren; ++i)

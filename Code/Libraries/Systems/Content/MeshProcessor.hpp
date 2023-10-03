@@ -7,10 +7,11 @@ namespace Zero
 class MeshProcessor
 {
 public:
-  MeshProcessor(MeshBuilder* meshBuilder, MeshDataMap& meshDataMap);
+  MeshProcessor(MeshBuilder* meshBuilder, MeshDataMap& meshDataMap, MaterialDataMap& materialDataMap);
   ~MeshProcessor();
 
   void SetupTransformationMatricies();
+  void ExtractMaterialData(const aiScene* scene);
   void ExtractAndProcessMeshData(const aiScene* scene);
   void ExportMeshData(String outputPath);
 
@@ -20,6 +21,8 @@ public:
   MeshBuilder* mBuilder;
 
   MeshDataMap& mMeshDataMap;
+
+  MaterialDataMap& mMaterialDataMap;
 };
 
 } // namespace Zero
