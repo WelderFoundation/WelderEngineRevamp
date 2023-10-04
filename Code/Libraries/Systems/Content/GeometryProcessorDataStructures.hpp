@@ -73,46 +73,11 @@ public:
 
 typedef HashMap<uint, MeshData> MeshDataMap;
 
-enum class MaterialPropertySemantic : int8
-{
-  Unknown = 0,
-
-  DiffuseColor,
-  MetallicValue,
-  RoughnessValue,
-  EmissiveColor,
-  SpecularColor,
-  TwosidedValue,
-  DiffuseMap,
-  DiffuseAlphaMap,
-  OcclusionMap,
-  RoughnessMap,
-  MetallicMap,
-  OrmMap,
-  DisplacementMap,
-  NormalMap,
-  EmissiveMap,
-  SpecularMap
-};
-
-template <>
-struct HashPolicy<MaterialPropertySemantic>
-{
-  inline size_t operator()(const MaterialPropertySemantic& value) const
-  {
-    return HashUint((unsigned int)value);
-  }
-  inline bool Equal(const MaterialPropertySemantic& left, const MaterialPropertySemantic& right) const
-  {
-    return left == right;
-  }
-};
-
 class MaterialData
 {
 public:
   String mMaterialName;
-  HashMap<MaterialPropertySemantic, Variant> mMaterialProperties;
+  HashMap<String, Variant> mMaterialProperties;
 };
 
 typedef HashMap<uint, MaterialData> MaterialDataMap;

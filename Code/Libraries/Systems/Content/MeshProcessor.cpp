@@ -90,8 +90,8 @@ int ConvertAssimpType(int value, bool dummy /*= false*/)
 }
 
 template <typename assimpType>
-static void TryReadAssimpProperty(HashMap<MaterialPropertySemantic, Variant>& properties,
-                                  MaterialPropertySemantic targetSemantic,
+static void TryReadAssimpProperty(HashMap<String, Variant>& properties,
+                                  MaterialAttribute::Enum targetSemantic,
                                   const aiMaterial& assimpMaterial,
                                   const char* aiKey,
                                   uint32 aiType,
@@ -102,27 +102,25 @@ static void TryReadAssimpProperty(HashMap<MaterialPropertySemantic, Variant>& pr
 
   if (assimpMaterial.Get(aiKey, aiType, aiIndex, value) == AI_SUCCESS)
   {
-    properties[targetSemantic] = ConvertAssimpType(value, invert);
+    properties[MaterialAttribute::Names[targetSemantic]] = ConvertAssimpType(value, invert);
   }
 }
 
-static void TryReadAssimpTexture(HashMap<MaterialPropertySemantic, Variant>& textures,
+static void TryReadAssimpTexture(HashMap<String, Variant>& textures,
                                  aiTextureType aiType,
-                                 MaterialPropertySemantic targetSemantic,
+                                 MaterialAttribute::Enum targetSemantic,
                                  const aiMaterial& assimpMaterial,
                                  uint32 aiIndex)
 {
   aiString path;
   if (assimpMaterial.GetTexture(aiType, aiIndex, &path) == AI_SUCCESS)
   {
-    textures[targetSemantic] = String(path.C_Str());
+    textures[MaterialAttribute::Names[targetSemantic]] = String(path.C_Str());
   }
 }
 
 MeshProcessor::MeshProcessor(MeshBuilder* meshBuilder, MeshDataMap& meshDataMap, MaterialDataMap& materialDataMap) :
-    mBuilder(meshBuilder),
-    mMeshDataMap(meshDataMap), 
-    mMaterialDataMap(materialDataMap)
+    mBuilder(meshBuilder), mMeshDataMap(meshDataMap), mMaterialDataMap(materialDataMap)
 {
 }
 
@@ -144,91 +142,122 @@ void MeshProcessor::ExtractMaterialData(const aiScene* scene)
     MaterialData& materialData = mMaterialDataMap[materialIndex];
     materialData.mMaterialName = String(material->GetName().C_Str());
 
-    TryReadAssimpProperty<aiColor3D>(materialData.mMaterialProperties, MaterialPropertySemantic::DiffuseColor, *material, AI_MATKEY_COLOR_DIFFUSE);
-    TryReadAssimpProperty<float>(materialData.mMaterialProperties,
-                                 MaterialPropertySemantic::MetallicValue,
-                                 *material,
-                                 AI_MATKEY_SHININESS_STRENGTH);
-    TryReadAssimpProperty<float>(
-        materialData.mMaterialProperties, MaterialPropertySemantic::RoughnessValue, *material, AI_MATKEY_SHININESS);
-    TryReadAssimpProperty<aiColor3D>(
-        materialData.mMaterialProperties, MaterialPropertySemantic::EmissiveColor, *material, AI_MATKEY_COLOR_EMISSIVE);
-    TryReadAssimpProperty<aiColor3D>(
-        materialData.mMaterialProperties, MaterialPropertySemantic::SpecularColor, *material, AI_MATKEY_COLOR_SPECULAR);
-    TryReadAssimpProperty<int>(
-        materialData.mMaterialProperties, MaterialPropertySemantic::TwosidedValue, *material, AI_MATKEY_TWOSIDED);
+    for (int i = 0; i < material->mNumProperties; i++)
+    {
+      aiMaterialProperty* property = material->mProperties[i];
 
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_DIFFUSE,
-                         MaterialPropertySemantic::DiffuseMap,
-                         *material,
-                         materialIndex);
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_BASE_COLOR,
-                         MaterialPropertySemantic::DiffuseMap,
-                         *material,
-                         materialIndex); // override aiTextureType_DIFFUSE
+      ZPrint("%i: %s\n", i, property->mKey.C_Str());
+    }
 
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_SHININESS,
-                         MaterialPropertySemantic::RoughnessMap,
-                         *material,
-                         materialIndex);
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_DIFFUSE_ROUGHNESS,
-                         MaterialPropertySemantic::RoughnessMap,
-                         *material,
-                         materialIndex); // override aiTextureType_SHININESS
+    // for (int propertyIndex = 0; propertyIndex < material->mNumProperties; propertyIndex++)
+    //{
+    //     // TODO: optimize, do not try to read all properties
+    //     // check if property read was succussful and continue
+    //     // Note: special case when we want to override a property
+    //     // e.g.: aiTextureType_BASE_COLOR overrides aiTextureType_DIFFUSE
+    {
+      TryReadAssimpProperty<aiColor4D>(
+          materialData.mMaterialProperties, MaterialAttribute::DiffuseColor, *material, AI_MATKEY_COLOR_DIFFUSE);
 
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_SPECULAR,
-                         MaterialPropertySemantic::MetallicMap,
-                         *material,
-                         materialIndex);
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_METALNESS,
-                         MaterialPropertySemantic::MetallicMap,
-                         *material,
-                         materialIndex); // override aiTextureType_SPECULAR
+      TryReadAssimpProperty<float>(materialData.mMaterialProperties,
+                                   MaterialAttribute::MetallicValue,
+                                   *material,
+                                   /*AI_MATKEY_METALLIC_FACTOR*/ AI_MATKEY_SHININESS_STRENGTH);
 
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_AMBIENT,
-                         MaterialPropertySemantic::OcclusionMap,
-                         *material,
-                         materialIndex);
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_AMBIENT_OCCLUSION,
-                         MaterialPropertySemantic::OcclusionMap,
-                         *material,
-                         materialIndex); // override aiTextureType_AMBIENT
+      TryReadAssimpProperty<float>(materialData.mMaterialProperties,
+                                   MaterialAttribute::RoughnessValue,
+                                   *material,
+                                   AI_MATKEY_ROUGHNESS_FACTOR /*AI_MATKEY_SHININESS*/);
 
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_DISPLACEMENT,
-                         MaterialPropertySemantic::DisplacementMap,
-                         *material,
-                         materialIndex);
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_NORMALS,
-                         MaterialPropertySemantic::NormalMap,
-                         *material,
-                         materialIndex);
+      TryReadAssimpProperty<aiColor3D>(
+          materialData.mMaterialProperties, MaterialAttribute::EmissiveColor, *material, AI_MATKEY_COLOR_EMISSIVE);
 
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_EMISSIVE,
-                         MaterialPropertySemantic::EmissiveMap,
-                         *material,
-                         materialIndex);
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_EMISSION_COLOR,
-                         MaterialPropertySemantic::EmissiveMap,
-                         *material,
-                         materialIndex); // override aiTextureType_EMISSIVE
+      TryReadAssimpProperty<float>(materialData.mMaterialProperties,
+                                       MaterialAttribute::SpecularValue,
+                                       *material,
+                                       AI_MATKEY_SPECULAR_FACTOR /*AI_MATKEY_COLOR_SPECULAR*/);
 
-    TryReadAssimpTexture(materialData.mMaterialProperties,
-                         aiTextureType_OPACITY,
-                         MaterialPropertySemantic::DiffuseAlphaMap,
-                         *material,
-                         materialIndex);
+      TryReadAssimpProperty<int>(
+          materialData.mMaterialProperties, MaterialAttribute::TwosidedValue, *material, AI_MATKEY_TWOSIDED);
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_DIFFUSE,
+                           MaterialAttribute::DiffuseMap,
+                           *material,
+                           materialIndex);
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_BASE_COLOR,
+                           MaterialAttribute::DiffuseMap,
+                           *material,
+                           materialIndex); // override aiTextureType_DIFFUSE
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_SHININESS,
+                           MaterialAttribute::RoughnessMap,
+                           *material,
+                           materialIndex);
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_DIFFUSE_ROUGHNESS,
+                           MaterialAttribute::RoughnessMap,
+                           *material,
+                           materialIndex); // override aiTextureType_SHININESS
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_SPECULAR,
+                           MaterialAttribute::MetallicMap,
+                           *material,
+                           materialIndex);
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_METALNESS,
+                           MaterialAttribute::MetallicMap,
+                           *material,
+                           materialIndex); // override aiTextureType_SPECULAR
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_AMBIENT,
+                           MaterialAttribute::OcclusionMap,
+                           *material,
+                           materialIndex);
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_AMBIENT_OCCLUSION,
+                           MaterialAttribute::OcclusionMap,
+                           *material,
+                           materialIndex); // override aiTextureType_AMBIENT
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_DISPLACEMENT,
+                           MaterialAttribute::DisplacementMap,
+                           *material,
+                           materialIndex);
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_NORMALS,
+                           MaterialAttribute::NormalMap,
+                           *material,
+                           materialIndex);
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_EMISSIVE,
+                           MaterialAttribute::EmissiveMap,
+                           *material,
+                           materialIndex);
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_EMISSION_COLOR,
+                           MaterialAttribute::EmissiveMap,
+                           *material,
+                           materialIndex); // override aiTextureType_EMISSIVE
+
+      TryReadAssimpTexture(materialData.mMaterialProperties,
+                           aiTextureType_OPACITY,
+                           MaterialAttribute::DiffuseAlphaMap,
+                           *material,
+                           materialIndex);
+    }
   }
 }
 

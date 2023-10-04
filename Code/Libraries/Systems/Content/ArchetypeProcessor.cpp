@@ -57,20 +57,7 @@ SceneGraphNode* ArchetypeProcessor::BuildSceneNodes(HierarchyData nodeData)
 
       SceneGraphMaterial* sgMaterial = new SceneGraphMaterial();
       sgMaterial->Name = materialData.mMaterialName;
-      forRange (const auto& property, materialData.mMaterialProperties)
-      {
-        String semantic = String("Unknown");
-        switch (property.first)
-        {
-        case MaterialPropertySemantic::DiffuseColor:
-          semantic = "DiffuseColor";
-          break;
-        case MaterialPropertySemantic::DiffuseMap:
-          semantic = "DiffuseMap";
-          break;
-        }
-        sgMaterial->Attributes[semantic] = property.second;
-      }
+      sgMaterial->Attributes = materialData.mMaterialProperties;
 
       mSceneSource.Materials.Append(sgMaterial);
       // todo:
