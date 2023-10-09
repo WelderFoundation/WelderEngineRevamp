@@ -10,6 +10,66 @@ DefineEvent(LauncherDebuggerCommunicationCompleted);
 DefineEvent(LauncherDebuggerCommunicationFailed);
 } // namespace Events
 
+Level* GetTemplateLevel(EditorMode::Enum editorMode)
+{
+  if (editorMode == EditorMode::Mode2D)
+    return LevelManager::Find("TemplateLevel2D");
+  else
+    return LevelManager::Find("TemplateLevel");
+}
+
+Archetype* GetTemplateSpace(EditorMode::Enum editorMode)
+{
+  if (editorMode == EditorMode::Mode2D)
+    return ArchetypeManager::Find("TemplateSpace2D");
+  else
+    return ArchetypeManager::Find("TemplateSpace");
+}
+
+Cog* CreateProject(Editor* editor, StringParam name, StringParam path, EditorMode::Enum editorMode)
+{
+  UnloadProject(editor, editor->mProject);
+
+  // Create the project directory
+  CreateDirectoryAndParents(path);
+
+  // Create the project Cog
+  Cog* projectCog = Z::gFactory->Create(Z::gEngine->GetEngineSpace(), "TemplateProject", 0, nullptr);
+  projectCog->ClearArchetype();
+
+  // Add the Project
+  ProjectSettings* project = HasOrAdd<ProjectSettings>(projectCog);
+
+  String fileName = BuildString(name, ".zeroproj");
+  String pathToProjectFile = FilePath::Combine(path, fileName);
+
+  String pathToContent = FilePath::Combine(path, "Content");
+  String pathToEditorContent = FilePath::Combine(path, "EditorContent");
+  project->ProjectName = name;
+  project->ContentFolder = pathToContent;
+  project->EditorContentFolder = pathToEditorContent;
+  project->ProjectFolder = path;
+
+  CreateDirectory(pathToContent);
+  CreateDirectory(pathToEditorContent);
+
+  SaveToDataFile(*projectCog, pathToProjectFile);
+
+  // Copy template files into project
+  Archetype* gameTemplate = ArchetypeManager::Find("TemplateGame");
+
+  Archetype* spaceTemplate = GetTemplateSpace(editorMode);
+  Level* levelTemplate = GetTemplateLevel(editorMode);
+
+  CopyFile(FilePath::Combine(pathToContent, "Space.data"), spaceTemplate->mContentItem->GetFullPath());
+  CopyFile(FilePath::Combine(pathToContent, "Game.data"), gameTemplate->mContentItem->GetFullPath());
+  CopyFile(FilePath::Combine(pathToContent, "Level.data"), levelTemplate->mContentItem->GetFullPath());
+
+  LoadProject(editor, projectCog, path, pathToProjectFile);
+
+  return projectCog;
+}
+
 void LoadProject(Editor* editor, Cog* projectCog, StringParam path, StringParam projectFile)
 {
   ZPrint("Loading project '%s'\n", projectFile.c_str());
@@ -254,6 +314,17 @@ void LauncherOpenProjectComposite::FailedToOpenLauncher()
   DoNotifyError("Launcher not found", message);
 }
 
+void LauncherOpenProjectComposite::RunOldDialog()
+{
+  if(mEventType == Events::LauncherNewProject)
+    OpenNewProjectDialog(Z::gEditor);
+  else
+  {
+    ProjectDialog* dialog = OpenNewProjectDialog(Z::gEditor);
+    dialog->SetSelectedTab(ProjectTabs::Recent);
+  }
+}
+
 bool LauncherOpenProjectComposite::RunLauncherExe(StringParam exePath)
 {
   String cmd;
@@ -323,13 +394,16 @@ void LauncherOpenProjectComposite::OnConnectionFailed(Event* e)
   // Try to run from the installed location, if not open the old dialog
   if (!RunFromInstalledPath())
   {
-    String launcherPath = GetLauncherLocationFromLauncherConfig();
-    if (!launcherPath.Empty() && RunLauncherExe(launcherPath))
-      return;
+    //String launcherPath = GetLauncherLocationFromLauncherConfig();
+    //if (!launcherPath.Empty() && RunLauncherExe(launcherPath))
+    //  return;
 
-    // otherwise the launcher doesn't seem to exist so run the old open/new
-    // dialog
-    FailedToOpenLauncher();
+    // // otherwise the launcher doesn't seem to exist so run the old open/new
+    // // dialog
+    // FailedToOpenLauncher();
+
+    //otherwise the launcher doesn't seem to exist so run the old open/new dialog
+    RunOldDialog();
   }
 
   mSocket->Close();

@@ -1230,10 +1230,25 @@ void CreateEditor(OsWindow* mainWindow, StringParam projectFile, StringParam new
     // blocking and shell out to the launcher.
     if (!projectSuccessfullyLoaded)
     {
-      Event event;
-      Z::gEngine->DispatchEvent(Events::NoProjectLoaded, &event);
-      DoNotifyWarning("No project found", "No project file found. Opening launcher");
-      NewProject();
+      // Event event;
+      // Z::gEngine->DispatchEvent(Events::NoProjectLoaded, &event);
+      // DoNotifyWarning("No project found", "No project file found. Opening launcher");
+      // NewProject();
+
+      ProjectDialog* dialog = OpenNewProjectDialog(editorMain);
+      //If the name of the new project is true then there was a command line argument to
+      //make a new project but no name was specified (hence the string we got was true).
+      //In this case we should bring up the new project dialog but not override the name
+      //of the project. This does however mean that no one can specify via command line a
+      //project whos name is "true", but I don't care...
+      if(newProjectName != "true")
+      {
+        dialog->mNameBox->SetText(newProjectName);
+        dialog->mNameBox->TakeFocus();
+      }
+
+      editorMain->mProjectLibrary = Z::gContentSystem->Libraries["Scratch"];
+      DoNotify("No Project", "Open a project or create a new project", "Disk");
     }
   }
 
