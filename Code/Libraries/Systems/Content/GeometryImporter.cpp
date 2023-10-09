@@ -92,12 +92,25 @@ GeometryProcessorCodes::Enum GeometryImporter::ProcessModelFiles()
   // when file paths contain unicode characters Assimp fails to
   // read the file.
   DataBlock block = ReadFileIntoDataBlock(mInputFile.c_str());
+
+  // In some cases, assimp may need to load additional data next
+  // to the current file e.g.: In the case of .gltf files
+  // However, since assimp is receiving a stream instead of a file
+  // it does not know where the current file is, and will fail.
+  // To solve this problem, we need to change the current directory
+  // of the IO handler to the directory of the current file.
+  // When loading is done, set the current directory back to 
+  // the previous value so we don't mess anything up with assimp
+  String ioHandlerDirectory = String(mAssetImporter.GetIOHandler()->CurrentDirectory().c_str());
+  String inputFileDirectory = FilePath::GetDirectoryPath(mInputFile);
+  mAssetImporter.GetIOHandler()->ChangeDirectory(inputFileDirectory.c_str());
   mScene = mAssetImporter.ReadFileFromMemory(block.Data, block.Size, flags);
   if (!mScene) {
     String extension = FilePath::GetExtension(mInputFile);
     mScene = mAssetImporter.ReadFileFromMemory(block.Data, block.Size, flags, extension.c_str());
   }
   zDeallocate(block.Data);
+  mAssetImporter.GetIOHandler()->ChangeDirectory(ioHandlerDirectory.c_str());
   ZPrint("Processing model: %s\n", FilePath::GetFileNameWithoutExtension(mInputFile).Data());
 
   // An error has occurred, no scene imported

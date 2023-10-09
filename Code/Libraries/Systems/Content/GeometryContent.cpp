@@ -639,8 +639,11 @@ void CreateGeometryContent(ContentSystem* system)
   // Collada
   system->CreatorsByExtension["dae"] =
       ContentTypeEntry(ZilchTypeId(GeometryContent), MakeGeometryContent, UpdateGeometryContent);
-  // Global Module in Basic Program
+  // GLB format is based on the glTF (GL Transmission Format) file format
   system->CreatorsByExtension["glb"] =
+      ContentTypeEntry(ZilchTypeId(GeometryContent), MakeGeometryContent, UpdateGeometryContent);
+  // glTF (GL Transmission Format) file format
+  system->CreatorsByExtension["gltf"] =
       ContentTypeEntry(ZilchTypeId(GeometryContent), MakeGeometryContent, UpdateGeometryContent);
   // 3ds Max 3DS
   system->CreatorsByExtension["3ds"] =
@@ -806,6 +809,7 @@ void AddGeometryFileFilters(ResourceManager* manager)
   filters.PushBack(FileDialogFilter("*.obj"));
   filters.PushBack(FileDialogFilter("*.dae"));
   filters.PushBack(FileDialogFilter("*.glb"));
+  filters.PushBack(FileDialogFilter("*.gltf"));
   filters.PushBack(FileDialogFilter("*.3ds"));
   filters.PushBack(FileDialogFilter("*.blend"));
   filters.PushBack(FileDialogFilter("*.ase"));

@@ -75,6 +75,37 @@ void RunGroupImport(ImportOptions& options)
     filename = SanitizeContentFilename(filename);
     String storedfilename = FilePath::Combine(library->SourcePath, filename);
 
+    // This is a work-around for gltf files with external binary data
+    // If the gltf file has associated binary files, then copy them
+    // TODO: Move this in the future
+    if (FilePath::GetExtension(filename) == "gltf")
+    {
+      Zilch::CompilationErrors errors;
+      JsonValue* gltf = JsonReader::ReadIntoTreeFromFile(errors, fullPath, nullptr);
+      if (!errors.WasError)
+      {
+        JsonValue* buffers = gltf->GetMember("buffers", JsonErrorMode::DefaultValue);
+        if (buffers != nullptr)
+        {
+          forRange (JsonValue*  buffer, buffers->ArrayElements)
+          {
+            JsonValue* uri = buffer->GetMember("uri", JsonErrorMode::DefaultValue);
+            if (uri == nullptr)
+              continue;
+            String binFileName = uri->AsString();
+            String binFilePath = fullPath.Replace(FilePath::GetFileName(fullPath), binFileName);
+            if (FileExists(binFilePath))
+            {
+              String outputFileName = FilePath::GetFileNameWithoutExtension(binFilePath);
+              String outputFileExt = FilePath::GetFileName(binFilePath).Replace(outputFileName, "");
+              String outputFilePath = FilePath::CombineWithExtension(library->SourcePath, outputFileName, outputFileExt);
+              CopyFile(outputFilePath, binFilePath);
+            }
+          }
+        }
+      }
+    }
+
     // Add the content item
     AddContentItemInfo addContent;
     addContent.FileName = filename;
