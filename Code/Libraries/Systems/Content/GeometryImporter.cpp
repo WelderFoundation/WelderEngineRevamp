@@ -105,7 +105,8 @@ GeometryProcessorCodes::Enum GeometryImporter::ProcessModelFiles()
   String inputFileDirectory = FilePath::GetDirectoryPath(mInputFile);
   mAssetImporter.GetIOHandler()->ChangeDirectory(inputFileDirectory.c_str());
   mScene = mAssetImporter.ReadFileFromMemory(block.Data, block.Size, flags);
-  if (!mScene) {
+  if (!mScene)
+  {
     String extension = FilePath::GetExtension(mInputFile);
     mScene = mAssetImporter.ReadFileFromMemory(block.Data, block.Size, flags, extension.c_str());
   }
@@ -148,11 +149,18 @@ GeometryProcessorCodes::Enum GeometryImporter::ProcessModelFiles()
     pivotProcessor.ProccessAndCollapsePivots();
   }
 
+  TextureContent* textureContent = mGeometryContent->has(TextureContent);
+  if (mScene->HasTextures() && textureContent)
+  {
+    TextureProcessor textureProcessor(textureContent, mOutputPath, mInputFile);
+    textureProcessor.ExtractAndImportTextures(mScene, mTextureDataMap);
+  }
+
   // process the data into our format and export the files
   MeshBuilder* meshBuilder = mGeometryContent->has(MeshBuilder);
   if (meshBuilder && mScene->HasMeshes())
   {
-    MeshProcessor meshProcessor(meshBuilder, mMeshDataMap, mMaterialDataMap);
+    MeshProcessor meshProcessor(meshBuilder, mMeshDataMap, mMaterialDataMap, mTextureDataMap);
     meshProcessor.ExtractMaterialData(mScene);
     meshProcessor.ExtractAndProcessMeshData(mScene);
     meshProcessor.ExportMeshData(mOutputPath);
@@ -163,13 +171,6 @@ GeometryProcessorCodes::Enum GeometryImporter::ProcessModelFiles()
   {
     PhysicsMeshProcessor physicsMeshProcessor(physicsMeshBuilder, mMeshDataMap);
     physicsMeshProcessor.BuildPhysicsMesh(mOutputPath);
-  }
-
-  TextureContent* textureContent = mGeometryContent->has(TextureContent);
-  if (mScene->HasTextures() && textureContent)
-  {
-    TextureProcessor textureProcessor(textureContent, mOutputPath, mInputFile);
-    textureProcessor.ExtractAndImportTextures(mScene);
   }
 
   AnimationBuilder* animationBuilder = mGeometryContent->has(AnimationBuilder);
@@ -554,7 +555,15 @@ bool GeometryImporter::UpdateBuilderMetaData()
       if (IsSupportedImageLoadExtension(extension))
       {
         GeometryResourceEntry entry;
-        entry.mName = BuildString(FilePath::GetFileNameWithoutExtension(mInputFile), ToString(i), ".", extension);
+        if (texture->mFilename.C_Str() == "")
+        {
+          entry.mName = BuildString(FilePath::GetFileNameWithoutExtension(mInputFile), ToString(i), ".", extension);
+        }
+        else
+        {
+          entry.mName = BuildString(FilePath::GetFileNameWithoutExtension(texture->mFilename.C_Str()), ".", extension);
+        }
+        //entry.mName = BuildString(FilePath::GetFileNameWithoutExtension(mInputFile), ToString(i), ".", extension);
 
         // Get resource id if this name already had one, otherwise make a new
         // one.

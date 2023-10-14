@@ -50,6 +50,7 @@ public:
   MeshDataMap mMeshDataMap;
   MaterialDataMap mMaterialDataMap;
   HierarchyDataMap mHierarchyDataMap;
+  HashMap<uint, String> mTextureDataMap;
   AnimationNodeRedirectMap mAnimationRedirectMap;
   // An every increasing value appended to node names to result in unique names
   // in the hierarchy

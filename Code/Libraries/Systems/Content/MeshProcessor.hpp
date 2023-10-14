@@ -7,7 +7,10 @@ namespace Zero
 class MeshProcessor
 {
 public:
-  MeshProcessor(MeshBuilder* meshBuilder, MeshDataMap& meshDataMap, MaterialDataMap& materialDataMap);
+  MeshProcessor(MeshBuilder* meshBuilder,
+                MeshDataMap& meshDataMap,
+                MaterialDataMap& materialDataMap,
+                HashMap<uint, String>& textureDataMap);
   ~MeshProcessor();
 
   void SetupTransformationMatricies();
@@ -23,6 +26,8 @@ public:
   MeshDataMap& mMeshDataMap;
 
   MaterialDataMap& mMaterialDataMap;
+
+  HashMap<uint, String>& mTextureDataMap;
 };
 
 } // namespace Zero

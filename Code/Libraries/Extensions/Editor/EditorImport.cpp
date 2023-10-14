@@ -14,7 +14,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
 
   if (material != nullptr)
   {
-    //Already loaded
+    // Already loaded
     sceneMaterial->LoadedMaterial = material;
     return material;
   }
@@ -52,7 +52,6 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   //               EmissiveMap,
   //               SpecularMap);
 
-  
   {
     const String& attributeName = MaterialAttribute::Names[MaterialAttribute::TwosidedValue];
     if (sceneMaterial->Attributes.ContainsKey(attributeName))
@@ -139,6 +138,26 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   //  }
   //}
 
+  //{
+  //  // we always need to add specular
+  //  BoundType* materialNodeType = MetaDatabase::FindType("SpecularValue");
+  //  if (materialNodeType != nullptr)
+  //  {
+  //    MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
+
+  //    const String& attributeName = MaterialAttribute::Names[MaterialAttribute::SpecularValue];
+  //    if (sceneMaterial->Attributes.ContainsKey(attributeName))
+  //    {
+  //      block->SetProperty("SpecularValue", sceneMaterial->Attributes[attributeName].GetOrError<float>());
+  //      // if (block->SetProperty("SpecularValue", sceneMaterial->Attributes[attributeName].GetOrError<float>()))
+  //      //{
+  //      //     material->Add(block, -1);
+  //      // }
+  //    }
+  //    material->Add(block, -1);
+  //  }
+  //}
+
   {
     const String& attributeName = MaterialAttribute::Names[MaterialAttribute::SpecularValue];
     if (sceneMaterial->Attributes.ContainsKey(attributeName))
@@ -163,7 +182,9 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("AlbedoMap", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+        String textureName = sceneMaterial->Attributes[attributeName].GetOrError<String>();
+        Texture* texture = TextureManager::FindOrNull(textureName);
+        if (block->SetProperty("AlbedoMap", texture))
         {
           material->Add(block, -1);
         }
