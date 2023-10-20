@@ -17,7 +17,7 @@ public:
   String Name;
   // Attributes of material
   //HashMap<String, String> Attributes;
-  HashMap<String, Variant> Attributes;
+  HashMap<String, Any> Attributes;
 
   Material* LoadedMaterial;
   void Serialize(Serializer& stream);

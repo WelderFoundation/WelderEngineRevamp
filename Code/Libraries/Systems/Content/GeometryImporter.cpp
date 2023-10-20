@@ -555,7 +555,7 @@ bool GeometryImporter::UpdateBuilderMetaData()
       if (IsSupportedImageLoadExtension(extension))
       {
         GeometryResourceEntry entry;
-        if (texture->mFilename.C_Str() == "")
+        if (texture->mFilename.length == 0)
         {
           entry.mName = BuildString(FilePath::GetFileNameWithoutExtension(mInputFile), ToString(i), ".", extension);
         }

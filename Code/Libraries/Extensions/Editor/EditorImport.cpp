@@ -66,7 +66,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       // if (materialNodeType != nullptr)
       //{
       //   MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-      //   if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].GetOrError<int>()))
+      //   if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].Get<int>()))
       //   {
       //     material->Add(block, -1);
       //   }
@@ -82,7 +82,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].GetOrError<Vec4>()))
+        if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].Get<Vec4>()))
         {
           material->Add(block, -1);
         }
@@ -98,7 +98,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("MetallicValue", sceneMaterial->Attributes[attributeName].GetOrError<float>()))
+        if (block->SetProperty("MetallicValue", sceneMaterial->Attributes[attributeName].Get<float>()))
         {
           material->Add(block, -1);
         }
@@ -114,7 +114,16 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("RoughnessValue", sceneMaterial->Attributes[attributeName].GetOrError<float>()))
+        float roughnessValue = 0.5f;
+        if (sceneMaterial->Attributes[attributeName].Is<int>())
+        {
+          roughnessValue = (real)sceneMaterial->Attributes[attributeName].Get<int>();
+        }
+        if (sceneMaterial->Attributes[attributeName].Is<real>())
+        {
+          roughnessValue = sceneMaterial->Attributes[attributeName].Get<real>();
+        }
+        if (block->SetProperty("RoughnessValue", roughnessValue))
         {
           material->Add(block, -1);
         }
@@ -130,7 +139,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   //    if (materialNodeType != nullptr)
   //    {
   //      MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].GetOrError<Vec4>()))
+  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].Get<Vec4>()))
   //      {
   //        material->Add(block, -1);
   //      }
@@ -148,8 +157,8 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   //    const String& attributeName = MaterialAttribute::Names[MaterialAttribute::SpecularValue];
   //    if (sceneMaterial->Attributes.ContainsKey(attributeName))
   //    {
-  //      block->SetProperty("SpecularValue", sceneMaterial->Attributes[attributeName].GetOrError<float>());
-  //      // if (block->SetProperty("SpecularValue", sceneMaterial->Attributes[attributeName].GetOrError<float>()))
+  //      block->SetProperty("SpecularValue", sceneMaterial->Attributes[attributeName].Get<float>());
+  //      // if (block->SetProperty("SpecularValue", sceneMaterial->Attributes[attributeName].Get<float>()))
   //      //{
   //      //     material->Add(block, -1);
   //      // }
@@ -166,7 +175,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("SpecularValue", sceneMaterial->Attributes[attributeName].GetOrError<float>()))
+        if (block->SetProperty("SpecularValue", sceneMaterial->Attributes[attributeName].Get<float>()))
         {
           material->Add(block, -1);
         }
@@ -182,7 +191,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        String textureName = sceneMaterial->Attributes[attributeName].GetOrError<String>();
+        String textureName = sceneMaterial->Attributes[attributeName].Get<String>();
         Texture* texture = TextureManager::FindOrNull(textureName);
         if (block->SetProperty("AlbedoMap", texture))
         {
@@ -201,7 +210,9 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle albedoMapBlock = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (albedoMapBlock->SetProperty("Texture", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+        String textureName = sceneMaterial->Attributes[attributeName].Get<String>();
+        Texture* texture = TextureManager::FindOrNull(textureName);
+        if (albedoMapBlock->SetProperty("Texture", texture))
         {
           material->Add(albedoMapBlock, -1);
         }
@@ -217,7 +228,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   //    if (materialNodeType != nullptr)
   //    {
   //      MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].Get<String>()))
   //      {
   //        material->Add(block, -1);
   //      }
@@ -233,7 +244,9 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("RoughnessMap", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+        String textureName = sceneMaterial->Attributes[attributeName].Get<String>();
+        Texture* texture = TextureManager::FindOrNull(textureName);
+        if (block->SetProperty("RoughnessMap", texture))
         {
           material->Add(block, -1);
         }
@@ -249,7 +262,9 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("MetallicMap", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+        String textureName = sceneMaterial->Attributes[attributeName].Get<String>();
+        Texture* texture = TextureManager::FindOrNull(textureName);
+        if (block->SetProperty("MetallicMap", texture))
         {
           material->Add(block, -1);
         }
@@ -265,7 +280,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   //    if (materialNodeType != nullptr)
   //    {
   //      MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].Get<String>()))
   //      {
   //        material->Add(block, -1);
   //      }
@@ -281,7 +296,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   //    if (materialNodeType != nullptr)
   //    {
   //      MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].Get<String>()))
   //      {
   //        material->Add(block, -1);
   //      }
@@ -297,7 +312,9 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("NormalMap", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+        String textureName = sceneMaterial->Attributes[attributeName].Get<String>();
+        Texture* texture = TextureManager::FindOrNull(textureName);
+        if (block->SetProperty("NormalMap", texture))
         {
           material->Add(block, -1);
         }
@@ -313,7 +330,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   //    if (materialNodeType != nullptr)
   //    {
   //      MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+  //      if (block->SetProperty("AlbedoValue", sceneMaterial->Attributes[attributeName].Get<String>()))
   //      {
   //        material->Add(block, -1);
   //      }
@@ -329,7 +346,9 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
       if (materialNodeType != nullptr)
       {
         MaterialBlockHandle block = MaterialFactory::GetInstance()->MakeObject(materialNodeType);
-        if (block->SetProperty("SpecularMap", sceneMaterial->Attributes[attributeName].GetOrError<String>()))
+        String textureName = sceneMaterial->Attributes[attributeName].Get<String>();
+        Texture* texture = TextureManager::FindOrNull(textureName);
+        if (block->SetProperty("SpecularMap", texture))
         {
           material->Add(block, -1);
         }
@@ -337,7 +356,7 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
     }
   }
 
-  // todo: we always need to add specular
+  // todo: we always need to add specular value
 
   material->Initialize();
 
@@ -350,6 +369,8 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
 
   if (!resourceAdd.WasSuccessful())
     SafeDelete(material);
+
+  Z::gEditor->EditResource(resourceAdd.SourceResource);
 
   // if(material != NULL)
   //{

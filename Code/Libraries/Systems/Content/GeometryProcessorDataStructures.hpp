@@ -77,7 +77,7 @@ class MaterialData
 {
 public:
   String mMaterialName;
-  HashMap<String, Variant> mMaterialProperties;
+  HashMap<String, Any> mMaterialProperties;
 };
 
 typedef HashMap<uint, MaterialData> MaterialDataMap;

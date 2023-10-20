@@ -22,7 +22,7 @@ void TextureProcessor::ExtractAndImportTextures(const aiScene* scene, HashMap<ui
 
     String extension = texture->achFormatHint;
 
-    if (texture->mFilename.C_Str() == "")
+    if (texture->mFilename.length == 0)
     {
       textureDataMap[i] = BuildString(mFilename, ToString(i) /*, ".", extension*/);
     }

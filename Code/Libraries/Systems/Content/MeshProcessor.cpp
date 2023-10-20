@@ -90,7 +90,7 @@ int ConvertAssimpType(int value, bool dummy /*= false*/)
 }
 
 template <typename assimpType>
-static void TryReadAssimpProperty(HashMap<String, Variant>& properties,
+static void TryReadAssimpProperty(HashMap<String, Any>& properties,
                                   MaterialAttribute::Enum targetSemantic,
                                   const aiMaterial& assimpMaterial,
                                   const char* aiKey,
@@ -106,7 +106,7 @@ static void TryReadAssimpProperty(HashMap<String, Variant>& properties,
   }
 }
 
-static void TryReadAssimpTexture(HashMap<String, Variant>& textures,
+static void TryReadAssimpTexture(HashMap<String, Any>& textures,
                                  aiTextureType aiType,
                                  MaterialAttribute::Enum targetSemantic,
                                  const aiMaterial& assimpMaterial,
@@ -184,7 +184,7 @@ void MeshProcessor::ExtractMaterialData(const aiScene* scene)
                                    *material,
                                    /*AI_MATKEY_METALLIC_FACTOR*/ AI_MATKEY_SHININESS_STRENGTH);
 
-      TryReadAssimpProperty<float>(materialData.mMaterialProperties,
+      TryReadAssimpProperty<real>(materialData.mMaterialProperties,
                                    MaterialAttribute::RoughnessValue,
                                    *material,
                                    AI_MATKEY_ROUGHNESS_FACTOR /*AI_MATKEY_SHININESS*/);
