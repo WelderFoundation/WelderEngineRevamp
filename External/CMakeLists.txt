@@ -3,7 +3,9 @@ add_compile_options(${WELDER_C_CXX_EXTERNAL_FLAGS})
 # OS dependent static/source libraries.
 add_subdirectory(Curl)
 add_subdirectory(GL)
-add_subdirectory(SDL)
+if(NOT ${WELDER_PLATFORM} STREQUAL "Windows")
+  add_subdirectory(SDL)
+endif()
 
 # Cross platform source libraries.
 add_subdirectory(Assimp)
