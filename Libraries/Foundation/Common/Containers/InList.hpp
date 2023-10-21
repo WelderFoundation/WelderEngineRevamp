@@ -36,6 +36,9 @@ public:
 };
 
 template <typename Parent, typename Member>
+#if defined(WelderCompilerClang)
+__attribute__((optnone))
+#endif
 inline ptrdiff_t PointerToMemberOffset(const Member Parent::*ptrToMember)
 {
   return (ptrdiff_t)ZeroOffsetOfHelper(Parent, ->*, ptrToMember);
