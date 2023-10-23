@@ -539,7 +539,8 @@ const readCmakeVariables = (buildDir) => {
 
 const getVersionedPrebuiltContentDir = (cmakeVariables) => {
   // This must match the revisionChangesetName in ContentLogic.cpp:
-  const revisionChangesetName = `Version-${cmakeVariables.WELDER_REVISION}-${cmakeVariables.WELDER_CHANGESET}`;
+  //const revisionChangesetName = `Version-${cmakeVariables.WELDER_REVISION}-${cmakeVariables.WELDER_CHANGESET}`;
+  const revisionChangesetName = `Version-${cmakeVariables.WELDER_REVISION}`;
   return path.join(dirs.prebuiltContent, revisionChangesetName);
 };
 
