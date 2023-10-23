@@ -37,7 +37,7 @@ void PerformanceGraphWidget::RenderUpdate(
   {
     sUpdateCount = 0;
     mainRecord->AverageRunningSample();
-    Profile::Record::sSampleIndex = (Profile::Record::sSampleIndex + 1) % Profile::Record::cSampleCount;
+    Profile::Record::sSampleIndex = Math::Max<uint>((Profile::Record::sSampleIndex + 1) % Profile::Record::cSampleCount, 1);
   }
 
   static Array<StreamedVertex> lines;
