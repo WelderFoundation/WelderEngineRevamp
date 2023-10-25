@@ -19,6 +19,13 @@ class FpsSampler : public DataSampler
     using namespace Profile;
     Array<Record*>::range records = ProfileSystem::Instance->GetRecords();
     Record* record = records.Front();
+    forRange(Profile::Record * r, records)
+    {
+      if (r->GetName() == "Engine")
+      {
+        record = r;
+      }
+    }
     record->Update();
     float timeInS = ProfileSystem::Instance->GetTimeInSeconds((ProfileTime)record->Average());
 

@@ -270,7 +270,7 @@ void GraphicsEngine::Update(bool debugger)
       "Cannot currently break within the graphics engine because it must "
       "continue running in editor";
 
-  ProfileScopeTree("GraphicsSystem", "Engine", Color::Blue);
+  ProfileScopeTree("Graphics", "Engine", Color::Blue);
 
   // Run all return jobs from renderer
   Array<RendererJob*> returnJobs;

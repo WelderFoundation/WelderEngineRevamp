@@ -30,6 +30,13 @@ void PerformanceGraphWidget::RenderUpdate(
     return;
 
   Profile::Record* mainRecord = records.Front();
+  forRange(Profile::Record * record, records)
+  {
+    if (record->GetName() == "Engine")
+    {
+      mainRecord = record;
+    }
+  }
   mainRecord->Update();
 
   ++sUpdateCount;

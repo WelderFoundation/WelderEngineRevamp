@@ -151,7 +151,7 @@ void Engine::Update()
   }
   else
   {
-    ProfileScopeFunction();
+    ProfileScope("Engine");
 
     Z::gTracker->ClearDeletedObjects();
 
