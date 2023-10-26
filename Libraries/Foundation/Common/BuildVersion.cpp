@@ -164,26 +164,51 @@ cstr GetPlatformString()
   return ZeroPlatform;
 }
 
+//String GetBuildVersionName()
+//{
+//  /*
+//   * This needs to match
+//   * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName.
+//   * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
+//   * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+//   */
+//  StringBuilder builder;
+//  builder.AppendFormat("%s.", GetApplicationName().c_str()); // Application [WelderEditor]
+//  builder.AppendFormat("%s.", WelderBranchName);             // Branch [master]
+//  builder.AppendFormat("%d.", GetMajorVersion());            // Major [1]
+//  builder.AppendFormat("%d.", GetMinorVersion());            // Minor [5]
+//  builder.AppendFormat("%d.", GetPatchVersion());            // Patch [0]
+//  builder.AppendFormat("%d.", GetRevisionNumber());          // Revision [1501]
+//  builder.AppendFormat("%s.", GetShortChangeSetString());    // ShortChangeset [fb02756c46a4]
+//  builder.AppendFormat("%llu.", WelderMsSinceEpoch);         // MsSinceEpoch [1574702096290]
+//  builder.AppendFormat("%s.", WelderTargetOsName);           // TargetOs [Windows]
+//  builder.AppendFormat("%s.", WelderArchitectureName);       // Architecture [x86]
+//  builder.AppendFormat("%s.", WelderConfigName);             // Config [Release]
+//  builder.Append("zip");
+//  String result = builder.ToString();
+//  return result;
+//}
+
 String GetBuildVersionName()
 {
   /*
    * This needs to match
    * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName.
-   * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
-   * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+   * Application.Major.Minor.Patch.Revision.Extension
+   * Example: WelderEditor.1.5.0.1501.zip
    */
   StringBuilder builder;
   builder.AppendFormat("%s.", GetApplicationName().c_str()); // Application [WelderEditor]
-  builder.AppendFormat("%s.", WelderBranchName);             // Branch [master]
+  //builder.AppendFormat("%s.", WelderBranchName);             // Branch [master]
   builder.AppendFormat("%d.", GetMajorVersion());            // Major [1]
   builder.AppendFormat("%d.", GetMinorVersion());            // Minor [5]
   builder.AppendFormat("%d.", GetPatchVersion());            // Patch [0]
   builder.AppendFormat("%d.", GetRevisionNumber());          // Revision [1501]
-  builder.AppendFormat("%s.", GetShortChangeSetString());    // ShortChangeset [fb02756c46a4]
-  builder.AppendFormat("%llu.", WelderMsSinceEpoch);         // MsSinceEpoch [1574702096290]
-  builder.AppendFormat("%s.", WelderTargetOsName);           // TargetOs [Windows]
-  builder.AppendFormat("%s.", WelderArchitectureName);       // Architecture [x86]
-  builder.AppendFormat("%s.", WelderConfigName);             // Config [Release]
+  //builder.AppendFormat("%s.", GetShortChangeSetString());    // ShortChangeset [fb02756c46a4]
+  //builder.AppendFormat("%llu.", WelderMsSinceEpoch);         // MsSinceEpoch [1574702096290]
+  //builder.AppendFormat("%s.", WelderTargetOsName);           // TargetOs [Windows]
+  //builder.AppendFormat("%s.", WelderArchitectureName);       // Architecture [x86]
+  //builder.AppendFormat("%s.", WelderConfigName);             // Config [Release]
   builder.Append("zip");
   String result = builder.ToString();
   return result;

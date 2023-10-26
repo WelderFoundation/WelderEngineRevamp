@@ -981,23 +981,42 @@ const pack = async (options) => {
     const files = fs.readdirSync(executableDir).filter((file) => !filter.includes(path.extname(file)) && !filter.includes(file)).
       map((file) => path.join(executableDir, file));
 
+    ///*
+    // * This needs to match index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
+    // * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
+    // * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+    // */
+    //const name =
+    //  `${library}.` +
+    //  `${cmakeVariables.WELDER_BRANCH}.` +
+    //  `${cmakeVariables.WELDER_MAJOR_VERSION}.` +
+    //  `${cmakeVariables.WELDER_MINOR_VERSION}.` +
+    //  `${cmakeVariables.WELDER_PATCH_VERSION}.` +
+    //  `${cmakeVariables.WELDER_REVISION}.` +
+    //  `${cmakeVariables.WELDER_SHORT_CHANGESET}.` +
+    //  `${cmakeVariables.WELDER_MS_SINCE_EPOCH}.` +
+    //  `${combo.alias}.` +
+    //  `${combo.architecture}.` +
+    //  `${cmakeVariables.WELDER_CONFIG}.zip`;
+      
     /*
      * This needs to match index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
-     * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
-     * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+     * Application.Major.Minor.Patch.Revision.Extension
+     * Example: WelderEditor.1.5.0.1501.Windows.x86.Release.zip
      */
     const name =
       `${library}.` +
-      `${cmakeVariables.WELDER_BRANCH}.` +
+      //`${cmakeVariables.WELDER_BRANCH}.` +
       `${cmakeVariables.WELDER_MAJOR_VERSION}.` +
       `${cmakeVariables.WELDER_MINOR_VERSION}.` +
       `${cmakeVariables.WELDER_PATCH_VERSION}.` +
       `${cmakeVariables.WELDER_REVISION}.` +
-      `${cmakeVariables.WELDER_SHORT_CHANGESET}.` +
-      `${cmakeVariables.WELDER_MS_SINCE_EPOCH}.` +
-      `${combo.alias}.` +
-      `${combo.architecture}.` +
-      `${cmakeVariables.WELDER_CONFIG}.zip`;
+      //`${cmakeVariables.WELDER_SHORT_CHANGESET}.` +
+      //`${cmakeVariables.WELDER_MS_SINCE_EPOCH}.` +
+      //`${combo.alias}.` +
+      //`${combo.architecture}.` +
+      //`${cmakeVariables.WELDER_CONFIG}.zip`;
+      `zip`;
 
     const packageZip = path.join(dirs.packages, name);
     tryUnlinkSync(packageZip);
