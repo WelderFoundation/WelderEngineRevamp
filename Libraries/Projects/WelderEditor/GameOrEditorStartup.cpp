@@ -13,19 +13,39 @@ void GameOrEditorStartup::UserInitializeConfig(Cog* configCog)
   HasOrAdd<EditorSettings>(configCog);
   HasOrAdd<ContentConfig>(configCog);
   HasOrAdd<TextEditorConfig>(configCog);
+  MainConfig* mainConfig = configCog->has(MainConfig);
+  if (mainConfig && mEmbeddedPackage)
+  {
+    static const String cDataDirectoryName("Data");
+    mainConfig->DataDirectory = FilePath::Combine(mEmbeddedOutputDirectory, cDataDirectoryName);
+  }
 }
 
-void GameOrEditorStartup::UserInitialize()
+StartupPhaseResult::Enum GameOrEditorStartup::UserInitialize()
 {
   String projectFile = Environment::GetValue<String>("file");
   bool playGame = Environment::GetValue<bool>("play", false);
   String newProject = Environment::GetValue<String>("newProject");
+
+  Importer importer;
+  ImporterResult::Type importResult = importer.CheckForImport();
+  if (importResult == ImporterResult::ExecutedAnotherProcess)
+    return StartupPhaseResult::Quit;
 
   // Check to see if there was a project file in the same directory.
   static const String cDefaultProjectFile("Project.zeroproj");
   if (FileExists(cDefaultProjectFile))
   {
     projectFile = cDefaultProjectFile;
+    playGame = true;
+  }
+
+  // Fix the project file path for exports to be in the import's output directory
+  mEmbeddedPackage = (importResult == ImporterResult::Embeded);
+  if (mEmbeddedPackage)
+  {
+    mEmbeddedOutputDirectory = importer.mOutputDirectory;
+    projectFile = FilePath::Combine(mEmbeddedOutputDirectory, "Project.zeroproj");
     playGame = true;
   }
 
@@ -54,7 +74,8 @@ void GameOrEditorStartup::UserInitialize()
     if (projectCog == nullptr)
     {
       FatalEngineError("Failed load project '%s'", projectFile.c_str());
-      return Exit(1);
+      Exit(1);
+      return StartupPhaseResult::Continue;
     }
 
     // Since we don't create a resiziable wigdet/close button, etc.
@@ -70,6 +91,8 @@ void GameOrEditorStartup::UserInitialize()
   mProjectCog = projectCog;
   mProjectFile = projectFile;
   mNewProject = newProject;
+
+  return StartupPhaseResult::Continue;
 }
 
 void GameOrEditorStartup::UserStartup()

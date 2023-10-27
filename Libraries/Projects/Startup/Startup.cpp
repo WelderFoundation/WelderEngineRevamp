@@ -19,8 +19,9 @@ void ZeroStartup::UserInitializeConfig(Cog* configCog)
 {
 }
 
-void ZeroStartup::UserInitialize()
+StartupPhaseResult::Enum ZeroStartup::UserInitialize()
 {
+  return StartupPhaseResult::Continue;
 }
 
 void ZeroStartup::UserStartup()
@@ -48,6 +49,7 @@ void ZeroStartup::Exit(int returnCode)
 
 void ZeroStartup::MainLoop()
 {
+  StartupPhaseResult::Enum result = StartupPhaseResult::Continue;
   switch (mPhase)
   {
   case StartupPhase::Initialize:
@@ -55,8 +57,19 @@ void ZeroStartup::MainLoop()
     NextPhase();
     break;
   case StartupPhase::UserInitialize:
-    UserInitialize();
-    NextPhase();
+    result = UserInitialize();
+    if (result == StartupPhaseResult::Continue)
+    {
+      Shortcuts::GetInstance()->Load(
+          FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Shortcuts.data"));
+
+      // Load documentation for all native libraries
+      DocumentationLibrary::GetInstance()->LoadDocumentation(
+          FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Documentation.data"));
+      NextPhase();
+    }
+    else
+      mPhase = StartupPhase::Shutdown;
     break;
   case StartupPhase::Startup:
     Startup();
@@ -88,6 +101,9 @@ void ZeroStartup::MainLoop()
     break;
   case StartupPhase::Shutdown:
     Shutdown();
+    // Exit could still be false UserInitialize goes straight to shutdown
+    // consider refactoring
+    mExit = true;
     break;
   }
 
@@ -221,12 +237,12 @@ void ZeroStartup::Initialize()
 
   Tweakables::Load();
 
-  Shortcuts::GetInstance()->Load(
-      FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Shortcuts.data"));
+  //Shortcuts::GetInstance()->Load(
+  //    FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Shortcuts.data"));
 
-  // Load documentation for all native libraries
-  DocumentationLibrary::GetInstance()->LoadDocumentation(
-      FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Documentation.data"));
+  //// Load documentation for all native libraries
+  //DocumentationLibrary::GetInstance()->LoadDocumentation(
+  //    FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Documentation.data"));
 
   ZPrint("Os: %s\n", Os::GetVersionString().c_str());
 }

@@ -432,11 +432,13 @@ Cog* LoadConfig(ModifyConfigFn modifier, void* userData)
     return nullptr;
   }
 
-  modifier(configCog, userData);
-
   MainConfig* mainConfig = HasOrAdd<MainConfig>(configCog);
   mainConfig->SourceDirectory = sourceDirectory;
   mainConfig->DataDirectory = dataDirectory;
+
+  // Modifier can modify MainConfig on configCog
+  // so let it run after setting source and data dirs
+  modifier(configCog, userData);
 
   Z::gEngine->mConfigCog = configCog;
 

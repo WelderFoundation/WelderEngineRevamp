@@ -32,6 +32,13 @@ DeclareEnum10(
     // All libraries are shutdown and the engine is destroyed.
     Shutdown);
 
+// Determine whether to continue to next startup phase or not
+DeclareEnum2(StartupPhaseResult,
+    // Continue to the next phase
+    Continue,
+    // Do not continue to the next phase
+    Quit);
+
 // Runs through phases of initialization, allowing platforms that don't support threading
 // to yeild time back to the OS/Browser between updates. This also unifies Editor/Game/Launcher startup.
 class ZeroStartup
@@ -71,7 +78,7 @@ protected:
   // The order these are declared is the order they will be called.
   virtual void UserInitializeLibraries();
   virtual void UserInitializeConfig(Cog* configCog);
-  virtual void UserInitialize();
+  virtual StartupPhaseResult::Enum UserInitialize();
   virtual void UserStartup();
   virtual void UserCreation();
   virtual void UserShutdown();

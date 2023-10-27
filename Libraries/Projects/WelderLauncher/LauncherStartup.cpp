@@ -23,7 +23,7 @@ void LauncherStartup::UserInitializeConfig(Cog* configCog)
   versionConfig->ApplyCommandLineArguments();
 }
 
-void LauncherStartup::UserInitialize()
+StartupPhaseResult::Enum LauncherStartup::UserInitialize()
 {
   // Check and see if another launcher is already open (has to happen after
   // startup)
@@ -36,7 +36,8 @@ void LauncherStartup::UserInitialize()
     ZPrint("Mutex is already open. Sending a message to the open launcher and "
            "closing\n");
     Zero::LauncherSingletonCommunication communicator;
-    return Exit(0);
+    Exit(0);
+    return StartupPhaseResult::Continue;
   }
 
   CrashHandler::SetRestartCommandLine(Environment::GetInstance()->mCommandLine);
@@ -45,6 +46,8 @@ void LauncherStartup::UserInitialize()
   mMinimumWindowSize = IntVec2(1024, 595);
   mWindowCentered = true;
   mWindowState = WindowState::Windowed;
+
+  return StartupPhaseResult::Continue;
 }
 
 void LauncherStartup::UserStartup()

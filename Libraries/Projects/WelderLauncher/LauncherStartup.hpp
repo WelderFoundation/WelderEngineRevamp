@@ -9,7 +9,7 @@ class LauncherStartup : public ZeroStartup
 protected:
   void UserInitializeLibraries() override;
   void UserInitializeConfig(Cog* configCog) override;
-  void UserInitialize() override;
+  StartupPhaseResult::Enum UserInitialize() override;
   void UserStartup() override;
   void UserCreation() override;
   void UserShutdown() override;
