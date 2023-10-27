@@ -307,7 +307,7 @@ String BuildId::GetMasterBranch()
   return cMaster;
 }
 
-const String ZeroBuild::mExtension = "zerobuild";
+const String ZeroBuild::mExtension = "zip";
 const String ZeroBuild::mDeprecatedTag = "Deprecated";
 
 ZeroBuild::ZeroBuild()
