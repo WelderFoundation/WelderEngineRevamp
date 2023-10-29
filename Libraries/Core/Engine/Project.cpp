@@ -17,7 +17,7 @@ ZilchDefineType(ProjectSettings, builder, type)
   ZeroBindDocumented();
   type->AddAttribute(ObjectAttributes::cCore);
 
-  ZilchBindField(ProjectName);
+  ZilchBindFieldProperty(ProjectName);
   ZilchBindFieldGetter(ProjectFolder);
   ZilchBindFieldGetter(ContentFolder);
   ZilchBindFieldGetter(EditorContentFolder);
