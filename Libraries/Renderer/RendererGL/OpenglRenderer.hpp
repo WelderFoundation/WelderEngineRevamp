@@ -41,6 +41,7 @@ class GlShader
 {
 public:
   GLuint mId;
+  HashMap<String, GLint> mLocations;
 };
 
 class GlMaterialRenderData : public MaterialRenderData
@@ -100,6 +101,9 @@ public:
   void SetLazyShaderCompilation(bool isLazy) override;
   void AddShaders(Array<ShaderEntry>& entries, uint forceCompileBatchCount) override;
   void RemoveShaders(Array<ShaderEntry>& entries) override;
+  void DeleteShaderByKey(const ShaderKey& shaderKey);
+
+  GLint GetUniformLocation(GlShader* shader, StringParam name);
 
   void SetVSync(bool vsync) override;
 
@@ -134,7 +138,7 @@ public:
   GlShader* GetShader(ShaderKey& shaderKey);
   void CreateShader(ShaderEntry& entry);
   void CreateShader(StringParam vertexSource, StringParam geometrySource, StringParam pixelSource, GLuint& shader);
-  void SetShader(GLuint shader);
+  void SetShader(GlShader* shader);
 
   void DelayedRenderDataDestruction();
   void DestroyRenderData(GlMaterialRenderData* renderData);
@@ -146,12 +150,13 @@ public:
 
   UniformFunction mUniformFunctions[ShaderInputType::Count];
 
-  HashMap<ShaderKey, GlShader> mGlShaders;
+  HashMap<ShaderKey, GlShader*> mGlShaders;
   HashMap<ShaderKey, ShaderEntry> mShaderEntries;
 
   bool mLazyShaderCompilation;
 
-  GLuint mActiveShader;
+  GLuint mActiveShaderId = 0;
+  GlShader* mActiveShader = nullptr;
   GLuint mActiveTexture;
   u64 mActiveMaterial;
   uint mNextTextureSlot;
@@ -179,6 +184,10 @@ public:
   GLuint mTriangleVertex;
   GLuint mTriangleIndex;
   GLuint mLoadingShader;
+  GLint mLoadingTextureLoc = 0;
+  GLint mLoadingTransformLoc = 0;
+  GLint mLoadingUvTransformLoc = 0;
+  GLint mLoadingAlphaLoc = 0;
 
   GLuint mSingleTargetFbo;
   GLuint mMultiTargetFbo;
