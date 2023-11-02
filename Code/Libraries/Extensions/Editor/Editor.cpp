@@ -1,6 +1,8 @@
 // MIT Licensed (see LICENSE.md).
 #include "Precompiled.hpp"
 
+#include "CameraPreview.hpp"
+
 namespace Zero
 {
 
@@ -526,10 +528,10 @@ void Editor::OnSelectionFinal(SelectionChangedEvent* event)
 
   if (Cog* primaryCog = primary.Get<Cog*>())
   {
-    // EditorViewport* editorViewport = mActiveViewport;
+    EditorViewport* editorViewport = mEditorViewport;
 
-    // if(editorViewport)
-    // TryOpenPreview(primaryCog, editorViewport, selection);
+    if(editorViewport)
+    TryOpenPreview(primaryCog, editorViewport, selection);
 
     // Gizmo creation
     if (selection->Count() == 1)
