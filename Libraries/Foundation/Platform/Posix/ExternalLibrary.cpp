@@ -1,6 +1,6 @@
 // MIT Licensed (see LICENSE.md).
 #include "Precompiled.hpp"
-#include "Common/ExternalLibrary.hpp"
+#include "Platform/ExternalLibrary.hpp"
 
 namespace Zero
 {

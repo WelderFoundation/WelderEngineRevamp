@@ -1,8 +1,8 @@
 // MIT Licensed (see LICENSE.md).
 #include "Precompiled.hpp"
-#include "Common/Utilities.hpp"
-#include "Common/FileSystem.hpp"
-#include "Common/CrashHandler.hpp"
+#include "Platform/Utilities.hpp"
+#include "Platform/FileSystem.hpp"
+#include "Platform/CrashHandler.hpp"
 
 #include <unistd.h>
 #include <pwd.h>
