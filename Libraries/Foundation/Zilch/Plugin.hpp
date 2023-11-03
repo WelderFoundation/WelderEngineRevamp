@@ -291,7 +291,7 @@ private:
 // This is a common macro for implementing a single static library and plugin in
 // one
 #  define ZilchDeclareStaticLibraryAndPlugin(LibraryName, PluginName, ...)                                             \
-    ZilchDeclareStaticLibrary(LibraryName, ZilchNoNamespace, ZeroNoImportExport, __VA_ARGS__);                         \
+    ZilchDeclareStaticLibrary(LibraryName, ZilchNoNamespace, ZeroNoImportExport, ##__VA_ARGS__);                       \
     class PluginName : public ZZ::Plugin                                                                               \
     {                                                                                                                  \
     public:                                                                                                            \
