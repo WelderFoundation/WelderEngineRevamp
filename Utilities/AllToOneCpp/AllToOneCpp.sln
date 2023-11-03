@@ -1,24 +1,26 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllToOneCpp", "AllToOneCpp\AllToOneCpp.csproj", "{663F9562-9B5E-4FA6-A67D-88193F978297}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllToOneCpp", "AllToOneCpp\AllToOneCpp.csproj", "{6114895E-9007-4DDC-9230-561D8B24028D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZilchToOneCpp", "ZilchToOneCpp\ZilchToOneCpp.csproj", "{A4952CE1-D6A7-4A99-9211-DECDF8A51AD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZilchToOneCpp", "ZilchToOneCpp\ZilchToOneCpp.csproj", "{DB6DC07B-BED9-4BDC-9508-2B6812452D9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x86 = Debug|x86
-		Release|x86 = Release|x86
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{663F9562-9B5E-4FA6-A67D-88193F978297}.Debug|x86.ActiveCfg = Debug|x86
-		{663F9562-9B5E-4FA6-A67D-88193F978297}.Debug|x86.Build.0 = Debug|x86
-		{663F9562-9B5E-4FA6-A67D-88193F978297}.Release|x86.ActiveCfg = Release|x86
-		{663F9562-9B5E-4FA6-A67D-88193F978297}.Release|x86.Build.0 = Release|x86
-		{A4952CE1-D6A7-4A99-9211-DECDF8A51AD1}.Debug|x86.ActiveCfg = Debug|x86
-		{A4952CE1-D6A7-4A99-9211-DECDF8A51AD1}.Debug|x86.Build.0 = Debug|x86
-		{A4952CE1-D6A7-4A99-9211-DECDF8A51AD1}.Release|x86.ActiveCfg = Release|x86
-		{A4952CE1-D6A7-4A99-9211-DECDF8A51AD1}.Release|x86.Build.0 = Release|x86
+		{6114895E-9007-4DDC-9230-561D8B24028D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6114895E-9007-4DDC-9230-561D8B24028D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6114895E-9007-4DDC-9230-561D8B24028D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6114895E-9007-4DDC-9230-561D8B24028D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB6DC07B-BED9-4BDC-9508-2B6812452D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB6DC07B-BED9-4BDC-9508-2B6812452D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB6DC07B-BED9-4BDC-9508-2B6812452D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB6DC07B-BED9-4BDC-9508-2B6812452D9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

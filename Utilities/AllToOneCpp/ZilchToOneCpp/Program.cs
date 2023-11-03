@@ -19,6 +19,9 @@ namespace ZilchToOneCpp
 			compactor.EmitLineDirectives = false;
 			compactor.Minify = false;
 
+			var overrideArgs = new String[] { "-Zero", Directory.GetCurrentDirectory(), "Zilch.hpp" };
+			args = overrideArgs;
+
 			if (args.Length == 3 || args.Length == 4)
 			{
 				var target = args[0];
@@ -31,14 +34,14 @@ namespace ZilchToOneCpp
 				var zilchPath = directoryPath;
 
 				if (forZero)
-					zilchPath = Path.Combine(directoryPath, @"ZeroLibraries\Zilch");
+					zilchPath = Path.Combine(directoryPath, @"Libraries\Foundation\Zilch");
 
-				compactor.FilesToProcess.AddFilesFromDirectory(Path.Combine(zilchPath, @"Project\Zilch"), "*.cpp");
+				compactor.FilesToProcess.AddFilesFromDirectory(zilchPath, "*.cpp");
 
 				var standardLibraries = Path.Combine(zilchPath, @"Project\StandardLibraries");
 
 				if (forZero)
-					standardLibraries = Path.Combine(zeroPath, @"ZeroLibraries");
+					standardLibraries = Path.Combine(zeroPath, @"Libraries\Foundation");
 
 				compactor.FilesToProcess.AddFilesFromDirectory(Path.Combine(standardLibraries, @"Common"), "*.cpp");
 
@@ -46,31 +49,31 @@ namespace ZilchToOneCpp
 				{
 					compactor.DirectoryDirectives.Add(Compactor.NormalizePath(Path.Combine(standardLibraries, @"Platform\Windows")), new CompacterDirectives()
 					{
-						PreprocessorCondition = "defined(PLATFORM_WINDOWS)",
+						PreprocessorCondition = "defined(WelderTargetOsWindows)",
 						CppOnly = true,
 					});
 					compactor.FilesToProcess.AddFilesFromDirectory(Path.Combine(standardLibraries, @"Platform\Windows"), "*.cpp");
 				}
 
-				// Posix platform
-				{
-					compactor.DirectoryDirectives.Add(Compactor.NormalizePath(Path.Combine(standardLibraries, @"Platform\Posix")), new CompacterDirectives()
-					{
-						PreprocessorCondition = "defined(PLATFORM_POSIX)",
-						CppOnly = true,
-					});
-					compactor.FilesToProcess.AddFilesFromDirectory(Path.Combine(standardLibraries, @"Platform\Posix"), "*.cpp");
-				}
+				//// Posix platform
+				//{
+				//	compactor.DirectoryDirectives.Add(Compactor.NormalizePath(Path.Combine(standardLibraries, @"Platform\Posix")), new CompacterDirectives()
+				//	{
+				//		PreprocessorCondition = "defined(PLATFORM_POSIX)",
+				//		CppOnly = true,
+				//	});
+				//	compactor.FilesToProcess.AddFilesFromDirectory(Path.Combine(standardLibraries, @"Platform\Posix"), "*.cpp");
+				//}
 
-				// Empty platform
-				{
-					compactor.DirectoryDirectives.Add(Compactor.NormalizePath(Path.Combine(standardLibraries, @"Platform\Empty")), new CompacterDirectives()
-					{
-						PreprocessorCondition = "defined(PLATFORM_EMSCRIPTEN)",
-						CppOnly = true,
-					});
-					compactor.FilesToProcess.AddFilesFromDirectory(Path.Combine(standardLibraries, @"Platform\Empty"), "*.cpp");
-				}
+				//// Empty platform
+				//{
+				//	compactor.DirectoryDirectives.Add(Compactor.NormalizePath(Path.Combine(standardLibraries, @"Platform\Empty")), new CompacterDirectives()
+				//	{
+				//		PreprocessorCondition = "defined(PLATFORM_EMSCRIPTEN)",
+				//		CppOnly = true,
+				//	});
+				//	compactor.FilesToProcess.AddFilesFromDirectory(Path.Combine(standardLibraries, @"Platform\Empty"), "*.cpp");
+				//}
 
 				compactor.HppDirectories.Add(Path.Combine(standardLibraries, @"Common"));
 				compactor.HppDirectories.Add(standardLibraries);
@@ -105,48 +108,48 @@ namespace ZilchToOneCpp
 			return returnValue;
 		}
 
-		static void CompileLib(String vsVersion, String vsYear, String chipset, String configuration, String runtime, String arguments)
-		{
-			Process compiler = StartCmd(@"C:\ZilchBuildOutput\DistributionOut");
+		//static void CompileLib(String vsVersion, String vsYear, String chipset, String configuration, String runtime, String arguments)
+		//{
+		//	Process compiler = StartCmd(@"C:\ZilchBuildOutput\DistributionOut");
 
-			String fileName = "Zilch_" + vsYear + "_" + chipset + "_" + runtime;
+		//	String fileName = "Zilch_" + vsYear + "_" + chipset + "_" + runtime;
 
-			String pathIf64 = "";
-			String vcVarsVersion = "32";
-			if (chipset == "x64")
-			{
-				pathIf64 = "x86_amd64\\";
-				vcVarsVersion = "x86_amd64";
-			}
+		//	String pathIf64 = "";
+		//	String vcVarsVersion = "32";
+		//	if (chipset == "x64")
+		//	{
+		//		pathIf64 = "x86_amd64\\";
+		//		vcVarsVersion = "x86_amd64";
+		//	}
 
-			compiler.StandardInput.WriteLine(@"""C:\Program Files (x86)\Microsoft Visual Studio " + vsVersion + @".0\VC\bin\" + pathIf64 + @"vcvars" + vcVarsVersion + @".bat""");
-			compiler.StandardInput.WriteLine(@"""C:\Program Files (x86)\Microsoft Visual Studio " + vsVersion + @".0\VC\bin\" + pathIf64 + @"cl""  /c /Zi /nologo /W4 /WX " + arguments + @" /" + runtime + @" /Gm- /GS /Gy /fp:fast /Gd /Fd""C:\ZilchBuildOutput\Distribution\" + fileName + @".pdb"" /Fa""C:\ZilchBuildOutput\DistributionOut\\"" /Fo""C:\ZilchBuildOutput\DistributionOut\" + fileName + @".obj"" ""C:\Sandbox\Zero2\Zilch\Project\ZilchAll\Zilch.cpp""");
-			compiler.StandardInput.WriteLine(@"""C:\Program Files (x86)\Microsoft Visual Studio " + vsVersion + @".0\VC\bin\" + pathIf64 + @"lib"" /OUT:""C:\ZilchBuildOutput\Distribution\" + fileName + @".lib"" /NOLOGO /LTCG ""C:\ZilchBuildOutput\DistributionOut\" + fileName + @".obj""");
-			EndCmd(compiler);
+		//	compiler.StandardInput.WriteLine(@"""C:\Program Files (x86)\Microsoft Visual Studio " + vsVersion + @".0\VC\bin\" + pathIf64 + @"vcvars" + vcVarsVersion + @".bat""");
+		//	compiler.StandardInput.WriteLine(@"""C:\Program Files (x86)\Microsoft Visual Studio " + vsVersion + @".0\VC\bin\" + pathIf64 + @"cl""  /c /Zi /nologo /W4 /WX " + arguments + @" /" + runtime + @" /Gm- /GS /Gy /fp:fast /Gd /Fd""C:\ZilchBuildOutput\Distribution\" + fileName + @".pdb"" /Fa""C:\ZilchBuildOutput\DistributionOut\\"" /Fo""C:\ZilchBuildOutput\DistributionOut\" + fileName + @".obj"" ""C:\Sandbox\Zero2\Zilch\Project\ZilchAll\Zilch.cpp""");
+		//	compiler.StandardInput.WriteLine(@"""C:\Program Files (x86)\Microsoft Visual Studio " + vsVersion + @".0\VC\bin\" + pathIf64 + @"lib"" /OUT:""C:\ZilchBuildOutput\Distribution\" + fileName + @".lib"" /NOLOGO /LTCG ""C:\ZilchBuildOutput\DistributionOut\" + fileName + @".obj""");
+		//	EndCmd(compiler);
 
-			// Capitolize the PDB (cl outputs pdb as all lowercase)
-			String pdbName = @"C:\ZilchBuildOutput\Distribution\" + fileName + ".pdb";
-			File.Move(pdbName, pdbName);
-		}
+		//	// Capitolize the PDB (cl outputs pdb as all lowercase)
+		//	String pdbName = @"C:\ZilchBuildOutput\Distribution\" + fileName + ".pdb";
+		//	File.Move(pdbName, pdbName);
+		//}
 
-		static Process StartCmd(String workingDirectory)
-		{
-			Process compiler = new Process();
-			compiler.StartInfo.FileName = "cmd.exe";
-			compiler.StartInfo.WorkingDirectory = @"C:\ZilchBuildOutput\DistributionOut";
-			compiler.StartInfo.RedirectStandardInput = true;
-			compiler.StartInfo.RedirectStandardOutput = true;
-			compiler.StartInfo.UseShellExecute = false;
-			compiler.Start();
-			return compiler;
-		}
+		//static Process StartCmd(String workingDirectory)
+		//{
+		//	Process compiler = new Process();
+		//	compiler.StartInfo.FileName = "cmd.exe";
+		//	compiler.StartInfo.WorkingDirectory = @"C:\ZilchBuildOutput\DistributionOut";
+		//	compiler.StartInfo.RedirectStandardInput = true;
+		//	compiler.StartInfo.RedirectStandardOutput = true;
+		//	compiler.StartInfo.UseShellExecute = false;
+		//	compiler.Start();
+		//	return compiler;
+		//}
 
-		static void EndCmd(Process compiler)
-		{
-			compiler.StandardInput.WriteLine(@"exit");
-			Debug.Write(compiler.StandardOutput.ReadToEnd());
-			compiler.WaitForExit();
-			compiler.Close();
-		}
+		//static void EndCmd(Process compiler)
+		//{
+		//	compiler.StandardInput.WriteLine(@"exit");
+		//	Debug.Write(compiler.StandardOutput.ReadToEnd());
+		//	compiler.WaitForExit();
+		//	compiler.Close();
+		//}
 	}
 }
