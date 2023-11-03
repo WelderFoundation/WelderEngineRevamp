@@ -66,6 +66,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>RESOURCE_NAME_Precompiled.hpp</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>WelderCompilerMsvc;WelderTargetOsWindows;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -100,6 +101,7 @@ EXIT 0
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>RESOURCE_NAME_Precompiled.hpp</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>WelderCompilerMsvc;WelderTargetOsWindows;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
