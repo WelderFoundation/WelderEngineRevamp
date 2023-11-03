@@ -20,7 +20,7 @@ namespace ZilchToOneCpp
 			compactor.Minify = false;
 
 			var overrideArgs = new String[] { "-Zero", Directory.GetCurrentDirectory(), "Zilch.hpp" };
-			args = overrideArgs;
+			//args = overrideArgs;
 
 			if (args.Length == 3 || args.Length == 4)
 			{
