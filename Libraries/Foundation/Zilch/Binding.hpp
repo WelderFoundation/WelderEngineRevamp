@@ -713,14 +713,14 @@ public:
 
 // These helpers exist to fix template order issues by forcing implementation in the cpp files.
 bool BoundTypeHelperIsRawCastable(BoundType* fromType, BoundType* toType);
-bool BoundTypeHelperIsInitialized(BoundType* type);
+ZeroShared bool BoundTypeHelperIsInitialized(BoundType* type);
 bool BoundTypeHelperIsInitializedAssert(BoundType* type);
 String BoundTypeHelperGetName(BoundType* type);
-void LibraryBuilderHelperAddNativeBoundType(LibraryBuilder& builder,
+ZeroShared void LibraryBuilderHelperAddNativeBoundType(LibraryBuilder& builder,
                                             BoundType* type,
                                             BoundType* base,
                                             TypeCopyMode::Enum mode);
-void InitializeTypeHelper(StringParam originalName, BoundType* type, size_t size, size_t rawVirtualcount);
+ZeroShared void InitializeTypeHelper(StringParam originalName, BoundType* type, size_t size, size_t rawVirtualcount);
 template <typename T>
 ZeroSharedTemplate T InternalReadRef(::byte* stackFrame);
 
