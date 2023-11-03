@@ -7,7 +7,7 @@
 class RESOURCE_NAME_ : public ZeroEngine::ZilchComponent
 {
 public:
-  ZilchDeclareType(Zilch::TypeCopyMode::ReferenceType);
+  ZilchDeclareType(RESOURCE_NAME_, Zilch::TypeCopyMode::ReferenceType);
   
   RESOURCE_NAME_();
   ~RESOURCE_NAME_();
@@ -34,7 +34,7 @@ private:
 class RESOURCE_NAME_Event : public ZeroEngine::ZilchEvent
 {
 public:
-  ZilchDeclareType(Zilch::TypeCopyMode::ReferenceType);
+  ZilchDeclareType(RESOURCE_NAME_Event, Zilch::TypeCopyMode::ReferenceType);
   
   int mLives;
 };

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Versions\$(OS)-$(PlatformShortName)-$(ZeroVersion)\ZeroEngine.cpp">
+    <ClCompile Include="Versions\Windows-x64-$(ZeroVersion)\ZeroEngine.cpp">
       <Filter>Zero</Filter>
     </ClCompile>
-    <ClCompile Include="Versions\$(OS)-$(PlatformShortName)-$(ZeroVersion)\Core.cpp">
+    <ClCompile Include="Versions\Windows-x64-$(ZeroVersion)\Core.cpp">
       <Filter>Zero</Filter>
     </ClCompile>
     <ClCompile Include="RESOURCE_NAME_.cpp">
@@ -15,13 +15,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Versions\$(OS)-$(PlatformShortName)-$(ZeroVersion)\ZeroEngine.hpp">
+    <ClInclude Include="Versions\Windows-x64-$(ZeroVersion)\ZeroEngine.hpp">
       <Filter>Zero</Filter>
     </ClInclude>
-    <ClInclude Include="Versions\$(OS)-$(PlatformShortName)-$(ZeroVersion)\Core.hpp">
+    <ClInclude Include="Versions\Windows-x64-$(ZeroVersion)\Core.hpp">
       <Filter>Zero</Filter>
     </ClInclude>
-    <ClInclude Include="Versions\$(OS)-$(PlatformShortName)-$(ZeroVersion)\Zilch.hpp">
+    <ClInclude Include="Versions\Windows-x64-$(ZeroVersion)\Zilch.hpp">
       <Filter>Zero</Filter>
     </ClInclude>
     <ClInclude Include="RESOURCE_NAME_.hpp">
