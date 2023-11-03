@@ -58,7 +58,7 @@ target_link_libraries(WelderEditor
 welder_copy_from_linked_libraries(WelderEditor)
 
 set_target_properties(WelderEditor PROPERTIES ENABLE_EXPORTS TRUE)
-set(platform_plugin_lib_dir ${WELDER_ZILCH_CUSTOM_PLUGIN_SHARED_DIR}${WELDER_TARGETOS}-${WELDER_ARCHITECTURE}-${WELDER_REVISION}/)
+set(platform_plugin_lib_dir ${WELDER_ZILCH_CUSTOM_PLUGIN_SHARED_DIR}${WELDER_TARGETOS}-${WELDER_ARCHITECTURE}/)
 add_custom_command(TARGET WelderEditor POST_BUILD COMMAND
     ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_IMPORT_FILE:WelderEditor> ${platform_plugin_lib_dir})
     
