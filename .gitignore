@@ -30,6 +30,7 @@ syntax: glob
 
 compile_commands.json
 
+/Data/ZilchCustomPluginShared/
 Temp/
 /Build/
 node_modules/
