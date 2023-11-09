@@ -22,4 +22,5 @@ target_link_libraries(Startup
     Physics
     Sound
     ZilchShaders
+    TBUI
 )
