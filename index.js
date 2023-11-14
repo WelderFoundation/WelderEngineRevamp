@@ -36,7 +36,7 @@ const repoRootFile = ".welder";
 
 const dirs = (() => {
   const repo = path.dirname(findUp.sync(repoRootFile));
-  const libraries = path.join(repo, "Libraries");
+  const libraries = path.join(repo, "Code", "Libraries");
   const resources = path.join(repo, "Resources");
   const build = path.join(repo, "Build");
   const prebuiltContent = path.join(build, "PrebuiltContent");
@@ -577,7 +577,7 @@ const buildvfs = async (cmakeVariablesOptional, buildDir, combo) => {
   for (const executable of executables) {
     console.log(`Building virtual file system for ${executable.name}`);
 
-    const libraryDir = path.join(buildDir, "Libraries", executable.directory, executable.name);
+    const libraryDir = path.join(buildDir, "Code", "Libraries", executable.directory, executable.name);
     mkdirp.sync(libraryDir);
 
     const makeFsBuffer = async () => {
@@ -757,8 +757,8 @@ const preventNoOutputTimeout = () => {
 };
 
 const findExecutableDir = (buildDir, config, directory, library) => [
-  path.join(buildDir, "Libraries", directory, library, config),
-  path.join(buildDir, "Libraries", directory, library)
+  path.join(buildDir, "Code", "Libraries", directory, library, config),
+  path.join(buildDir, "Code", "Libraries", directory, library)
 ].filter((filePath) => fs.existsSync(filePath))[0];
 
 const findExecutable = (buildDir, config, directory, library) => path.join(findExecutableDir(buildDir, config, directory, library), `${library}${executableExtension}`);
@@ -829,7 +829,7 @@ const build = async (options) => {
 
 const executeBuiltProcess = async (buildDir, combo, directory, library, args) => {
   if (combo.toolchain === "Emscripten") {
-    const pageDirectory = path.join(buildDir, "Libraries", directory, library);
+    const pageDirectory = path.join(buildDir, "Code", "Libraries", directory, library);
     if (!fs.existsSync(pageDirectory)) {
       printErrorLine(`Directory does not exist ${pageDirectory}`);
       return [];

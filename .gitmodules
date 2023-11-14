@@ -1,42 +1,42 @@
 [submodule "External/Assimp/Repo"]
-	path = External/Assimp/Repo
+	path = Code/External/Assimp/Repo
 	url = https://github.com/WelderFoundation/assimp.git
 [submodule "External/Curl/Repo"]
-	path = External/Curl/Repo
+	path = Code/External/Curl/Repo
 	url = https://github.com/WelderFoundation/curl.git
 [submodule "External/FreeType/Repo"]
-	path = External/FreeType/Repo
+	path = Code/External/FreeType/Repo
 	url = https://github.com/WelderFoundation/freetype.git
 [submodule "External/Glew/Repo"]
-	path = External/Glew/Repo
+	path = Code/External/Glew/Repo
 	url = https://github.com/WelderFoundation/glew.git
 [submodule "External/Libgit2/Repo"]
-	path = External/Libgit2/Repo
+	path = Code/External/Libgit2/Repo
 	url = https://github.com/WelderFoundation/libgit2.git
 [submodule "External/Libpng/Repo"]
-	path = External/Libpng/Repo
+	path = Code/External/Libpng/Repo
 	url = https://github.com/WelderFoundation/libpng.git
 [submodule "External/Nvtt/Repo"]
-	path = External/Nvtt/Repo
+	path = Code/External/Nvtt/Repo
 	url = https://github.com/WelderFoundation/nvidia-texture-tools.git
 [submodule "External/Opus/Repo"]
-	path = External/Opus/Repo
+	path = Code/External/Opus/Repo
 	url = https://github.com/WelderFoundation/opus.git
 [submodule "External/Scintilla/Repo"]
-	path = External/Scintilla/Repo
+	path = Code/External/Scintilla/Repo
 	url = https://github.com/WelderFoundation/scintilla.git
 [submodule "External/SDL/Repo"]
-	path = External/SDL/Repo
+	path = Code/External/SDL/Repo
 	url = https://github.com/WelderFoundation/SDL.git
 [submodule "External/SpirvCross/Repo"]
-	path = External/SpirvCross/Repo
+	path = Code/External/SpirvCross/Repo
 	url = https://github.com/WelderFoundation/SPIRV-Cross.git
 [submodule "External/SpirvHeaders/Repo"]
-	path = External/SpirvHeaders/Repo
+	path = Code/External/SpirvHeaders/Repo
 	url = https://github.com/WelderFoundation/SPIRV-Headers.git
 [submodule "External/SpirvTools/Repo"]
-	path = External/SpirvTools/Repo
+	path = Code/External/SpirvTools/Repo
 	url = https://github.com/WelderFoundation/SPIRV-Tools.git
 [submodule "External/ZLib/Repo"]
-	path = External/ZLib/Repo
+	path = Code/External/ZLib/Repo
 	url = https://github.com/WelderFoundation/zlib.git
