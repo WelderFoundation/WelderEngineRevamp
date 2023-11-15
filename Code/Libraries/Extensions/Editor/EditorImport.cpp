@@ -370,7 +370,8 @@ Material* CreateMaterialFromGraphMaterial(SceneGraphMaterial* sceneMaterial)
   if (!resourceAdd.WasSuccessful())
     SafeDelete(material);
 
-  Z::gEditor->EditResource(resourceAdd.SourceResource);
+  //Z::gEditor->EditResource(resourceAdd.SourceResource);
+  //Z::gEditor->EditResource(material);
 
   // if(material != NULL)
   //{

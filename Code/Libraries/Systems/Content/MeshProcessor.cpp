@@ -127,6 +127,11 @@ static void TryReadAssimpTexture(HashMap<String, Any>& textures,
         textureDataMap.TryGetValue(indexValue, texturePath);
       }
     }
+    else
+    {
+        // todo: this is an external texture,
+        // surface the information so texture can be imported too
+    }
     textures[MaterialAttribute::Names[targetSemantic]] = texturePath;
   }
 }
