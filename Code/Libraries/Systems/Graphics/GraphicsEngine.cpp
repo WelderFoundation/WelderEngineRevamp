@@ -1056,8 +1056,8 @@ void GraphicsEngine::AddComposite(Material* material)
     newComposite.mFragmentNameMap.Append(newComposite.mFragmentNames.All());
     newComposite.mReferences = 1;
     mUniqueComposites.Insert(compositeName, newComposite);
-    mModifiedComposites.Insert(compositeName);
   }
+  mModifiedComposites.Insert(compositeName);
 }
 
 void GraphicsEngine::RemoveComposite(StringParam compositeName)
