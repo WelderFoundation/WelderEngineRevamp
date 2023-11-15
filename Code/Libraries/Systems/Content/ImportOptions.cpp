@@ -11,7 +11,8 @@ DefineEvent(ImportOptionsModified);
 
 String SanitizeContentFilename(StringParam filename)
 {
-  String sanitizedName = Cog::SanitizeName(FilePath::GetFileNameWithoutExtension(filename));
+  //String sanitizedName = Cog::SanitizeName(FilePath::GetFileNameWithoutExtension(filename));
+  String sanitizedName = CleanAssetName(FilePath::GetFileNameWithoutExtension(filename));
   return BuildString(sanitizedName, ".", FilePath::GetExtension(filename));
 }
 
@@ -190,7 +191,8 @@ void ImportOptions::Initialize(Array<String>& files, ContentLibrary* library)
     String fileName = SanitizeContentFilename(originalFilename);
 
     // Check to see if the filename contained any valid characters
-    if (fileName == Zilch::EmptyUpperIdentifier && !originalFilename.Contains(Zilch::EmptyUpperIdentifier))
+    if (FilePath::GetFileNameWithoutExtension(fileName) == Zilch::EmptyUpperIdentifier &&
+        !originalFilename.Contains(Zilch::EmptyUpperIdentifier))
     {
       invalidFiles.PushBack(originalFilename);
       continue;
