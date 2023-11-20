@@ -148,4 +148,26 @@ private:
 #include "CopyOnWrite.hpp"
 
 // Co-dependent libraries
-#include "Content/ContentStandard.hpp"
+//#include "Content/ContentStandard.hpp"
+// Forward declarations
+
+namespace Zero
+{
+class ContentLibrary;
+class ContentItem;
+class ContentComponent;
+class BuildOptions;
+class ContentComposition;
+} // namespace Zero
+
+#include "Image/ImageStandard.hpp"
+
+#include "Content/ContentItem.hpp"
+#include "Content/ContentLibrary.hpp"
+#include "Content/BuildOptions.hpp"
+#include "Content/ContentSystem.hpp"
+#include "Content/ContentUtility.hpp"
+#include "Content/ContentComposition.hpp"
+#include "Content/TagsContent.hpp"
+#include "Content/SupportComponents.hpp"
+#include "Content/ResourceLoaderTemplates.hpp"

@@ -32,6 +32,26 @@ set(Engine_Animation_Sources
     ${CMAKE_CURRENT_LIST_DIR}/Animation/PropertyTrack.inl
 )
 
+set(Engine_Content_Sources
+    ${CMAKE_CURRENT_LIST_DIR}/Content/BuildOptions.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/BuildOptions.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentComposition.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentComposition.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentItem.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentItem.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentLibrary.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentLibrary.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentSystem.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentSystem.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentUtility.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ContentUtility.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/ResourceLoaderTemplates.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/SupportComponents.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/SupportComponents.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/TagsContent.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Content/TagsContent.hpp
+)
+
 set(Engine_Platform_Sources
     ${CMAKE_CURRENT_LIST_DIR}/Platform/Input/GamePadSystem.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Platform/Input/GamePadSystem.hpp
@@ -75,6 +95,7 @@ target_sources(Engine
   PRIVATE
     ${Engine_Action_Sources}
     ${Engine_Animation_Sources}
+    ${Engine_Content_Sources}
     ${Engine_Platform_Sources}
     ${Engine_Resource_Sources}
     ${Engine_Scripting_Sources}
@@ -243,6 +264,6 @@ target_link_libraries(Engine
 
 target_include_directories(Engine
   PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}/../../Systems/
+#    ${CMAKE_CURRENT_LIST_DIR}/../../Systems/
     ${CMAKE_CURRENT_LIST_DIR}/../../Renderer/
 )

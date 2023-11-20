@@ -354,7 +354,7 @@ AnimationManager::AnimationManager(BoundType* resourceType) : ResourceManager(re
   AddLoader("Animation", new TextDataFileLoader<AnimationManager>());
   DefaultResourceName = "DefaultAnimation";
   mCanAddFile = true;
-  AddGeometryFileFilters(this);
+  //AddGeometryFileFilters(this);
   mOpenFileFilters.InsertAt(1, FileDialogFilter("Rich Animation (*.Animation.data)", "*.Animation.data"));
 
   // Append the rich animation filter to the "All Animations"
