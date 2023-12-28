@@ -5,7 +5,7 @@
 namespace Zero
 {
 
-void ResizeImage(TextureFormat::Enum format,
+void ResizeImage(ImageFormat::Enum format,
                  const ::byte* srcImage,
                  uint srcWidth,
                  uint srcHeight,
@@ -38,7 +38,7 @@ public:
   ImageContent* mImageContent;
   TextureBuilder* mBuilder;
 
-  TextureFormat::Enum mLoadFormat;
+  ImageFormat::Enum mLoadFormat;
   Array<MipHeader> mMipHeaders;
   Array<::byte*> mImageData;
 

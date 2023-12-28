@@ -16,10 +16,10 @@ bool IsPng(Stream* stream);
 bool ReadPngInfo(Stream* stream, ImageInfo& info);
 
 // Checks if the format is a valid load format (always returns true for None).
-bool IsPngLoadFormat(TextureFormat::Enum format);
+bool IsPngLoadFormat(ImageFormat::Enum format);
 
 // Checks if the format is a valid save format (always returns false for None).
-bool IsPngSaveFormat(TextureFormat::Enum format);
+bool IsPngSaveFormat(ImageFormat::Enum format);
 
 // Both Load/Save will leave the stream at the end, or wherever they failed.
 // Supported texture formats: RGBA8, RGBA16
@@ -28,8 +28,8 @@ void LoadPng(Status& status,
              ::byte** output,
              uint* width,
              uint* height,
-             TextureFormat::Enum* format,
-             TextureFormat::Enum requireFormat = TextureFormat::None);
-void SavePng(Status& status, Stream* stream, const ::byte* image, uint width, uint height, TextureFormat::Enum format);
+             ImageFormat::Enum* format,
+             ImageFormat::Enum requireFormat = ImageFormat::None);
+void SavePng(Status& status, Stream* stream, const ::byte* image, uint width, uint height, ImageFormat::Enum format);
 
 } // namespace Zero

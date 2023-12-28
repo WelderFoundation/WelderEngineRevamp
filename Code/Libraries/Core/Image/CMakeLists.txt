@@ -19,12 +19,6 @@ target_sources(Image
 target_link_libraries(Image
   PUBLIC
     Common
-    RendererBase
     Libpng
     ZLib
-)
-
-target_include_directories(Image
-  PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}/../../Renderer/
 )

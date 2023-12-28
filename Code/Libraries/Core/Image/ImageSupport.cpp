@@ -50,21 +50,21 @@ static stbi_io_callbacks StbStreamCallbacks()
   return callbacks;
 }
 
-bool IsImageLoadFormat(TextureFormat::Enum format)
+bool IsImageLoadFormat(ImageFormat::Enum format)
 {
-  return format == TextureFormat::None || IsImageSaveFormat(format);
+  return format == ImageFormat::None || IsImageSaveFormat(format);
 }
 
-bool IsImageSaveFormat(TextureFormat::Enum format)
+bool IsImageSaveFormat(ImageFormat::Enum format)
 {
-  return format == TextureFormat::R8 || format == TextureFormat::RG8 || format == TextureFormat::RGB8 ||
-         format == TextureFormat::RGBA8 || format == TextureFormat::SRGB8 || format == TextureFormat::SRGB8A8 ||
-         format == TextureFormat::R16 || format == TextureFormat::RG16 || format == TextureFormat::RGB16 ||
-         format == TextureFormat::RGBA16 || format == TextureFormat::R32f || format == TextureFormat::RG32f ||
-         format == TextureFormat::RGB32f || format == TextureFormat::RGBA32f;
+  return format == ImageFormat::R8 || format == ImageFormat::RG8 || format == ImageFormat::RGB8 ||
+         format == ImageFormat::RGBA8 || format == ImageFormat::SRGB8 || format == ImageFormat::SRGB8A8 ||
+         format == ImageFormat::R16 || format == ImageFormat::RG16 || format == ImageFormat::RGB16 ||
+         format == ImageFormat::RGBA16 || format == ImageFormat::R32f || format == ImageFormat::RG32f ||
+         format == ImageFormat::RGB32f || format == ImageFormat::RGBA32f;
 }
 
-TextureFormat::Enum ToImageFormat(int components, ImageBitDepth::Enum depth)
+ImageFormat::Enum ToImageFormat(int components, ImageBitDepth::Enum depth)
 {
   switch (depth)
   {
@@ -72,104 +72,104 @@ TextureFormat::Enum ToImageFormat(int components, ImageBitDepth::Enum depth)
     switch (components)
     {
     case 1:
-      return TextureFormat::R8;
+      return ImageFormat::R8;
     case 2:
-      return TextureFormat::RG8;
+      return ImageFormat::RG8;
     case 3:
-      return TextureFormat::RGB8;
+      return ImageFormat::RGB8;
     case 4:
-      return TextureFormat::RGBA8;
+      return ImageFormat::RGBA8;
     }
     break;
   case ImageBitDepth::I16:
     switch (components)
     {
     case 1:
-      return TextureFormat::R16;
+      return ImageFormat::R16;
     case 2:
-      return TextureFormat::RG16;
+      return ImageFormat::RG16;
     case 3:
-      return TextureFormat::RGB16;
+      return ImageFormat::RGB16;
     case 4:
-      return TextureFormat::RGBA16;
+      return ImageFormat::RGBA16;
     }
     break;
   case ImageBitDepth::F32:
     switch (components)
     {
     case 1:
-      return TextureFormat::R32f;
+      return ImageFormat::R32f;
     case 2:
-      return TextureFormat::RG32f;
+      return ImageFormat::RG32f;
     case 3:
-      return TextureFormat::RGB32f;
+      return ImageFormat::RGB32f;
     case 4:
-      return TextureFormat::RGBA32f;
+      return ImageFormat::RGBA32f;
     }
     break;
   default:
     break;
   }
-  return TextureFormat::None;
+  return ImageFormat::None;
 }
 
-void FromImageFormat(TextureFormat::Enum format, int* components, ImageBitDepth::Enum* depth)
+void FromImageFormat(ImageFormat::Enum format, int* components, ImageBitDepth::Enum* depth)
 {
   switch (format)
   {
-  case TextureFormat::R8:
+  case ImageFormat::R8:
     *components = 1;
     *depth = ImageBitDepth::I8;
     return;
-  case TextureFormat::RG8:
+  case ImageFormat::RG8:
     *components = 2;
     *depth = ImageBitDepth::I8;
     return;
-  case TextureFormat::RGB8:
+  case ImageFormat::RGB8:
     *components = 3;
     *depth = ImageBitDepth::I8;
     return;
-  case TextureFormat::RGBA8:
+  case ImageFormat::RGBA8:
     *components = 4;
     *depth = ImageBitDepth::I8;
     return;
-  case TextureFormat::SRGB8:
+  case ImageFormat::SRGB8:
     *components = 3;
     *depth = ImageBitDepth::I8;
     return;
-  case TextureFormat::SRGB8A8:
+  case ImageFormat::SRGB8A8:
     *components = 4;
     *depth = ImageBitDepth::I8;
     return;
-  case TextureFormat::R16:
+  case ImageFormat::R16:
     *components = 1;
     *depth = ImageBitDepth::I16;
     return;
-  case TextureFormat::RG16:
+  case ImageFormat::RG16:
     *components = 2;
     *depth = ImageBitDepth::I16;
     return;
-  case TextureFormat::RGB16:
+  case ImageFormat::RGB16:
     *components = 3;
     *depth = ImageBitDepth::I16;
     return;
-  case TextureFormat::RGBA16:
+  case ImageFormat::RGBA16:
     *components = 4;
     *depth = ImageBitDepth::I16;
     return;
-  case TextureFormat::R32f:
+  case ImageFormat::R32f:
     *components = 1;
     *depth = ImageBitDepth::F32;
     return;
-  case TextureFormat::RG32f:
+  case ImageFormat::RG32f:
     *components = 2;
     *depth = ImageBitDepth::F32;
     return;
-  case TextureFormat::RGB32f:
+  case ImageFormat::RGB32f:
     *components = 3;
     *depth = ImageBitDepth::F32;
     return;
-  case TextureFormat::RGBA32f:
+  case ImageFormat::RGBA32f:
     *components = 4;
     *depth = ImageBitDepth::F32;
     return;
@@ -266,8 +266,8 @@ void LoadImage(Status& status,
                ::byte** output,
                uint* width,
                uint* height,
-               TextureFormat::Enum* format,
-               TextureFormat::Enum requireFormat)
+               ImageFormat::Enum* format,
+               ImageFormat::Enum requireFormat)
 {
 #ifdef ZeroCustomPngSupport
   if (IsPngLoadFormat(requireFormat) && IsPng(stream))
@@ -399,8 +399,8 @@ void LoadImage(Status& status,
                ::byte** output,
                uint* width,
                uint* height,
-               TextureFormat::Enum* format,
-               TextureFormat::Enum requireFormat)
+               ImageFormat::Enum* format,
+               ImageFormat::Enum requireFormat)
 {
   FileStream stream(file);
   LoadImage(status, &stream, output, width, height, format, requireFormat);
@@ -411,8 +411,8 @@ void LoadImage(Status& status,
                ::byte** output,
                uint* width,
                uint* height,
-               TextureFormat::Enum* format,
-               TextureFormat::Enum requireFormat)
+               ImageFormat::Enum* format,
+               ImageFormat::Enum requireFormat)
 {
   File file;
   if (!file.Open(filename.c_str(), FileMode::Read, FileAccessPattern::Sequential, FileShare::Unspecified, &status))
@@ -427,8 +427,8 @@ void LoadImage(Status& status,
                ::byte** output,
                uint* width,
                uint* height,
-               TextureFormat::Enum* format,
-               TextureFormat::Enum requireFormat)
+               ImageFormat::Enum* format,
+               ImageFormat::Enum requireFormat)
 {
   FixedMemoryStream stream(encoded, size);
   LoadImage(status, &stream, output, width, height, format, requireFormat);
@@ -440,13 +440,13 @@ void LoadImage(Status& status, Stream* stream, Image* imageOut)
   ::byte* output = nullptr;
   uint width = 0;
   uint height = 0;
-  TextureFormat::Enum format = TextureFormat::None;
-  LoadImage(status, stream, &output, &width, &height, &format, TextureFormat::RGBA8);
+  ImageFormat::Enum format = ImageFormat::None;
+  LoadImage(status, stream, &output, &width, &height, &format, ImageFormat::RGBA8);
 
   // Note that Image::Set steals the data
   if (output && status.Succeeded())
   {
-    ErrorIf(format != TextureFormat::RGBA8, "Got back an invalid format from LoadImage");
+    ErrorIf(format != ImageFormat::RGBA8, "Got back an invalid format from LoadImage");
     imageOut->Set((ImagePixel*)output, width, height);
   }
 }
@@ -477,7 +477,7 @@ void SaveImage(Status& status,
                const ::byte* image,
                uint width,
                uint height,
-               TextureFormat::Enum format,
+               ImageFormat::Enum format,
                ImageSaveFormat::Enum imageType)
 {
   if (image == nullptr || width == 0 || height == 0)
@@ -552,7 +552,7 @@ void SaveImage(Status& status,
                const ::byte* image,
                uint width,
                uint height,
-               TextureFormat::Enum format,
+               ImageFormat::Enum format,
                ImageSaveFormat::Enum imageType)
 {
   FileStream stream(file);
@@ -564,7 +564,7 @@ void SaveImage(Status& status,
                const ::byte* image,
                uint width,
                uint height,
-               TextureFormat::Enum format,
+               ImageFormat::Enum format,
                ImageSaveFormat::Enum imageType)
 {
   File file;
@@ -575,7 +575,7 @@ void SaveImage(Status& status,
 
 void SaveImage(Status& status, Stream* stream, Image* image, ImageSaveFormat::Enum imageType)
 {
-  return SaveImage(status, stream, (::byte*)image->Data, image->Width, image->Height, TextureFormat::RGBA8, imageType);
+  return SaveImage(status, stream, (::byte*)image->Data, image->Width, image->Height, ImageFormat::RGBA8, imageType);
 }
 
 void SaveImage(Status& status, File& file, Image* image, ImageSaveFormat::Enum imageType)

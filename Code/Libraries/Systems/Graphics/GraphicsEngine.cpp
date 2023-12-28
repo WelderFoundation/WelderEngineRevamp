@@ -1637,7 +1637,7 @@ void GraphicsEngine::WriteTextureToFile(HandleOf<Texture> texture, StringParam f
 void SaveToImageJob::Execute()
 {
   Status status;
-  SaveImage(status, mFilename, mImage, mWidth, mHeight, mFormat, mImageType);
+  SaveImage(status, mFilename, mImage, mWidth, mHeight, TextureFormatToImageFormat(mFormat), mImageType);
   delete[] mImage;
 }
 

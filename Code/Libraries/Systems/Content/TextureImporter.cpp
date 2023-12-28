@@ -88,7 +88,7 @@ void ShortClamp(float& value)
   value = Math::Clamp(value, 0.0f, 65535.0f);
 }
 
-void ResizeImage(TextureFormat::Enum format,
+void ResizeImage(ImageFormat::Enum format,
                  const ::byte* srcImage,
                  uint srcWidth,
                  uint srcHeight,
@@ -125,7 +125,7 @@ void MipmapTexture(Array<MipHeader>& mipHeaders, Array<::byte*>& imageData, Text
     {
       uint newSize = newWidth * newHeight * GetPixelSize(format);
       ::byte* newImage = new ::byte[newSize];
-      ResizeImage(format, imageData[0], width, height, newImage, newWidth, newHeight);
+      ResizeImage(TextureFormatToImageFormat(format), imageData[0], width, height, newImage, newWidth, newHeight);
 
       delete[] imageData[0];
       imageData[0] = newImage;
@@ -151,7 +151,7 @@ void MipmapTexture(Array<MipHeader>& mipHeaders, Array<::byte*>& imageData, Text
     uint newSize = newWidth * newHeight * pixelSize;
 
     ::byte* newImage = new ::byte[newSize];
-    ResizeImage(format, image, width, height, newImage, newWidth, newHeight);
+    ResizeImage(TextureFormatToImageFormat(format), image, width, height, newImage, newWidth, newHeight);
 
     MipHeader header;
     header.mFace = TextureFace::None;
@@ -307,7 +307,7 @@ TextureImporter::TextureImporter(StringParam inputFile, StringParam outputFile, 
     mInputFile(inputFile),
     mOutputFile(outputFile),
     mMetaFile(metaFile),
-    mLoadFormat(TextureFormat::None),
+    mLoadFormat(ImageFormat::None),
     mImageContent(nullptr),
     mBuilder(nullptr),
     mMetaChanged(false)
@@ -411,7 +411,7 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
     {
       uint width = mMipHeaders[0].mWidth;
       uint height = mMipHeaders[0].mHeight;
-      uint pixelSize = GetPixelSize(mLoadFormat);
+      uint pixelSize = GetPixelSize(ImageFormatToTextureFormat(mLoadFormat));
 
       // Stop if image can't be down scaled anymore
       if (width > 1 || height > 1)
@@ -441,10 +441,10 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
   {
     u16* imageData = (u16*)mImageData[0];
 
-    mLoadFormat = TextureFormat::RGBA8;
+    mLoadFormat = ImageFormat::RGBA8;
     uint width = mMipHeaders[0].mWidth;
     uint height = mMipHeaders[0].mHeight;
-    uint pixelSize = GetPixelSize(mLoadFormat);
+    uint pixelSize = GetPixelSize(ImageFormatToTextureFormat(mLoadFormat));
     uint newSize = width * height * pixelSize;
 
     mMipHeaders[0].mDataSize = newSize;
@@ -467,7 +467,7 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
   {
     ::byte* imageData = mImageData[0];
     uint pixelCount = mMipHeaders[0].mWidth * mMipHeaders[0].mHeight;
-    uint pixelSize = GetPixelSize(mLoadFormat);
+    uint pixelSize = GetPixelSize(ImageFormatToTextureFormat(mLoadFormat));
 
     if (mBuilder->mPremultipliedAlpha)
     {
@@ -498,7 +498,7 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
   {
     ::byte* imageData = mImageData[0];
     uint pixelCount = mMipHeaders[0].mWidth * mMipHeaders[0].mHeight;
-    uint pixelSize = GetPixelSize(mLoadFormat);
+    uint pixelSize = GetPixelSize(ImageFormatToTextureFormat(mLoadFormat));
 
     if (mBuilder->mPremultipliedAlpha)
     {
@@ -528,7 +528,7 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
 
   if (mBuilder->mType == TextureType::TextureCube)
   {
-    ExtractCubemapFaces(status, mMipHeaders, mImageData, mLoadFormat);
+    ExtractCubemapFaces(status, mMipHeaders, mImageData, ImageFormatToTextureFormat(mLoadFormat));
     if (status.Failed())
     {
       // Resort to builing Texture2D so the resource at least builds
@@ -547,7 +547,7 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
     mBackupMipHeaders.Resize(mMipHeaders.Size());
     mBackupImageData.Resize(mImageData.Size());
 
-    uint pixelSize = GetPixelSize(mLoadFormat);
+    uint pixelSize = GetPixelSize(ImageFormatToTextureFormat(mLoadFormat));
     uint dataOffset = 0;
     float dimensionScale = Math::Sqrt(GetCompressionRatio(mBuilder->mCompression));
 
@@ -576,16 +576,16 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
   {
     bool compressed = mBuilder->mCompression != TextureCompression::None;
     if (mBuilder->mType == TextureType::Texture2D)
-      MipmapTexture(mMipHeaders, mImageData, mLoadFormat, compressed);
+      MipmapTexture(mMipHeaders, mImageData, ImageFormatToTextureFormat(mLoadFormat), compressed);
     else if (mBuilder->mType == TextureType::TextureCube)
-      MipmapCubemap(mMipHeaders, mImageData, mLoadFormat, compressed);
+      MipmapCubemap(mMipHeaders, mImageData, ImageFormatToTextureFormat(mLoadFormat), compressed);
 
     if (mBackupMipHeaders.Size())
     {
       if (mBuilder->mType == TextureType::Texture2D)
-        MipmapTexture(mBackupMipHeaders, mBackupImageData, mLoadFormat, false);
+        MipmapTexture(mBackupMipHeaders, mBackupImageData, ImageFormatToTextureFormat(mLoadFormat), false);
       else if (mBuilder->mType == TextureType::TextureCube)
-        MipmapCubemap(mBackupMipHeaders, mBackupImageData, mLoadFormat, false);
+        MipmapCubemap(mBackupMipHeaders, mBackupImageData, ImageFormatToTextureFormat(mLoadFormat), false);
     }
   }
 
@@ -608,7 +608,7 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
         newHeight = height + 4 - height % 4;
       if (newWidth != width || newHeight != height)
       {
-        uint newSize = newWidth * newHeight * GetPixelSize(mLoadFormat);
+        uint newSize = newWidth * newHeight * GetPixelSize(ImageFormatToTextureFormat(mLoadFormat));
         ::byte* newImage = new ::byte[newSize];
 
         ResizeImage(mLoadFormat, mImageData[i], width, height, newImage, newWidth, newHeight);
@@ -621,7 +621,7 @@ ImageProcessorCodes::Enum TextureImporter::ProcessTexture(Status& status)
       }
 
       nvtt::Surface surface;
-      ToNvttSurface(surface, width, height, mLoadFormat, mImageData[i]);
+      ToNvttSurface(surface, width, height, ImageFormatToTextureFormat(mLoadFormat), mImageData[i]);
 
       nvtt::CompressionOptions compressionOptions;
       compressionOptions.setFormat(NvttFormat(mBuilder->mCompression));
@@ -738,7 +738,7 @@ void TextureImporter::LoadImageData(Status& status, StringParam extension)
   }
 #endif
 
-  LoadImage(status, &stream, &imageData, &width, &height, &mLoadFormat, TextureFormat::RGBA8);
+  LoadImage(status, &stream, &imageData, &width, &height, &mLoadFormat, ImageFormat::RGBA8);
   if (imageData != nullptr)
     AddImageData(imageData, width, height);
 }
@@ -804,7 +804,7 @@ void TextureImporter::AddImageData(::byte* imageData, uint width, uint height)
   header.mWidth = width;
   header.mHeight = height;
   header.mDataOffset = 0;
-  header.mDataSize = width * height * GetPixelSize(mLoadFormat);
+  header.mDataSize = width * height * GetPixelSize(ImageFormatToTextureFormat(mLoadFormat));
 
   mMipHeaders.PushBack(header);
   mImageData.PushBack(imageData);

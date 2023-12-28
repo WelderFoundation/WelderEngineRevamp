@@ -860,7 +860,7 @@ void MipmapCubemap(Array<MipHeader>& mipHeaders, Array<::byte*>& imageData, Text
       {
         uint newSize = newWidth * newWidth * GetPixelSize(format);
         ::byte* newImage = new ::byte[newSize];
-        ResizeImage(format, imageData[i], width, width, newImage, newWidth, newWidth);
+        ResizeImage(TextureFormatToImageFormat(format), imageData[i], width, width, newImage, newWidth, newWidth);
 
         delete[] imageData[i];
         imageData[i] = newImage;

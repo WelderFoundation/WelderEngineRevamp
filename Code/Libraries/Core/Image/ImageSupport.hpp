@@ -10,29 +10,29 @@ struct ImageInfo
 {
   uint Width;
   uint Height;
-  TextureFormat::Enum Format;
+  ImageFormat::Enum Format;
 };
 
 // Supported formats are: R8, RGB8, RGBA8, R16, RGB16, RGBA16, R32f, RGB32f,
 // RGBA32f
 
 // Checks if the format is a valid load format (always returns true for None).
-bool IsImageLoadFormat(TextureFormat::Enum format);
+bool IsImageLoadFormat(ImageFormat::Enum format);
 
 // Checks if the format is a valid save format (always returns false for None).
-bool IsImageSaveFormat(TextureFormat::Enum format);
+bool IsImageSaveFormat(ImageFormat::Enum format);
 
 DeclareEnum4(ImageBitDepth, None, I8, I16, F32);
 
 // Returns a valid image load format from the number of components and the bit
 // depth. If the components or bit-depth (or combination) are unsupported, it
 // will return TextureFormat::None.
-TextureFormat::Enum ToImageFormat(int components, ImageBitDepth::Enum depth);
+ImageFormat::Enum ToImageFormat(int components, ImageBitDepth::Enum depth);
 
 // Gets the number of components and image bit depth from a given format.
 // If the format is not valid, then the components will be 0 and depth will be
 // None.
-void FromImageFormat(TextureFormat::Enum format, int* components, ImageBitDepth::Enum* depth);
+void FromImageFormat(ImageFormat::Enum format, int* components, ImageBitDepth::Enum* depth);
 
 // Returns a list of all the supported extensions, e.g. "png".
 const Array<String>& GetSupportedImageLoadExtensions();
@@ -56,30 +56,30 @@ void LoadImage(Status& status,
                ::byte** output,
                uint* width,
                uint* height,
-               TextureFormat::Enum* format,
-               TextureFormat::Enum requireFormat = TextureFormat::None);
+               ImageFormat::Enum* format,
+               ImageFormat::Enum requireFormat = ImageFormat::None);
 void LoadImage(Status& status,
                File& file,
                ::byte** output,
                uint* width,
                uint* height,
-               TextureFormat::Enum* format,
-               TextureFormat::Enum requireFormat = TextureFormat::None);
+               ImageFormat::Enum* format,
+               ImageFormat::Enum requireFormat = ImageFormat::None);
 void LoadImage(Status& status,
                StringParam filename,
                ::byte** output,
                uint* width,
                uint* height,
-               TextureFormat::Enum* format,
-               TextureFormat::Enum requireFormat = TextureFormat::None);
+               ImageFormat::Enum* format,
+               ImageFormat::Enum requireFormat = ImageFormat::None);
 void LoadImage(Status& status,
                ::byte* encoded,
                size_t size,
                ::byte** output,
                uint* width,
                uint* height,
-               TextureFormat::Enum* format,
-               TextureFormat::Enum requireFormat = TextureFormat::None);
+               ImageFormat::Enum* format,
+               ImageFormat::Enum requireFormat = ImageFormat::None);
 void LoadImage(Status& status, Stream* stream, Image* imageOut);
 void LoadImage(Status& status, File& file, Image* imageOut);
 void LoadImage(Status& status, StringParam filename, Image* imageOut);
@@ -93,21 +93,21 @@ void SaveImage(Status& status,
                const ::byte* image,
                uint width,
                uint height,
-               TextureFormat::Enum format,
+               ImageFormat::Enum format,
                ImageSaveFormat::Enum imageType = ImageSaveFormat::Png);
 void SaveImage(Status& status,
                File& file,
                const ::byte* image,
                uint width,
                uint height,
-               TextureFormat::Enum format,
+               ImageFormat::Enum format,
                ImageSaveFormat::Enum imageType = ImageSaveFormat::Png);
 void SaveImage(Status& status,
                StringParam filename,
                const ::byte* image,
                uint width,
                uint height,
-               TextureFormat::Enum format,
+               ImageFormat::Enum format,
                ImageSaveFormat::Enum imageType = ImageSaveFormat::Png);
 void SaveImage(Status& status, Stream* stream, Image* image, ImageSaveFormat::Enum imageType = ImageSaveFormat::Png);
 void SaveImage(Status& status, File& file, Image* image, ImageSaveFormat::Enum imageType = ImageSaveFormat::Png);

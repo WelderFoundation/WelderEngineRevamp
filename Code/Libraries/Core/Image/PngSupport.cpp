@@ -72,9 +72,9 @@ bool ReadPngInfo(Stream* stream, ImageInfo& info)
   int bitDepth = png_get_bit_depth(pngPtr, infoPtr);
 
   if (bitDepth == 16)
-    info.Format = TextureFormat::RGBA16;
+    info.Format = ImageFormat::RGBA16;
   else
-    info.Format = TextureFormat::RGBA8;
+    info.Format = ImageFormat::RGBA8;
 
   png_uint_32 color_type = png_get_color_type(pngPtr, infoPtr);
 
@@ -83,14 +83,14 @@ bool ReadPngInfo(Stream* stream, ImageInfo& info)
   return true;
 }
 
-bool IsPngLoadFormat(TextureFormat::Enum format)
+bool IsPngLoadFormat(ImageFormat::Enum format)
 {
-  return format == TextureFormat::None || IsPngSaveFormat(format);
+  return format == ImageFormat::None || IsPngSaveFormat(format);
 }
 
-bool IsPngSaveFormat(TextureFormat::Enum format)
+bool IsPngSaveFormat(ImageFormat::Enum format)
 {
-  return format == TextureFormat::RGBA8 || format == TextureFormat::RGBA16;
+  return format == ImageFormat::RGBA8 || format == ImageFormat::RGBA16;
 }
 
 void LoadPng(Status& status,
@@ -98,8 +98,8 @@ void LoadPng(Status& status,
              ::byte** output,
              uint* width,
              uint* height,
-             TextureFormat::Enum* format,
-             TextureFormat::Enum requireFormat)
+             ImageFormat::Enum* format,
+             ImageFormat::Enum requireFormat)
 {
   if (!IsPngLoadFormat(requireFormat))
   {
@@ -161,7 +161,7 @@ void LoadPng(Status& status,
   png_get_IHDR(pngPtr, infoPtr, &readWidth, &readHeight, &readDepth, &colorType, &interlaceType, nullptr, nullptr);
 
   // Strip 16 bits/color files down to 8 bits/color.
-  if (requireFormat == TextureFormat::RGBA8)
+  if (requireFormat == ImageFormat::RGBA8)
   {
     png_set_strip_16(pngPtr);
     readDepth = 8;
@@ -227,12 +227,12 @@ void LoadPng(Status& status,
   *height = readHeight;
 
   if (readDepth == 16)
-    *format = TextureFormat::RGBA16;
+    *format = ImageFormat::RGBA16;
   else
-    *format = TextureFormat::RGBA8;
+    *format = ImageFormat::RGBA8;
 }
 
-void SavePng(Status& status, Stream* stream, const ::byte* image, uint width, uint height, TextureFormat::Enum format)
+void SavePng(Status& status, Stream* stream, const ::byte* image, uint width, uint height, ImageFormat::Enum format)
 {
   if (!IsPngSaveFormat(format))
   {
@@ -261,7 +261,7 @@ void SavePng(Status& status, Stream* stream, const ::byte* image, uint width, ui
   }
 
   int bitDepth = 8;
-  if (format == TextureFormat::RGBA16)
+  if (format == ImageFormat::RGBA16)
     bitDepth = 16;
 
   // Set image attributes

@@ -352,7 +352,7 @@ bool IsHdr(Stream* stream)
 
 bool ReadHdrInfo(Stream* stream, ImageInfo& info)
 {
-  info.Format = TextureFormat::RGB32f;
+  info.Format = ImageFormat::RGB32f;
 
   Status status;
   ParseHdrHeader(status, stream, info.Width, info.Height);
@@ -360,14 +360,14 @@ bool ReadHdrInfo(Stream* stream, ImageInfo& info)
   return status.Succeeded();
 }
 
-bool IsHdrLoadFormat(TextureFormat::Enum format)
+bool IsHdrLoadFormat(ImageFormat::Enum format)
 {
-  return format == TextureFormat::None || IsHdrSaveFormat(format);
+  return format == ImageFormat::None || IsHdrSaveFormat(format);
 }
 
-bool IsHdrSaveFormat(TextureFormat::Enum format)
+bool IsHdrSaveFormat(ImageFormat::Enum format)
 {
-  return format == TextureFormat::RGB32f;
+  return format == ImageFormat::RGB32f;
 }
 
 void LoadHdr(Status& status,
@@ -375,8 +375,8 @@ void LoadHdr(Status& status,
              ::byte** output,
              uint* width,
              uint* height,
-             TextureFormat::Enum* format,
-             TextureFormat::Enum requireFormat)
+             ImageFormat::Enum* format,
+             ImageFormat::Enum requireFormat)
 {
   if (!IsHdrLoadFormat(requireFormat))
   {
@@ -444,10 +444,10 @@ void LoadHdr(Status& status,
   *output = (::byte*)outputImage;
 
   // We always output the RGB32f format.
-  *format = TextureFormat::RGB32f;
+  *format = ImageFormat::RGB32f;
 }
 
-void SaveHdr(Status& status, Stream* stream, const ::byte* image, uint width, uint height, TextureFormat::Enum format)
+void SaveHdr(Status& status, Stream* stream, const ::byte* image, uint width, uint height, ImageFormat::Enum format)
 {
   if (!IsHdrSaveFormat(format))
   {

@@ -6,6 +6,13 @@
 #include "Engine/EngineStandard.hpp"
 #include "SpatialPartition/SpatialPartitionStandard.hpp"
 #include "Image/ImageStandard.hpp"
+#include "RendererBase/RendererBaseStandard.hpp"
+
+namespace Zero
+{
+ImageFormat::Enum TextureFormatToImageFormat(TextureFormat::Enum format);
+TextureFormat::Enum ImageFormatToTextureFormat(ImageFormat::Enum format);
+} // namespace Zero
 
 namespace Zero
 {
