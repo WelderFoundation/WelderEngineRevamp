@@ -17,3 +17,7 @@ elseif(${WELDER_PLATFORM} STREQUAL "Stub")
 else()
   message(FATAL_ERROR "No renderer available for target '${WELDER_TARGETOS}'.")
 endif()
+
+add_subdirectory(RHI)
+add_subdirectory(RHIVulkan)
+add_subdirectory(RPI)
