@@ -1,3 +1,4 @@
+add_subdirectory(Engine)
 add_subdirectory(Content)
 add_subdirectory(Graphics)
 add_subdirectory(Networking)
