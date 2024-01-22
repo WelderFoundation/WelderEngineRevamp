@@ -82,7 +82,7 @@ void RunGroupImport(ImportOptions& options)
     {
       Zilch::CompilationErrors errors;
       JsonValue* gltf = JsonReader::ReadIntoTreeFromFile(errors, fullPath, nullptr);
-      if (!errors.WasError)
+      if (gltf != nullptr && !errors.WasError)
       {
         JsonValue* buffers = gltf->GetMember("buffers", JsonErrorMode::DefaultValue);
         if (buffers != nullptr)
@@ -103,6 +103,7 @@ void RunGroupImport(ImportOptions& options)
             }
           }
         }
+        delete gltf;
       }
     }
 
