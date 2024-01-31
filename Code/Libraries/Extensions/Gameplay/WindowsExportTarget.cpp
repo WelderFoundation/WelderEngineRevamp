@@ -43,7 +43,7 @@ void WindowsExportTarget::ExportApplication()
     Archive engineArchive(ArchiveMode::Compressing);
     ArchiveLibraryOutput(engineArchive, "FragmentCore");
     ArchiveLibraryOutput(engineArchive, "Loading");
-    ArchiveLibraryOutput(engineArchive, "ZeroCore");
+    ArchiveLibraryOutput(engineArchive, "Core");
     ArchiveLibraryOutput(engineArchive, "UiWidget");
     ArchiveLibraryOutput(engineArchive, "EditorUi");
     ArchiveLibraryOutput(engineArchive, "Editor");

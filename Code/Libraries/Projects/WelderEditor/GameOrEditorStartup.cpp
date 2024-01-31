@@ -104,7 +104,7 @@ void GameOrEditorStartup::UserStartup()
   else
   {
     Array<String> coreLibs;
-    coreLibs.PushBack("ZeroCore");
+    coreLibs.PushBack("Core");
     coreLibs.PushBack("UiWidget");
     coreLibs.PushBack("EditorUi");
     coreLibs.PushBack("Editor");

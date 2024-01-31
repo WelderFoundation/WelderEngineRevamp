@@ -251,7 +251,7 @@ LibraryView* EditorMain::CreateLibraryView(bool showCore, bool autoDock)
   if (!showCore)
   {
     library->AddHiddenLibrary("Loading");
-    library->AddHiddenLibrary("ZeroCore");
+    library->AddHiddenLibrary("Core");
     library->AddHiddenLibrary("UiWidget");
     library->AddHiddenLibrary("Editor");
     library->AddHiddenLibrary("EditorUi");

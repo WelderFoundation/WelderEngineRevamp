@@ -23,7 +23,7 @@ void LoadGamePackages(StringParam projectFile, Cog* projectCog)
   String projectDirectory = FilePath::GetDirectoryPath(projectFile);
   LoadResourcePackageRelative(projectDirectory, "FragmentCore");
   LoadResourcePackageRelative(projectDirectory, "Loading");
-  LoadResourcePackageRelative(projectDirectory, "ZeroCore");
+  LoadResourcePackageRelative(projectDirectory, "Core");
   LoadResourcePackageRelative(projectDirectory, "UiWidget");
   LoadResourcePackageRelative(projectDirectory, "EditorUi");
   LoadResourcePackageRelative(projectDirectory, "Editor");

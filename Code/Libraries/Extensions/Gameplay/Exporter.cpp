@@ -644,7 +644,7 @@ void Exporter::CopyContent(Status& status, String outputDirectory, ExportTarget*
   // Copy content output
   ExportUtility::CopyLibraryOut(outputDirectory, "FragmentCore");
   ExportUtility::CopyLibraryOut(outputDirectory, "Loading");
-  ExportUtility::CopyLibraryOut(outputDirectory, "ZeroCore");
+  ExportUtility::CopyLibraryOut(outputDirectory, "Core");
   ExportUtility::CopyLibraryOut(outputDirectory, "UiWidget");
   ExportUtility::CopyLibraryOut(outputDirectory, "EditorUi");
   ExportUtility::CopyLibraryOut(outputDirectory, "Editor");

@@ -72,7 +72,7 @@ const executables = [
     resourceLibraries: [
       "FragmentCore",
       "Loading",
-      "ZeroCore",
+      "Core",
       "UiWidget",
       "EditorUi",
       "Editor",
@@ -94,7 +94,7 @@ const executables = [
     resourceLibraries: [
       "FragmentCore",
       "Loading",
-      "ZeroCore",
+      "Core",
       "ZeroLauncherResources"
     ],
     vfsOnlyPackage: []

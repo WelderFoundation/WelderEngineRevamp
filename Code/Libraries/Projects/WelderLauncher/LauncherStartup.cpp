@@ -53,7 +53,7 @@ StartupPhaseResult::Enum LauncherStartup::UserInitialize()
 void LauncherStartup::UserStartup()
 {
   Array<String> coreLibs;
-  coreLibs.PushBack("ZeroCore");
+  coreLibs.PushBack("Core");
   coreLibs.PushBack("ZeroLauncherResources");
   LoadCoreContent(coreLibs);
 }
