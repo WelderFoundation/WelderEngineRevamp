@@ -54,7 +54,7 @@ void LauncherStartup::UserStartup()
 {
   Array<String> coreLibs;
   coreLibs.PushBack("Core");
-  coreLibs.PushBack("ZeroLauncherResources");
+  coreLibs.PushBack("Launcher");
   LoadCoreContent(coreLibs);
 }
 

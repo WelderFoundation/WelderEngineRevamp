@@ -95,7 +95,7 @@ const executables = [
       "FragmentCore",
       "Loading",
       "Core",
-      "ZeroLauncherResources"
+      "Launcher"
     ],
     vfsOnlyPackage: []
   }

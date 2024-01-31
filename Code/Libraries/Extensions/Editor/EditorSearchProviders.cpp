@@ -230,7 +230,7 @@ void LibrarySearchProvider::Search(SearchData& search)
   forRange (ContentLibrary* library, mLibraries.Values())
   {
     String& name = library->Name;
-    if (name == "ZeroLauncherResources")
+    if (name == "Launcher")
       continue;
 
     // Match on the name
