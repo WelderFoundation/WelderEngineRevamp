@@ -41,6 +41,8 @@ CameraPreview::CameraPreview(
   mTargetCamera = cameraObject;
   mRenderer = renderer;
 
+  mCameraViewportDrawer = new CameraViewportDrawer(this, cameraObject);
+
   //mViewport->SetCamera(cameraObject);
   //mViewport->SetTargetSpace(cameraObject->GetSpace());
   //// mViewport->SetRenderer(renderer);
@@ -51,7 +53,7 @@ CameraPreview::CameraPreview(
   ConnectThisTo(mTargetViewport, Events::Deactivated, Deactivate);
 
   // We want to destroy ourself when we're no longer selected
-  ConnectThisTo(selection, Events::SelectionChanged, OnSelectionChanged);
+  ConnectThisTo(selection, Events::SelectionFinal, OnSelectionChanged);
 
   // We want to put ourselves off the bottom of the
   // screen so that we can slide in
@@ -108,6 +110,9 @@ void CameraPreview::UpdateTransform()
   //mViewport->SetTranslation(SnapToPixels(lr.Translation));
   //mViewport->SetSize(SnapToPixels(lr.Size));
 
+  mCameraViewportDrawer->SetSize(mSize);
+  //mViewport->SetSize(mSize, mSize);
+
   FloatingComposite::UpdateTransform();
 }
 
@@ -130,27 +135,27 @@ void CameraPreview::UpdateTransform(Vec3Param posOffset)
  void TryOpenPreview(Cog* cameraCog, EditorViewport* targetViewport, MetaSelection* selection)
 {
    Camera* camera = cameraCog->has(Camera);
-   if(camera == NULL)
+   if(camera == nullptr)
      return;
 
    Cog* viewport = camera->GetCameraViewportCog();
-   if(viewport == NULL)
+   if (viewport == nullptr)
      return;
 
    CameraViewport* cameraViewport = viewport->has(CameraViewport);
-   if(cameraViewport == NULL)
+   if (cameraViewport == nullptr)
      return;
 
    Cog* rendererCog = cameraViewport->mRendererPath.GetCog();
-   if(rendererCog == NULL)
+   if (rendererCog == nullptr)
      return;
 
    ////No renderer found use editor renderer
-   ////if(rendererCog == NULL)
+   ////if(rendererCog == nullptr)
    ////  rendererCog = cameraCog->GetSpace()->FindObjectByName(SpecialCogNames::EditorCamera);
 
    ////Renderer* renderer = rendererCog->has(Renderer);
-   ////if(renderer == NULL)
+   ////if(renderer == nullptr)
    ////  return;
 
    ////if(renderer->InUse())

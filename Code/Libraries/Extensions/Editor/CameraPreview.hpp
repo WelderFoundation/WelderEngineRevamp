@@ -39,6 +39,8 @@ public:
 
   /// The renderer used to display the scene
   CogId mRenderer;
+
+  CameraViewportDrawer* mCameraViewportDrawer;
 };
 
 void TryOpenPreview(Cog* cameraCog, EditorViewport* targetViewport, MetaSelection* selection);
