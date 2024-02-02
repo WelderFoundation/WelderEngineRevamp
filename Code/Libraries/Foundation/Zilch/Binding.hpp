@@ -717,19 +717,16 @@ ZeroShared bool BoundTypeHelperIsInitialized(BoundType* type);
 bool BoundTypeHelperIsInitializedAssert(BoundType* type);
 String BoundTypeHelperGetName(BoundType* type);
 ZeroShared void LibraryBuilderHelperAddNativeBoundType(LibraryBuilder& builder,
-                                            BoundType* type,
-                                            BoundType* base,
-                                            TypeCopyMode::Enum mode);
+                                                       BoundType* type,
+                                                       BoundType* base,
+                                                       TypeCopyMode::Enum mode);
 ZeroShared void InitializeTypeHelper(StringParam originalName, BoundType* type, size_t size, size_t rawVirtualcount);
 template <typename T>
 ZeroSharedTemplate T InternalReadRef(::byte* stackFrame);
 
 template <typename T>
 Handle::Handle(const HandleOf<T>& rhs) :
-    StoredType(rhs.StoredType),
-    Manager(rhs.Manager),
-    Offset(rhs.Offset),
-    Flags(rhs.Flags)
+    StoredType(rhs.StoredType), Manager(rhs.Manager), Offset(rhs.Offset), Flags(rhs.Flags)
 {
   // The data of a handle type is always memory-copyable
   memcpy(this->Data, rhs.Data, sizeof(this->Data));
@@ -1077,13 +1074,13 @@ public:
       }                                                                                                                \
       /* Read our object representation from either stack data or handle data                                          \
        */                                                                                                              \
-      static typename ZilchStaticType(SelfType)::ReadType(Read)(::byte * from)                                          \
+      static typename ZilchStaticType(SelfType)::ReadType(Read)(::byte * from)                                         \
       {                                                                                                                \
         return *(SelfType*)from;                                                                                       \
       }                                                                                                                \
       /* Write our object representation to either stack data or handle data                                           \
        */                                                                                                              \
-      static void(Write)(const SelfType& value, ::byte* to)                                                             \
+      static void(Write)(const SelfType& value, ::byte* to)                                                            \
       {                                                                                                                \
         memcpy(to, &value, sizeof(SelfType));                                                                          \
       }                                                                                                                \
@@ -1109,13 +1106,13 @@ public:
       }                                                                                                                \
       /* Read our object representation from either stack data or handle data                                          \
        */                                                                                                              \
-      static typename ZilchStaticType(SelfType)::ReadType(Read)(::byte * from)                                          \
+      static typename ZilchStaticType(SelfType)::ReadType(Read)(::byte * from)                                         \
       {                                                                                                                \
         return ConvertToRedirect(*(RepresentedType*)from);                                                             \
       }                                                                                                                \
       /* Write our object representation to either stack data or handle data                                           \
        */                                                                                                              \
-      static void(Write)(const SelfType& value, ::byte* to)                                                             \
+      static void(Write)(const SelfType& value, ::byte* to)                                                            \
       {                                                                                                                \
         new (to) RepresentedType(ConvertFromRedirect(value));                                                          \
       }                                                                                                                \
@@ -1237,17 +1234,17 @@ BoundType* InitializeType(const char* initializingTypeName, SetupFunction setupT
   return type;
 };
 
-  // A helper for initializing types that belong to a library
+// A helper for initializing types that belong to a library
 #  define ZilchInitializeTypeAs(Type, Name)                                                                            \
     ZZ::InitializeType<Type, ZilchLibrary, void (*)(Type*, ZZ::LibraryBuilder&, ZZ::BoundType*)>(Name)
-#  define ZilchInitializeType(Type) ZilchInitializeTypeAs(Type, #  Type)
+#  define ZilchInitializeType(Type) ZilchInitializeTypeAs(Type, #Type)
 
-  // A helper for initializing types that belong to a library
+// A helper for initializing types that belong to a library
 #  define ZilchInitializeExternalTypeAs(Type, Name)                                                                    \
     ZZ::InitializeType<Type, ZilchLibrary, void (*)(Type*, ZZ::LibraryBuilder&, ZZ::BoundType*)>(Name, ZilchSetupType)
-#  define ZilchInitializeExternalType(Type) ZilchInitializeExternalTypeAs(Type, #  Type)
+#  define ZilchInitializeExternalType(Type) ZilchInitializeExternalTypeAs(Type, #Type)
 
-  // Declares a zilch derived type (belongs inside the type definition)
+// Declares a zilch derived type (belongs inside the type definition)
 #  define ZilchDeclareDerivedTypeExplicit(SelfType, BaseType, CopyMode)                                                \
   public:                                                                                                              \
     /* Current class being bound and it's base class */                                                                \
@@ -1271,16 +1268,16 @@ BoundType* InitializeType(const char* initializingTypeName, SetupFunction setupT
     /* they may choose what they want to bind to reflection */                                                         \
     static void ZilchSetupType(ZZ::LibraryBuilder& builder, ZZ::BoundType* type)
 
-  // Declares a zilch base type (belongs inside the type definition)
+// Declares a zilch base type (belongs inside the type definition)
 #  define ZilchDeclareBaseTypeExplicit(SelfType, CopyMode)                                                             \
     ZilchDeclareDerivedTypeExplicit(SelfType, ZZ::NoType, CopyMode)
 
-  // Completely prevents binding from occurring with this type,
-  // including calls like ZilchTypeId() and any sort of bind macro
+// Completely prevents binding from occurring with this type,
+// including calls like ZilchTypeId() and any sort of bind macro
 #  define ZilchDoNotAllowBinding() static void ZilchDoNotBind();
 
-  // Declares a zilch type (belongs inside the type definition)
-  // Implicitly deduces self and base types being bound
+// Declares a zilch type (belongs inside the type definition)
+// Implicitly deduces self and base types being bound
 #  define ZilchDeclareType(ClassType, CopyMode)                                                                        \
   public:                                                                                                              \
     /* Binding macros need the current class being bound */                                                            \
@@ -1307,9 +1304,9 @@ BoundType* InitializeType(const char* initializingTypeName, SetupFunction setupT
 #  define ZilchDeclareExternalType(SelfType)                                                                           \
     void ZilchSetupType(SelfType*, ZZ::LibraryBuilder& builder, ZZ::BoundType* type);
 
-  // The declaration of the external type must be within the same namespace as
-  // the definition Alternatively, all the externally bound types can be defined
-  // ABOVE the library initialization
+// The declaration of the external type must be within the same namespace as
+// the definition Alternatively, all the externally bound types can be defined
+// ABOVE the library initialization
 #  define ZilchDefineExternalDerivedType(SelfType, SelfBaseType, TypeCopyMode, builder, type)                          \
     /* This is just a forward declared template which is literally defined                                             \
      * below by the user */                                                                                            \
@@ -1328,8 +1325,8 @@ BoundType* InitializeType(const char* initializingTypeName, SetupFunction setupT
 #  define ZilchDefineExternalBaseType(SelfType, CopyMode, builder, type)                                               \
     ZilchDefineExternalDerivedType(SelfType, ZZ::NoType, CopyMode, builder, type)
 
-  /************************************* ENUM
-   * ************************************/
+/************************************* ENUM
+ * ************************************/
 #  define ZilchBindEnumValues(enumType)                                                                                \
     for (uint i = 0; i < enumType::Size; ++i)                                                                          \
     {                                                                                                                  \
@@ -1343,7 +1340,7 @@ BoundType* InitializeType(const char* initializingTypeName, SetupFunction setupT
       ZilchBindEnumValues(enumType);                                                                                   \
     }
 
-#  define ZilchInitializeEnum(enumType) ZilchInitializeExternalTypeAs(enumType::Enum, #  enumType);
+#  define ZilchInitializeEnum(enumType) ZilchInitializeExternalTypeAs(enumType::Enum, #enumType);
 #  define ZilchInitializeEnumAs(enumType, name) ZilchInitializeExternalTypeAs(enumType::Enum, name);
 
 /********************************** PRIMITIVE

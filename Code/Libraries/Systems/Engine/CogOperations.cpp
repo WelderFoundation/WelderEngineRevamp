@@ -416,8 +416,7 @@ void AttachOperation::Redo()
 
 // Detach Operation
 DetachOperation::DetachOperation(Cog* object, bool relativeDetach) :
-    mRelativeDetach(relativeDetach),
-    mObjectUndoHandle(object)
+    mRelativeDetach(relativeDetach), mObjectUndoHandle(object)
 {
   Cog* parent = object->GetParent();
   ErrorIf(object == nullptr || parent == nullptr, "Invalid object given to DetachOperation");
@@ -564,8 +563,7 @@ void DetachOperation::Redo()
 }
 
 ReorderOperation::ReorderOperation(Cog* movingObject, uint movingToIndex) :
-    mWasParentChildOrderLocallyModified(false),
-    mMovingObjectHandle(movingObject)
+    mWasParentChildOrderLocallyModified(false), mMovingObjectHandle(movingObject)
 {
   ErrorIf(movingObject == nullptr, "Invalid object given to ReorderOperation");
 
@@ -763,8 +761,7 @@ void UploadToArchetypeOperation::RebuildArchetypes(Cog* cog)
 }
 
 UploadToNewArchetypeOperation::UploadToNewArchetypeOperation(Cog* object) :
-    UploadToArchetypeOperation(object),
-    mUploadedToNewArchetype(false)
+    UploadToArchetypeOperation(object), mUploadedToNewArchetype(false)
 {
   mNewChildId = GenerateUniqueId64();
 

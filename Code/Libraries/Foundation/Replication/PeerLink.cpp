@@ -1897,10 +1897,7 @@ MessageReceiptId LinkPlugin::Send(Status& status,
 }
 
 LinkPlugin::LinkPlugin(size_t messageTypeCount) :
-    mName(),
-    mLink(nullptr),
-    mMessageTypeStart(0),
-    mMessageTypeCount(MessageType(messageTypeCount))
+    mName(), mLink(nullptr), mMessageTypeStart(0), mMessageTypeCount(MessageType(messageTypeCount))
 {
 }
 

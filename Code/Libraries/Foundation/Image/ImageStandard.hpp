@@ -33,7 +33,7 @@ DeclareEnum25(ImageFormat,
               Depth32f, // depth
               Depth24Stencil8,
               Depth32fStencil8Pad24); // depth-stencil
-}
+} // namespace Zero
 
 #include "ImageSupport.hpp"
 #include "PngSupport.hpp"

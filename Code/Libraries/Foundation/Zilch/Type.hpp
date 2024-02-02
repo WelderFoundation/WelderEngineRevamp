@@ -431,11 +431,7 @@ public:
 
   MemberRange(
       BoundType* type, StringParam name, Type* declaredType, Members::Enum options, BoundType* memberKind = nullptr) :
-      IteratingType(type),
-      DerivedType(type),
-      Name(name),
-      DeclaredType(declaredType),
-      CurrentMember(nullptr)
+      IteratingType(type), DerivedType(type), Name(name), DeclaredType(declaredType), CurrentMember(nullptr)
   {
     // If neither instance or static is specified, then assume both
     if ((options & (Members::Static | Members::Instance)) == 0)

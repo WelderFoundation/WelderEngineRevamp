@@ -48,8 +48,7 @@ Vec2 MenuButton::GetMinSize()
 }
 
 MenuTextButton::MenuTextButton(Composite* parent, StringParam style, LauncherMenu::Type menu) :
-    TextButton(parent, style),
-    mMenu(menu)
+    TextButton(parent, style), mMenu(menu)
 {
   SetStyle(TextButtonStyle::Modern);
   DeSelect();

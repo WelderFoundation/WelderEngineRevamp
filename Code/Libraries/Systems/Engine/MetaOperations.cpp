@@ -185,8 +185,7 @@ ZilchDefineType(PropertyOperation, builder, type)
 }
 
 PropertyOperation::PropertyOperation(HandleParam object, PropertyPathParam property, AnyParam before, AnyParam after) :
-    MetaOperation(object),
-    mPropertyPath(property)
+    MetaOperation(object), mPropertyPath(property)
 {
   MetaOwner* owner = object.StoredType->HasInherited<MetaOwner>();
   if (owner && owner->GetOwner(object).IsNotNull())
@@ -319,10 +318,7 @@ AddRemoveComponentOperation::AddRemoveComponentOperation(HandleParam object,
                                                          ComponentOperation::Enum mode,
                                                          StringParam componentData,
                                                          uint componentIndex) :
-    MetaOperation(object),
-    mComposition(object.StoredType),
-    mComponentType(componentType),
-    mRemovedObjectState(nullptr)
+    MetaOperation(object), mComposition(object.StoredType), mComponentType(componentType), mRemovedObjectState(nullptr)
 {
   mNotifyModified = true;
 
@@ -709,9 +705,7 @@ void RevertPropertyOperation::Redo()
 }
 
 RestoreChildOperation::RestoreChildOperation(HandleParam parent, ObjectState::ChildId& childId) :
-    MetaOperation(parent),
-    mChildId(childId),
-    mInheritance(parent.StoredType)
+    MetaOperation(parent), mChildId(childId), mInheritance(parent.StoredType)
 {
   mName = BuildString("RestoreChild on '", GetNameFromHandle(parent), "'");
 }
@@ -745,9 +739,7 @@ void RestoreChildOperation::Redo()
 }
 
 RestoreChildOrderOperation::RestoreChildOrderOperation(HandleParam object) :
-    MetaOperation(object),
-    mMetaOperations(object.StoredType),
-    mInheritance(object.StoredType)
+    MetaOperation(object), mMetaOperations(object.StoredType), mInheritance(object.StoredType)
 {
   mName = BuildString("RestoreChildOrder on '", GetNameFromHandle(object), "'");
 

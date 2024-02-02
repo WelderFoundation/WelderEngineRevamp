@@ -56,8 +56,7 @@ IpAddress::IpAddress() : SocketAddress(), mHostPortString()
 }
 
 IpAddress::IpAddress(Status& status, StringParam host, uint port, InternetProtocol::Enum internetProtocol) :
-    SocketAddress(),
-    mHostPortString()
+    SocketAddress(), mHostPortString()
 {
   SetHost(status, host, internetProtocol);
   if (status.Succeeded())
@@ -70,8 +69,7 @@ IpAddress::IpAddress(Status& status, StringParam host, uint port) : SocketAddres
     SetPort(status, port);
 }
 IpAddress::IpAddress(StringParam host, uint port, InternetProtocol::Enum internetProtocol) :
-    SocketAddress(),
-    mHostPortString()
+    SocketAddress(), mHostPortString()
 {
   Status status;
   SetHost(status, host, internetProtocol);

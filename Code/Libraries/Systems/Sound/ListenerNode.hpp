@@ -14,9 +14,7 @@ public:
   {
   }
   ListenerWorldPositionInfo(const Vec3& position, const Vec3& velocity, const Mat3& worldMatrix) :
-      mPosition(position),
-      mVelocity(velocity),
-      mWorldMatrix(worldMatrix)
+      mPosition(position), mVelocity(velocity), mWorldMatrix(worldMatrix)
   {
   }
 

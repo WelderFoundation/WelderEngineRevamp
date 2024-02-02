@@ -107,9 +107,7 @@ bool DelegateTypePolicy::Equal(DelegateType* a, DelegateType* b) const
 }
 
 LibraryBuilder::LibraryBuilder(StringParam name, StringParam namespaceForPlugins) :
-    UserData(nullptr),
-    CreatableInScriptDefault(true),
-    ComputedDelegateAndFunctionSizes(false)
+    UserData(nullptr), CreatableInScriptDefault(true), ComputedDelegateAndFunctionSizes(false)
 {
   // Start out by creating a new library that we'll populate
   this->BuiltLibrary = LibraryRef(new Library());
@@ -2376,9 +2374,7 @@ String Module::BuildDocumentationHtml()
 }
 
 InstantiatedTemplate::InstantiatedTemplate() :
-    Type(nullptr),
-    ExpectedArguments(0),
-    Result(TemplateResult::FailedInstantiatorDidNotReturnType)
+    Type(nullptr), ExpectedArguments(0), Result(TemplateResult::FailedInstantiatorDidNotReturnType)
 {
 }
 

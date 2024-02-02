@@ -21,10 +21,7 @@ Completion::Completion(StringParam name) : Name(name), AssociatedResourceId(0), 
 }
 
 Completion::Completion(StringParam name, StringParam description) :
-    Name(name),
-    Description(description),
-    AssociatedResourceId(0),
-    Hidden(false)
+    Name(name), Description(description), AssociatedResourceId(0), Hidden(false)
 {
 }
 

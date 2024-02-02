@@ -255,8 +255,7 @@ public:
 
   /// Move Constructor
   LockedRange(MoveReference<LockedRange> rhs) :
-      mContainer(ZeroMove(rhs->mContainer)),
-      mRange(mContainer.All()) // This is correct
+      mContainer(ZeroMove(rhs->mContainer)), mRange(mContainer.All()) // This is correct
   {
   }
 

@@ -17,31 +17,24 @@ StringRange::StringRange(cstr cstring) : mOriginalString(cstring)
 }
 
 StringRange::StringRange(StringParam str) :
-    mOriginalString(str),
-    mBegin(str.Data()),
-    mEnd(str.Data() + str.SizeInBytes())
+    mOriginalString(str), mBegin(str.Data()), mEnd(str.Data() + str.SizeInBytes())
 {
 }
 
 StringRange::StringRange(StringRangeParam strRange) :
-    mOriginalString(strRange.mOriginalString),
-    mBegin(strRange.mBegin),
-    mEnd(strRange.mEnd)
+    mOriginalString(strRange.mOriginalString), mBegin(strRange.mBegin), mEnd(strRange.mEnd)
 {
 }
 
 StringRange::StringRange(StringIterator pbegin, StringIterator pend) :
-    mOriginalString(pbegin.mIteratorRange.mOriginalString),
-    mBegin(pbegin.Data()),
-    mEnd(pend.Data())
+    mOriginalString(pbegin.mIteratorRange.mOriginalString), mBegin(pbegin.Data()), mEnd(pend.Data())
 {
   ErrorIf(pbegin.mIteratorRange.mOriginalString != pend.mIteratorRange.mOriginalString,
           "Got two iterators from different strings");
 }
 
 StringRange::StringRange(StringIterator pbegin, size_t sizeInBytes) :
-    mOriginalString(pbegin.mIteratorRange.mOriginalString),
-    mBegin(pbegin.Data())
+    mOriginalString(pbegin.mIteratorRange.mOriginalString), mBegin(pbegin.Data())
 {
   int bytesToEndFromIterator = mOriginalString.SizeInBytes() - (pbegin.Data() - mOriginalString.Data());
   // if someone really messed up bytes to end could be negative, use int.
@@ -73,9 +66,7 @@ StringRange::StringRange(cstr originalBegin, cstr currentByte, cstr endByte) :
 
 // For internal iterator use only
 StringRange::StringRange(StringParam orginalStr, cstr currentByte, cstr endByte) :
-    mOriginalString(orginalStr),
-    mBegin(currentByte),
-    mEnd(endByte)
+    mOriginalString(orginalStr), mBegin(currentByte), mEnd(endByte)
 {
 }
 

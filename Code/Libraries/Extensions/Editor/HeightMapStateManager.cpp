@@ -12,8 +12,7 @@ ZilchDefineType(HeightMapBrushStroke, builder, type)
 }
 
 HeightMapBrushStroke::HeightMapBrushStroke(float radius, float featherRadius) :
-    mRadius(radius),
-    mFeatherRadius(featherRadius)
+    mRadius(radius), mFeatherRadius(featherRadius)
 {
 }
 

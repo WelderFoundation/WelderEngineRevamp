@@ -16,7 +16,7 @@ namespace Zilch
 #  define ZE ::Zero
 
 // Helper macros for stringifiying previous #defines
-#  define ZilchStr(Argument) #  Argument
+#  define ZilchStr(Argument) #Argument
 #  define ZilchStringify(Argument) ZilchStr(Argument)
 
 // Don't allow copying of a type

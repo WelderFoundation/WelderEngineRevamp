@@ -10,16 +10,12 @@ FragmentedReceipt::FragmentedReceipt() : mReceiptId(0), mPacketRecords(), mIsCom
 {
 }
 FragmentedReceipt::FragmentedReceipt(MessageReceiptId receiptId) :
-    mReceiptId(receiptId),
-    mPacketRecords(),
-    mIsComplete(false)
+    mReceiptId(receiptId), mPacketRecords(), mIsComplete(false)
 {
 }
 
 FragmentedReceipt::FragmentedReceipt(MoveReference<FragmentedReceipt> rhs) :
-    mReceiptId(rhs->mReceiptId),
-    mPacketRecords(ZeroMove(rhs->mPacketRecords)),
-    mIsComplete(rhs->mIsComplete)
+    mReceiptId(rhs->mReceiptId), mPacketRecords(ZeroMove(rhs->mPacketRecords)), mIsComplete(rhs->mIsComplete)
 {
 }
 

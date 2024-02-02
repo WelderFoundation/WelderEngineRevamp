@@ -25,8 +25,7 @@ Modal* ActiveProjectMenu::OpenProject(Composite* modalParent, CachedProject* cac
 }
 
 ActiveProjectMenu::ActiveProjectMenu(Composite* parent, LauncherWindow* launcher) :
-    Composite(parent),
-    mLauncher(launcher)
+    Composite(parent), mLauncher(launcher)
 {
   mActiveSizeTask = nullptr;
 

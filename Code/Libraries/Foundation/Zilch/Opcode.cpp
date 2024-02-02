@@ -19,9 +19,7 @@ Operand::Operand(OperandIndex local) : Type(OperandType::Local), HandleConstantL
 }
 
 Operand::Operand(OperandIndex handleConstantLocal, size_t field, OperandType::Enum type) :
-    Type(type),
-    HandleConstantLocal(handleConstantLocal),
-    FieldOffset(field)
+    Type(type), HandleConstantLocal(handleConstantLocal), FieldOffset(field)
 {
 }
 

@@ -81,8 +81,7 @@ void ResourceSystem::SetupDefaults()
         resource->mContentItem->ShowInEditor = true;
 
         // Moved default font to the Loading library for progress display
-        ErrorIf(resource->mContentItem->mLibrary->Name != "Core" &&
-                    resource->mContentItem->mLibrary->Name != "Loading",
+        ErrorIf(resource->mContentItem->mLibrary->Name != "Core" && resource->mContentItem->mLibrary->Name != "Loading",
                 "Only resources that are in core can be defaults");
       }
     }

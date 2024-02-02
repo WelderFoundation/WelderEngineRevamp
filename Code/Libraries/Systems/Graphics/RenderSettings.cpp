@@ -416,9 +416,7 @@ ZilchDefineType(MultiRenderTarget, builder, type)
 }
 
 MultiRenderTarget::MultiRenderTarget(HandleOf<GraphicsRenderSettings> renderSettings) :
-    mRenderSettings(renderSettings),
-    mColorTargetMrt(renderSettings),
-    mBlendSettingsMrt(renderSettings)
+    mRenderSettings(renderSettings), mColorTargetMrt(renderSettings), mBlendSettingsMrt(renderSettings)
 {
 }
 

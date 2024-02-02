@@ -90,8 +90,7 @@ struct PreviewWidgetCreator
   {
   }
   PreviewWidgetCreator(PreviewImportance::Enum importance, CreatePreviewWidget creator) :
-      Importance(importance),
-      Creator(creator)
+      Importance(importance), Creator(creator)
   {
   }
   PreviewImportance::Enum Importance;

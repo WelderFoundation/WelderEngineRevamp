@@ -34,9 +34,7 @@ ZilchDefineType(WebServerRequestEvent, builder, type)
 }
 
 WebServerRequestEvent::WebServerRequestEvent(WebServerConnection* connection) :
-    mWebServer(connection->mWebServer),
-    mConnection(connection),
-    mMethod(WebServerRequestMethod::Other)
+    mWebServer(connection->mWebServer), mConnection(connection), mMethod(WebServerRequestMethod::Other)
 {
 }
 

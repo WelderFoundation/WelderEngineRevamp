@@ -74,8 +74,7 @@ public:
   bool mCaseSensative;
 
   ExtensionFilterFile(StringParam extension, bool caseSensative = false) :
-      mExtension(extension),
-      mCaseSensative(caseSensative)
+      mExtension(extension), mCaseSensative(caseSensative)
   {
   }
 

@@ -5,16 +5,12 @@ namespace Zero
 {
 
 ObjectPropertyNode::ObjectPropertyNode(ObjectPropertyNode* parent, HandleParam object, Property* objectProperty) :
-    mParent(parent),
-    mObject(object),
-    mProperty(objectProperty)
+    mParent(parent), mObject(object), mProperty(objectProperty)
 {
 }
 
 ObjectPropertyNode::ObjectPropertyNode(ObjectPropertyNode* parent, Property* property) :
-    mParent(parent),
-    mObject(nullptr),
-    mProperty(property)
+    mParent(parent), mObject(nullptr), mProperty(property)
 {
 }
 
@@ -344,8 +340,7 @@ void PropertyInterface::SendComponentsModifiedOnGrid(HandleParam object)
 
 // Event Meta Composition
 EventMetaComposition::EventMetaComposition(PropertyInterface* propertyInterface, BoundType* typeToWrap) :
-    MetaCompositionWrapper(typeToWrap),
-    mPropertyInterface(propertyInterface)
+    MetaCompositionWrapper(typeToWrap), mPropertyInterface(propertyInterface)
 {
 }
 
@@ -382,8 +377,7 @@ void EventMetaComposition::MoveComponent(HandleParam owner, HandleParam componen
 
 // Event Meta Array
 EventMetaArray::EventMetaArray(BoundType* containedType, PropertyInterface* propertyInterface) :
-    MetaArrayWrapper(containedType),
-    mPropertyInterface(propertyInterface)
+    MetaArrayWrapper(containedType), mPropertyInterface(propertyInterface)
 {
 }
 

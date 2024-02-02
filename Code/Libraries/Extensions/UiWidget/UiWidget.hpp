@@ -388,7 +388,8 @@ public:
 private:
   friend class UiRootWidget;
 
-  union {
+  union
+  {
     UiSizePolicy::Enum mSizePolicy[Axis::Size];
     struct
     {

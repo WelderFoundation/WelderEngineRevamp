@@ -474,17 +474,12 @@ Type* Variable::GetTypeOrNull()
 }
 
 SendsEvent::SendsEvent() :
-    SentType(Core::GetInstance().ErrorType),
-    Owner(Core::GetInstance().ErrorType),
-    EventProperty(nullptr)
+    SentType(Core::GetInstance().ErrorType), Owner(Core::GetInstance().ErrorType), EventProperty(nullptr)
 {
 }
 
 SendsEvent::SendsEvent(BoundType* owner, StringParam name, BoundType* sentType) :
-    Name(name),
-    SentType(sentType),
-    Owner(owner),
-    EventProperty(nullptr)
+    Name(name), SentType(sentType), Owner(owner), EventProperty(nullptr)
 {
 }
 

@@ -43,9 +43,7 @@ public:
   }
   /// Move Constructor
   ItemCache(MoveReference<ItemCache> rhs) :
-      mIdStore(ZeroMove(rhs->mIdStore)),
-      mItemIdMap(ZeroMove(rhs->mItemIdMap)),
-      mIdItemMap(ZeroMove(rhs->mIdItemMap))
+      mIdStore(ZeroMove(rhs->mIdStore)), mItemIdMap(ZeroMove(rhs->mItemIdMap)), mIdItemMap(ZeroMove(rhs->mIdItemMap))
   {
   }
 

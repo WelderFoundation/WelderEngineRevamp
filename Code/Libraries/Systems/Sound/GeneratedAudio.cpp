@@ -277,8 +277,7 @@ ZilchDefineType(AdditiveSynthNode, builder, type)
 }
 
 AdditiveSynthNode::AdditiveSynthNode(StringParam name, unsigned ID) :
-    SoundNode(name, ID, false, true),
-    mCurrentNoteCountThreaded(0)
+    SoundNode(name, ID, false, true), mCurrentNoteCountThreaded(0)
 {
 }
 
@@ -433,10 +432,7 @@ ZilchDefineType(MicrophoneInputNode, builder, type)
 }
 
 MicrophoneInputNode::MicrophoneInputNode(StringParam name, unsigned ID) :
-    SoundNode(name, ID, false, true),
-    mActive(false),
-    mVolume(1.0f),
-    mStopping(cFalse)
+    SoundNode(name, ID, false, true), mActive(false), mVolume(1.0f), mStopping(cFalse)
 {
 }
 
@@ -556,8 +552,7 @@ bool MicrophoneInputNode::GetOutputSamples(BufferType* outputBuffer,
 // Linear Grain Window
 
 LinearGrainWindow::LinearGrainWindow(unsigned length) :
-    GrainWindow(length, GranularSynthWindows::Linear),
-    mHalfLength(length / 2)
+    GrainWindow(length, GranularSynthWindows::Linear), mHalfLength(length / 2)
 {
 }
 
@@ -681,10 +676,7 @@ void RaisedCosineGrainWindow::CopySettings(GrainWindow* other)
 // Parabolic Window
 
 ParabolicGrainWindow::ParabolicGrainWindow(unsigned length) :
-    GrainWindow(length, GranularSynthWindows::Parabolic),
-    mLastAmplitude(0.0f),
-    mSlope(0.0f),
-    mCurve(0.0f)
+    GrainWindow(length, GranularSynthWindows::Parabolic), mLastAmplitude(0.0f), mSlope(0.0f), mCurve(0.0f)
 {
   Reset(length, 0, 0);
 }

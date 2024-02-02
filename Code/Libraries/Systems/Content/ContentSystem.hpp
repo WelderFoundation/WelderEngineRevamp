@@ -33,9 +33,7 @@ struct ContentTypeEntry
   {
   }
   ContentTypeEntry(BoundType* meta, MakeContentItem make, UpdateContentItem update = nullptr) :
-      Meta(meta),
-      MakeItem(make),
-      UpdateItem(update)
+      Meta(meta), MakeItem(make), UpdateItem(update)
   {
   }
   BoundType* Meta;

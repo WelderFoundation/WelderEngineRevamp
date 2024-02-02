@@ -37,10 +37,7 @@ Handle::Handle(NullPointerType)
 }
 
 Handle::Handle(const Handle& rhs) :
-    StoredType(rhs.StoredType),
-    Manager(rhs.Manager),
-    Offset(rhs.Offset),
-    Flags(rhs.Flags)
+    StoredType(rhs.StoredType), Manager(rhs.Manager), Offset(rhs.Offset), Flags(rhs.Flags)
 {
   // The data of a handle type is always memory-copyable
   memcpy(this->Data, rhs.Data, sizeof(this->Data));

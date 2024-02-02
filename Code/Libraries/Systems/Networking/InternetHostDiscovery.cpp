@@ -5,10 +5,7 @@ namespace Zero
 {
 
 InternetHostDiscovery::InternetHostDiscovery(NetPeer* netPeer) :
-    NetDiscoveryInterface(netPeer),
-    mCurrentMasterServerIndex(0),
-    mMasterServerConnectionIp(),
-    mInternetHostListTimer(0)
+    NetDiscoveryInterface(netPeer), mCurrentMasterServerIndex(0), mMasterServerConnectionIp(), mInternetHostListTimer(0)
 {
 }
 

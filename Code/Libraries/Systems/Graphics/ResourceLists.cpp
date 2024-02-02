@@ -23,10 +23,7 @@ bool GraphicsResourceList::mRenderGroupRuntimeExpanded = false;
 bool GraphicsResourceList::mChildRenderGroupListExpanded = false;
 
 GraphicsResourceList::GraphicsResourceList(Resource* owner) :
-    mReadOnly(false),
-    mOwner(owner),
-    mExpanded(nullptr),
-    mListItemCallback(nullptr)
+    mReadOnly(false), mOwner(owner), mExpanded(nullptr), mListItemCallback(nullptr)
 {
 }
 

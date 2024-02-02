@@ -35,8 +35,8 @@ struct ZeroBuildTagPolicy
   bool ShouldInclude(ZeroBuild* build)
   {
     BuildId buildId = build->GetBuildId();
-    //if (!mShowExperimentalBranches && buildId.mBranch != BuildId::GetMasterBranch())
-    //  return false;
+    // if (!mShowExperimentalBranches && buildId.mBranch != BuildId::GetMasterBranch())
+    //   return false;
     if (mShowOnlyPreferredPlatform && !buildId.IsForThisPlatform())
       return false;
     return true;

@@ -124,7 +124,8 @@ public:
   // What type of operand are we trying to access?
   OperandType::Enum Type;
 
-  union {
+  union
+  {
     // An offset to:
     //  - A handle on the stack
     //  - A constant within a function's constant space

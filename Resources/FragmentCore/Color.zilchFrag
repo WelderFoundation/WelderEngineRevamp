@@ -1,3 +1,4 @@
+// MIT Licensed (see LICENSE.md).
 struct ColorExtensions
 {
   //https://www.laurivan.com/rgb-to-hsv-to-rgb-for-shaders/

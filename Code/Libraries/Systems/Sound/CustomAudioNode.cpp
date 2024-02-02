@@ -304,9 +304,7 @@ void CustomAudioNode::DispatchSamplesEvent(unsigned samplesNeeded)
 }
 
 CustomAudioNode::SampleBuffer::SampleBuffer(float* buffer, unsigned size) :
-    mBuffer(buffer),
-    mBufferSize(size),
-    mFrameIndex(0)
+    mBuffer(buffer), mBufferSize(size), mFrameIndex(0)
 {
   mBuffer = new float[mBufferSize];
   memcpy(mBuffer, buffer, sizeof(float) * mBufferSize);

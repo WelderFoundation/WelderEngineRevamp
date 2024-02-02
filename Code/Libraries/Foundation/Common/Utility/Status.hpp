@@ -26,11 +26,7 @@ public:
   }
 
   StatusContext(StatusState::Enum state, StringParam message) :
-      State(state),
-      Message(message),
-      IgnoreMessage(false),
-      CallbackOnFailure(nullptr),
-      UserDataOnFailure(nullptr)
+      State(state), Message(message), IgnoreMessage(false), CallbackOnFailure(nullptr), UserDataOnFailure(nullptr)
   {
   }
 

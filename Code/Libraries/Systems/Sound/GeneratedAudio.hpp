@@ -128,10 +128,7 @@ class HarmonicData
 {
 public:
   HarmonicData(float multiplier, float volume, EnvelopeSettings& envelope, SynthWaveType::Enum type) :
-      mFrequencyMultiplier(multiplier),
-      mVolume(volume),
-      mEnvelope(envelope),
-      mWaveType(type)
+      mFrequencyMultiplier(multiplier), mVolume(volume), mEnvelope(envelope), mWaveType(type)
   {
   }
   HarmonicData() : mFrequencyMultiplier(0.0f), mVolume(0.0f)

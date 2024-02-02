@@ -40,8 +40,7 @@ bool IsValidNetPeerIdPropertyType(Type* propertyType)
 //                                 Network Types //
 
 ComponentPropertyInstanceData::ComponentPropertyInstanceData(String propertyName, Component* component) :
-    mPropertyName(propertyName),
-    mComponent(component)
+    mPropertyName(propertyName), mComponent(component)
 {
 }
 
@@ -565,11 +564,7 @@ NetObjectId GetNetPropertyCogAsNetObjectId(Property* property, const Any& instan
 //                                 FamilyTree //
 
 FamilyTree::FamilyTree() :
-    mFamilyTreeId(0),
-    mAncestorDisplayName(),
-    mAncestorCreateContext(),
-    mAncestorReplicaType(),
-    mReplicas()
+    mFamilyTreeId(0), mAncestorDisplayName(), mAncestorCreateContext(), mAncestorReplicaType(), mReplicas()
 {
   // (Should not actually get called)
   Assert(false);

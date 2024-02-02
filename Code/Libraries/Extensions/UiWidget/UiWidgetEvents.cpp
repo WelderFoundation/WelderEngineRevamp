@@ -23,8 +23,7 @@ ZilchDefineType(UiFocusEvent, builder, type)
 }
 
 UiFocusEvent::UiFocusEvent(UiWidget* focusGained, UiWidget* focusLost) :
-    mReceivedFocus(focusGained),
-    mLostFocus(focusLost)
+    mReceivedFocus(focusGained), mLostFocus(focusLost)
 {
 }
 

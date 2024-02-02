@@ -545,9 +545,7 @@ public:
   {
   public:
     DelegateCompare(ExecutableState* state, ExceptionReport& report, Delegate& comparer) :
-        State(state),
-        Report(&report),
-        Comparer(&comparer)
+        State(state), Report(&report), Comparer(&comparer)
     {
     }
 

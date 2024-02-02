@@ -159,12 +159,7 @@ Token::Token() : mEnd(true), mError(false), mRule(nullptr), mStartInclusive(0), 
 }
 
 Token::Token(GrammarRule<Character>* rule) :
-    mEnd(false),
-    mError(false),
-    mRule(rule),
-    mStartInclusive(0),
-    mEndExclusive(0),
-    mStream(nullptr)
+    mEnd(false), mError(false), mRule(rule), mStartInclusive(0), mEndExclusive(0), mStream(nullptr)
 {
 }
 
@@ -231,10 +226,7 @@ bool Token::operator>=(const Token& rhs) const
 }
 
 ReplacementNode::ReplacementNode() :
-    mType(ReplacementNodeType::Text),
-    mCaptureReference(nullptr),
-    mLhs(nullptr),
-    mRhs(nullptr)
+    mType(ReplacementNodeType::Text), mCaptureReference(nullptr), mLhs(nullptr), mRhs(nullptr)
 {
 }
 

@@ -81,7 +81,7 @@ void Image::ClearColorTo(uint color)
   }
 }
 
-#define SetPixelIB(x, y, value) *((destData) + (x) + (y)*destWidth) = value
+#define SetPixelIB(x, y, value) *((destData) + (x) + (y) * destWidth) = value
 
 void CopyImageExpand(Image* dest, Image* source)
 {

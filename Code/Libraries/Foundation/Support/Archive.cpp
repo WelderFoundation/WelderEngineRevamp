@@ -93,9 +93,7 @@ int RawInflate(::byte* outputData, uint outSize, ::byte* inputData, uint inSize)
 //  ------------------ Archive
 
 Archive::Archive(ArchiveMode::Enum mode, uint compressionLevel) :
-    mCompressionLevel(compressionLevel),
-    mMode(mode),
-    mFileOriginBegin(0)
+    mCompressionLevel(compressionLevel), mMode(mode), mFileOriginBegin(0)
 {
 }
 

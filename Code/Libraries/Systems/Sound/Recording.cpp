@@ -202,10 +202,7 @@ ZilchDefineType(SaveAudioNode, builder, type)
 }
 
 SaveAudioNode::SaveAudioNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mSaveData(false),
-    mPlayData(false),
-    mPlaybackIndexThreaded(0)
+    SimpleCollapseNode(name, ID, false, false), mSaveData(false), mPlayData(false), mPlaybackIndexThreaded(0)
 {
 }
 

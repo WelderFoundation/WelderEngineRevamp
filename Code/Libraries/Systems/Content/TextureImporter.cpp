@@ -271,7 +271,8 @@ void ToNvttSurface(nvtt::Surface& surface, uint width, uint height, TextureForma
   delete[] convertedImage;
 }
 
-void FromNvttSurface(const nvtt::Surface& surface, uint& width, uint& height, TextureFormat::Enum format, ::byte*& image)
+void FromNvttSurface(
+    const nvtt::Surface& surface, uint& width, uint& height, TextureFormat::Enum format, ::byte*& image)
 {
   const float* srcImage = surface.data();
   width = surface.width();

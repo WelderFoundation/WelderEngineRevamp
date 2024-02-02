@@ -31,7 +31,7 @@ void LoadContentConfig()
   // To avoid conflicts of assets of different versions(especially when the
   // version selector goes live) set the content folder to a unique directory
   // based upon the version number
-  //String revisionChangesetName = BuildString("Version-", GetRevisionNumberString(), "-", GetChangeSetString());
+  // String revisionChangesetName = BuildString("Version-", GetRevisionNumberString(), "-", GetChangeSetString());
   String revisionChangesetName = BuildString("Version-", GetRevisionNumberString());
   contentSystem->ContentOutputPath =
       FilePath::Combine(GetUserDocumentsApplicationDirectory(), "ContentOutput", revisionChangesetName);

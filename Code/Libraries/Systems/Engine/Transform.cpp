@@ -805,7 +805,9 @@ Vec3 Transform::ClampTranslation(Space* space, Cog* owner, Vec3 translation)
     String objName = owner->GetDescription();
     String errStr = String::Format("Translation [%g, %g, %g] set beyond the range of [%g, %g] on object %s. "
                                    "The translation will be clamped to this range.",
-                                   translation.x, translation.y, translation.z,
+                                   translation.x,
+                                   translation.y,
+                                   translation.z,
                                    -maxTranslation,
                                    maxTranslation,
                                    objName.c_str());

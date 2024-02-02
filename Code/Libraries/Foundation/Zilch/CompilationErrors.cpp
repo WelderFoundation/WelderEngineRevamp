@@ -22,10 +22,7 @@ void OutputErrorStringCallback(ErrorEvent* e, void* stringPointer)
 }
 
 CompilationErrors::CompilationErrors() :
-    UserData(nullptr),
-    WasError(false),
-    IgnoreMultipleErrors(true),
-    TolerantMode(false)
+    UserData(nullptr), WasError(false), IgnoreMultipleErrors(true), TolerantMode(false)
 {
 }
 

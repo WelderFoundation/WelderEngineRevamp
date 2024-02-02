@@ -7,10 +7,7 @@ namespace Zero
 static const String cResourcesTag = "Resources";
 
 ResourceSearchProvider::ResourceSearchProvider(ResourceLibrary* library, bool showHidden, ResourceLibrary* defaultLib) :
-    SearchProvider("Resource"),
-    mDefaultLibrary(defaultLib),
-    mResourceLibrary(library),
-    mShowHidden(showHidden)
+    SearchProvider("Resource"), mDefaultLibrary(defaultLib), mResourceLibrary(library), mShowHidden(showHidden)
 {
 }
 
@@ -331,9 +328,7 @@ String ObjectSearchProvider::GetElementType(SearchViewResult& element)
 }
 
 ComponentSearchProvider::ComponentSearchProvider(HandleParam object, HandleOf<MetaComposition>& composition) :
-    SearchProvider("Component"),
-    mObject(object),
-    mComposition(composition)
+    SearchProvider("Component"), mObject(object), mComposition(composition)
 {
   mResultsContainExactMatch = false;
 }

@@ -6,9 +6,7 @@ namespace Zero
 {
 
 FontProcessor::FontProcessor(RenderQueues* renderQueues, ViewNode* viewNode, Vec4 vertexColor) :
-    mRenderQueues(renderQueues),
-    mViewNode(viewNode),
-    mVertexColor(vertexColor)
+    mRenderQueues(renderQueues), mViewNode(viewNode), mVertexColor(vertexColor)
 {
 }
 
@@ -47,9 +45,7 @@ void FontProcessorVertexArray::ProcessRenderRune(RenderRune& rune, Vec2 position
 }
 
 FontProcessorFindCharPosition::FontProcessorFindCharPosition(int charIndex, Vec2 startPositon) :
-    mFindIndex(charIndex),
-    mCurrentIndex(0),
-    mCharPosition(startPositon)
+    mFindIndex(charIndex), mCurrentIndex(0), mCharPosition(startPositon)
 {
 }
 

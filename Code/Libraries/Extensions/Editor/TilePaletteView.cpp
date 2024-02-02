@@ -171,9 +171,7 @@ ZilchDefineType(TilePaletteView, builder, type)
 }
 
 TilePaletteView::TilePaletteView(Composite* parent, TileEditor2D* editor) :
-    Composite(parent),
-    mEditor(editor),
-    mShowCollision(true)
+    Composite(parent), mEditor(editor), mShowCollision(true)
 {
   mTileSize = 64;
   mSelectionStart = IntVec2(0, 0);

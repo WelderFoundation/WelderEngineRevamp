@@ -169,10 +169,7 @@ AttributeExtension* AttributeExtensions::RegisterExtension(AttributeExtension* e
 
 // Attribute Extension
 AttributeExtension::AttributeExtension(StringParam name) :
-    mAttributeName(name),
-    mMustBeType(nullptr),
-    mAllowStatic(false),
-    mAllowMultiple(false)
+    mAttributeName(name), mMustBeType(nullptr), mAllowStatic(false), mAllowMultiple(false)
 {
 }
 

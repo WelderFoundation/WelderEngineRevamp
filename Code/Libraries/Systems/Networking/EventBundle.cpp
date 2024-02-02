@@ -134,41 +134,25 @@ ZilchDefineType(EventBundle, builder, type)
 }
 
 EventBundle::EventBundle() :
-    mGameSession(nullptr),
-    mBitStream(),
-    mEvents(),
-    mNeedToSerialize(false),
-    mNeedToDeserialize(false)
+    mGameSession(nullptr), mBitStream(), mEvents(), mNeedToSerialize(false), mNeedToDeserialize(false)
 {
 }
 
 EventBundle::EventBundle(Event* event) :
-    mGameSession(nullptr),
-    mBitStream(),
-    mEvents(),
-    mNeedToSerialize(false),
-    mNeedToDeserialize(false)
+    mGameSession(nullptr), mBitStream(), mEvents(), mNeedToSerialize(false), mNeedToDeserialize(false)
 {
   // Add specified event
   AddEvent(event);
 }
 
 EventBundle::EventBundle(GameSession* gameSession) :
-    mGameSession(gameSession),
-    mBitStream(),
-    mEvents(),
-    mNeedToSerialize(false),
-    mNeedToDeserialize(false)
+    mGameSession(gameSession), mBitStream(), mEvents(), mNeedToSerialize(false), mNeedToDeserialize(false)
 {
   Assert(mGameSession);
 }
 
 EventBundle::EventBundle(GameSession* gameSession, Event* event) :
-    mGameSession(gameSession),
-    mBitStream(),
-    mEvents(),
-    mNeedToSerialize(false),
-    mNeedToDeserialize(false)
+    mGameSession(gameSession), mBitStream(), mEvents(), mNeedToSerialize(false), mNeedToDeserialize(false)
 {
   Assert(mGameSession);
 
@@ -177,11 +161,7 @@ EventBundle::EventBundle(GameSession* gameSession, Event* event) :
 }
 
 EventBundle::EventBundle(const EventBundle& rhs) :
-    mGameSession(rhs.mGameSession),
-    mBitStream(),
-    mEvents(),
-    mNeedToSerialize(false),
-    mNeedToDeserialize(false)
+    mGameSession(rhs.mGameSession), mBitStream(), mEvents(), mNeedToSerialize(false), mNeedToDeserialize(false)
 {
   // Assert(mGameSession);
 

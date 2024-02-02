@@ -42,8 +42,7 @@ void CreateSpacer(Composite* parent)
 
 DiscoverTile::DiscoverTile(
     Composite* parent, StringParam text, StringParam fontStyle, float titleHeight, StringParam url) :
-    Composite(parent),
-    mUrl(url)
+    Composite(parent), mUrl(url)
 {
   SetSizing(SizeAxis::Y, SizePolicy::Flex, 1);
 

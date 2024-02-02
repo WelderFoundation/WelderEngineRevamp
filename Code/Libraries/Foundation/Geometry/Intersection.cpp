@@ -122,9 +122,7 @@ SupportShape::SupportShape()
 }
 
 SupportShape::SupportShape(Vec3Param center, SupportFunction support, void* data) :
-    mCenter(center),
-    mSupportFunction(support),
-    mData(data)
+    mCenter(center), mSupportFunction(support), mData(data)
 {
   mDeltaPosition = Vec3::cZero;
   mDeltaRotation = Quat::cIdentity;

@@ -153,8 +153,7 @@ void ZilchScriptLoader::ReloadFromFile(Resource* resource, ResourceEntry& entry)
 ImplementResourceManager(ZilchScriptManager, ZilchScript);
 
 ZilchScriptManager::ZilchScriptManager(BoundType* resourceType) :
-    ResourceManager(resourceType),
-    mLastExceptionVersion(-1)
+    ResourceManager(resourceType), mLastExceptionVersion(-1)
 {
   mCategory = "Code";
   mCanAddFile = true;

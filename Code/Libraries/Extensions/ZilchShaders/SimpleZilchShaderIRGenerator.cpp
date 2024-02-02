@@ -512,8 +512,7 @@ void SimplifiedShaderReflectionData::CreateSimpleOpaqueTypeReflectionData(ZilchS
 }
 
 SimpleZilchShaderIRGenerator::SimpleZilchShaderIRGenerator(FrontEndTranslatorType* frontEndTranslator) :
-    mFragmentProject("Fragments"),
-    mShaderProject("Shaders")
+    mFragmentProject("Fragments"), mShaderProject("Shaders")
 {
   SetupEventConnections();
 
@@ -526,8 +525,7 @@ SimpleZilchShaderIRGenerator::SimpleZilchShaderIRGenerator(FrontEndTranslatorTyp
 
 SimpleZilchShaderIRGenerator::SimpleZilchShaderIRGenerator(FrontEndTranslatorType* frontEndTranslator,
                                                            ZilchShaderSpirVSettings* settings) :
-    mFragmentProject("Fragments"),
-    mShaderProject("Shaders")
+    mFragmentProject("Fragments"), mShaderProject("Shaders")
 {
   SetupEventConnections();
   Initialize(frontEndTranslator, settings);

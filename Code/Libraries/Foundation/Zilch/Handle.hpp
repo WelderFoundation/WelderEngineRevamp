@@ -7,7 +7,7 @@
 // Enable this to add extra debugging support (for Zilch internal use, such as
 // working on the compiler) Warning: This will make Zilch run significantly
 // slower
-//#define ZILCH_HANDLE_DEBUG
+// #define ZILCH_HANDLE_DEBUG
 
 namespace Zilch
 {
@@ -191,7 +191,8 @@ public:
   // An offset from the base of the handle (used in dereferencing)
   size_t Offset;
 
-  union {
+  union
+  {
     // The user data stored on the handle (of a fixed size)
     ::byte Data[HandleUserDataSize];
 

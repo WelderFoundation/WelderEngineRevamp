@@ -9,19 +9,13 @@ UserToken::UserToken() : TokenId(Grammar::Invalid), Start(0), Length(0)
 }
 
 UserToken::UserToken(Grammar::Enum tokenId, CodeLocation* location) :
-    Token(Grammar::GetKeywordOrSymbol(tokenId)),
-    TokenId(tokenId),
-    Start(0),
-    Length(0)
+    Token(Grammar::GetKeywordOrSymbol(tokenId)), TokenId(tokenId), Start(0), Length(0)
 {
   this->SetLocationAndStartLength(location);
 }
 
 UserToken::UserToken(StringParam token, Grammar::Enum tokenId, CodeLocation* location) :
-    Token(token),
-    TokenId(tokenId),
-    Start(0),
-    Length(0)
+    Token(token), TokenId(tokenId), Start(0), Length(0)
 {
   this->SetLocationAndStartLength(location);
 }
@@ -43,9 +37,7 @@ cstr UserToken::c_str() const
 }
 
 Tokenizer::Tokenizer(CompilationErrors& errors) :
-    EnableStringInterpolation(true),
-    Errors(errors),
-    WasCarriageReturn(false)
+    EnableStringInterpolation(true), Errors(errors), WasCarriageReturn(false)
 {
   ZilchErrorIfNotStarted(Tokenizer);
 

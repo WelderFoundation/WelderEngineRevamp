@@ -1925,10 +1925,7 @@ String DelegateParameter::GetNameOrGenerate()
 }
 
 DelegateType::DelegateType() :
-    Return(nullptr),
-    ReturnStackOffset(0),
-    ThisHandleStackOffset(0),
-    TotalStackSizeExcludingThisHandle(0)
+    Return(nullptr), ReturnStackOffset(0), ThisHandleStackOffset(0), TotalStackSizeExcludingThisHandle(0)
 {
 }
 

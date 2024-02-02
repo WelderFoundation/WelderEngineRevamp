@@ -52,8 +52,12 @@ public:
   bool StringField(cstr typeName, cstr fieldName, StringRange& stringRange) override;
 
   // Array Serialization
-  bool ArrayField(
-      cstr typeName, cstr fieldName, ::byte* data, ArrayType arrayType, uint numberOfElements, uint sizeOftype) override;
+  bool ArrayField(cstr typeName,
+                  cstr fieldName,
+                  ::byte* data,
+                  ArrayType arrayType,
+                  uint numberOfElements,
+                  uint sizeOftype) override;
 
   void ArraySize(uint& arraySize){};
 

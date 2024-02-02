@@ -11,11 +11,7 @@ DefineEvent(PathFinderMeshFinished);
 
 // Nav Mesh Edge
 NavMeshEdge::NavMeshEdge(NavMeshPolygon* owner) :
-    mCost(0.0f),
-    mTailVertex(u32(-1)),
-    mPolygon(owner),
-    mNextConnected(this),
-    mPreviousConnected(this)
+    mCost(0.0f), mTailVertex(u32(-1)), mPolygon(owner), mNextConnected(this), mPreviousConnected(this)
 {
   owner->mEdges.PushBack(this);
 }
@@ -26,9 +22,7 @@ NavMeshEdge::PolygonRange::PolygonRange() : mIgnore(nullptr)
 }
 
 NavMeshEdge::PolygonRange::PolygonRange(NavMeshEdge* edge, NavMeshPolygon* ignore) :
-    mBegin(edge->mNextConnected),
-    mEnd(edge),
-    mIgnore(ignore)
+    mBegin(edge->mNextConnected), mEnd(edge), mIgnore(ignore)
 {
   FindNextValid();
 }

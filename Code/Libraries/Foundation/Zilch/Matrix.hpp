@@ -17,9 +17,7 @@ public:
   }
 
   MatrixUserData(size_t sizeX, size_t sizeY, size_t elementTypeIndex) :
-      SizeX(sizeX),
-      SizeY(sizeY),
-      ElementTypeIndex(elementTypeIndex)
+      SizeX(sizeX), SizeY(sizeY), ElementTypeIndex(elementTypeIndex)
   {
   }
 

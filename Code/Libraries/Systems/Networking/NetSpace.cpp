@@ -28,11 +28,7 @@ ZilchDefineType(NetSpace, builder, type)
 }
 
 NetSpace::NetSpace() :
-    NetObject(),
-    mPendingNetObjects(),
-    mPendingNetLevelStarted(false),
-    mReadyChildMap(),
-    mDelayedParentMap()
+    NetObject(), mPendingNetObjects(), mPendingNetLevelStarted(false), mReadyChildMap(), mDelayedParentMap()
 {
 }
 

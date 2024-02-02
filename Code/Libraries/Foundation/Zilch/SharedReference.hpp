@@ -220,7 +220,7 @@ public:
   // with the template version below)
   Ref& operator=(const Ref& other)
   {
-    return this->operator=<Type>(other);
+    return this->operator= <Type>(other);
   }
 
   // Assignment operator

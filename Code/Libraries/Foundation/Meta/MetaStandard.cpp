@@ -33,14 +33,14 @@ ZilchDefineExternalBaseType(IpAddress, TypeCopyMode::ReferenceType, builder, typ
                             &Zero::IpAddress::GetHost,
                             (String(Zero::IpAddress::*)() const),
                             &Zero::IpAddress::SetHost,
-                            (void (Zero::IpAddress::*)(StringParam)),
+                            (void(Zero::IpAddress::*)(StringParam)),
                             "Host");
   ZilchFullBindGetterSetter(builder,
                             type,
                             &Zero::IpAddress::GetPort,
                             (uint(Zero::IpAddress::*)() const),
                             &Zero::IpAddress::SetPort,
-                            (void (Zero::IpAddress::*)(uint)),
+                            (void(Zero::IpAddress::*)(uint)),
                             "Port");
 
   ZilchBindGetterProperty(PortString);

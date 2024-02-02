@@ -42,10 +42,7 @@ ZilchDefineType(ItemList, builder, type)
 }
 
 ItemList::ItemList(Composite* parent, float itemHeight, uint columns) :
-    Composite(parent),
-    mItemHeight(itemHeight),
-    mColumns(columns),
-    mSelectedItem(nullptr)
+    Composite(parent), mItemHeight(itemHeight), mColumns(columns), mSelectedItem(nullptr)
 {
   SetLayout(CreateFillLayout());
 
@@ -239,8 +236,7 @@ ZilchDefineType(WeightedComposite, builder, type)
 }
 
 WeightedComposite::WeightedComposite(Composite* parent, StringParam displayName, uint weight, Vec4Param color) :
-    ColoredComposite(parent, color),
-    mWeight(weight)
+    ColoredComposite(parent, color), mWeight(weight)
 {
   mName = displayName;
 }
@@ -258,8 +254,7 @@ ZilchDefineType(ItemGroup, builder, type)
 }
 
 ItemGroup::ItemGroup(Composite* parent, StringParam name, uint weight, float itemHeight, uint columns) :
-    WeightedComposite(parent, name, weight, Vec4(1, 1, 1, 0.05f)),
-    mColumns(columns)
+    WeightedComposite(parent, name, weight, Vec4(1, 1, 1, 0.05f)), mColumns(columns)
 {
   SetLayout(CreateStackLayout(LayoutDirection::TopToBottom, Pixels(0, 2), Thickness(Pixels(0, 3, 0, 6))));
 
@@ -307,9 +302,7 @@ ZilchDefineType(Item, builder, type)
 }
 
 Item::Item(Composite* parent, StringParam itemName, StringParam displayName, uint weight) :
-    WeightedComposite(parent, displayName, weight, Vec4(1, 1, 1, 0.05f)),
-    mItemName(itemName),
-    mSelected(false)
+    WeightedComposite(parent, displayName, weight, Vec4(1, 1, 1, 0.05f)), mItemName(itemName), mSelected(false)
 {
   SetLayout(CreateStackLayout(LayoutDirection::LeftToRight, Pixels(12, 0), Thickness(Pixels(12, 0, 12, 0))));
 
@@ -387,9 +380,7 @@ void Item::UpdateTransform()
 
 // Item Grid Layout
 ItemGridLayout::ItemGridLayout(float itemHeight, uint columns) :
-    Layout(Thickness::cZero),
-    mItemHeight(itemHeight),
-    mColumns(columns)
+    Layout(Thickness::cZero), mItemHeight(itemHeight), mColumns(columns)
 {
 }
 

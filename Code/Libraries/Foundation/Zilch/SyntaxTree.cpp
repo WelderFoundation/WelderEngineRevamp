@@ -824,9 +824,7 @@ String MemberAccessNode::ToString() const
 }
 
 TypeIdNode::TypeIdNode() :
-    CompileTimeSyntaxType(nullptr),
-    Value(nullptr),
-    CompileTimeType(Core::GetInstance().ErrorType)
+    CompileTimeSyntaxType(nullptr), Value(nullptr), CompileTimeType(Core::GetInstance().ErrorType)
 {
 }
 
@@ -1180,10 +1178,7 @@ void GenericFunctionNode::PopulateChildren(NodeChildren& childrenOut)
 }
 
 FunctionNode::FunctionNode() :
-    ReturnType(nullptr),
-    ExtensionOwner(nullptr),
-    IsStatic(false),
-    Virtualized(VirtualMode::NonVirtual)
+    ReturnType(nullptr), ExtensionOwner(nullptr), IsStatic(false), Virtualized(VirtualMode::NonVirtual)
 {
 }
 

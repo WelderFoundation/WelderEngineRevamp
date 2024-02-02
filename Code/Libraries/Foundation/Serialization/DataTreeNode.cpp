@@ -19,8 +19,7 @@ void DataNode::operator delete(void* pMem, size_t size)
 }
 
 DataNode::DataNode(DataNodeType::Enum nodeType, DataNode* parent) :
-    mNumberOfChildren(0),
-    mUniqueNodeId(PolymorphicNode::cInvalidUniqueNodeId)
+    mNumberOfChildren(0), mUniqueNodeId(PolymorphicNode::cInvalidUniqueNodeId)
 {
   mNodeType = nodeType;
   mPatchState = PatchState::None;

@@ -210,7 +210,7 @@
 // Spirv triggers this
 #  pragma clang diagnostic ignored "-Wunqualified-std-cast-call"
 
-//#  undef __STDC__
+// #  undef __STDC__
 #endif
 
 #if defined(WelderCompilerGcc)

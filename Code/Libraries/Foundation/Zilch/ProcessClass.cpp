@@ -40,10 +40,10 @@ ZilchDefineType(ProcessClass, builder, type)
   ZilchFullBindDestructor(builder, type, ProcessClass);
 
   ZilchFullBindMethod(
-      builder, type, &ProcessClass::Start, (void (ProcessClass::*)(Zero::ProcessStartInfo&)), "Start", "startInfo")
+      builder, type, &ProcessClass::Start, (void(ProcessClass::*)(Zero::ProcessStartInfo&)), "Start", "startInfo")
       ->Description = ZilchDocumentString("Begins the execution of another process using the given parameters. ");
 
-  ZilchFullBindMethod(builder, type, &ProcessClass::WaitForClose, (int (Process::*)()), "WaitForClose", ZilchNoNames)
+  ZilchFullBindMethod(builder, type, &ProcessClass::WaitForClose, (int(Process::*)()), "WaitForClose", ZilchNoNames)
       ->Description = ZilchDocumentString("Waits for a process to close, this will block until "
                                           "the process closes.");
   ZilchFullBindMethod(builder, type, &ProcessClass::IsRunning, ZilchNoOverload, "IsRunning", ZilchNoNames)

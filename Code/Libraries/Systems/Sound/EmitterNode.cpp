@@ -10,9 +10,7 @@ using namespace AudioConstants;
 // Emitter Data Per Listener
 
 EmitterDataPerListener::EmitterDataPerListener() :
-    mPreviousRelativePosition(Math::Vec3(FLT_MAX, FLT_MAX, FLT_MAX)),
-    mDirectionalVolume(1.0f),
-    mUseLowPass(false)
+    mPreviousRelativePosition(Math::Vec3(FLT_MAX, FLT_MAX, FLT_MAX)), mDirectionalVolume(1.0f), mUseLowPass(false)
 {
   memset(mPreviousGains, 0, sizeof(float) * cMaxChannels);
 }

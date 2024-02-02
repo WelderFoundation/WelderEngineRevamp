@@ -1054,7 +1054,7 @@ void TcpSocket::HandleChunks(SocketData& socketData, const ::byte* buffer, size_
 
           // Erase the packet from the received data
           PodArray<::byte>::range range(socketData.PartialReceivedData.Begin(),
-                                      socketData.PartialReceivedData.Begin() + packetSize);
+                                        socketData.PartialReceivedData.Begin() + packetSize);
           socketData.PartialReceivedData.Erase(range);
         }
         else
@@ -1094,7 +1094,7 @@ void TcpSocket::HandleChunks(SocketData& socketData, const ::byte* buffer, size_
 
           // Erase the packet from the received data
           PodArray<::byte>::range range(socketData.PartialReceivedData.Begin(),
-                                      socketData.PartialReceivedData.Begin() + i);
+                                        socketData.PartialReceivedData.Begin() + i);
           socketData.PartialReceivedData.Erase(range);
           break;
         }

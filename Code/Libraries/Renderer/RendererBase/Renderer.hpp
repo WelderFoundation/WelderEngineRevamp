@@ -114,10 +114,7 @@ public:
   {
   }
   StreamedVertex(Vec3 position, Vec2 uv, Vec4 color, Vec2 uvAux = Vec2::cZero) :
-      mPosition(position),
-      mUv(uv),
-      mColor(color),
-      mUvAux(uvAux)
+      mPosition(position), mUv(uv), mColor(color), mUvAux(uvAux)
   {
   }
 
@@ -328,9 +325,7 @@ public:
   {
   }
   ShaderEntry(Shader* shader) :
-      mCoreVertex(shader->mCoreVertex),
-      mComposite(shader->mComposite),
-      mRenderPass(shader->mRenderPass)
+      mCoreVertex(shader->mCoreVertex), mComposite(shader->mComposite), mRenderPass(shader->mRenderPass)
   {
   }
 
@@ -842,7 +837,8 @@ class RenderTask
 {
 public:
   // We use a large type to ensure alignment on all platforms.
-  union {
+  union
+  {
     u64 mId;
     MaxAlignmentType mAligned;
   };

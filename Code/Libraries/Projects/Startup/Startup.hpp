@@ -34,10 +34,10 @@ DeclareEnum10(
 
 // Determine whether to continue to next startup phase or not
 DeclareEnum2(StartupPhaseResult,
-    // Continue to the next phase
-    Continue,
-    // Do not continue to the next phase
-    Quit);
+             // Continue to the next phase
+             Continue,
+             // Do not continue to the next phase
+             Quit);
 
 // Runs through phases of initialization, allowing platforms that don't support threading
 // to yeild time back to the OS/Browser between updates. This also unifies Editor/Game/Launcher startup.

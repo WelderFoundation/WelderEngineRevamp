@@ -51,9 +51,7 @@ AddRemoveNetPropertyInfoOperation::AddRemoveNetPropertyInfoOperation(NetObject* 
                                                                      BoundType* componentType,
                                                                      StringParam propertyName,
                                                                      NetPropertyInfoAction::Enum action) :
-    mComponentType(componentType),
-    mPropertyName(propertyName),
-    mAction(action)
+    mComponentType(componentType), mPropertyName(propertyName), mAction(action)
 
 {
   ErrorIf(netObject->GetOwner() == nullptr, "NetObject doesn't have an Owner");
@@ -125,10 +123,7 @@ SetNetPropertyInfoChannelOperation::SetNetPropertyInfoChannelOperation(NetObject
                                                                        BoundType* componentType,
                                                                        StringParam propertyName,
                                                                        NetChannelConfig* netChannelConfig) :
-    mComponentType(componentType),
-    mPropertyName(propertyName),
-    mLastNetChannelConfig(),
-    mCurrentNetChannelConfig()
+    mComponentType(componentType), mPropertyName(propertyName), mLastNetChannelConfig(), mCurrentNetChannelConfig()
 {
   ErrorIf(netObject->GetOwner() == nullptr, "NetObject doesn't have an Owner");
 

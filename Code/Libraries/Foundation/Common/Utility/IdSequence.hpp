@@ -24,9 +24,7 @@ public:
 
   /// Move Constructor
   IdSequence(MoveReference<IdSequence> rhs) :
-      mNext(rhs->mNext),
-      mMissing(ZeroMove(rhs->mMissing)),
-      mVerified(rhs->mVerified)
+      mNext(rhs->mNext), mMissing(ZeroMove(rhs->mMissing)), mVerified(rhs->mVerified)
   {
   }
 

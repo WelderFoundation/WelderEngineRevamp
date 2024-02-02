@@ -5,8 +5,7 @@ namespace Zero
 {
 
 GetVersionListingTaskJob::GetVersionListingTaskJob(StringParam applicationName) :
-    DownloadTaskJob(Urls::cApiBuilds, cCacheSeconds),
-    mApplicationName(applicationName)
+    DownloadTaskJob(Urls::cApiBuilds, cCacheSeconds), mApplicationName(applicationName)
 {
 }
 

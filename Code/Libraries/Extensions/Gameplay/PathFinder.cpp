@@ -69,9 +69,7 @@ ZilchDefineType(PathFinderRequest, builder, type)
 }
 
 PathFinderRequest::PathFinderRequest(PathFinder* owner, Job* job) :
-    mPathFinderComponent(owner),
-    mJob(job),
-    mStatus(PathFinderStatus::Pending)
+    mPathFinderComponent(owner), mJob(job), mStatus(PathFinderStatus::Pending)
 {
   // When the job is finished it sends an event to the request which uses thread
   // safe handle id. Any script may listen upon the request, but the request

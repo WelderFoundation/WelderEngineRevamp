@@ -227,12 +227,12 @@ void ZeroStartup::Initialize()
 
   Tweakables::Load();
 
-  //Shortcuts::GetInstance()->Load(
-  //    FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Shortcuts.data"));
+  // Shortcuts::GetInstance()->Load(
+  //     FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Shortcuts.data"));
 
   //// Load documentation for all native libraries
-  //DocumentationLibrary::GetInstance()->LoadDocumentation(
-  //    FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Documentation.data"));
+  // DocumentationLibrary::GetInstance()->LoadDocumentation(
+  //     FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Documentation.data"));
 
   ZPrint("Os: %s\n", Os::GetVersionString().c_str());
 }

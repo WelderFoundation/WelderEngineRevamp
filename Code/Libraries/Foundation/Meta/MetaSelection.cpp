@@ -17,9 +17,9 @@ ZilchDefineType(MetaSelection, builder, type)
 {
   ZilchBindMethod(Count);
   ZilchBindMethod(Empty);
-  ZilchFullBindMethod(builder, type, &MetaSelection::Clear, (void (MetaSelection::*)()), "Clear", ZilchNoNames);
+  ZilchFullBindMethod(builder, type, &MetaSelection::Clear, (void(MetaSelection::*)()), "Clear", ZilchNoNames);
   ZilchBindMethod(SelectOnly);
-  ZilchFullBindMethod(builder, type, &MetaSelection::Add, (void (MetaSelection::*)(HandleParam)), "Add", ZilchNoNames);
+  ZilchFullBindMethod(builder, type, &MetaSelection::Add, (void(MetaSelection::*)(HandleParam)), "Add", ZilchNoNames);
   ZilchBindMethod(Remove);
   ZilchBindMethod(Replace);
   ZilchBindMethod(Contains);

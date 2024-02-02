@@ -93,10 +93,7 @@ Object* ObjectEvent::GetSource()
 Array<Delegate> EventConnection::sDelayDestructDelegates;
 
 EventConnection::EventConnection(EventDispatcher* dispatcher, StringParam eventId) :
-    ThisObject(nullptr),
-    EventType(nullptr),
-    mDispatcher(dispatcher),
-    mEventId(eventId)
+    ThisObject(nullptr), EventType(nullptr), mDispatcher(dispatcher), mEventId(eventId)
 {
 }
 

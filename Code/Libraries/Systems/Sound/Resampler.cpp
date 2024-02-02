@@ -6,12 +6,7 @@ namespace Zero
 {
 
 Resampler::Resampler() :
-    ResampleFactor(0),
-    ResampleFrameIndex(0),
-    BufferFraction(0),
-    InputSamples(nullptr),
-    InputFrames(0),
-    InputChannels(0)
+    ResampleFactor(0), ResampleFrameIndex(0), BufferFraction(0), InputSamples(nullptr), InputFrames(0), InputChannels(0)
 {
   memset(PreviousFrame, 0, sizeof(float) * AudioConstants::cMaxChannels);
 }

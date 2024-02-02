@@ -43,11 +43,7 @@ MemoryLeakEvent::MemoryLeakEvent() : State(nullptr), AllocatedLocation(nullptr)
 }
 
 OpcodeEvent::OpcodeEvent() :
-    State(nullptr),
-    CurrentFunction(nullptr),
-    ProgramCounter(InvalidOpcodeLocation),
-    StackOffset(0),
-    Location(nullptr)
+    State(nullptr), CurrentFunction(nullptr), ProgramCounter(InvalidOpcodeLocation), StackOffset(0), Location(nullptr)
 {
 }
 
@@ -870,7 +866,9 @@ void ExecutableState::InvokePreConstructorOrRelease(Handle& handle, ExceptionRep
   }
 }
 
-void ExecutableState::UpdateCppVirtualTable(::byte* objectWithBaseVTable, BoundType* cppBaseType, BoundType* derivedType)
+void ExecutableState::UpdateCppVirtualTable(::byte* objectWithBaseVTable,
+                                            BoundType* cppBaseType,
+                                            BoundType* derivedType)
 {
   // Error checking
   ErrorIf(cppBaseType->BoundNativeVirtualCount > cppBaseType->RawNativeVirtualCount,
@@ -1321,8 +1319,10 @@ bool ExecutableState::IsInCallStack()
   return (this->StackFrames.Size() != 1);
 }
 
-Handle
-ExecutableState::AllocateStackObject(::byte* stackLocation, PerScopeData* scope, BoundType* type, ExceptionReport& report)
+Handle ExecutableState::AllocateStackObject(::byte* stackLocation,
+                                            PerScopeData* scope,
+                                            BoundType* type,
+                                            ExceptionReport& report)
 {
   // Verify that the given pointer is within our stack
   ErrorIf(stackLocation < this->Stack || stackLocation > this->Stack + this->StackSize,

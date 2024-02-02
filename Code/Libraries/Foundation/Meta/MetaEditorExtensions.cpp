@@ -37,9 +37,7 @@ EditorRange::EditorRange() : Min(-Math::PositiveMax()), Max(Math::PositiveMax())
 }
 
 EditorRange::EditorRange(float minValue, float maxValue, float increment) :
-    Min(minValue),
-    Max(maxValue),
-    Increment(increment)
+    Min(minValue), Max(maxValue), Increment(increment)
 {
 }
 
@@ -79,16 +77,12 @@ EditorRotationBasis::EditorRotationBasis() : mIntData(0), mGizmoName("EditorGizm
 }
 
 EditorRotationBasis::EditorRotationBasis(StringParam archetypeName) :
-    mIntData(0),
-    mGizmoName("EditorGizmo"),
-    mArchetypeName(archetypeName)
+    mIntData(0), mGizmoName("EditorGizmo"), mArchetypeName(archetypeName)
 {
 }
 
 EditorRotationBasis::EditorRotationBasis(StringParam archetypeName, StringParam gizmoName, int intData) :
-    mIntData(intData),
-    mGizmoName(gizmoName),
-    mArchetypeName(archetypeName)
+    mIntData(intData), mGizmoName(gizmoName), mArchetypeName(archetypeName)
 {
 }
 
@@ -113,12 +107,7 @@ MetaEditorResource::MetaEditorResource(
 }
 
 MetaEditorResource::MetaEditorResource(SearchFilter filter) :
-    AllowAdd(false),
-    AllowNone(false),
-    FilterTag(""),
-    ForceCompact(false),
-    SearchPreview(true),
-    Filter(filter)
+    AllowAdd(false), AllowNone(false), FilterTag(""), ForceCompact(false), SearchPreview(true), Filter(filter)
 {
 }
 

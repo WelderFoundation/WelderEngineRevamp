@@ -10,8 +10,7 @@ namespace Zero
 struct InstanceAttenuation
 {
   InstanceAttenuation(SoundAttenuatorNode* attenuatorNode, SoundAttenuator* attenuator) :
-      mAttenuatorNode(attenuatorNode),
-      mAttenuator(attenuator)
+      mAttenuatorNode(attenuatorNode), mAttenuator(attenuator)
   {
   }
   InstanceAttenuation() : mAttenuatorNode(nullptr)

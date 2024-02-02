@@ -63,13 +63,8 @@ ZilchDefineExternalBaseType(Aabb, TypeCopyMode::ValueType, builder, type)
 
   ZilchBindGetterSetter(Extents);
   ZilchBindGetterSetter(HalfExtents);
-  ZilchFullBindGetterSetter(builder,
-                            type,
-                            &Aabb::GetCenter,
-                            (Vec3(Aabb::*)() const),
-                            &Aabb::SetCenter,
-                            (void (Aabb::*)(Vec3Param)),
-                            "Center");
+  ZilchFullBindGetterSetter(
+      builder, type, &Aabb::GetCenter, (Vec3(Aabb::*)() const), &Aabb::SetCenter, (void(Aabb::*)(Vec3Param)), "Center");
 
   // Expose later when we do a more full pass on the math library and geometry
   // ZilchFullBindMethod(builder, type, &Aabb::TransformAabb,

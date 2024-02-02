@@ -3,7 +3,7 @@
 
 namespace Zero
 {
-//#define WIDGET_DEBUGGING
+// #define WIDGET_DEBUGGING
 
 ZilchDefineType(SizePolicies, builder, type)
 {

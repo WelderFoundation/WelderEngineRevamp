@@ -207,9 +207,7 @@ public:
   String FilterTag;
 
   ArchetypeLoader(StringParam objectTypeName, StringParam filterTag) :
-      StoredTypeName(objectTypeName),
-      FilterTag(filterTag),
-      StoredType(nullptr)
+      StoredTypeName(objectTypeName), FilterTag(filterTag), StoredType(nullptr)
   {
   }
 

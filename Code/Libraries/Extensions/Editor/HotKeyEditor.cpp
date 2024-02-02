@@ -30,9 +30,7 @@ class BindingConflictEvent : public Event
 {
 public:
   BindingConflictEvent(CommandEntry* newCommand, CommandEntry* existingComnnad, HotKeyBinding* newBinding) :
-      mNewCommand(newCommand),
-      mExistingCommad(existingComnnad),
-      mNewBinding(newBinding)
+      mNewCommand(newCommand), mExistingCommad(existingComnnad), mNewBinding(newBinding)
   {
   }
 
@@ -841,9 +839,7 @@ ZilchDefineType(HotKeyEditor, builder, type)
 HashMap<unsigned, String> HotKeyEditor::sKeyMap;
 
 HotKeyEditor::HotKeyEditor(Composite* parent) :
-    Composite(parent),
-    mCogCommandSortToggle(true),
-    mCurrentSort(CommandCompare::None)
+    Composite(parent), mCogCommandSortToggle(true), mCurrentSort(CommandCompare::None)
 {
   mHotKeys = HotKeyCommands::GetInstance();
 

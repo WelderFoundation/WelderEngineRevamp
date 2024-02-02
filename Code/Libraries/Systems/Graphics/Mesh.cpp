@@ -11,8 +11,7 @@ namespace Zero
 {
 
 VertexSemanticRange::VertexSemanticRange(const FixedVertexDescription& fixedDesc) :
-    mFixedDesc(fixedDesc),
-    mCurrentIndex(0)
+    mFixedDesc(fixedDesc), mCurrentIndex(0)
 {
 }
 

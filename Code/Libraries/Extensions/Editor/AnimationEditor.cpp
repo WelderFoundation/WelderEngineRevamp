@@ -66,8 +66,7 @@ PropertyKeyIcon::PropertyKeyIcon(Composite* parent,
                                  HandleParam object,
                                  Property* metaProperty,
                                  AnimationEditor* editor) :
-    Composite(parent),
-    mEditor(editor)
+    Composite(parent), mEditor(editor)
 {
   mComponentHandle = object;
   mProperty = metaProperty;

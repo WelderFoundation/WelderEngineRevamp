@@ -182,7 +182,7 @@ void ZilchShaderGenerator::InitializeSpirV()
   mFrontEndTranslator->SetSettings(mSpirVSettings);
   mFrontEndTranslator->Setup();
   // Create the core library and parse it
-  
+
   ZilchShaderIRCore& coreLibrary = ZilchShaderIRCore::GetInstance();
   coreLibrary.Parse(mFrontEndTranslator);
   mCoreLibrary = coreLibrary.GetLibrary();
@@ -828,7 +828,10 @@ ShaderInput ZilchShaderGenerator::CreateShaderInput(StringParam fragmentName,
   }
   else
   {
-    shaderInput.mTranslatedInputName = BuildString("Material_", FragmentType::Names[shaderTypeMeta->mFragmentType], ".", GenerateSpirVPropertyName(inputName, fragmentName));
+    shaderInput.mTranslatedInputName = BuildString("Material_",
+                                                   FragmentType::Names[shaderTypeMeta->mFragmentType],
+                                                   ".",
+                                                   GenerateSpirVPropertyName(inputName, fragmentName));
     // SPIR-V doesn't allow boolean uniforms so we convert boolean inputs from
     // Zilch to integers.
     if (type == ShaderInputType::Bool)

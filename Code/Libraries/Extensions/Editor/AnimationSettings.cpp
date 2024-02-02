@@ -79,8 +79,7 @@ uint AnimationSettings::GetEditFps()
 }
 
 AnimationSettingsView::AnimationSettingsView(Composite* parent, AnimationEditor* editor) :
-    Composite(parent),
-    mEditor(editor)
+    Composite(parent), mEditor(editor)
 {
   SetClipping(true);
 

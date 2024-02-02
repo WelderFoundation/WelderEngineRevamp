@@ -4,12 +4,7 @@
 namespace Zero
 {
 PixelBuffer::PixelBuffer() :
-    Width(0),
-    Height(0),
-    Total(0),
-    Data(nullptr),
-    MaxMipLevel(-1),
-    Image(Texture::CreateRuntime())
+    Width(0), Height(0), Total(0), Data(nullptr), MaxMipLevel(-1), Image(Texture::CreateRuntime())
 {
 }
 

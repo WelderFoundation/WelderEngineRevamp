@@ -224,10 +224,7 @@ OsInt WebRequestThread(void* userData)
 }
 
 WebRequest::WebRequest() :
-    mOnHeadersReceived(nullptr),
-    mOnDataReceived(nullptr),
-    mOnComplete(nullptr),
-    mUserData(nullptr)
+    mOnHeadersReceived(nullptr), mOnDataReceived(nullptr), mOnComplete(nullptr), mUserData(nullptr)
 {
   ZeroConstructPrivateData(WebRequestPrivateData);
 }

@@ -41,11 +41,10 @@ void StopMainLoop()
 }
 #endif
 
-EM_JS(void, JSInitialLoadingCompleted, (), {
-  window.parent.postMessage({type: 'initialLoadingCompleted'}, '*');
-});
+EM_JS(void, JSInitialLoadingCompleted, (), { window.parent.postMessage({type : 'initialLoadingCompleted'}, '*'); });
 
-void InitialLoadingCompleted() {
+void InitialLoadingCompleted()
+{
   JSInitialLoadingCompleted();
 }
 

@@ -202,12 +202,8 @@ bool ErrorProcessHandler(ErrorSignaler::ErrorData& errorData)
 
 bool SystemOpenFile(Status& status, cstr file, cwstr verb, cstr parameters = nullptr, cstr workingDirectory = nullptr)
 {
-  HINSTANCE success = ShellExecute(NULL,
-                                   verb,
-                                   Widen(file).c_str(),
-                                   Widen(parameters).c_str(),
-                                   Widen(workingDirectory).c_str(),
-                                   TRUE);
+  HINSTANCE success =
+      ShellExecute(NULL, verb, Widen(file).c_str(), Widen(parameters).c_str(), Widen(workingDirectory).c_str(), TRUE);
 
   const HINSTANCE shellSucceed = (HINSTANCE)32;
   if (success > shellSucceed)
@@ -245,7 +241,8 @@ bool ShellEditFile(StringParam file)
 bool ShellOpenApplication(StringParam file, StringParam parameters, StringParam workingDirectory)
 {
   Status status;
-  SystemOpenFile(status, file.c_str(), NULL, parameters.c_str(), !workingDirectory.Empty() ? workingDirectory.c_str() : nullptr);
+  SystemOpenFile(
+      status, file.c_str(), NULL, parameters.c_str(), !workingDirectory.Empty() ? workingDirectory.c_str() : nullptr);
   return status.Succeeded();
 }
 

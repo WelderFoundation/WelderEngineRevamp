@@ -21,10 +21,7 @@ ZilchDefineType(ToolUiEvent, builder, type)
 }
 
 ToolUiEvent::ToolUiEvent(Composite* parent) :
-    mParent(parent),
-    mNeedsPropertyGrid(false),
-    mCustomUi(nullptr),
-    mSelectTool(nullptr)
+    mParent(parent), mNeedsPropertyGrid(false), mCustomUi(nullptr), mSelectTool(nullptr)
 {
 }
 

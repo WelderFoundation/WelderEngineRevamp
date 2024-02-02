@@ -13,8 +13,7 @@ struct Replacement
   }
 
   Replacement(StringParam matchString, StringParam replaceString) :
-      MatchString(matchString),
-      ReplaceString(replaceString)
+      MatchString(matchString), ReplaceString(replaceString)
   {
   }
 

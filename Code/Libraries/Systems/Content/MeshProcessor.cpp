@@ -5,8 +5,7 @@ namespace Zero
 {
 
 MeshProcessor::MeshProcessor(MeshBuilder* meshBuilder, MeshDataMap& meshDataMap) :
-    mBuilder(meshBuilder),
-    mMeshDataMap(meshDataMap)
+    mBuilder(meshBuilder), mMeshDataMap(meshDataMap)
 {
 }
 

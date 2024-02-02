@@ -22,8 +22,7 @@ ZilchDefineType(EditorViewport, builder, type)
 }
 
 EditorViewport::EditorViewport(Composite* parent, OwnerShip::Enum ownership) :
-    Composite(parent),
-    mIgnoreSpaceModifications(false)
+    Composite(parent), mIgnoreSpaceModifications(false)
 {
   mTools = Z::gEditor->Tools;
   mOwnerShip = ownership;

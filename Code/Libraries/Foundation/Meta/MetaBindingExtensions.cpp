@@ -219,10 +219,7 @@ ZilchDefineType(PropertyEvent, builder, type)
 }
 
 PropertyEvent::PropertyEvent(HandleParam object, PropertyPathParam property, AnyParam oldValue, AnyParam newValue) :
-    mObject(object),
-    mProperty(property),
-    mOldValue(oldValue),
-    mNewValue(newValue)
+    mObject(object), mProperty(property), mOldValue(oldValue), mNewValue(newValue)
 {
 }
 

@@ -26,10 +26,7 @@ float GetNormalizeValue(const Math::Vec2& vector)
 // Speaker Info
 
 SpeakerInfo::SpeakerInfo(float radians, const Math::Vec2& vector, SpeakerInfo* neighbor, unsigned index) :
-    mAngleRadians(radians),
-    mVector(vector),
-    mLeftNeighbor(neighbor),
-    mChannelIndex(index)
+    mAngleRadians(radians), mVector(vector), mLeftNeighbor(neighbor), mChannelIndex(index)
 {
   if (Math::Abs(mVector.x) < 0.0001f)
     mVector.x = 0.0f;

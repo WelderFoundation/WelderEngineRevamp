@@ -56,10 +56,7 @@ void HeightPatch::SetHeight(CellIndex index, float height)
 }
 
 HeightMapCellRange::HeightMapCellRange(HeightMap* heightMap, Vec2 position, real radius, real feather) :
-    mHeightMap(heightMap),
-    mToolPosition(position),
-    mRadius(radius),
-    mFeather(feather)
+    mHeightMap(heightMap), mToolPosition(position), mRadius(radius), mFeather(feather)
 {
   mCellSize = mHeightMap->mUnitsPerPatch / HeightPatch::Size;
 

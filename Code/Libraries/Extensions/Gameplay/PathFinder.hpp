@@ -38,9 +38,7 @@ public:
     }
 
     PathFinderNode(NodeKeyParam nodeKey, PathFinderNode* cameFrom, float costSoFar) :
-        mKey(nodeKey),
-        mCameFrom(cameFrom),
-        mCostSoFar(costSoFar)
+        mKey(nodeKey), mCameFrom(cameFrom), mCostSoFar(costSoFar)
     {
     }
 

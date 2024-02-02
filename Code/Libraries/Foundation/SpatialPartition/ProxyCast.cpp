@@ -234,9 +234,7 @@ void ProxyResult::Set(void* proxy, Vec3 points[2], Vec3Param contactNormal, real
 }
 
 ProxyCastResults::ProxyCastResults(ProxyCastResultArray& array, BaseCastFilter& filter) :
-    CurrSize(0),
-    Filter(filter),
-    Results(array)
+    CurrSize(0), Filter(filter), Results(array)
 {
 }
 

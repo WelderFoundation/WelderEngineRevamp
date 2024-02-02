@@ -48,9 +48,7 @@ void NoScreenshotAvailable::UpdateTransform()
 RecentProjectItem::RecentProjectItem(Composite* parent,
                                      RecentProjectsMenu* projectsMenu,
                                      CachedProject* cachedProject) :
-    Composite(parent),
-    mRecentProjectsMenu(projectsMenu),
-    mCachedProject(cachedProject)
+    Composite(parent), mRecentProjectsMenu(projectsMenu), mCachedProject(cachedProject)
 {
   mBackground = CreateAttached<Element>(cWhiteSquare);
   mBackground->SetColor(RecentProjectUi::ProjectColor);
@@ -270,8 +268,7 @@ void RecentProjectItem::OnRemoveModalResult(ModalConfirmEvent* e)
 }
 
 RecentProjectsMenu::RecentProjectsMenu(Composite* parent, LauncherWindow* launcher) :
-    Composite(parent),
-    mLauncher(launcher)
+    Composite(parent), mLauncher(launcher)
 {
   SetLayout(CreateStackLayout(LayoutDirection::TopToBottom, Vec2::cZero, Thickness(Pixels(0, 0, 10, 0))));
   mScrollArea = new ScrollArea(this);

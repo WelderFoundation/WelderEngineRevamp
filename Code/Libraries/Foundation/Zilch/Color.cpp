@@ -148,8 +148,8 @@ const float InvFactor = 1.0f / 255.0f;
 
 #undef ByteColorRGBA
 #define ByteColorRGBA(r, g, b, a)                                                                                      \
-  ((ByteColor)((((a)&CC::MaxByte) << CC::AlphaOffset) | (((r)&CC::MaxByte) << CC::RedOffset) |                         \
-               (((g)&CC::MaxByte) << CC::GreenOffset) | ((b)&CC::MaxByte) << CC::BlueOffset))
+  ((ByteColor)((((a) & CC::MaxByte) << CC::AlphaOffset) | (((r) & CC::MaxByte) << CC::RedOffset) |                     \
+               (((g) & CC::MaxByte) << CC::GreenOffset) | ((b) & CC::MaxByte) << CC::BlueOffset))
 
 #undef FloatColorRGBA
 #define FloatColorRGBA(r, g, b, a)                                                                                     \
@@ -181,7 +181,7 @@ inline ByteColor ColorWithAlpha(ByteColor color, float alpha)
 inline ByteColor ColorWithAlphaByte(ByteColor color, int alpha)
 {
   ByteColor alphaRemoved = (CC::RedMask | CC::GreenMask | CC::BlueMask) & color;
-  return alphaRemoved | (((alpha)&0xff) << CC::AlphaOffset);
+  return alphaRemoved | (((alpha) & 0xff) << CC::AlphaOffset);
 }
 
 Real4 ColorClass::FromBytes(Integer r, Integer g, Integer b)

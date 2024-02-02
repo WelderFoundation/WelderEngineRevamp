@@ -63,8 +63,7 @@ ZilchDefineType(TreeViewHeaderAddedEvent, builder, type)
 }
 
 TreeViewHeaderAddedEvent::TreeViewHeaderAddedEvent(uint headerIndex, ColumnHeader* newHeader) :
-    mHeaderIndex(headerIndex),
-    mNewHeader(newHeader)
+    mHeaderIndex(headerIndex), mNewHeader(newHeader)
 {
 }
 

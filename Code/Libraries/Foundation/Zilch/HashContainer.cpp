@@ -18,11 +18,7 @@ AnyHashMapRange::AnyHashMapRange() : ModifyId(0)
 }
 
 HashMapUserData::HashMapUserData() :
-    KeyType(nullptr),
-    ValueType(nullptr),
-    PairRangeType(nullptr),
-    ValueRangeType(nullptr),
-    KeyRangeType(nullptr)
+    KeyType(nullptr), ValueType(nullptr), PairRangeType(nullptr), ValueRangeType(nullptr), KeyRangeType(nullptr)
 {
 }
 

@@ -547,9 +547,7 @@ public:
   public:
     /// Constructor
     ItemCacher(Replicator* replicator, ReplicatorMessageType::Enum replicatorMessageType) :
-        ItemCache(),
-        mReplicator(replicator),
-        mReplicatorMessageType(replicatorMessageType)
+        ItemCache(), mReplicator(replicator), mReplicatorMessageType(replicatorMessageType)
     {
     }
 

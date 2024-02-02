@@ -49,7 +49,6 @@ ZilchShaderIRCompositor::ShaderDefinition::ShaderDefinition()
     mResults[i].mFragmentType = (FragmentType::Enum)i;
 }
 
-//-------------------------------------------------------------------ComputeShaderProperties
 ZilchShaderIRCompositor::ComputeShaderProperties::ComputeShaderProperties()
 {
   mLocalSizeX = mLocalSizeY = mLocalSizeZ = 1;

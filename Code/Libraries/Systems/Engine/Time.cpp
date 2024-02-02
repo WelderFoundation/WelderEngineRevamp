@@ -34,10 +34,7 @@ ZilchDefineType(UpdateEvent, builder, type)
 }
 
 UpdateEvent::UpdateEvent(float dt, float realDt, float timePassed, float realTimePassed) :
-    Dt(dt),
-    RealDt(realDt),
-    TimePassed(timePassed),
-    RealTimePassed(realTimePassed)
+    Dt(dt), RealDt(realDt), TimePassed(timePassed), RealTimePassed(realTimePassed)
 {
 }
 

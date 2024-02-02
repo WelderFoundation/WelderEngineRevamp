@@ -2,7 +2,7 @@
 #pragma once
 
 #ifndef WelderExceptions
-#define SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS
+#  define SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS
 #endif
 #include "ZilchShadersStandard.hpp"
 

@@ -120,8 +120,7 @@ struct BroadPhaseArrayRange : public QueryCheck
   }
 
   BroadPhaseArrayRange(ObjectArray* data, const QueryType& queryObj, Policy policy) :
-      QueryCheck(queryObj, policy),
-      mData(data)
+      QueryCheck(queryObj, policy), mData(data)
   {
     mIndex = 0;
     mIndex = SkipDead();
@@ -190,8 +189,7 @@ struct BroadPhaseTreeRange
                       NodeType* root,
                       const QueryType& queryObj,
                       PolicyType policy) :
-      mQueryObj(queryObj),
-      mPolicy(policy)
+      mQueryObj(queryObj), mPolicy(policy)
   {
     mScratchSpace = scratchBuffer;
     mScratchSpace->Clear();

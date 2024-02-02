@@ -42,8 +42,7 @@ public:
   Vec2 mDragStartGraph;
 
   MultiSelectManipulation(MouseDragEvent* dragEvent, CurveEditor* editor) :
-      MouseManipulation(dragEvent->GetMouse(), editor->GetRootWidget()),
-      mEditor(editor)
+      MouseManipulation(dragEvent->GetMouse(), editor->GetRootWidget()), mEditor(editor)
   {
     Vec2 localPixels = mEditor->ToLocal(dragEvent->StartPosition);
     mDragStartGraph = mEditor->ToGraphPosition(localPixels);
@@ -1181,8 +1180,7 @@ ZilchDefineType(ControlPoint, builder, type)
 }
 
 ControlPoint::ControlPoint(CurveObject* curve, Vec2Param pos, Vec2Param tanIn, Vec2Param tanOut, uint editorFlags) :
-    Draggable(curve),
-    mEditorFlags(editorFlags)
+    Draggable(curve), mEditorFlags(editorFlags)
 {
   mClientData = nullptr;
 

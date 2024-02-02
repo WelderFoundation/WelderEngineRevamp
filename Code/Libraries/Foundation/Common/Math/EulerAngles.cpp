@@ -14,8 +14,7 @@ EulerAngles::EulerAngles(Vec3Param xyzRotation, EulerOrderParam order) : Angles(
 }
 
 EulerAngles::EulerAngles(real xRotation, real yRotation, real zRotation, EulerOrderParam order) :
-    Angles(xRotation, yRotation, zRotation),
-    Order(order)
+    Angles(xRotation, yRotation, zRotation), Order(order)
 {
   //
 }

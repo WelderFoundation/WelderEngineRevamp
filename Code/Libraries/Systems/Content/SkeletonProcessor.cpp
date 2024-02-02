@@ -5,9 +5,7 @@ namespace Zero
 {
 
 SkeletonProcessor::SkeletonProcessor(HierarchyDataMap& hierarchyData, MeshDataMap& meshData, String& rootNodeName) :
-    mHierarchyDataMap(hierarchyData),
-    mMeshDataMap(meshData),
-    mRootNodeName(rootNodeName)
+    mHierarchyDataMap(hierarchyData), mMeshDataMap(meshData), mRootNodeName(rootNodeName)
 {
 }
 

@@ -45,8 +45,7 @@ ZilchDefineType(ButtonBase, builder, type)
 }
 
 ButtonBase::ButtonBase(Composite* parent, StringParam styleClass) :
-    Composite(parent),
-    mToolTipColor(ToolTipColorScheme::Default)
+    Composite(parent), mToolTipColor(ToolTipColorScheme::Default)
 {
   mDefSet = mDefSet->GetDefinitionSet(styleClass);
 

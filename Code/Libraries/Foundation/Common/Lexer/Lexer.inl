@@ -5,12 +5,7 @@ namespace Zero
 {
 template <typename TokenType>
 GrammarNode<TokenType>::GrammarNode() :
-    mType(GrammarNodeType::Epsilon),
-    mLhs(nullptr),
-    mRhs(nullptr),
-    mOperand(nullptr),
-    mGrammarSet(nullptr),
-    mOrderId(0)
+    mType(GrammarNodeType::Epsilon), mLhs(nullptr), mRhs(nullptr), mOperand(nullptr), mGrammarSet(nullptr), mOrderId(0)
 {
 }
 
@@ -261,12 +256,7 @@ TokenType Capture<TokenType>::GetFirstToken(StringParam name, const TokenType& f
 
 template <typename TokenType>
 ParseNodeInfo<TokenType>::ParseNodeInfo() :
-    mRule(nullptr),
-    mStartInclusive(0),
-    mEndExclusive(0),
-    mAccepted(false),
-    mFailed(false),
-    mCapture(nullptr)
+    mRule(nullptr), mStartInclusive(0), mEndExclusive(0), mAccepted(false), mFailed(false), mCapture(nullptr)
 {
 }
 
@@ -1262,8 +1252,7 @@ TokenRange<ParseHandlerType>::TokenRange(GrammarSet<Character>& set,
                                          GrammarRule<Character>& rule,
                                          StringParam input,
                                          bool debug) :
-    mSet(&set),
-    mHasRunFirstIteration(false)
+    mSet(&set), mHasRunFirstIteration(false)
 {
   this->mParser.mDebug = debug;
   this->mParser.mStream = &this->mStream;
@@ -1274,10 +1263,7 @@ TokenRange<ParseHandlerType>::TokenRange(GrammarSet<Character>& set,
 
 template <typename ParseHandlerType>
 TokenRange<ParseHandlerType>::TokenRange(const TokenRange& rhs) :
-    mParser(rhs.mParser),
-    mStream(rhs.mStream),
-    mSet(rhs.mSet),
-    mHasRunFirstIteration(rhs.mHasRunFirstIteration)
+    mParser(rhs.mParser), mStream(rhs.mStream), mSet(rhs.mSet), mHasRunFirstIteration(rhs.mHasRunFirstIteration)
 {
   this->mParser.mStream = &this->mStream;
 }

@@ -388,8 +388,11 @@ ZeroForceInline void IfHandler(PerFrameData* stackFrame, const Opcode& opcode)
   }
 }
 
-ZeroForceInline void CopyHandlerEx(
-    PerFrameData* ourFrame, PerFrameData* topFrame, const ::byte*& sourceOut, ::byte*& destinationOut, const CopyOpcode& op)
+ZeroForceInline void CopyHandlerEx(PerFrameData* ourFrame,
+                                   PerFrameData* topFrame,
+                                   const ::byte*& sourceOut,
+                                   ::byte*& destinationOut,
+                                   const CopyOpcode& op)
 {
   // When we copy to parameters, it's always a destination
   // (we are placing parameters in the place they must go before we call)

@@ -90,11 +90,7 @@ class DebugDrawObjectBase
 {
 public:
   DebugDrawObjectBase() :
-      mViewScaleOffset(Vec3::cZero),
-      mColor(Vec4(1.0f)),
-      mDuration(0.0f),
-      mWidth(1.0f),
-      mDrawFlags(0)
+      mViewScaleOffset(Vec3::cZero), mColor(Vec4(1.0f)), mDuration(0.0f), mWidth(1.0f), mDrawFlags(0)
   {
   }
 
@@ -236,44 +232,32 @@ public:
   }
 
   Box(Vec3Param position, Vec2Param halfExtents) :
-      mPosition(position),
-      mHalfExtents(halfExtents),
-      mRotation(Quat::cIdentity)
+      mPosition(position), mHalfExtents(halfExtents), mRotation(Quat::cIdentity)
   {
   }
 
   Box(Vec3Param position, float halfExtents) :
-      mPosition(position),
-      mHalfExtents(Vec2(1, 1) * halfExtents),
-      mRotation(Quat::cIdentity)
+      mPosition(position), mHalfExtents(Vec2(1, 1) * halfExtents), mRotation(Quat::cIdentity)
   {
   }
 
   Box(Vec3Param position, Vec2Param halfExtents, QuatParam rotation) :
-      mPosition(position),
-      mHalfExtents(halfExtents),
-      mRotation(rotation)
+      mPosition(position), mHalfExtents(halfExtents), mRotation(rotation)
   {
   }
 
   Box(Vec3Param position, float halfExtents, QuatParam rotation) :
-      mPosition(position),
-      mHalfExtents(Vec2(1, 1) * halfExtents),
-      mRotation(rotation)
+      mPosition(position), mHalfExtents(Vec2(1, 1) * halfExtents), mRotation(rotation)
   {
   }
 
   Box(Vec3Param position, Vec3Param halfExtents, QuatParam rotation = Quat::cIdentity) :
-      mPosition(position),
-      mHalfExtents(Math::ToVector2(halfExtents)),
-      mRotation(rotation)
+      mPosition(position), mHalfExtents(Math::ToVector2(halfExtents)), mRotation(rotation)
   {
   }
 
   Box(const Zero::Aabb& aabb) :
-      mPosition(aabb.GetCenter()),
-      mHalfExtents(Math::ToVector2(aabb.GetHalfExtents())),
-      mRotation(Quat::cIdentity)
+      mPosition(aabb.GetCenter()), mHalfExtents(Math::ToVector2(aabb.GetHalfExtents())), mRotation(Quat::cIdentity)
   {
   }
 
@@ -308,9 +292,7 @@ public:
   }
 
   Capsule(Vec3Param pos, Vec3Param axis, float height, float radius) :
-      mStart(pos + axis * height),
-      mEnd(pos - axis * height),
-      mRadius(radius)
+      mStart(pos + axis * height), mEnd(pos - axis * height), mRadius(radius)
   {
   }
 
@@ -371,10 +353,7 @@ public:
   }
 
   Cone(Vec3Param position, Vec3Param direction, float length, float radius) :
-      mPosition(position),
-      mDirection(direction),
-      mLength(length),
-      mRadius(radius)
+      mPosition(position), mDirection(direction), mLength(length), mRadius(radius)
   {
   }
 
@@ -409,9 +388,7 @@ public:
   }
 
   Cylinder(Vec3Param pos, Vec3Param axis, float height, float radius) :
-      mStart(pos + axis * height),
-      mEnd(pos - axis * height),
-      mRadius(radius)
+      mStart(pos + axis * height), mEnd(pos - axis * height), mRadius(radius)
   {
   }
 
@@ -546,51 +523,37 @@ public:
   }
 
   Obb(Vec3Param position, Vec3Param halfExtents) :
-      mPosition(position),
-      mHalfExtents(halfExtents),
-      mRotation(Quat::cIdentity)
+      mPosition(position), mHalfExtents(halfExtents), mRotation(Quat::cIdentity)
   {
   }
 
   Obb(Vec3Param position, float halfExtents) :
-      mPosition(position),
-      mHalfExtents(Vec3(1, 1, 1) * halfExtents),
-      mRotation(Quat::cIdentity)
+      mPosition(position), mHalfExtents(Vec3(1, 1, 1) * halfExtents), mRotation(Quat::cIdentity)
   {
   }
 
   Obb(Vec3Param position, Vec3Param extents, QuatParam rotation) :
-      mPosition(position),
-      mHalfExtents(extents),
-      mRotation(rotation)
+      mPosition(position), mHalfExtents(extents), mRotation(rotation)
   {
   }
 
   Obb(Vec3Param position, float halfExtents, QuatParam rotation) :
-      mPosition(position),
-      mHalfExtents(Vec3(1, 1, 1) * halfExtents),
-      mRotation(rotation)
+      mPosition(position), mHalfExtents(Vec3(1, 1, 1) * halfExtents), mRotation(rotation)
   {
   }
 
   Obb(Vec3Param position, Vec3Param extents, Mat3Param rotation) :
-      mPosition(position),
-      mHalfExtents(extents),
-      mRotation(Math::ToQuaternion(rotation))
+      mPosition(position), mHalfExtents(extents), mRotation(Math::ToQuaternion(rotation))
   {
   }
 
   Obb(const Zero::Obb& obb) :
-      mPosition(obb.Center),
-      mHalfExtents(obb.HalfExtents),
-      mRotation(Math::ToQuaternion(obb.Basis))
+      mPosition(obb.Center), mHalfExtents(obb.HalfExtents), mRotation(Math::ToQuaternion(obb.Basis))
   {
   }
 
   Obb(const Zero::Aabb& aabb) :
-      mPosition(aabb.GetCenter()),
-      mHalfExtents(aabb.GetHalfExtents()),
-      mRotation(Quat::cIdentity)
+      mPosition(aabb.GetCenter()), mHalfExtents(aabb.GetHalfExtents()), mRotation(Quat::cIdentity)
   {
   }
 
@@ -655,10 +618,7 @@ public:
   }
 
   Text(Vec3Param position, float textHeight, StringParam text) :
-      mPosition(position),
-      mRotation(Quat::cIdentity),
-      mTextHeight(textHeight),
-      mText(text)
+      mPosition(position), mRotation(Quat::cIdentity), mTextHeight(textHeight), mText(text)
   {
   }
 

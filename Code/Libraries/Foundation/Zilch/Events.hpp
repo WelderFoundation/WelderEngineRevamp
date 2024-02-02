@@ -11,7 +11,7 @@ namespace Zilch
 #  define ZilchDeclareEvent(EventName, EventType) ZeroShared extern const String EventName;
 
 // Defines the event so only cpp uint allocates the string
-#  define ZilchDefineEvent(EventName) ZeroShared const String EventName = #  EventName;
+#  define ZilchDefineEvent(EventName) ZeroShared const String EventName = #EventName;
 
 // All events that are sent must be derived from this type
 class ZeroShared EventData : public IZilchObject
@@ -78,7 +78,7 @@ public:
 // implement 'GetSize' and 'CopyInto' Our implementation of 'CopyInto' just
 // invokes the copy constructor via placement new
 #  define ZilchDefineEventDelegateHelpers(SelfType)                                                                    \
-    void CopyInto(::byte* destination) override                                                                          \
+    void CopyInto(::byte* destination) override                                                                        \
     {                                                                                                                  \
       static_assert(sizeof(SelfType) <= MaxEventDelegateSize,                                                          \
                     "The size of the event delegate must not exceed "                                                  \
@@ -187,8 +187,7 @@ public:
   // Construct a member function delegate from a class instance and member
   // function pointer
   MemberFunctionEventDelegate(FunctionType function, ClassType* instance) :
-      FunctionPointer(function),
-      ThisPointer(instance)
+      FunctionPointer(function), ThisPointer(instance)
   {
     this->Type = ZilchTypeId(EventType);
   }
@@ -318,8 +317,7 @@ public:
   // Construct a member function delegate from a class instance and member
   // function pointer
   StaticFunctionUserDataEventDelegate(FunctionType function, void* userData) :
-      FunctionPointer(function),
-      UserData(userData)
+      FunctionPointer(function), UserData(userData)
   {
     this->Type = ZilchTypeId(EventType);
   }

@@ -15,12 +15,7 @@ class SDLAudioDevice
 {
 public:
   SDLAudioDevice() :
-      mDeviceID(0),
-      mSampleRate(0),
-      mChannels(0),
-      mCallback(nullptr),
-      mCallbackData(nullptr),
-      mType(StreamTypes::Output)
+      mDeviceID(0), mSampleRate(0), mChannels(0), mCallback(nullptr), mCallbackData(nullptr), mType(StreamTypes::Output)
   {
   }
 

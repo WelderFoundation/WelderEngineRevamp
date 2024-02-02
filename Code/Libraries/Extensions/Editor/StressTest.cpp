@@ -309,10 +309,7 @@ ZilchDefineType(StressTestDialog, builder, type)
 
 // Constructor
 StressTestDialog::StressTestDialog(Composite* parent) :
-    Composite(parent),
-    mTestIterationCount(0),
-    mTestFrame(0),
-    mRandom(0)
+    Composite(parent), mTestIterationCount(0), mTestFrame(0), mRandom(0)
 {
   SetLayout(CreateStackLayout());
   SetMinSize(Vec2(300, 300));

@@ -42,8 +42,7 @@ void SoundCuePreview::OnLeftClick(MouseEvent* event)
 }
 
 CameraViewportDrawer::CameraViewportDrawer(Composite* parent, Cog* cameraObject) :
-    Widget(parent),
-    mCameraObject(cameraObject)
+    Widget(parent), mCameraObject(cameraObject)
 {
 }
 
@@ -82,8 +81,7 @@ void CameraViewportDrawer::RenderUpdate(
 }
 
 SpacePreviewMouseDrag::SpacePreviewMouseDrag(Mouse* mouse, SpacePreview* preview) :
-    MouseManipulation(mouse, preview),
-    mPreview(preview)
+    MouseManipulation(mouse, preview), mPreview(preview)
 {
 }
 

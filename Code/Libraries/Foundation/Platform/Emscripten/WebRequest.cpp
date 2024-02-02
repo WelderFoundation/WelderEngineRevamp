@@ -63,10 +63,7 @@ EM_JS(void,
 EM_JS(void, EmscriptenWebRequestCancel, (WebRequest * request), { xhrCancel(request); });
 
 WebRequest::WebRequest() :
-    mOnHeadersReceived(nullptr),
-    mOnDataReceived(nullptr),
-    mOnComplete(nullptr),
-    mUserData(nullptr)
+    mOnHeadersReceived(nullptr), mOnDataReceived(nullptr), mOnComplete(nullptr), mUserData(nullptr)
 {
   ZeroConstructPrivateData(WebRequestPrivateData);
 }

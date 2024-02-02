@@ -52,8 +52,7 @@ ZilchDefineType(UiWidgetCastResultsRange, builder, type)
 }
 
 UiWidgetCastResultsRange::UiWidgetCastResultsRange(const UiWidgetArray& overlappingWidgets) :
-    mOverlappingWidgets(overlappingWidgets),
-    mIndex(0)
+    mOverlappingWidgets(overlappingWidgets), mIndex(0)
 {
 }
 

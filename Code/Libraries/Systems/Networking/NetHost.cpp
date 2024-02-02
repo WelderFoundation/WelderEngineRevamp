@@ -27,11 +27,7 @@ NetHost::NetHost() : mNetwork(Network::LAN), mIpAddress(), mRoundTripTime(0), mB
 {
 }
 NetHost::NetHost(const IpAddress& ipAddress) :
-    mNetwork(Network::LAN),
-    mIpAddress(ipAddress),
-    mRoundTripTime(0),
-    mBasicHostInfo(),
-    mExtraHostInfo()
+    mNetwork(Network::LAN), mIpAddress(ipAddress), mRoundTripTime(0), mBasicHostInfo(), mExtraHostInfo()
 {
 }
 NetHost::NetHost(const NetHost& rhs) :

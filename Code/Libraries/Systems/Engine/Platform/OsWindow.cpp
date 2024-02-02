@@ -682,9 +682,7 @@ ZilchDefineType(OsWindowBorderHitTest, builder, type)
 }
 
 OsWindowBorderHitTest::OsWindowBorderHitTest() :
-    Window(nullptr),
-    ClientPosition(IntVec2::cZero),
-    mWindowBorderArea(WindowBorderArea::None)
+    Window(nullptr), ClientPosition(IntVec2::cZero), mWindowBorderArea(WindowBorderArea::None)
 {
 }
 

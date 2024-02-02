@@ -24,11 +24,7 @@ struct OperationInput
   f32 CollinearAngleTolerance;
 
   OperationInput() :
-      Operation(Operation::Union),
-      ContoursA(0),
-      ContoursB(0),
-      DistanceTolerance(0.f),
-      CollinearAngleTolerance(0.f)
+      Operation(Operation::Union), ContoursA(0), ContoursB(0), DistanceTolerance(0.f), CollinearAngleTolerance(0.f)
   {
   }
 };

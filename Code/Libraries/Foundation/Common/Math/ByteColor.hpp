@@ -44,8 +44,8 @@ const float InvFactor = 1.0f / 255.0f;
 } // namespace CS
 
 #define ByteColorRGBA(r, g, b, a)                                                                                      \
-  ((ByteColor)((((a)&CS::MaxByte) << CS::AlphaOffset) | (((r)&CS::MaxByte) << CS::RedOffset) |                         \
-               (((g)&CS::MaxByte) << CS::GreenOffset) | ((b)&CS::MaxByte) << CS::BlueOffset))
+  ((ByteColor)((((a) & CS::MaxByte) << CS::AlphaOffset) | (((r) & CS::MaxByte) << CS::RedOffset) |                     \
+               (((g) & CS::MaxByte) << CS::GreenOffset) | ((b) & CS::MaxByte) << CS::BlueOffset))
 
 #define FloatColorRGBA(r, g, b, a)                                                                                     \
   Math::Vec4(float(r) * CS::InvFactor, float(g) * CS::InvFactor, float(b) * CS::InvFactor, float(a) * CS::InvFactor)
@@ -113,13 +113,13 @@ inline ByteColor ColorWithAlpha(ByteColor color, float alpha)
 inline ByteColor ColorWithAlphaByte(ByteColor color, int alpha)
 {
   ByteColor alphaRemoved = (CS::RedMask | CS::GreenMask | CS::BlueMask) & color;
-  return alphaRemoved | (((alpha)&0xff) << CS::AlphaOffset);
+  return alphaRemoved | (((alpha) & 0xff) << CS::AlphaOffset);
 }
 
 inline void SetAlphaByte(ByteColor& color, uint alpha)
 {
   ByteColor alphaRemoved = (CS::RedMask | CS::GreenMask | CS::BlueMask) & color;
-  color = alphaRemoved | (((alpha)&0xff) << CS::AlphaOffset);
+  color = alphaRemoved | (((alpha) & 0xff) << CS::AlphaOffset);
 }
 
 // Hue [0,1]

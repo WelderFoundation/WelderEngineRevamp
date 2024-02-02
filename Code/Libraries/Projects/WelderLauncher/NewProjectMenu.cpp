@@ -19,9 +19,7 @@ Tweakable(Vec4, InvalidColor, Vec4(1, 1, 1, 1), cLocation);
 
 // TemplateProjectItem
 TemplateProjectItem::TemplateProjectItem(Composite* parent, NewProjectMenu* newProjectMenu, TemplateProject* project) :
-    Composite(parent),
-    mNewProjectMenu(newProjectMenu),
-    mTemplateProject(project)
+    Composite(parent), mNewProjectMenu(newProjectMenu), mTemplateProject(project)
 {
   mSelected = false;
   SetClipping(true);

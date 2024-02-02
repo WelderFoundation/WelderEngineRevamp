@@ -24,11 +24,7 @@ ZilchDefineType(RenderGroup, builder, type)
 }
 
 RenderGroup::RenderGroup() :
-    mSerializedList(this),
-    mReferencedByList(this),
-    mChildRenderGroups(this),
-    mParentInternal(nullptr),
-    mSortId(-1)
+    mSerializedList(this), mReferencedByList(this), mChildRenderGroups(this), mParentInternal(nullptr), mSortId(-1)
 {
   mSerializedList.mDisplayName = "Materials";
   mReferencedByList.mDisplayName = "ReferencedBy";

@@ -34,11 +34,11 @@ ZilchDefineType(Random, builder, type)
   ZilchFullBindMethod(builder, type, &Random::RangeExclusiveMax, ZilchNoOverload, "RangeExclusiveMax", "min, max");
   ZilchFullBindMethod(builder, type, &Random::Range, ZilchNoOverload, "Range", "min, max");
   ZilchFullBindMethod(builder, type, &Random::DoubleRange, ZilchNoOverload, "DoubleRange", "min, max");
-  ZilchFullBindMethod(builder, type, &Random::Variance, (int (Random::*)(int, int)), "Variance", "baseValue, variance");
+  ZilchFullBindMethod(builder, type, &Random::Variance, (int(Random::*)(int, int)), "Variance", "baseValue, variance");
   ZilchFullBindMethod(
-      builder, type, &Random::Variance, (float (Random::*)(float, float)), "Variance", "baseValue, variance");
+      builder, type, &Random::Variance, (float(Random::*)(float, float)), "Variance", "baseValue, variance");
   ZilchFullBindMethod(
-      builder, type, &Random::Variance, (double (Random::*)(double, double)), "Variance", "baseValue, variance");
+      builder, type, &Random::Variance, (double(Random::*)(double, double)), "Variance", "baseValue, variance");
 
   // Some more "user friendly" functions for designers
   ZilchFullBindMethod(builder, type, &Random::DieRoll, ZilchNoOverload, "DieRoll", nullptr);
@@ -47,13 +47,13 @@ ZilchDefineType(Random, builder, type)
   ZilchFullBindMethod(builder, type, &Random::Rotation, ZilchNoOverload, "Rotation", nullptr);
 
   // Bell curve (Gaussian) distribution
-  ZilchFullBindMethod(builder, type, &Random::BellCurve, (float (Random::*)()), "BellCurve", nullptr);
+  ZilchFullBindMethod(builder, type, &Random::BellCurve, (float(Random::*)()), "BellCurve", nullptr);
   ZilchFullBindMethod(
-      builder, type, &Random::BellCurve, (float (Random::*)(float, float)), "BellCurve", "center, range");
+      builder, type, &Random::BellCurve, (float(Random::*)(float, float)), "BellCurve", "center, range");
   ZilchFullBindMethod(builder,
                       type,
                       &Random::BellCurve,
-                      (float (Random::*)(float, float, float)),
+                      (float(Random::*)(float, float, float)),
                       "BellCurve",
                       "center, range, standardDeviation");
 }

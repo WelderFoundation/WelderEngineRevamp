@@ -23,9 +23,7 @@ ZilchDefineType(ZilchCompileFragmentEvent, builder, type)
 ZilchCompileFragmentEvent::ZilchCompileFragmentEvent(Module& dependencies,
                                                      Array<ZilchDocumentResource*>& fragments,
                                                      ResourceLibrary* owningLibrary) :
-    mDependencies(dependencies),
-    mFragments(fragments),
-    mOwningLibrary(owningLibrary)
+    mDependencies(dependencies), mFragments(fragments), mOwningLibrary(owningLibrary)
 {
 }
 

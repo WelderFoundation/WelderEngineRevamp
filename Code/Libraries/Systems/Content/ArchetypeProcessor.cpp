@@ -5,8 +5,7 @@ namespace Zero
 {
 
 ArchetypeProcessor::ArchetypeProcessor(GeneratedArchetype* generatedArchetype, HierarchyDataMap& hierarchyData) :
-    mGeneratedArchetype(generatedArchetype),
-    mHierarchyDataMap(hierarchyData)
+    mGeneratedArchetype(generatedArchetype), mHierarchyDataMap(hierarchyData)
 {
 }
 

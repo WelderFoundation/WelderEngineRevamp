@@ -8,12 +8,7 @@ struct TimeOfImpactData
 {
   TimeOfImpactData(
       Collider* colliderA, Collider* colliderB, real dt, Vec3 velocity = Vec3::cZero, bool linearSweep = false) :
-      ColliderA(colliderA),
-      ColliderB(colliderB),
-      Dt(dt),
-      Velocity(velocity),
-      LinearSweep(linearSweep),
-      Steps(0)
+      ColliderA(colliderA), ColliderB(colliderB), Dt(dt), Velocity(velocity), LinearSweep(linearSweep), Steps(0)
   {
   }
 

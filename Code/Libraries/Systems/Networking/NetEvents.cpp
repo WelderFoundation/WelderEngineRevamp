@@ -232,9 +232,7 @@ void BindNetEvents(LibraryBuilder& builder, BoundType* type)
 NetRequest::NetRequest(NetRequestType::Enum netRequestType,
                        const IpAddress& ipAddress,
                        const EventBundle& requestBundle) :
-    mNetRequestType(netRequestType),
-    mTheirIpAddress(ipAddress),
-    mOurRequestBundle(requestBundle)
+    mNetRequestType(netRequestType), mTheirIpAddress(ipAddress), mOurRequestBundle(requestBundle)
 {
 }
 
@@ -278,10 +276,7 @@ ZilchDefineType(NetHostUpdate, builder, type)
 }
 
 NetHostUpdate::NetHostUpdate() :
-    mRefreshResult(NetRefreshResult::NoResponse),
-    mResponseTime(0),
-    mNetwork(Network::LAN),
-    mHost(nullptr)
+    mRefreshResult(NetRefreshResult::NoResponse), mResponseTime(0), mNetwork(Network::LAN), mHost(nullptr)
 {
 }
 
@@ -361,9 +356,7 @@ ZilchDefineType(NetPeerSentConnectRequest, builder, type)
 }
 
 NetPeerSentConnectRequest::NetPeerSentConnectRequest(GameSession* gameSession) :
-    mTheirIpAddress(),
-    mOurRequestBundle(gameSession),
-    mOurPendingUserAddRequestCount(0)
+    mTheirIpAddress(), mOurRequestBundle(gameSession), mOurPendingUserAddRequestCount(0)
 {
 }
 
@@ -467,9 +460,7 @@ ZilchDefineType(NetLinkConnected, builder, type)
 }
 
 NetLinkConnected::NetLinkConnected() :
-    mTheirNetPeerId(0),
-    mTheirIpAddress(),
-    mDirection(TransmissionDirection::Unspecified)
+    mTheirNetPeerId(0), mTheirIpAddress(), mDirection(TransmissionDirection::Unspecified)
 {
 }
 
@@ -540,9 +531,7 @@ ZilchDefineType(NetPeerSentUserAddRequest, builder, type)
 }
 
 NetPeerSentUserAddRequest::NetPeerSentUserAddRequest(GameSession* gameSession) :
-    mTheirNetPeerId(0),
-    mTheirIpAddress(),
-    mOurRequestBundle(gameSession)
+    mTheirNetPeerId(0), mTheirIpAddress(), mOurRequestBundle(gameSession)
 {
 }
 

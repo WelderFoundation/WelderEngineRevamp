@@ -30,7 +30,7 @@ void PerformanceGraphWidget::RenderUpdate(
     return;
 
   Profile::Record* mainRecord = records.Front();
-  forRange(Profile::Record * record, records)
+  forRange (Profile::Record* record, records)
   {
     if (record->GetName() == "Engine")
     {
@@ -44,7 +44,8 @@ void PerformanceGraphWidget::RenderUpdate(
   {
     sUpdateCount = 0;
     mainRecord->AverageRunningSample();
-    Profile::Record::sSampleIndex = Math::Max<uint>((Profile::Record::sSampleIndex + 1) % Profile::Record::cSampleCount, 1);
+    Profile::Record::sSampleIndex =
+        Math::Max<uint>((Profile::Record::sSampleIndex + 1) % Profile::Record::cSampleCount, 1);
   }
 
   static Array<StreamedVertex> lines;

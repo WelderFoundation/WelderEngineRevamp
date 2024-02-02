@@ -15,9 +15,7 @@ ZilchDefineType(Viewport, builder, type)
 }
 
 Viewport::Viewport(Composite* parent, Space* space, Camera* camera) :
-    Composite(parent),
-    mTargetSpace(space),
-    mCamera(camera)
+    Composite(parent), mTargetSpace(space), mCamera(camera)
 {
   for (uint i = 0; i < 4; ++i)
   {

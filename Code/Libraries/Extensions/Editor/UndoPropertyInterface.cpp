@@ -79,8 +79,7 @@ void PropertyToUndo::Redo()
 UndoMetaComposition::UndoMetaComposition(PropertyInterface* propertyInterface,
                                          BoundType* objectType,
                                          OperationQueue* opQueue) :
-    EventMetaComposition(propertyInterface, objectType),
-    mOperationQueue(opQueue)
+    EventMetaComposition(propertyInterface, objectType), mOperationQueue(opQueue)
 {
 }
 

@@ -8,9 +8,7 @@ namespace Zero
 // Audio IO Interface
 
 AudioIOInterface::AudioIOInterface() :
-    MixedOutputBuffer(nullptr),
-    InputBuffer(nullptr),
-    mOutputStreamLatency(AudioLatency::Low)
+    MixedOutputBuffer(nullptr), InputBuffer(nullptr), mOutputStreamLatency(AudioLatency::Low)
 {
   memset(OutputBufferSizePerLatency, 0, sizeof(unsigned) * AudioLatency::Size);
 }

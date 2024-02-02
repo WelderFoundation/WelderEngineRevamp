@@ -362,10 +362,7 @@ DecompressedDecoder::DecompressedDecoder(Status& status,
                                          const String& fileName,
                                          FileDecoderCallback callback,
                                          void* callbackData) :
-    AudioFileDecoder(0, 0, callback, callbackData),
-    mCompressedData(nullptr),
-    mDataIndex(0),
-    mDataSize(0)
+    AudioFileDecoder(0, 0, callback, callbackData), mCompressedData(nullptr), mDataIndex(0), mDataSize(0)
 {
   // If no valid callback was provided, don't do anything
   if (!callback)

@@ -14,14 +14,14 @@ ZilchDefineType(StringBuilderExtended, builder, type)
   ZilchFullBindMethod(builder, type, &StringBuilderExtended::Clear, ZilchNoOverload, "Clear", nullptr);
 
   ZilchFullBindMethod(
-      builder, type, &StringBuilderExtended::Write, (void (StringBuilderExtended::*)(AnyParam)), "Write", nullptr);
+      builder, type, &StringBuilderExtended::Write, (void(StringBuilderExtended::*)(AnyParam)), "Write", nullptr);
 
   ZilchFullBindMethod(
-      builder, type, &StringBuilderExtended::WriteLine, (void (StringBuilderExtended::*)()), "WriteLine", nullptr);
+      builder, type, &StringBuilderExtended::WriteLine, (void(StringBuilderExtended::*)()), "WriteLine", nullptr);
   ZilchFullBindMethod(builder,
                       type,
                       &StringBuilderExtended::WriteLine,
-                      (void (StringBuilderExtended::*)(AnyParam)),
+                      (void(StringBuilderExtended::*)(AnyParam)),
                       "WriteLine",
                       nullptr);
 }

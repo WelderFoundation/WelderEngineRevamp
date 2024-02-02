@@ -201,10 +201,7 @@ void Comb::ProcessAudio(const float input, float* output)
 // Low Pass Comb Filter
 
 LPComb::LPComb(const float maxDelayTime, const int sampleRate) :
-    mCombG(0),
-    mLPFg(0),
-    mPrevSample(0),
-    Delay(maxDelayTime, sampleRate)
+    mCombG(0), mLPFg(0), mPrevSample(0), Delay(maxDelayTime, sampleRate)
 {
 }
 

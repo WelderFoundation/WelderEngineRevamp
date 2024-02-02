@@ -91,9 +91,7 @@ public:
   }
 
   SizePolicies(SizePolicy::Enum xpolicy, SizePolicy::Enum ypolicy) :
-      XPolicy(xpolicy),
-      YPolicy(ypolicy),
-      Size(Vec2::cZero)
+      XPolicy(xpolicy), YPolicy(ypolicy), Size(Vec2::cZero)
   {
     XPolicy = xpolicy;
     YPolicy = ypolicy;
@@ -103,7 +101,8 @@ public:
   {
   }
 
-  union {
+  union
+  {
     struct
     {
       SizePolicy::Enum XPolicy;

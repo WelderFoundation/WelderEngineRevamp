@@ -46,7 +46,6 @@ typedef void (*ExpressionInitializerIRResolverFn)(ZilchSpirVFrontEnd* translator
                                                   Zilch::ExpressionInitializerNode*& node,
                                                   ZilchSpirVFrontEndContext* context);
 
-//-------------------------------------------------------------------FragmentSharedKey
 /// Hash key used to lookup fields with the FragmentShared attribute. A shared field
 /// is uniquely described by its type and name (additionally include any storage
 /// class as this is technically part of the type, not sure if this is actually important).

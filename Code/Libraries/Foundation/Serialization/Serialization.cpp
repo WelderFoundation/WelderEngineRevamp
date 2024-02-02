@@ -21,10 +21,7 @@ DataAttribute::DataAttribute(StringParam name, StringParam value) : mName(name),
 const Guid PolymorphicNode::cInvalidUniqueNodeId = (Guid)-1;
 
 PolymorphicInfo::PolymorphicInfo() :
-    mTypeName(nullptr),
-    mUniqueNodeId(PolymorphicNode::cInvalidUniqueNodeId),
-    mFieldName(nullptr),
-    mFlags(0)
+    mTypeName(nullptr), mUniqueNodeId(PolymorphicNode::cInvalidUniqueNodeId), mFieldName(nullptr), mFlags(0)
 {
 }
 

@@ -24,9 +24,7 @@ ZilchDefineType(GizmoRayTestEvent, builder, type)
 {
 }
 GizmoRayTestEvent::GizmoRayTestEvent() :
-    mGizmoHit(nullptr),
-    mHitDistance(Math::PositiveMax()),
-    mPickingPriority(-Math::IntegerNegativeMin())
+    mGizmoHit(nullptr), mHitDistance(Math::PositiveMax()), mPickingPriority(-Math::IntegerNegativeMin())
 {
 }
 
@@ -56,10 +54,7 @@ ZilchDefineType(GizmoEvent, builder, type)
 }
 
 GizmoEvent::GizmoEvent(Cog* gizmoCog, ViewportMouseEvent* e) :
-    mGizmo(gizmoCog),
-    mSource(nullptr),
-    mMouseEvent(e),
-    mOperationQueue(nullptr)
+    mGizmo(gizmoCog), mSource(nullptr), mMouseEvent(e), mOperationQueue(nullptr)
 {
 }
 

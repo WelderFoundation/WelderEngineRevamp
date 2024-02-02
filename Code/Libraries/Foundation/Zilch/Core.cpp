@@ -3141,9 +3141,7 @@ class SplatWithErrorUserData
 {
 public:
   SplatWithErrorUserData(size_t size, cstr errorFormat, BoundType* boundType) :
-      Size(size),
-      ErrorFormat(errorFormat),
-      Type(boundType)
+      Size(size), ErrorFormat(errorFormat), Type(boundType)
   {
   }
 

@@ -215,7 +215,8 @@ public:
   // The delegate stores the handle, so we know delegate is the biggest
   // If the size of the type is bigger then can fit here, then we allocate a
   // pointer instead
-  union {
+  union
+  {
     ::byte Data[sizeof(Delegate)];
 
     // Ensure alignment on all platforms.

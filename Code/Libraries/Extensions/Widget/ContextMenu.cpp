@@ -117,11 +117,7 @@ ZilchDefineType(ContextMenuEntry, builder, type)
 }
 
 ContextMenuEntry::ContextMenuEntry(StringParam name, StringParam icon, bool readOnly) :
-    mName(name),
-    mIcon(icon),
-    mEnabled(true),
-    mParent(nullptr),
-    mReadOnly(readOnly)
+    mName(name), mIcon(icon), mEnabled(true), mParent(nullptr), mReadOnly(readOnly)
 {
   ConnectThisTo(this, Events::MenuItemSelected, OnItemSelected);
   ConnectThisTo(this, Events::MenuItemHover, OnItemHover);

@@ -50,9 +50,7 @@ BoundType* ZilchCompileEvent::GetReplacingType(BoundType* oldType)
 
 // Zilch Manager
 ZilchManager::ZilchManager() :
-    mVersion(0),
-    mShouldAttemptCompile(true),
-    mLastCompileResult(CompileResult::CompilationSucceeded)
+    mVersion(0), mShouldAttemptCompile(true), mLastCompileResult(CompileResult::CompilationSucceeded)
 {
   ConnectThisTo(Z::gEngine, Events::EngineUpdate, OnEngineUpdate);
 

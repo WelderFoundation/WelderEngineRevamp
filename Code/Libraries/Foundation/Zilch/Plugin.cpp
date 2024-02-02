@@ -39,13 +39,7 @@ LibraryRef BuildEvent::FindLibrary(StringParam name)
 ZeroShared EventHandler PluginEvent::GlobalEvents;
 
 PluginEvent::PluginEvent() :
-    mCString(nullptr),
-    mInteger(0),
-    mFloat(0),
-    mDouble(0),
-    mBool(false),
-    mPointer(nullptr),
-    mHandled(false)
+    mCString(nullptr), mInteger(0), mFloat(0), mDouble(0), mBool(false), mPointer(nullptr), mHandled(false)
 {
 }
 
@@ -287,9 +281,7 @@ NativeName::NativeName()
 }
 
 NativeName::NativeName(StringParam className, StringParam parameterName, StringParam returnName) :
-    Class(className),
-    Parameter(parameterName),
-    Return(returnName)
+    Class(className), Parameter(parameterName), Return(returnName)
 {
 }
 

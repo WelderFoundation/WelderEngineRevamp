@@ -10,8 +10,7 @@ ZilchDefineType(MultiPrimitive, builder, type)
 }
 
 MultiPrimitive::MultiPrimitive(BoundType* primitiveMemberType, size_t primitiveMemberCount) :
-    PrimitiveMemberType(primitiveMemberType),
-    PrimitiveMemberCount(primitiveMemberCount)
+    PrimitiveMemberType(primitiveMemberType), PrimitiveMemberCount(primitiveMemberCount)
 {
 }
 } // namespace Zilch

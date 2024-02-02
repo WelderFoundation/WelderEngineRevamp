@@ -53,9 +53,7 @@ struct Frame
   {
   }
   Frame(TrapezoidMap::RegionId regionId_, s32 depth_, s32 winding_) :
-      regionId(regionId_),
-      depth(depth_),
-      winding(winding_)
+      regionId(regionId_), depth(depth_), winding(winding_)
   {
   }
 };

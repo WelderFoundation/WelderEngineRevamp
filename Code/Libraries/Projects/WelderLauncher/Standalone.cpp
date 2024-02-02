@@ -92,17 +92,17 @@ bool BuildId::Parse(StringParam buildName)
    * Example: WelderEditor.1.5.0.1501.zip
    */
   const Regex cBuildNameRegex("([a-zA-Z0-9_]+)\\." // Application [WelderEditor]
-                              //"([a-zA-Z0-9_]+)\\." // Branch [master]
-                              "([0-9]+)\\."        // Major [1]
-                              "([0-9]+)\\."        // Minor [5]
-                              "([0-9]+)\\."        // Patch [0]
-                              "([0-9]+)\\."        // Revision [1501]
+                                                   //"([a-zA-Z0-9_]+)\\." // Branch [master]
+                              "([0-9]+)\\." // Major [1]
+                              "([0-9]+)\\." // Minor [5]
+                              "([0-9]+)\\." // Patch [0]
+                              "([0-9]+)\\." // Revision [1501]
                               //"([0-9a-fA-F]+)\\."  // ShortChangeset [fb02756c46a4]
                               //"([0-9]+)\\."        // MsSinceEpoch [1574702096290]
                               //"([a-zA-Z0-9_]+)\\." // TargetOs [Windows]
                               //"([a-zA-Z0-9_]+)\\." // Architecture [x86]
                               //"([a-zA-Z0-9_]+)\\." // Config [Release]
-                              "([a-zA-Z0-9_]+)"    // Extension [zip]
+                              "([a-zA-Z0-9_]+)" // Extension [zip]
   );
 
   Matches matches;
@@ -115,20 +115,18 @@ bool BuildId::Parse(StringParam buildName)
   //// 1           2      3     4     5     6        7              8            9        10           11     12
   //// Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
 
-  //mApplication = matches[1];
-  //mBranch = matches[2];
-  //ToValue(matches[3], mMajorVersion);
-  //ToValue(matches[4], mMinorVersion);
-  //ToValue(matches[5], mPatchVersion);
-  //ToValue(matches[6], mRevisionId);
-  //mShortChangeSet = matches[7];
-  //ToValue(matches[8], mMsSinceEpoch);
-  //mTargetOs = matches[9];
-  //mArchitecture = matches[10];
-  //mConfig = matches[11];
-  //mPackageExtension = matches[12];
-
-  
+  // mApplication = matches[1];
+  // mBranch = matches[2];
+  // ToValue(matches[3], mMajorVersion);
+  // ToValue(matches[4], mMinorVersion);
+  // ToValue(matches[5], mPatchVersion);
+  // ToValue(matches[6], mRevisionId);
+  // mShortChangeSet = matches[7];
+  // ToValue(matches[8], mMsSinceEpoch);
+  // mTargetOs = matches[9];
+  // mArchitecture = matches[10];
+  // mConfig = matches[11];
+  // mPackageExtension = matches[12];
 
   // 1           2     3     4     5        6
   // Application.Major.Minor.Patch.Revision.Extension
@@ -149,29 +147,29 @@ bool BuildId::ParseRequired(StringParam buildName)
   return false;
 }
 
-//String BuildId::GetFullId() const
+// String BuildId::GetFullId() const
 //{
-//  /*
-//   * This needs to match
-//   * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
-//   * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
-//   * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
-//   */
-//  StringBuilder builder;
-//  builder.AppendFormat("%s.", mApplication.c_str());     // Application [WelderEditor]
-//  builder.AppendFormat("%s.", mBranch.c_str());          // Branch [master]
-//  builder.AppendFormat("%d.", mMajorVersion);            // Major [1]
-//  builder.AppendFormat("%d.", mMinorVersion);            // Minor [5]
-//  builder.AppendFormat("%d.", mPatchVersion);            // Patch [0]
-//  builder.AppendFormat("%d.", mRevisionId);              // Revision [1501]
-//  builder.AppendFormat("%s.", mShortChangeSet.c_str());  // ShortChangeset [fb02756c46a4]
-//  builder.AppendFormat("%llu.", mMsSinceEpoch);          // MsSinceEpoch [1574702096290]
-//  builder.AppendFormat("%s.", mTargetOs.c_str());        // TargetOs [Windows]
-//  builder.AppendFormat("%s.", mArchitecture.c_str());    // Architecture [x86]
-//  builder.AppendFormat("%s.", mConfig.c_str());          // Config [Release]
-//  builder.AppendFormat("%s", mPackageExtension.c_str()); // Extension [zip]
-//  return builder.ToString();
-//}
+//   /*
+//    * This needs to match
+//    * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
+//    * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
+//    * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+//    */
+//   StringBuilder builder;
+//   builder.AppendFormat("%s.", mApplication.c_str());     // Application [WelderEditor]
+//   builder.AppendFormat("%s.", mBranch.c_str());          // Branch [master]
+//   builder.AppendFormat("%d.", mMajorVersion);            // Major [1]
+//   builder.AppendFormat("%d.", mMinorVersion);            // Minor [5]
+//   builder.AppendFormat("%d.", mPatchVersion);            // Patch [0]
+//   builder.AppendFormat("%d.", mRevisionId);              // Revision [1501]
+//   builder.AppendFormat("%s.", mShortChangeSet.c_str());  // ShortChangeset [fb02756c46a4]
+//   builder.AppendFormat("%llu.", mMsSinceEpoch);          // MsSinceEpoch [1574702096290]
+//   builder.AppendFormat("%s.", mTargetOs.c_str());        // TargetOs [Windows]
+//   builder.AppendFormat("%s.", mArchitecture.c_str());    // Architecture [x86]
+//   builder.AppendFormat("%s.", mConfig.c_str());          // Config [Release]
+//   builder.AppendFormat("%s", mPackageExtension.c_str()); // Extension [zip]
+//   return builder.ToString();
+// }
 
 String BuildId::GetFullId() const
 {
@@ -182,17 +180,17 @@ String BuildId::GetFullId() const
    * Example: WelderEditor.1.5.0.1501.zip
    */
   StringBuilder builder;
-  builder.AppendFormat("%s.", mApplication.c_str());     // Application [WelderEditor]
-  //builder.AppendFormat("%s.", mBranch.c_str());          // Branch [master]
-  builder.AppendFormat("%d.", mMajorVersion);            // Major [1]
-  builder.AppendFormat("%d.", mMinorVersion);            // Minor [5]
-  builder.AppendFormat("%d.", mPatchVersion);            // Patch [0]
-  builder.AppendFormat("%d.", mRevisionId);              // Revision [1501]
-  //builder.AppendFormat("%s.", mShortChangeSet.c_str());  // ShortChangeset [fb02756c46a4]
-  //builder.AppendFormat("%llu.", mMsSinceEpoch);          // MsSinceEpoch [1574702096290]
-  //builder.AppendFormat("%s.", mTargetOs.c_str());        // TargetOs [Windows]
-  //builder.AppendFormat("%s.", mArchitecture.c_str());    // Architecture [x86]
-  //builder.AppendFormat("%s.", mConfig.c_str());          // Config [Release]
+  builder.AppendFormat("%s.", mApplication.c_str()); // Application [WelderEditor]
+  // builder.AppendFormat("%s.", mBranch.c_str());          // Branch [master]
+  builder.AppendFormat("%d.", mMajorVersion); // Major [1]
+  builder.AppendFormat("%d.", mMinorVersion); // Minor [5]
+  builder.AppendFormat("%d.", mPatchVersion); // Patch [0]
+  builder.AppendFormat("%d.", mRevisionId);   // Revision [1501]
+  // builder.AppendFormat("%s.", mShortChangeSet.c_str());  // ShortChangeset [fb02756c46a4]
+  // builder.AppendFormat("%llu.", mMsSinceEpoch);          // MsSinceEpoch [1574702096290]
+  // builder.AppendFormat("%s.", mTargetOs.c_str());        // TargetOs [Windows]
+  // builder.AppendFormat("%s.", mArchitecture.c_str());    // Architecture [x86]
+  // builder.AppendFormat("%s.", mConfig.c_str());          // Config [Release]
   builder.AppendFormat("%s", mPackageExtension.c_str()); // Extension [zip]
   return builder.ToString();
 }
@@ -281,7 +279,7 @@ bool BuildId::IsPlatformEmpty() const
 
 bool BuildId::IsForThisPlatform() const
 {
-  //return mTargetOs == WelderTargetOsName && mArchitecture == WelderArchitectureName && mConfig == WelderConfigName;
+  // return mTargetOs == WelderTargetOsName && mArchitecture == WelderArchitectureName && mConfig == WelderConfigName;
   return true;
 }
 

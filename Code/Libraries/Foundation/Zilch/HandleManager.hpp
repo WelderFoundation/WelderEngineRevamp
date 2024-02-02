@@ -192,7 +192,8 @@ public:
   // otherwise The default behavior is to compare the dereferenced pointers
   // Since this check is only done after the handles have already been
   // dereferenced, we also pass in the dereferenced byte pointers we received
-  virtual bool IsEqual(const Handle& handleLhs, const Handle& handleRhs, const ::byte* objectLhs, const ::byte* objectRhs);
+  virtual bool
+  IsEqual(const Handle& handleLhs, const Handle& handleRhs, const ::byte* objectLhs, const ::byte* objectRhs);
 
 public:
   // The executable state (only used in the case that we're not shared)
@@ -361,7 +362,8 @@ public:
   void ObjectToHandle(const ::byte* object, BoundType* type, Handle& handleToInitialize) override;
   void AddReference(const Handle& handle) override;
   ReleaseResult::Enum ReleaseReference(const Handle& handle) override;
-  bool IsEqual(const Handle& handleLhs, const Handle& handleRhs, const ::byte* objectLhs, const ::byte* objectRhs) override;
+  bool
+  IsEqual(const Handle& handleLhs, const Handle& handleRhs, const ::byte* objectLhs, const ::byte* objectRhs) override;
 };
 static_assert(sizeof(String) <= HandleUserDataSize,
               "The String class must fit within Handle::Data (make handle Data bigger)");

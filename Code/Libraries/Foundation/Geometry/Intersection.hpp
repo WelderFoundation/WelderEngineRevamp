@@ -71,7 +71,8 @@ struct IntersectionPoint
   /// corresponds to the point on the second shape.
   Vec3 Points[2];
 
-  union {
+  union
+  {
     /// Amount of overlap occurring in the direction of the normal.
     real Depth;
 
@@ -1106,7 +1107,8 @@ struct IntersectionPoint2D
   /// corresponds to the point on the second shape.
   Vec2 Points[2];
 
-  union {
+  union
+  {
     /// Amount of overlap occurring in the direction of the normal.
     real Depth;
 

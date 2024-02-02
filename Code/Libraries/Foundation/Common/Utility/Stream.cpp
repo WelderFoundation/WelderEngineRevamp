@@ -94,7 +94,8 @@ FixedMemoryStream::FixedMemoryStream(ByteBufferBlock& block) : FixedMemoryStream
 {
 }
 
-FixedMemoryStream::FixedMemoryStream(StringParam string) : FixedMemoryStream((::byte*)string.Data(), string.SizeInBytes())
+FixedMemoryStream::FixedMemoryStream(StringParam string) :
+    FixedMemoryStream((::byte*)string.Data(), string.SizeInBytes())
 {
 }
 

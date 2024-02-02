@@ -38,11 +38,7 @@ ZilchDefineType(SoundSpace, builder, type)
 }
 
 SoundSpace::SoundSpace() :
-    mPauseWithTimeSpace(true),
-    mPitchWithTimeSpace(true),
-    mPitchNode(nullptr),
-    mLevelPaused(false),
-    mEditorMode(false)
+    mPauseWithTimeSpace(true), mPitchWithTimeSpace(true), mPitchNode(nullptr), mLevelPaused(false), mEditorMode(false)
 {
 }
 

@@ -212,7 +212,8 @@ public:
   void SetCross(uint index, Vec3Param crossVector3, real w);
   void SetCross(uint index, real x, real y, real z, real w);
 
-  union {
+  union
+  {
     struct
     {
 #if ColumnBasis == 1

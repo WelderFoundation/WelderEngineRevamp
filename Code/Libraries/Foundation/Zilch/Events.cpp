@@ -265,8 +265,7 @@ void EventForward(EventHandler* sender, StringParam eventName, EventHandler* rec
 }
 
 ZilchEventDelegate::ZilchEventDelegate(const Delegate& delegate, ExecutableState* state) :
-    FunctionWithThis(delegate),
-    State(state)
+    FunctionWithThis(delegate), State(state)
 {
   // We assume that the passed in delegate should be validated by this point, so
   // this should not crash or be invalid

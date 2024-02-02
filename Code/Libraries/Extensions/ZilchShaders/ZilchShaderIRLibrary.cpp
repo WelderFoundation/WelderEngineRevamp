@@ -4,7 +4,6 @@
 namespace Zero
 {
 
-//-------------------------------------------------------------------FragmentSharedKey
 FragmentSharedKey::FragmentSharedKey()
 {
   mStorageClass = spv::StorageClassFunction;

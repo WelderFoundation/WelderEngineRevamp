@@ -9,13 +9,13 @@
 #endif
 
 #ifdef ZeroWebgl
-# include "GLES3/gl32.h"
+#  include "GLES3/gl32.h"
 #else
 // Include glew before OpenGl
-# include <GL/glew.h>
-# if defined(WelderTargetOsWindows)
-#  include <GL/wglew.h>
-# endif
+#  include <GL/glew.h>
+#  if defined(WelderTargetOsWindows)
+#    include <GL/wglew.h>
+#  endif
 #endif
 
 // Include OpenGl

@@ -24,9 +24,7 @@ Tweakable(Vec4, DownloadBackground, Vec4(1, 1, 1, 1), cLocation);
 } // namespace BuildsUi
 
 BuildItem::BuildItem(Composite* parent, ZeroBuild* version, BuildsMenu* buildsMenu) :
-    Composite(parent),
-    mVersion(version),
-    mBuildsMenu(buildsMenu)
+    Composite(parent), mVersion(version), mBuildsMenu(buildsMenu)
 {
   mVersionSelector = buildsMenu->mLauncher->mVersionSelector;
 

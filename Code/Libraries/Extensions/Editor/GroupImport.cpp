@@ -87,7 +87,7 @@ void RunGroupImport(ImportOptions& options)
         JsonValue* buffers = gltf->GetMember("buffers", JsonErrorMode::DefaultValue);
         if (buffers != nullptr)
         {
-          forRange (JsonValue*  buffer, buffers->ArrayElements)
+          forRange (JsonValue* buffer, buffers->ArrayElements)
           {
             JsonValue* uri = buffer->GetMember("uri", JsonErrorMode::DefaultValue);
             if (uri == nullptr)
@@ -98,7 +98,8 @@ void RunGroupImport(ImportOptions& options)
             {
               String outputFileName = FilePath::GetFileNameWithoutExtension(binFilePath);
               String outputFileExt = FilePath::GetFileName(binFilePath).Replace(outputFileName, "");
-              String outputFilePath = FilePath::CombineWithExtension(library->SourcePath, outputFileName, outputFileExt);
+              String outputFilePath =
+                  FilePath::CombineWithExtension(library->SourcePath, outputFileName, outputFileExt);
               CopyFile(outputFilePath, binFilePath);
             }
           }

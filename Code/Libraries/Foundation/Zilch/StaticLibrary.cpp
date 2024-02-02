@@ -5,8 +5,7 @@
 namespace Zilch
 {
 StaticLibrary::StaticLibrary(StringParam name, StringParam namespaceForPlugins) :
-    Name(name),
-    Build(BuildState::NotBuilt)
+    Name(name), Build(BuildState::NotBuilt)
 {
   // Create a library builder
   this->Builder = new LibraryBuilder(name, namespaceForPlugins);

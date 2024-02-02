@@ -95,7 +95,8 @@ void Sha1Builder::RunUnitTests()
 void Sha1BuilderTransform(u32 state[5], const ::byte buffer[64])
 {
   u32 a, b, c, d, e;
-  typedef union {
+  typedef union
+  {
     ::byte c[64];
     u32 l[16];
   } CHAR64LONG16;

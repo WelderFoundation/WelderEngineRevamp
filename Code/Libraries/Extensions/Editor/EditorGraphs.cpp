@@ -19,7 +19,7 @@ class FpsSampler : public DataSampler
     using namespace Profile;
     Array<Record*>::range records = ProfileSystem::Instance->GetRecords();
     Record* record = records.Front();
-    forRange(Profile::Record * r, records)
+    forRange (Profile::Record* r, records)
     {
       if (r->GetName() == "Engine")
       {

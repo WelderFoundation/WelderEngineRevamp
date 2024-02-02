@@ -144,10 +144,7 @@ public:
 
   /// Move Constructor
   Array(MoveReference<this_type> other) :
-      base_type(*other),
-      mData(other->mData),
-      mCapacity(other->mCapacity),
-      mSize(other->mSize)
+      base_type(*other), mData(other->mData), mCapacity(other->mCapacity), mSize(other->mSize)
   {
     other->ReleaseData();
   }
@@ -179,9 +176,7 @@ public:
     PushBack(p1);
   }
   Array(ContainerInitializerDummy*, const_reference p0, const_reference p1, const_reference p2) :
-      mData(nullptr),
-      mCapacity(0),
-      mSize(0)
+      mData(nullptr), mCapacity(0), mSize(0)
   {
     Reserve(3);
     PushBack(p0);
@@ -189,9 +184,7 @@ public:
     PushBack(p2);
   }
   Array(ContainerInitializerDummy*, const_reference p0, const_reference p1, const_reference p2, const_reference p3) :
-      mData(nullptr),
-      mCapacity(0),
-      mSize(0)
+      mData(nullptr), mCapacity(0), mSize(0)
   {
     Reserve(4);
     PushBack(p0);
@@ -205,9 +198,7 @@ public:
         const_reference p2,
         const_reference p3,
         const_reference p4) :
-      mData(nullptr),
-      mCapacity(0),
-      mSize(0)
+      mData(nullptr), mCapacity(0), mSize(0)
   {
     Reserve(5);
     PushBack(p0);
@@ -223,9 +214,7 @@ public:
         const_reference p3,
         const_reference p4,
         const_reference p5) :
-      mData(nullptr),
-      mCapacity(0),
-      mSize(0)
+      mData(nullptr), mCapacity(0), mSize(0)
   {
     Reserve(6);
     PushBack(p0);

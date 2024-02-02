@@ -1483,19 +1483,23 @@ void OpenglRenderer::AddShaders(Array<ShaderEntry>& entries, uint forceCompileBa
   }
 }
 
-GLint OpenglRenderer::GetUniformLocation(GlShader* shader, StringParam name) {
+GLint OpenglRenderer::GetUniformLocation(GlShader* shader, StringParam name)
+{
   // First look in our local cache
   GLint location = shader->mLocations.FindValue(name, -1);
-  if (location != -1) {
+  if (location != -1)
+  {
     return location;
   }
   location = glGetUniformLocation(shader->mId, name.c_str());
   shader->mLocations[name] = location;
   return location;
 }
-void OpenglRenderer::DeleteShaderByKey(const ShaderKey& shaderKey) {
+void OpenglRenderer::DeleteShaderByKey(const ShaderKey& shaderKey)
+{
   GlShader* shader = mGlShaders.FindValue(shaderKey, nullptr);
-  if (shader) {
+  if (shader)
+  {
     glDeleteProgram(shader->mId);
     delete shader;
   }

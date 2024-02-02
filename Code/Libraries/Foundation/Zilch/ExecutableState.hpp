@@ -849,8 +849,8 @@ public:
     public:                                                                                                            \
       static T Get(Call& call, size_t index);                                                                          \
       static void Set(Call& call, size_t index, SetT value);                                                           \
-      static ::byte* GetArgumentPointer(Call& call, size_t index);                                                       \
-      static T CastArgumentPointer(::byte* stackPointer);                                                                \
+      static ::byte* GetArgumentPointer(Call& call, size_t index);                                                     \
+      static T CastArgumentPointer(::byte* stackPointer);                                                              \
     };
 
 #  define ZilchCallHelperTemplateSpecialization(T, SetT)                                                               \
@@ -859,8 +859,8 @@ public:
     public:                                                                                                            \
       static T Get(Call& call, size_t index);                                                                          \
       static void Set(Call& call, size_t index, SetT value);                                                           \
-      static ::byte* GetArgumentPointer(Call& call, size_t index);                                                       \
-      static T CastArgumentPointer(::byte* stackPointer);                                                                \
+      static ::byte* GetArgumentPointer(Call& call, size_t index);                                                     \
+      static T CastArgumentPointer(::byte* stackPointer);                                                              \
     };
 
 // Facilitates invoking Zilch functions including parameter passing and grabbing
@@ -962,10 +962,10 @@ public:
   {
     // Get the stack location and perform checks
     ::byte* stack = this->GetChecked(index,
-                                   sizeof(typename ZilchStaticType(T)::RepresentedType),
-                                   ZilchTypeId(T),
-                                   CheckPrimitive::Value,
-                                   Direction::Get);
+                                     sizeof(typename ZilchStaticType(T)::RepresentedType),
+                                     ZilchTypeId(T),
+                                     CheckPrimitive::Value,
+                                     Direction::Get);
 
     // Read the value from the stack and return it (or convert it)
     return InternalReadValue<T>(stack);

@@ -16,7 +16,7 @@ static_assert(CHAR_BIT == 8, "Platform byte length must be 8 bits");
 /// Converts Bits to Bytes
 #define BITS_TO_BYTES(b) (((b) + 7) >> 3)
 /// Converts Bytes to Bits
-#define BYTES_TO_BITS(B) ((B)*8)
+#define BYTES_TO_BITS(B) ((B) * 8)
 
 /// Unsigned integer bit size
 #define UINT_BITS (BYTES_TO_BITS(sizeof(uint)))
@@ -29,14 +29,14 @@ static_assert(CHAR_BIT == 8, "Platform byte length must be 8 bits");
 #define LBIT(N) (uint8(128) >> (N))
 
 /// Sets the right-justified bit N of Byte if Condition is true, else clears it
-#define ASSIGN_RBIT(Condition, Byte, N) ((*(uint8*)Byte) ^= ((-(bool)(Condition) ^ ((uint8)*Byte)) & RBIT(N)))
+#define ASSIGN_RBIT(Condition, Byte, N) ((*(uint8*)Byte) ^= ((-(bool)(Condition) ^ ((uint8) * Byte)) & RBIT(N)))
 /// Sets the left-justified bit N of Byte if Condition is true, else clears it
-#define ASSIGN_LBIT(Condition, Byte, N) ((*(uint8*)Byte) ^= ((-(bool)(Condition) ^ ((uint8)*Byte)) & LBIT(N)))
+#define ASSIGN_LBIT(Condition, Byte, N) ((*(uint8*)Byte) ^= ((-(bool)(Condition) ^ ((uint8) * Byte)) & LBIT(N)))
 
 /// Equivalent to (X / 8)
 #define DIV8(X) ((X) >> 3)
 /// Equivalent to (X % 8)
-#define MOD8(X) ((X)&7)
+#define MOD8(X) ((X) & 7)
 /// Rounds X up to the next multiple of 8
 #define ROUND_UP_8(X) (MOD8(X) == 0 ? (X) : (X) + (8 - MOD8(X)))
 
@@ -146,7 +146,8 @@ enum Enum
 };
 typedef uint32 Type;
 } // namespace Endianness
-static const union {
+static const union
+{
   uint8 bytes[4];
   Endianness::Enum value;
 } platformEndianness = {{0x01, 0x02, 0x03, 0x04}};

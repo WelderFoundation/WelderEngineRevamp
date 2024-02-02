@@ -48,7 +48,7 @@ extern "C"
 #pragma intrinsic(_InterlockedExchange8)
 #pragma intrinsic(_InterlockedExchange16)
 #pragma intrinsic(_InterlockedExchange)
-//#pragma intrinsic (_InterlockedExchange64     )
+// #pragma intrinsic (_InterlockedExchange64     )
 #pragma intrinsic(_InterlockedExchangePointer)
 
 // InterlockedCompareExchange
@@ -62,19 +62,19 @@ extern "C"
 #pragma intrinsic(_InterlockedExchangeAdd8)
 #pragma intrinsic(_InterlockedExchangeAdd16)
 #pragma intrinsic(_InterlockedExchangeAdd)
-//#pragma intrinsic (_InterlockedExchangeAdd64)
+// #pragma intrinsic (_InterlockedExchangeAdd64)
 
 // InterlockedIncrement
-//#pragma intrinsic (_InterlockedIncrement8 )
+// #pragma intrinsic (_InterlockedIncrement8 )
 #pragma intrinsic(_InterlockedIncrement16)
 #pragma intrinsic(_InterlockedIncrement)
-//#pragma intrinsic (_InterlockedIncrement64)
+// #pragma intrinsic (_InterlockedIncrement64)
 
 // InterlockedDecrement
-//#pragma intrinsic (_InterlockedDecrement8 )
+// #pragma intrinsic (_InterlockedDecrement8 )
 #pragma intrinsic(_InterlockedDecrement16)
 #pragma intrinsic(_InterlockedDecrement)
-//#pragma intrinsic (_InterlockedDecrement64)
+// #pragma intrinsic (_InterlockedDecrement64)
 
 namespace Zero
 {

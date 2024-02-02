@@ -405,7 +405,8 @@ public:
 
 // Bind data members with an offset
 #  define ZilchFullBindMember(ZilchBuilder, ZilchType, MemberName, Name, PropertyBinding)                              \
-    [&]() {                                                                                                            \
+    [&]()                                                                                                              \
+    {                                                                                                                  \
       ErrorIf(ZilchTypeId(decltype(ZilchSelf::MemberName))->GetCopyableSize() != sizeof(ZilchSelf::MemberName),        \
               "When binding a member the type must match the exact size it is "                                        \
               "expected to be in Zilch "                                                                               \
@@ -531,32 +532,32 @@ public:
 // identifier
 #  define ZilchBindOverloadedMethod(MethodName, OverloadResolution)                                                    \
     ZilchBindOverloadedMethodAs(MethodName, OverloadResolution, #MethodName)
-#  define ZilchBindMethod(MethodName) ZilchBindMethodAs(MethodName, #  MethodName)
+#  define ZilchBindMethod(MethodName) ZilchBindMethodAs(MethodName, #MethodName)
 #  define ZilchBindOverloadedMethodProperty(MethodName, OverloadResolution)                                            \
     ZilchBindOverloadedPropertyMethodAs(MethodName, OverloadResolution, #MethodName)
-#  define ZilchBindMethodProperty(MethodName) ZilchBindMethodPropertyAs(MethodName, #  MethodName)
-#  define ZilchBindMember(MemberName) ZilchBindMemberAs(MemberName, #  MemberName)
-#  define ZilchBindMemberProperty(MemberName) ZilchBindMemberPropertyAs(MemberName, #  MemberName)
-#  define ZilchBindField(FieldName) ZilchBindFieldAs(FieldName, #  FieldName)
-#  define ZilchBindFieldGetter(FieldName) ZilchBindFieldGetterAs(FieldName, #  FieldName)
-#  define ZilchBindFieldSetter(FieldName) ZilchBindFieldSetterAs(FieldName, #  FieldName)
-#  define ZilchBindFieldProperty(FieldName) ZilchBindFieldPropertyAs(FieldName, #  FieldName)
-#  define ZilchBindFieldGetterProperty(FieldName) ZilchBindFieldGetterPropertyAs(FieldName, #  FieldName)
-#  define ZilchBindFieldSetterProperty(FieldName) ZilchBindFieldSetterPropertyAs(FieldName, #  FieldName)
-#  define ZilchBindGetter(PropertyName) ZilchBindGetterAs(PropertyName, #  PropertyName)
-#  define ZilchBindSetter(PropertyName) ZilchBindSetterAs(PropertyName, #  PropertyName)
-#  define ZilchBindGetterSetter(PropertyName) ZilchBindGetterSetterAs(PropertyName, #  PropertyName)
-#  define ZilchBindGetterProperty(PropertyName) ZilchBindGetterPropertyAs(PropertyName, #  PropertyName)
-#  define ZilchBindSetterProperty(PropertyName) ZilchBindSetterPropertyAs(PropertyName, #  PropertyName)
-#  define ZilchBindGetterSetterProperty(PropertyName) ZilchBindGetterSetterPropertyAs(PropertyName, #  PropertyName)
-#  define ZilchBindCustomGetter(PropertyName) ZilchBindCustomGetterAs(PropertyName, #  PropertyName)
-#  define ZilchBindCustomSetter(PropertyName) ZilchBindCustomSetterAs(PropertyName, #  PropertyName)
-#  define ZilchBindCustomGetterSetter(PropertyName) ZilchBindCustomGetterSetterAs(PropertyName, #  PropertyName)
-#  define ZilchBindCustomGetterProperty(PropertyName) ZilchBindCustomGetterPropertyAs(PropertyName, #  PropertyName)
-#  define ZilchBindCustomSetterProperty(PropertyName) ZilchBindCustomSetterPropertyAs(PropertyName, #  PropertyName)
+#  define ZilchBindMethodProperty(MethodName) ZilchBindMethodPropertyAs(MethodName, #MethodName)
+#  define ZilchBindMember(MemberName) ZilchBindMemberAs(MemberName, #MemberName)
+#  define ZilchBindMemberProperty(MemberName) ZilchBindMemberPropertyAs(MemberName, #MemberName)
+#  define ZilchBindField(FieldName) ZilchBindFieldAs(FieldName, #FieldName)
+#  define ZilchBindFieldGetter(FieldName) ZilchBindFieldGetterAs(FieldName, #FieldName)
+#  define ZilchBindFieldSetter(FieldName) ZilchBindFieldSetterAs(FieldName, #FieldName)
+#  define ZilchBindFieldProperty(FieldName) ZilchBindFieldPropertyAs(FieldName, #FieldName)
+#  define ZilchBindFieldGetterProperty(FieldName) ZilchBindFieldGetterPropertyAs(FieldName, #FieldName)
+#  define ZilchBindFieldSetterProperty(FieldName) ZilchBindFieldSetterPropertyAs(FieldName, #FieldName)
+#  define ZilchBindGetter(PropertyName) ZilchBindGetterAs(PropertyName, #PropertyName)
+#  define ZilchBindSetter(PropertyName) ZilchBindSetterAs(PropertyName, #PropertyName)
+#  define ZilchBindGetterSetter(PropertyName) ZilchBindGetterSetterAs(PropertyName, #PropertyName)
+#  define ZilchBindGetterProperty(PropertyName) ZilchBindGetterPropertyAs(PropertyName, #PropertyName)
+#  define ZilchBindSetterProperty(PropertyName) ZilchBindSetterPropertyAs(PropertyName, #PropertyName)
+#  define ZilchBindGetterSetterProperty(PropertyName) ZilchBindGetterSetterPropertyAs(PropertyName, #PropertyName)
+#  define ZilchBindCustomGetter(PropertyName) ZilchBindCustomGetterAs(PropertyName, #PropertyName)
+#  define ZilchBindCustomSetter(PropertyName) ZilchBindCustomSetterAs(PropertyName, #PropertyName)
+#  define ZilchBindCustomGetterSetter(PropertyName) ZilchBindCustomGetterSetterAs(PropertyName, #PropertyName)
+#  define ZilchBindCustomGetterProperty(PropertyName) ZilchBindCustomGetterPropertyAs(PropertyName, #PropertyName)
+#  define ZilchBindCustomSetterProperty(PropertyName) ZilchBindCustomSetterPropertyAs(PropertyName, #PropertyName)
 #  define ZilchBindCustomGetterSetterProperty(PropertyName)                                                            \
     ZilchBindCustomGetterSetterPropertyAs(PropertyName, #PropertyName)
-#  define ZilchBindEnumValue(EnumValue) ZilchBindEnumValueAs(EnumValue, #  EnumValue)
+#  define ZilchBindEnumValue(EnumValue) ZilchBindEnumValueAs(EnumValue, #EnumValue)
 
 // Overload resolution helper macros
 #  define ZilchStaticOverload(ReturnType, ...) (ReturnType(*)(__VA_ARGS__))

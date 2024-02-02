@@ -598,8 +598,9 @@ void EntryPointGeneration::DeclareGeometryInterface(ZilchSpirVFrontEnd* translat
     entryPointArguments.PushBack(outputVar);
 
     // Create the function call to the entry point
-    translator->BuildIROp(currentBlock, OpType::OpFunctionCall, voidType, copyInputsData.mFunction, selfVar, inputVar, context);
-    
+    translator->BuildIROp(
+        currentBlock, OpType::OpFunctionCall, voidType, copyInputsData.mFunction, selfVar, inputVar, context);
+
     // Call the generated entry point function
     translator->WriteFunctionCall(entryPointArguments, function, context);
 
@@ -2599,7 +2600,7 @@ void EntryPointGeneration::AddRuntimeArrayDecorations(BasicBlock* decorationBloc
   int stride = GetSizeAfterAlignment(totalSize, maxAlignment);
   reflectionData.mSizeInBytes = totalSize;
   reflectionData.mStride = stride;
-  
+
   // Now we can actually decorate the runtime array's stride (make sure to only decorate a type once)
   if (!mUniqueTypes.Contains(spirvRuntimeArrayType))
   {

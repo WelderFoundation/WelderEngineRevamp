@@ -29,10 +29,7 @@ StringParam GetCoreVertexFragmentName(CoreVertexType::Enum type)
 }
 
 GraphicsDriverSupport::GraphicsDriverSupport() :
-    mTextureCompression(false),
-    mMultiTargetBlend(false),
-    mSamplerObjects(false),
-    mIntel(false)
+    mTextureCompression(false), mMultiTargetBlend(false), mSamplerObjects(false), mIntel(false)
 {
 }
 
@@ -731,7 +728,7 @@ void YInvertBC6Mode10Block(::byte* block)
     ::byte b0B = (block[7] & 0x1f) << 1 | (block[6] & 0x80) >> 7;
     ::byte b1A = (block[2] & 0x40) >> 1 | (block[1] & 0x40) >> 2 | (block[8] & 0x01) << 3 | (block[7] & 0xe0) >> 5;
     ::byte b1B = (block[4] & 0x02) << 4 | (block[4] & 0x04) << 2 | (block[4] & 0x01) << 3 | (block[2] & 0x80) >> 5 |
-               (block[1] & 0x30) >> 4;
+                 (block[1] & 0x30) >> 4;
 
     // Other swaps assume this swap will happen first if it's needed
     if (swapEndpoints01)

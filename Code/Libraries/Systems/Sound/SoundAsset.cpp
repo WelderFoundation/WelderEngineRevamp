@@ -12,12 +12,7 @@ ZilchDefineType(SoundAsset, builder, Type)
 }
 
 SoundAsset::SoundAsset(const String& assetName, bool streaming) :
-    mStreaming(streaming),
-    mFileLength(0.0f),
-    mChannels(0),
-    mFrameCount(0),
-    mName(assetName),
-    mInstanceReferenceCount(0)
+    mStreaming(streaming), mFileLength(0.0f), mChannels(0), mFrameCount(0), mName(assetName), mInstanceReferenceCount(0)
 {
 }
 
@@ -176,8 +171,7 @@ StreamingSoundAsset::StreamingSoundAsset(Status& status,
                                          const String& fileName,
                                          AudioFileLoadType::Enum loadType,
                                          const String& assetName) :
-    SoundAsset(assetName, true),
-    mFileName(fileName)
+    SoundAsset(assetName, true), mFileName(fileName)
 {
   FileHeader header;
   unsigned fileSize = PacketDecoder::OpenAndReadHeader(status, fileName, &mInputFile, &header);

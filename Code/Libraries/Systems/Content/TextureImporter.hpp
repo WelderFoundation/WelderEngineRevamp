@@ -14,7 +14,8 @@ void ResizeImage(ImageFormat::Enum format,
                  uint dstHeight);
 
 void ToNvttSurface(nvtt::Surface& surface, uint width, uint height, TextureFormat::Enum format, const ::byte* image);
-void FromNvttSurface(const nvtt::Surface& surface, uint& width, uint& height, TextureFormat::Enum format, ::byte*& image);
+void FromNvttSurface(
+    const nvtt::Surface& surface, uint& width, uint& height, TextureFormat::Enum format, ::byte*& image);
 
 class TextureImporter
 {

@@ -149,11 +149,7 @@ ZilchDefineType(PanningNode, builder, type)
 }
 
 PanningNode::PanningNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mSumToMono(false),
-    mLeftVolume(1.0f),
-    mRightVolume(1.0f),
-    mActive(false)
+    SimpleCollapseNode(name, ID, false, false), mSumToMono(false), mLeftVolume(1.0f), mRightVolume(1.0f), mActive(false)
 {
 }
 
@@ -470,8 +466,7 @@ ZilchDefineType(LowPassNode, builder, type)
 }
 
 LowPassNode::LowPassNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mCutoffFrequency(20001.0f)
+    SimpleCollapseNode(name, ID, false, false), mCutoffFrequency(20001.0f)
 {
 }
 
@@ -565,8 +560,7 @@ ZilchDefineType(HighPassNode, builder, type)
 }
 
 HighPassNode::HighPassNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mCutoffFrequency(10.0f)
+    SimpleCollapseNode(name, ID, false, false), mCutoffFrequency(10.0f)
 {
 }
 
@@ -662,9 +656,7 @@ ZilchDefineType(BandPassNode, builder, type)
 }
 
 BandPassNode::BandPassNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mCentralFrequency(0.0f),
-    mQuality(0.669f)
+    SimpleCollapseNode(name, ID, false, false), mCentralFrequency(0.0f), mQuality(0.669f)
 {
 }
 
@@ -959,10 +951,7 @@ ZilchDefineType(ReverbNode, builder, type)
 }
 
 ReverbNode::ReverbNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mTimeSec(1.0f),
-    mWetLevelValue(0.5f),
-    mOutputFinishedThreaded(true)
+    SimpleCollapseNode(name, ID, false, false), mTimeSec(1.0f), mWetLevelValue(0.5f), mOutputFinishedThreaded(true)
 {
 }
 
@@ -1104,10 +1093,7 @@ ZilchDefineType(DelayNode, builder, type)
 }
 
 DelayNode::DelayNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mDelaySec(0.1f),
-    mFeedbackValue(0.0f),
-    mWetValue(0.5f)
+    SimpleCollapseNode(name, ID, false, false), mDelaySec(0.1f), mFeedbackValue(0.0f), mWetValue(0.5f)
 {
 }
 
@@ -1275,10 +1261,7 @@ ZilchDefineType(FlangerNode, builder, type)
 }
 
 FlangerNode::FlangerNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mMaxDelayMS(5.0f),
-    mModFrequency(0.18f),
-    mFeedback(0.0f)
+    SimpleCollapseNode(name, ID, false, false), mMaxDelayMS(5.0f), mModFrequency(0.18f), mFeedback(0.0f)
 {
 }
 
@@ -1983,10 +1966,7 @@ ZilchDefineType(ModulationNode, builder, type)
 }
 
 ModulationNode::ModulationNode(StringParam name, unsigned ID) :
-    SimpleCollapseNode(name, ID, false, false),
-    mAmplitude(false),
-    mFrequency(10.0f),
-    mWetLevelValue(1.0f)
+    SimpleCollapseNode(name, ID, false, false), mAmplitude(false), mFrequency(10.0f), mWetLevelValue(1.0f)
 {
 }
 

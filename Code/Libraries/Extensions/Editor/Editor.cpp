@@ -620,8 +620,7 @@ class SpaceViewport : public Composite
 {
 public:
   SpaceViewport(Composite* parent, CameraViewport* cameraViewport, bool destroySpaceOnClose) :
-      Composite(parent),
-      mDestroySpaceOnClose(destroySpaceOnClose)
+      Composite(parent), mDestroySpaceOnClose(destroySpaceOnClose)
   {
     // Fill the game widget
     SetLayout(CreateFillLayout());
@@ -908,7 +907,8 @@ Status Editor::SaveAll(bool showNotify)
   // Scripts need to be fully compiling before we run
   ZilchManager* zilchManager = ZilchManager::GetInstance();
   zilchManager->TriggerCompileExternally();
-  if (zilchManager->mLastCompileResult == CompileResult::CompilationFailed) {
+  if (zilchManager->mLastCompileResult == CompileResult::CompilationFailed)
+  {
     Z::gEngine->LoadingFinish();
     return Status(StatusState::Failure, "Failed to compile Zilch Scripts");
   }

@@ -613,8 +613,7 @@ FragmentedMessage::FragmentedMessage(MoveReference<Message> fragment) : mFragmen
 }
 
 FragmentedMessage::FragmentedMessage(MoveReference<FragmentedMessage> rhs) :
-    mFragments(ZeroMove(rhs->mFragments)),
-    mFinalFragmentIndex(rhs->mFinalFragmentIndex)
+    mFragments(ZeroMove(rhs->mFragments)), mFinalFragmentIndex(rhs->mFinalFragmentIndex)
 {
 }
 

@@ -7,9 +7,7 @@ namespace Zero
 AnimationProcessor::AnimationProcessor(AnimationBuilder* animationBuilder,
                                        HierarchyDataMap& hierarchyData,
                                        AnimationNodeRedirectMap& animationRedirectMap) :
-    mBuilder(animationBuilder),
-    mHierarchyDataMap(hierarchyData),
-    mAnimationRedirectMap(animationRedirectMap)
+    mBuilder(animationBuilder), mHierarchyDataMap(hierarchyData), mAnimationRedirectMap(animationRedirectMap)
 {
 }
 

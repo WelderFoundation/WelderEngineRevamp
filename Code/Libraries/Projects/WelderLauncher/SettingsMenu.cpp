@@ -23,9 +23,7 @@ Tweakable(Vec4, TextBoxButtonClicked, Vec4(1, 1, 1, 1), cLocation);
 } // namespace SettingsUi
 
 SettingsMenu::SettingsMenu(Modal* parent, LauncherWindow* launcher) :
-    Composite(parent),
-    mLauncher(launcher),
-    mParentModal(parent)
+    Composite(parent), mLauncher(launcher), mParentModal(parent)
 {
   ZPrint("Settings Menu Displayed\n");
   SetLayout(CreateStackLayout(LayoutDirection::TopToBottom, Pixels(0, 5), Thickness(32, 52, 32, 22)));

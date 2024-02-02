@@ -173,9 +173,7 @@ ZilchDefineType(TileEditor2DSubTool, builder, type)
 }
 
 TileEditor2DSubTool::TileEditor2DSubTool(TileEditor2D* owner) :
-    mOwner(owner),
-    mPrimaryActive(false),
-    mSecondaryActive(false)
+    mOwner(owner), mPrimaryActive(false), mSecondaryActive(false)
 {
 }
 

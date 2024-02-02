@@ -10,8 +10,7 @@ MessageChannel::MessageChannel() : mChannelId(0), mTransferMode(TransferMode::Im
 {
 }
 MessageChannel::MessageChannel(MessageChannelId channelId, TransferMode::Enum transferMode) :
-    mChannelId(channelId),
-    mTransferMode(transferMode)
+    mChannelId(channelId), mTransferMode(transferMode)
 {
 }
 

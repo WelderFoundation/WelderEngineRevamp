@@ -99,13 +99,14 @@ GeometryProcessorCodes::Enum GeometryImporter::ProcessModelFiles()
   // it does not know where the current file is, and will fail.
   // To solve this problem, we need to change the current directory
   // of the IO handler to the directory of the current file.
-  // When loading is done, set the current directory back to 
+  // When loading is done, set the current directory back to
   // the previous value so we don't mess anything up with assimp
   String ioHandlerDirectory = String(mAssetImporter.GetIOHandler()->CurrentDirectory().c_str());
   String inputFileDirectory = FilePath::GetDirectoryPath(mInputFile);
   mAssetImporter.GetIOHandler()->ChangeDirectory(inputFileDirectory.c_str());
   mScene = mAssetImporter.ReadFileFromMemory(block.Data, block.Size, flags);
-  if (!mScene) {
+  if (!mScene)
+  {
     String extension = FilePath::GetExtension(mInputFile);
     mScene = mAssetImporter.ReadFileFromMemory(block.Data, block.Size, flags, extension.c_str());
   }

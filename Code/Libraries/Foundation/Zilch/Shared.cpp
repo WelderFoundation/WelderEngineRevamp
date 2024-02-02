@@ -129,10 +129,7 @@ bool UnaryOperator::operator==(const UnaryOperator& rhs) const
 }
 
 UntypedOperator::UntypedOperator() :
-    IsValid(false),
-    Operator(Grammar::Invalid),
-    Precedence(0),
-    Associativity(OperatorAssociativity::LeftToRight)
+    IsValid(false), Operator(Grammar::Invalid), Precedence(0), Associativity(OperatorAssociativity::LeftToRight)
 {
 }
 

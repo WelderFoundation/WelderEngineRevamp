@@ -14,11 +14,7 @@ static const float cSqrt2 = (float)sqrt(2);
 static const float cSqrt3 = (float)sqrt(3);
 
 PathFinderGridNodeRange::PathFinderGridNodeRange(PathFinderAlgorithmGrid* grid, IntVec3Param center) :
-    mGrid(grid),
-    mCenter(center),
-    mIndex(0),
-    mCurrentCost(0),
-    mCurrentIntVec3(IntVec3::cZero)
+    mGrid(grid), mCenter(center), mIndex(0), mCurrentCost(0), mCurrentIntVec3(IntVec3::cZero)
 {
   PopUntilValid();
 }
@@ -242,9 +238,7 @@ ZilchDefineType(PathFinderGrid, builder, type)
 }
 
 PathFinderGrid::PathFinderGrid() :
-    mTransform(nullptr),
-    mLocalCellSize(Vec3(1)),
-    mGrid(new CopyOnWriteData<PathFinderAlgorithmGrid>())
+    mTransform(nullptr), mLocalCellSize(Vec3(1)), mGrid(new CopyOnWriteData<PathFinderAlgorithmGrid>())
 {
 }
 

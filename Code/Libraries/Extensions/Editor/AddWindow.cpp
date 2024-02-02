@@ -18,8 +18,7 @@ ZilchDefineType(PostAddResourceEvent, builder, type)
 }
 
 PostAddResourceEvent::PostAddResourceEvent(PostAddOp& postAdd, ResourceAdd* resource) :
-    mPostAdd(postAdd),
-    mResourceAdd(resource)
+    mPostAdd(postAdd), mResourceAdd(resource)
 {
 }
 
@@ -473,9 +472,7 @@ ZilchDefineType(ResourceTemplateSearch, builder, type)
 }
 
 ResourceTemplateSearch::ResourceTemplateSearch(Composite* parent) :
-    ColoredComposite(parent, Vec4(0.22f, 0.22f, 0.22f, 1.0f)),
-    mTemplateCount(0),
-    mManager(nullptr)
+    ColoredComposite(parent, Vec4(0.22f, 0.22f, 0.22f, 1.0f)), mTemplateCount(0), mManager(nullptr)
 {
   SetLayout(CreateStackLayout());
 
@@ -689,9 +686,7 @@ ZilchDefineType(ResourceTemplateDisplay, builder, type)
 }
 
 ResourceTemplateDisplay::ResourceTemplateDisplay(Composite* parent, PostAddOp& postAdd) :
-    ColoredComposite(parent, Vec4(0.27f, 0.27f, 0.27f, 1.0f)),
-    mPostAdd(postAdd),
-    mPreviewWidget(nullptr)
+    ColoredComposite(parent, Vec4(0.27f, 0.27f, 0.27f, 1.0f)), mPostAdd(postAdd), mPreviewWidget(nullptr)
 {
   SetLayout(CreateStackLayout(LayoutDirection::TopToBottom, Pixels(0, 0), Thickness::cZero));
 

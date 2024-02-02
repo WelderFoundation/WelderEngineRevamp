@@ -50,8 +50,7 @@ public:
   Element* mSelectBox;
 
   TileSelector(MouseDragEvent* dragEvent, TileView* tree) :
-      MouseManipulation(dragEvent->GetMouse(), tree),
-      mTileView(tree)
+      MouseManipulation(dragEvent->GetMouse(), tree), mTileView(tree)
   {
     mClientArea = tree->mArea->GetClientWidget();
 
@@ -145,8 +144,7 @@ void ItemPopUp::UpdateTransform()
 }
 
 TileViewWidget::TileViewWidget(Composite* parent, TileView* tileView, PreviewWidget* tileWidget, DataIndex dataIndex) :
-    Composite(parent),
-    mTileView(tileView)
+    Composite(parent), mTileView(tileView)
 {
   mDefSet = parent->GetDefinitionSet()->GetDefinitionSet("ItemGrid");
   mBackground = CreateAttached<Element>(cWhiteSquare);

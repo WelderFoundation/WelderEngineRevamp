@@ -151,8 +151,7 @@ void ZilchFragmentLoader::ReloadFromFile(Resource* resource, ResourceEntry& entr
 ImplementResourceManager(ZilchFragmentManager, ZilchFragment);
 
 ZilchFragmentManager::ZilchFragmentManager(BoundType* resourceType) :
-    ResourceManager(resourceType),
-    mLastExceptionVersion(-1)
+    ResourceManager(resourceType), mLastExceptionVersion(-1)
 {
   mCategory = "Code";
   mCanAddFile = true;
