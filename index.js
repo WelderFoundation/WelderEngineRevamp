@@ -761,7 +761,11 @@ const findExecutableDir = (buildDir, config, directory, library) => [
   path.join(buildDir, "Code", "Libraries", directory, library)
 ].filter((filePath) => fs.existsSync(filePath))[0];
 
-const findExecutable = (buildDir, config, directory, library) => path.join(findExecutableDir(buildDir, config, directory, library), `${library}${executableExtension}`);
+const findExecutable = (buildDir, config, directory, library) => 
+{
+	const executableDir = findExecutableDir(buildDir, config, directory, library);
+	return path.join(executableDir, `${library}${executableExtension}`);
+}
 
 const format = async (options) => {
   console.log("Formatting");
