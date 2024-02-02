@@ -769,7 +769,7 @@ const findExecutable = (buildDir, config, directory, library) =>
 
 const format = async (options) => {
   console.log("Formatting");
-  await runEslint(options);
+  //await runEslint(options);
   const sourceFiles = gatherSourceFiles(dirs.libraries, "c|cc|cxx|cpp|h|hxx|hpp|inl");
   if (options.tidy) {
     await runClangTidy(options, sourceFiles);
