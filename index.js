@@ -538,8 +538,10 @@ const readCmakeVariables = (buildDir) => {
 };
 
 const getVersionedPrebuiltContentDir = (cmakeVariables) => {
-  // This must match the revisionChangesetName in ContentLogic.cpp:
-  //const revisionChangesetName = `Version-${cmakeVariables.WELDER_REVISION}-${cmakeVariables.WELDER_CHANGESET}`;
+  /*
+   * This must match the revisionChangesetName in ContentLogic.cpp:
+   *const revisionChangesetName = `Version-${cmakeVariables.WELDER_REVISION}-${cmakeVariables.WELDER_CHANGESET}`;
+   */
   const revisionChangesetName = `Version-${cmakeVariables.WELDER_REVISION}`;
   return path.join(dirs.prebuiltContent, revisionChangesetName);
 };
@@ -761,15 +763,14 @@ const findExecutableDir = (buildDir, config, directory, library) => [
   path.join(buildDir, "Code", "Libraries", directory, library)
 ].filter((filePath) => fs.existsSync(filePath))[0];
 
-const findExecutable = (buildDir, config, directory, library) => 
-{
-	const executableDir = findExecutableDir(buildDir, config, directory, library);
-	return path.join(executableDir, `${library}${executableExtension}`);
-}
+const findExecutable = (buildDir, config, directory, library) => {
+  const executableDir = findExecutableDir(buildDir, config, directory, library);
+  return path.join(executableDir, `${library}${executableExtension}`);
+};
 
 const format = async (options) => {
   console.log("Formatting");
-  //await runEslint(options);
+  await runEslint(options);
   const sourceFiles = gatherSourceFiles(dirs.libraries, "c|cc|cxx|cpp|h|hxx|hpp|inl");
   if (options.tidy) {
     await runClangTidy(options, sourceFiles);
@@ -985,12 +986,12 @@ const pack = async (options) => {
     const files = fs.readdirSync(executableDir).filter((file) => !filter.includes(path.extname(file)) && !filter.includes(file)).
       map((file) => path.join(executableDir, file));
 
-    ///*
+    // /*
     // * This needs to match index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
     // * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
     // * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
     // */
-    //const name =
+    // Const name =
     //  `${library}.` +
     //  `${cmakeVariables.WELDER_BRANCH}.` +
     //  `${cmakeVariables.WELDER_MAJOR_VERSION}.` +
@@ -1002,7 +1003,7 @@ const pack = async (options) => {
     //  `${combo.alias}.` +
     //  `${combo.architecture}.` +
     //  `${cmakeVariables.WELDER_CONFIG}.zip`;
-      
+
     /*
      * This needs to match index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
      * Application.Major.Minor.Patch.Revision.Extension
@@ -1010,17 +1011,19 @@ const pack = async (options) => {
      */
     const name =
       `${library}.` +
-      //`${cmakeVariables.WELDER_BRANCH}.` +
+      // `${cmakeVariables.WELDER_BRANCH}.` +
       `${cmakeVariables.WELDER_MAJOR_VERSION}.` +
       `${cmakeVariables.WELDER_MINOR_VERSION}.` +
       `${cmakeVariables.WELDER_PATCH_VERSION}.` +
       `${cmakeVariables.WELDER_REVISION}.` +
-      //`${cmakeVariables.WELDER_SHORT_CHANGESET}.` +
-      //`${cmakeVariables.WELDER_MS_SINCE_EPOCH}.` +
-      //`${combo.alias}.` +
-      //`${combo.architecture}.` +
-      //`${cmakeVariables.WELDER_CONFIG}.zip`;
-      `zip`;
+      /*
+       *`${cmakeVariables.WELDER_SHORT_CHANGESET}.` +
+       *`${cmakeVariables.WELDER_MS_SINCE_EPOCH}.` +
+       *`${combo.alias}.` +
+       *`${combo.architecture}.` +
+       *`${cmakeVariables.WELDER_CONFIG}.zip`;
+       */
+      "zip";
 
     const packageZip = path.join(dirs.packages, name);
     tryUnlinkSync(packageZip);
@@ -1098,7 +1101,7 @@ const disk = () => {
 };
 
 const all = async (options) => {
-  //await format({...options, validate: true});
+  // Await format({...options, validate: true});
   await cmake(options);
   // Build the executable so we can prebuild content (no prebuilt content or included builds for the launcher yet)
   await build(options);
