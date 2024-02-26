@@ -49,7 +49,6 @@ void ZeroStartup::Exit(int returnCode)
 
 void ZeroStartup::MainLoop()
 {
-  StartupPhaseResult::Enum result = StartupPhaseResult::Continue;
   switch (mPhase)
   {
   case StartupPhase::Initialize:
@@ -57,17 +56,8 @@ void ZeroStartup::MainLoop()
     NextPhase();
     break;
   case StartupPhase::UserInitialize:
-    result = UserInitialize();
-    if (result == StartupPhaseResult::Continue)
-    {
-      Shortcuts::GetInstance()->Load(
-          FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Shortcuts.data"));
-
-      // Load documentation for all native libraries
-      DocumentationLibrary::GetInstance()->LoadDocumentation(
-          FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Documentation.data"));
+    if (UserInitialize() == StartupPhaseResult::Continue)
       NextPhase();
-    }
     else
       mPhase = StartupPhase::Shutdown;
     break;
@@ -261,6 +251,16 @@ System* CreateTimeSystem();
 void ZeroStartup::Startup()
 {
   ProfileScopeFunction();
+
+  {
+    Shortcuts::GetInstance()->Load(
+        FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Shortcuts.data"));
+
+    // Load documentation for all native libraries
+    DocumentationLibrary::GetInstance()->LoadDocumentation(
+        FilePath::Combine(Z::gEngine->GetConfigCog()->has(MainConfig)->DataDirectory, "Documentation.data"));
+  }
+
   Engine* engine = Z::gEngine;
   Cog* configCog = engine->GetConfigCog();
 
