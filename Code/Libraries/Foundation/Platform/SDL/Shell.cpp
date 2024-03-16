@@ -1049,7 +1049,7 @@ void ShellWindow::PlatformSpecificFixup()
 
 bool ShellWindow::HasOwnMinMaxExitButtons()
 {
-#if defined(WelderTargetOsEmscripten)
+#if defined(ZeroTargetOsEmscripten)
   return true;
 #else
   return !mStyle.IsSet(WindowStyleFlags::ClientOnly);

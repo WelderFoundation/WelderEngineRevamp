@@ -5,7 +5,7 @@
 namespace Zero
 {
 
-#if defined(WelderTargetOsEmscripten)
+#if defined(ZeroTargetOsEmscripten)
 const cstr cExecutableExtensionWithoutDot = ".wasm";
 const cstr cSharedLibraryExtensionWithoutDot = "wasm";
 const cstr cExecutableExtensionWithDot = ".wasm";

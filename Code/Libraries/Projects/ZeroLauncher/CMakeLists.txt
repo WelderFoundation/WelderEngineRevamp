@@ -1,9 +1,9 @@
-add_executable(WelderLauncher)
+add_executable(ZeroLauncher)
 
-welder_setup_library(WelderLauncher ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(WelderLauncher ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(ZeroLauncher ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(ZeroLauncher ${CMAKE_CURRENT_LIST_DIR})
 
-target_sources(WelderLauncher
+target_sources(ZeroLauncher
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/VirtualFileSystem.cpp
     ${CMAKE_CURRENT_LIST_DIR}/ActiveProjectMenu.cpp
@@ -52,7 +52,7 @@ target_sources(WelderLauncher
     ${CMAKE_CURRENT_LIST_DIR}/VersionSelector.hpp
 )
 
-target_link_libraries(WelderLauncher
+target_link_libraries(ZeroLauncher
   PUBLIC
     Assimp
     CodeTranslator
@@ -92,4 +92,4 @@ target_link_libraries(WelderLauncher
     ZilchShaders
 )
 
-welder_copy_from_linked_libraries(WelderLauncher)
+zero_copy_from_linked_libraries(ZeroLauncher)

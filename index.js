@@ -32,7 +32,7 @@ const initialize = () => {
 };
 
 initialize();
-const repoRootFile = ".welder";
+const repoRootFile = ".zero";
 
 const dirs = (() => {
   const repo = path.dirname(findUp.sync(repoRootFile));
@@ -62,7 +62,7 @@ const executables = [
   {
     copyToIncludedBuilds: true,
     directory: "Projects",
-    name: "WelderEditor",
+    name: "ZeroEditor",
     nonResourceDependencies: [
       "Data",
       "LauncherTemplates",
@@ -84,7 +84,7 @@ const executables = [
     // Since the launcher includes the editor build, it must come afterwards.
     copyToIncludedBuilds: false,
     directory: "Projects",
-    name: "WelderLauncher",
+    name: "ZeroLauncher",
     nonResourceDependencies: [
       "Data",
       path.join("Build", "IncludedBuilds"),
@@ -391,8 +391,8 @@ const runClangFormat = async (options, sourceFiles) => {
   }));
 };
 
-const runWelderFormat = async (options, sourceFiles) => {
-  console.log("Running Welder Format");
+const runZeroFormat = async (options, sourceFiles) => {
+  console.log("Running Zero Format");
 
   await Promise.all(sourceFiles.map(async (filePath) => {
     const oldCode = fs.readFileSync(filePath, "utf8");
@@ -438,7 +438,7 @@ const runWelderFormat = async (options, sourceFiles) => {
 
     if (oldCode !== newCode) {
       if (options.validate) {
-        printErrorLine(`File '${filePath}' must be welder-formatted`);
+        printErrorLine(`File '${filePath}' must be zero-formatted`);
       } else {
         fs.writeFileSync(filePath, newCode, "utf8");
       }
@@ -539,8 +539,8 @@ const readCmakeVariables = (buildDir) => {
 
 const getVersionedPrebuiltContentDir = (cmakeVariables) => {
   // This must match the revisionChangesetName in ContentLogic.cpp:
-  //const revisionChangesetName = `Version-${cmakeVariables.WELDER_REVISION}-${cmakeVariables.WELDER_CHANGESET}`;
-  const revisionChangesetName = `Version-${cmakeVariables.WELDER_REVISION}`;
+  //const revisionChangesetName = `Version-${cmakeVariables.ZERO_REVISION}-${cmakeVariables.ZERO_CHANGESET}`;
+  const revisionChangesetName = `Version-${cmakeVariables.ZERO_REVISION}`;
   return path.join(dirs.prebuiltContent, revisionChangesetName);
 };
 
@@ -700,27 +700,27 @@ const cmake = async (options) => {
   }
 
   const cmakeArgs = [
-    `-DWELDER_MS_SINCE_EPOCH=${Date.now()}`,
-    `-DWELDER_BRANCH=${branch}`,
-    `-DWELDER_REVISION=${revision}`,
-    `-DWELDER_SHORT_CHANGESET=${shortChangeset}`,
-    `-DWELDER_CHANGESET=${changeset}`,
-    `-DWELDER_CHANGESET_DATE=${changesetDate}`,
-    `-DWELDER_MAJOR_VERSION=${version.major}`,
-    `-DWELDER_MINOR_VERSION=${version.minor}`,
-    `-DWELDER_PATCH_VERSION=${version.patch}`,
-    `-DWELDER_CONFIG=${combo.config}`,
+    `-DZERO_MS_SINCE_EPOCH=${Date.now()}`,
+    `-DZERO_BRANCH=${branch}`,
+    `-DZERO_REVISION=${revision}`,
+    `-DZERO_SHORT_CHANGESET=${shortChangeset}`,
+    `-DZERO_CHANGESET=${changeset}`,
+    `-DZERO_CHANGESET_DATE=${changesetDate}`,
+    `-DZERO_MAJOR_VERSION=${version.major}`,
+    `-DZERO_MINOR_VERSION=${version.minor}`,
+    `-DZERO_PATCH_VERSION=${version.patch}`,
+    `-DZERO_CONFIG=${combo.config}`,
     "-G",
     combo.builder,
     ...builderArgs,
-    `-DWELDER_TOOLCHAIN=${combo.toolchain}`,
+    `-DZERO_TOOLCHAIN=${combo.toolchain}`,
     ...toolchainArgs,
-    `-DWELDER_PLATFORM=${combo.platform}`,
-    `-DWELDER_ARCHITECTURE=${combo.architecture}`,
+    `-DZERO_PLATFORM=${combo.platform}`,
+    `-DZERO_ARCHITECTURE=${combo.architecture}`,
     ...architectureArgs,
     ...configArgs,
-    `-DWELDER_HOSTOS=${hostos}`,
-    `-DWELDER_TARGETOS=${combo.targetos}`,
+    `-DZERO_HOSTOS=${hostos}`,
+    `-DZERO_TARGETOS=${combo.targetos}`,
     dirs.repo
   ];
 
@@ -777,7 +777,7 @@ const format = async (options) => {
   await runClangFormat(options, sourceFiles);
   const scriptFiles = gatherSourceFiles(dirs.resources, "zilchscript|z|zilchfrag|zilchFrag");
   const allFiles = sourceFiles.concat(scriptFiles);
-  await runWelderFormat(options, allFiles);
+  await runZeroFormat(options, allFiles);
   console.log("Formatted");
 };
 
@@ -988,38 +988,38 @@ const pack = async (options) => {
     ///*
     // * This needs to match index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
     // * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
-    // * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+    // * Example: ZeroEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
     // */
     //const name =
     //  `${library}.` +
-    //  `${cmakeVariables.WELDER_BRANCH}.` +
-    //  `${cmakeVariables.WELDER_MAJOR_VERSION}.` +
-    //  `${cmakeVariables.WELDER_MINOR_VERSION}.` +
-    //  `${cmakeVariables.WELDER_PATCH_VERSION}.` +
-    //  `${cmakeVariables.WELDER_REVISION}.` +
-    //  `${cmakeVariables.WELDER_SHORT_CHANGESET}.` +
-    //  `${cmakeVariables.WELDER_MS_SINCE_EPOCH}.` +
+    //  `${cmakeVariables.ZERO_BRANCH}.` +
+    //  `${cmakeVariables.ZERO_MAJOR_VERSION}.` +
+    //  `${cmakeVariables.ZERO_MINOR_VERSION}.` +
+    //  `${cmakeVariables.ZERO_PATCH_VERSION}.` +
+    //  `${cmakeVariables.ZERO_REVISION}.` +
+    //  `${cmakeVariables.ZERO_SHORT_CHANGESET}.` +
+    //  `${cmakeVariables.ZERO_MS_SINCE_EPOCH}.` +
     //  `${combo.alias}.` +
     //  `${combo.architecture}.` +
-    //  `${cmakeVariables.WELDER_CONFIG}.zip`;
+    //  `${cmakeVariables.ZERO_CONFIG}.zip`;
       
     /*
      * This needs to match index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
      * Application.Major.Minor.Patch.Revision.Extension
-     * Example: WelderEditor.1.5.0.1501.Windows.x86.Release.zip
+     * Example: ZeroEditor.1.5.0.1501.Windows.x86.Release.zip
      */
     const name =
       `${library}.` +
-      //`${cmakeVariables.WELDER_BRANCH}.` +
-      `${cmakeVariables.WELDER_MAJOR_VERSION}.` +
-      `${cmakeVariables.WELDER_MINOR_VERSION}.` +
-      `${cmakeVariables.WELDER_PATCH_VERSION}.` +
-      `${cmakeVariables.WELDER_REVISION}.` +
-      //`${cmakeVariables.WELDER_SHORT_CHANGESET}.` +
-      //`${cmakeVariables.WELDER_MS_SINCE_EPOCH}.` +
+      //`${cmakeVariables.ZERO_BRANCH}.` +
+      `${cmakeVariables.ZERO_MAJOR_VERSION}.` +
+      `${cmakeVariables.ZERO_MINOR_VERSION}.` +
+      `${cmakeVariables.ZERO_PATCH_VERSION}.` +
+      `${cmakeVariables.ZERO_REVISION}.` +
+      //`${cmakeVariables.ZERO_SHORT_CHANGESET}.` +
+      //`${cmakeVariables.ZERO_MS_SINCE_EPOCH}.` +
       //`${combo.alias}.` +
       //`${combo.architecture}.` +
-      //`${cmakeVariables.WELDER_CONFIG}.zip`;
+      //`${cmakeVariables.ZERO_CONFIG}.zip`;
       `zip`;
 
     const packageZip = path.join(dirs.packages, name);

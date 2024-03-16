@@ -1,56 +1,56 @@
 [submodule "Code/External/Assimp/Repo"]
 	path = Code/External/Assimp/Repo
-	url = https://github.com/WelderFoundation/assimp.git
-    branch = updateassimp3
+	url = https://github.com/ZeroEngineProject/assimp.git
+    branch = zeroengine
 [submodule "Code/External/Curl/Repo"]
 	path = Code/External/Curl/Repo
-	url = https://github.com/WelderFoundation/curl.git
-    branch = rel_7_86_0
+	url = https://github.com/ZeroEngineProject/curl.git
+    branch = zeroengine
 [submodule "Code/External/FreeType/Repo"]
 	path = Code/External/FreeType/Repo
-	url = https://github.com/WelderFoundation/freetype.git
-    branch = ftupdate2
+	url = https://github.com/ZeroEngineProject/freetype.git
+    branch = zeroengine
 [submodule "Code/External/Glew/Repo"]
 	path = Code/External/Glew/Repo
-	url = https://github.com/WelderFoundation/glew.git
-    branch = welder_updates2
+	url = https://github.com/ZeroEngineProject/glew.git
+    branch = zeroengine
 [submodule "Code/External/Libgit2/Repo"]
 	path = Code/External/Libgit2/Repo
-	url = https://github.com/WelderFoundation/libgit2.git
-    branch = welder_updates2
+	url = https://github.com/ZeroEngineProject/libgit2.git
+    branch = zeroengine
 [submodule "Code/External/Libpng/Repo"]
 	path = Code/External/Libpng/Repo
-	url = https://github.com/WelderFoundation/libpng.git
-    branch = welder_updates2
+	url = https://github.com/ZeroEngineProject/libpng.git
+    branch = zeroengine
 [submodule "Code/External/Nvtt/Repo"]
 	path = Code/External/Nvtt/Repo
-	url = https://github.com/WelderFoundation/nvidia-texture-tools.git
-    branch = welder_updates2
+	url = https://github.com/ZeroEngineProject/nvidia-texture-tools.git
+    branch = zeroengine
 [submodule "Code/External/Opus/Repo"]
 	path = Code/External/Opus/Repo
-	url = https://github.com/WelderFoundation/opus.git
-    branch = welder_updates2
+	url = https://github.com/ZeroEngineProject/opus.git
+    branch = zeroengine
 [submodule "Code/External/Scintilla/Repo"]
 	path = Code/External/Scintilla/Repo
-	url = https://github.com/WelderFoundation/scintilla.git
-    branch = welder_updates
+	url = https://github.com/ZeroEngineProject/scintilla.git
+    branch = zeroengine
 [submodule "Code/External/SDL/Repo"]
 	path = Code/External/SDL/Repo
-	url = https://github.com/WelderFoundation/SDL.git
-    branch = sdlupdate_sdl2
+	url = https://github.com/ZeroEngineProject/SDL.git
+    branch = zeroengine
 [submodule "Code/External/SpirvCross/Repo"]
 	path = Code/External/SpirvCross/Repo
-	url = https://github.com/WelderFoundation/SPIRV-Cross.git
-    branch = zeroupdate1
+	url = https://github.com/ZeroEngineProject/SPIRV-Cross.git
+    branch = zeroengine
 [submodule "Code/External/SpirvHeaders/Repo"]
 	path = Code/External/SpirvHeaders/Repo
-	url = https://github.com/WelderFoundation/SPIRV-Headers.git
-    branch = zeroupdate1
+	url = https://github.com/ZeroEngineProject/SPIRV-Headers.git
+    branch = zeroengine
 [submodule "Code/External/SpirvTools/Repo"]
 	path = Code/External/SpirvTools/Repo
-	url = https://github.com/WelderFoundation/SPIRV-Tools.git
-    branch = welder_updates_zero2
+	url = https://github.com/ZeroEngineProject/SPIRV-Tools.git
+    branch = zeroengine
 [submodule "Code/External/ZLib/Repo"]
 	path = Code/External/ZLib/Repo
-	url = https://github.com/WelderFoundation/zlib.git
-    branch = welder_updates
+	url = https://github.com/ZeroEngineProject/zlib.git
+    branch = zeroengine

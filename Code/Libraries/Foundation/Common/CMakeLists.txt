@@ -1,12 +1,12 @@
 add_library(Common)
 
-welder_setup_library(Common ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(Common ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(Common ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(Common ${CMAKE_CURRENT_LIST_DIR})
 
-set(WELDER_COMMON_VISUALIZER "")
+set(ZERO_COMMON_VISUALIZER "")
 
 if ("${CMAKE_GENERATOR}" MATCHES "Visual Studio*")
-    set(WELDER_COMMON_VISUALIZER "${CMAKE_CURRENT_LIST_DIR}/Visualizers.natvis")
+    set(ZERO_COMMON_VISUALIZER "${CMAKE_CURRENT_LIST_DIR}/Visualizers.natvis")
 endif()
 
 set(Common_Containers_Sources
@@ -300,5 +300,5 @@ target_sources(Common
     ${CMAKE_CURRENT_LIST_DIR}/CommonStandard.hpp
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.hpp
-    ${WELDER_COMMON_VISUALIZER}
+    ${ZERO_COMMON_VISUALIZER}
 )

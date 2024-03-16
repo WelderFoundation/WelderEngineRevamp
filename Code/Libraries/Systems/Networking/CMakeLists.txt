@@ -1,7 +1,7 @@
 add_library(Networking)
 
-welder_setup_library(Networking ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(Networking ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(Networking ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(Networking ${CMAKE_CURRENT_LIST_DIR})
 
 target_sources(Networking
   PRIVATE

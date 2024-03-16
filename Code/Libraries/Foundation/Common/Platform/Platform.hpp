@@ -8,7 +8,7 @@
 #  define ZeroDebug 1
 #endif
 
-#ifdef WelderCompilerMsvc
+#ifdef ZeroCompilerMsvc
 
 // Enable these warnings by setting them to level 3
 // Enable warning function does not override any base class virtual member
@@ -181,7 +181,7 @@
 
 #endif
 
-#if defined(WelderCompilerClang)
+#if defined(ZeroCompilerClang)
 // Ignore unknown pragma warnings...
 #  pragma clang diagnostic ignored "-Wunknown-pragmas"
 #  pragma clang diagnostic ignored "-Wpragmas"
@@ -213,7 +213,7 @@
 //#  undef __STDC__
 #endif
 
-#if defined(WelderCompilerGcc)
+#if defined(ZeroCompilerGcc)
 // Ignore unknown pragma warnings...
 #  pragma GCC diagnostic ignored "-Wpragmas"
 
@@ -252,7 +252,7 @@
   (((::size_t) & reinterpret_cast<char const volatile&>((((structure*)(::uintptr_t)1)op member))) - 1)
 #define ZeroOffsetOf(structure, member) ZeroOffsetOfHelper(structure, ->, member)
 
-#if defined(WelderTargetOsWindows)
+#if defined(ZeroTargetOsWindows)
 #  define ZeroThreadLocal __declspec(thread)
 #  define ZeroImport __declspec(dllimport)
 #  define ZeroExport __declspec(dllexport)
@@ -260,7 +260,7 @@
 #  define ZeroDebugBreak() __debugbreak()
 #  define ZeroTodo(text) /* __pragma(message(__FILE__ "("                                                              \
                             ZeroStringize(__LINE__) ") : Todo: " text)) */
-#  if defined(WelderCompilerMsvc)
+#  if defined(ZeroCompilerMsvc)
 #    define ZeroForceInline inline __forceinline
 #  else
 #    define ZeroForceInline inline
@@ -272,7 +272,7 @@
 #  define ZeroExport __attribute__((visibility("default")))
 #  define ZeroExportC extern "C" __attribute__((visibility("default")))
 #  define ZeroTodo(text)
-#  if defined(WelderTargetOsEmscripten)
+#  if defined(ZeroTargetOsEmscripten)
 #    define ZeroForceInline
 #    define ZeroDebugBreak()
 #  else

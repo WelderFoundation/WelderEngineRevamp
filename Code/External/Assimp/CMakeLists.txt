@@ -1,10 +1,10 @@
 add_library(Assimp)
 
-welder_setup_library(Assimp ${CMAKE_CURRENT_LIST_DIR} FALSE)
-welder_use_precompiled_header(Assimp ${CMAKE_CURRENT_LIST_DIR})
-welder_source_ignore_precompiled_header(${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/unzip/ioapi.c)
-welder_source_ignore_precompiled_header(${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/unzip/unzip.c)
-welder_source_ignore_precompiled_header(${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/zip/src/zip.c)
+zero_setup_library(Assimp ${CMAKE_CURRENT_LIST_DIR} FALSE)
+zero_use_precompiled_header(Assimp ${CMAKE_CURRENT_LIST_DIR})
+zero_source_ignore_precompiled_header(${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/unzip/ioapi.c)
+zero_source_ignore_precompiled_header(${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/unzip/unzip.c)
+zero_source_ignore_precompiled_header(${CMAKE_CURRENT_LIST_DIR}/Repo/contrib/zip/src/zip.c)
 
 target_compile_definitions(Assimp
   PUBLIC
@@ -609,7 +609,7 @@ target_sources(Assimp
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.hpp
 )
 
-welder_target_includes(Assimp
+zero_target_includes(Assimp
   PUBLIC
     ZLib
 )

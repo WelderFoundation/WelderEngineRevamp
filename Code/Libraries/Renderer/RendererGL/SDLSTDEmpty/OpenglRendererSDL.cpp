@@ -58,7 +58,7 @@ Renderer* CreateRenderer(OsHandle windowHandle, String& error)
 void zglSetSwapInterval(OpenglRenderer* renderer, int interval)
 {
 // On Emscripten we don't want to set this because the browser emits errors.
-#if !defined(WelderTargetOsEmscripten)
+#if !defined(ZeroTargetOsEmscripten)
   SDL_GL_SetSwapInterval(interval);
 #endif
 }

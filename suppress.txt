@@ -26,7 +26,7 @@ KERNELBASE.dll!GetFinalPathNameByHandleW
 INVALID HEAP ARGUMENT
 name=AddTextureWrongDelete (Remove Later)
 drmemorylib.dll!replace_operator_delete_array_nothrow
-WelderEditor.exe!Zero::OpenglRenderer::AddTexture
-WelderEditor.exe!Zero::AddTextureJob::Execute
-WelderEditor.exe!Zero::RendererThreadMain
+ZeroEditor.exe!Zero::OpenglRenderer::AddTexture
+ZeroEditor.exe!Zero::AddTextureJob::Execute
+ZeroEditor.exe!Zero::RendererThreadMain
 KERNEL32.dll!BaseThreadInitThunk

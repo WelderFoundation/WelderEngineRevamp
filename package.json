@@ -1,5 +1,5 @@
 {
-  "name": "welderengine",
+  "name": "zeroengine",
   "version": "0.0.25",
   "description": "Component based game engine focusing on rapid iteration.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WelderFoundation/WelderEngine.git"
+    "url": "git+https://github.com/ZeroEngineProject/ZeroEngine.git"
   },
   "config": {
     "unsafe-perm": true
@@ -23,9 +23,9 @@
   "author": "Trevor Sundberg",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WelderFoundation/WelderEngine/issues"
+    "url": "https://github.com/ZeroEngineProject/ZeroEngine/issues"
   },
-  "homepage": "https://github.com/WelderFoundation/WelderEngine#readme",
+  "homepage": "https://github.com/ZeroEngineProject/ZeroEngine#readme",
   "dependencies": {
     "@koumoul/gh-pages-multi": "^0.7.1",
     "command-exists": "^1.2.8",

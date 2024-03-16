@@ -36,7 +36,7 @@ public:
 };
 
 template <typename Parent, typename Member>
-#if defined(WelderCompilerClang)
+#if defined(ZeroCompilerClang)
 __attribute__((optnone))
 #endif
 inline ptrdiff_t PointerToMemberOffset(const Member Parent::*ptrToMember)

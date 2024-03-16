@@ -1,7 +1,7 @@
-#define MyAppName "WelderEditor"
-#define MyAppPublisher "Welder Foundation"
-#define MyAppURL "https://github.com/WelderFoundation/WelderEngineRevamp/"
-#define MyAppExeName "WelderEditor.exe"
+#define MyAppName "ZeroEditor"
+#define MyAppPublisher "Zero Engine Project"
+#define MyAppURL "https://zeroengine.net/"
+#define MyAppExeName "ZeroEditor.exe"
 
 #ifndef ZeroSource
 #define ZeroSource GetEnv("ZERO_SOURCE")

@@ -1,12 +1,12 @@
-add_definitions(-DWelderCompilerMsvc=1 -DWelderCompilerName="Msvc")
+add_definitions(-DZeroCompilerMsvc=1 -DZeroCompilerName="Msvc")
 
-if (WELDER_EXCEPTIONS)
+if (ZERO_EXCEPTIONS)
   set(MSVC_EXCEPTION_OPTION "-EHsc")
 else()
   set(MSVC_EXCEPTION_OPTION "-EHs-c-")
 endif()
 
-set(WELDER_C_CXX_FLAGS "\
+set(ZERO_C_CXX_FLAGS "\
   -W3\
   -Zc:wchar_t\
   -Zc:inline\
@@ -20,7 +20,7 @@ set(WELDER_C_CXX_FLAGS "\
   -bigobj\
 ")
 
-set(WELDER_C_CXX_FLAGS_DEBUG "\
+set(ZERO_C_CXX_FLAGS_DEBUG "\
   -Zi\
   -MDd\
   -GS\
@@ -29,7 +29,7 @@ set(WELDER_C_CXX_FLAGS_DEBUG "\
   -Oy-\
 ")
 
-set(WELDER_C_CXX_FLAGS_RELWITHDEBINFO "\
+set(ZERO_C_CXX_FLAGS_RELWITHDEBINFO "\
   -Zi\
   -MT\
   -MP\
@@ -39,7 +39,7 @@ set(WELDER_C_CXX_FLAGS_RELWITHDEBINFO "\
   -Oy-\
 ")
 
-set(WELDER_C_CXX_FLAGS_RELEASE "\
+set(ZERO_C_CXX_FLAGS_RELEASE "\
   -MT\
   -MP\
   -GL\
@@ -48,7 +48,7 @@ set(WELDER_C_CXX_FLAGS_RELEASE "\
   -Oi\
 ")
 
-set(WELDER_C_CXX_FLAGS_MINSIZEREL "\
+set(ZERO_C_CXX_FLAGS_MINSIZEREL "\
   -MT\
   -MP\
   -GL\
@@ -56,14 +56,14 @@ set(WELDER_C_CXX_FLAGS_MINSIZEREL "\
   -O1\
 ")
 
-set(WELDER_LINKER_FLAGS "/ignore:4099,4221,4075,4251")
-set(WELDER_LINKER_FLAGS_RELEASE "/LTCG")
+set(ZERO_LINKER_FLAGS "/ignore:4099,4221,4075,4251")
+set(ZERO_LINKER_FLAGS_RELEASE "/LTCG")
 
 #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO /SUBSYSTEM:WINDOWS /STACK:8388608")
 
-set(WELDER_C_CXX_EXTERNAL_FLAGS /W0 /wd4267)
+set(ZERO_C_CXX_EXTERNAL_FLAGS /W0 /wd4267)
 
-function(welder_toolchain_setup_library target internal)
+function(zero_toolchain_setup_library target internal)
     set(TARGET_CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO /STACK:8388608")
     if (${internal})
         set(TARGET_CMAKE_EXE_LINKER_FLAGS "${TARGET_CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
@@ -71,12 +71,12 @@ function(welder_toolchain_setup_library target internal)
     set_target_properties(${target} PROPERTIES LINK_FLAGS "${TARGET_CMAKE_EXE_LINKER_FLAGS}")
 endfunction()
 
-function(welder_use_precompiled_header target directory)
+function(zero_use_precompiled_header target directory)
   target_compile_options(${target} PRIVATE "/FIPrecompiled.hpp")
   set_source_files_properties(${directory}/Precompiled.cpp PROPERTIES COMPILE_FLAGS "/YcPrecompiled.hpp")
   set_target_properties(${target} PROPERTIES COMPILE_FLAGS "/YuPrecompiled.hpp")
 endfunction()
 
-function(welder_source_ignore_precompiled_header source)
+function(zero_source_ignore_precompiled_header source)
   set_source_files_properties(${source} PROPERTIES COMPILE_FLAGS "/Y-")
 endfunction()

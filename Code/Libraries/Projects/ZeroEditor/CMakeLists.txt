@@ -1,9 +1,9 @@
-add_executable(WelderEditor)
+add_executable(ZeroEditor)
 
-welder_setup_library(WelderEditor ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(WelderEditor ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(ZeroEditor ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(ZeroEditor ${CMAKE_CURRENT_LIST_DIR})
 
-target_sources(WelderEditor
+target_sources(ZeroEditor
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/VirtualFileSystem.cpp
     ${CMAKE_CURRENT_LIST_DIR}/GameOrEditorStartup.cpp
@@ -15,7 +15,7 @@ target_sources(WelderEditor
     ${CMAKE_CURRENT_LIST_DIR}/ZeroCrashCallbacks.hpp
 )
 
-target_link_libraries(WelderEditor
+target_link_libraries(ZeroEditor
   PUBLIC
     Assimp
     CodeTranslator
@@ -55,14 +55,14 @@ target_link_libraries(WelderEditor
     ZilchShaders
 )
 
-welder_copy_from_linked_libraries(WelderEditor)
+zero_copy_from_linked_libraries(ZeroEditor)
 
-set_target_properties(WelderEditor PROPERTIES ENABLE_EXPORTS TRUE)
-set(platform_plugin_lib_dir ${WELDER_ZILCH_CUSTOM_PLUGIN_SHARED_DIR}${WELDER_TARGETOS}-${WELDER_ARCHITECTURE}/)
-add_custom_command(TARGET WelderEditor POST_BUILD COMMAND
+set_target_properties(ZeroEditor PROPERTIES ENABLE_EXPORTS TRUE)
+set(platform_plugin_lib_dir ${ZERO_ZILCH_CUSTOM_PLUGIN_SHARED_DIR}${ZERO_TARGETOS}-${ZERO_ARCHITECTURE}/)
+add_custom_command(TARGET ZeroEditor POST_BUILD COMMAND
     ${CMAKE_COMMAND} -E make_directory ${platform_plugin_lib_dir})
-add_custom_command(TARGET WelderEditor POST_BUILD COMMAND
-    ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_IMPORT_FILE:WelderEditor> ${platform_plugin_lib_dir})
+add_custom_command(TARGET ZeroEditor POST_BUILD COMMAND
+    ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_IMPORT_FILE:ZeroEditor> ${platform_plugin_lib_dir})
     
-add_custom_command(TARGET WelderEditor POST_BUILD COMMAND
-    ${WELDER_ALL_TO_ONE_TOOL} -Zero ${WELDER_CODE_DIR} ${platform_plugin_lib_dir}Zilch.hpp)
+add_custom_command(TARGET ZeroEditor POST_BUILD COMMAND
+    ${ZERO_ALL_TO_ONE_TOOL} -Zero ${ZERO_CODE_DIR} ${platform_plugin_lib_dir}Zilch.hpp)

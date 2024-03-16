@@ -49,7 +49,7 @@ namespace ZilchToOneCpp
 				{
 					compactor.DirectoryDirectives.Add(Compactor.NormalizePath(Path.Combine(standardLibraries, @"Platform\Windows")), new CompacterDirectives()
 					{
-						PreprocessorCondition = "defined(WelderTargetOsWindows)",
+						PreprocessorCondition = "defined(ZeroTargetOsWindows)",
 						CppOnly = true,
 					});
 					compactor.FilesToProcess.AddFilesFromDirectory(Path.Combine(standardLibraries, @"Platform\Windows"), "*.cpp");

@@ -74,7 +74,7 @@ u64 GetMacAddress()
 
 bool DebugBreak()
 {
-#if defined(WelderTargetOsEmscripten)
+#if defined(ZeroTargetOsEmscripten)
   emscripten_debugger();
 #else
   SDL_TriggerBreakpoint();
@@ -225,7 +225,7 @@ void OpenUrl(cstr url)
 
 void MarkAsExecutable(cstr fileName)
 {
-#if defined(WelderTargetOsLinux) || defined(WelderTargetOsMac)
+#if defined(ZeroTargetOsLinux) || defined(ZeroTargetOsMac)
   system(String::Format("chmod +x \"%s\"", fileName).c_str());
 #endif
 }

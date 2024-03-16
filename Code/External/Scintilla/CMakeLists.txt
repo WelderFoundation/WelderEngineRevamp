@@ -1,7 +1,7 @@
 add_library(Scintilla)
 
-welder_setup_library(Scintilla ${CMAKE_CURRENT_LIST_DIR} FALSE)
-welder_use_precompiled_header(Scintilla ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(Scintilla ${CMAKE_CURRENT_LIST_DIR} FALSE)
+zero_use_precompiled_header(Scintilla ${CMAKE_CURRENT_LIST_DIR})
 
 target_compile_definitions(Scintilla
   PUBLIC

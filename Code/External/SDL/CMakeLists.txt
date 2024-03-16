@@ -4,7 +4,7 @@ set(SDL_TESTS OFF)
 set(SDL_TEST OFF)
 
 # Only done as a hack because we can't find main for some reason (Ubuntu).
-if(WELDER_TARGETOS STREQUAL "Linux")
+if(ZERO_TARGETOS STREQUAL "Linux")
   add_definitions(-DSDL_MAIN_AVAILABLE)
 endif()
 

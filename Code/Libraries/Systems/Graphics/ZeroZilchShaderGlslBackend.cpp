@@ -1,7 +1,7 @@
 // MIT Licensed (see LICENSE.md).
 #include "Precompiled.hpp"
 
-#ifndef WelderExceptions
+#ifndef ZeroExceptions
 #define SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS
 #endif
 #include "spirv_glsl.hpp"
@@ -30,8 +30,8 @@ bool ZeroZilchShaderGlslBackend::RunTranslationPass(ShaderTranslationPassResult&
   spirv_cross::CompilerGLSL compiler(data, wordCount);
   // Set options
   spirv_cross::CompilerGLSL::Options opts = compiler.get_common_options();
-  //opts.force_legacy = true; // welder specific
-  opts.emit_uniform_buffer_as_plain_uniforms = true; // replaces welder specific line above after spirv-cross update, welder specific patch not needed anymore
+  //opts.force_legacy = true; // zero specific
+  opts.emit_uniform_buffer_as_plain_uniforms = true; // replaces zero specific line above after spirv-cross update, zero specific patch not needed anymore
   opts.version = mTargetVersion;
   opts.es = mTargetGlslEs;
   compiler.set_common_options(opts);
@@ -48,7 +48,7 @@ bool ZeroZilchShaderGlslBackend::RunTranslationPass(ShaderTranslationPassResult&
     compiler.set_name(ubo.base_type_id, name.c_str());
   }
 
-#ifdef WelderTargetOsEmscripten
+#ifdef ZeroTargetOsEmscripten
   // gles output is going to flatten input/output blocks and prepend the block
   // name to each member. Forcing block typenames to match.
   for (auto stageInput : resources.stage_inputs)
@@ -113,13 +113,13 @@ bool ZeroZilchShaderGlslBackend::RunTranslationPass(ShaderTranslationPassResult&
   outputData.mReflectionData.mShaderTypeName = inputData.mReflectionData.mShaderTypeName;
 
   bool success = true;
-#ifdef WelderExceptions
+#ifdef ZeroExceptions
   try
   {
 #endif
     std::string source = compiler.compile();
     outputData.mByteStream.Load(source.c_str(), source.size());
-#ifdef WelderExceptions
+#ifdef ZeroExceptions
   }
   catch (const std::exception& e)
   {

@@ -1,8 +1,8 @@
-add_definitions(-DWelderCompilerClang=1 -DWelderCompilerName="Clang")
+add_definitions(-DZeroCompilerClang=1 -DZeroCompilerName="Clang")
 
 add_definitions(-DHAVE_UNISTD_H)
 
-set(WELDER_SINGLE_FILE 0)
+set(ZERO_SINGLE_FILE 0)
 
 # We disable MINIFY_HTML because it takes too much memory and crashes
 
@@ -14,7 +14,7 @@ set(WELDER_SINGLE_FILE 0)
 set(CMAKE_C_ARCHIVE_CREATE "<CMAKE_AR> qc <TARGET> <OBJECTS>")
 set(CMAKE_CXX_ARCHIVE_CREATE "<CMAKE_AR> qc <TARGET> <OBJECTS>")
 
-if (WELDER_EXCEPTIONS)
+if (ZERO_EXCEPTIONS)
   set(CLANG_EXCEPTION_OPTION "-fexceptions")
 else()
   set(CLANG_EXCEPTION_OPTION "-fno-exceptions")
@@ -22,7 +22,7 @@ endif()
 
 set(CMAKE_EXECUTABLE_SUFFIX ".html")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(WELDER_C_CXX_FLAGS "\
+set(ZERO_C_CXX_FLAGS "\
   -Wno-address-of-packed-member\
   -Wno-empty-body\
   ${CLANG_EXCEPTION_OPTION}\
@@ -32,7 +32,7 @@ set(WELDER_C_CXX_FLAGS "\
   -fno-tree-vectorize\
 ")
 
-set(WELDER_LINKER_FLAGS "\
+set(ZERO_LINKER_FLAGS "\
   -s ALLOW_MEMORY_GROWTH=1\
   -s WASM=1\
   -s ASYNCIFY=1\
@@ -41,14 +41,14 @@ set(WELDER_LINKER_FLAGS "\
   -s FULL_ES2=1\
   -s FULL_ES3=1\
   -s MINIFY_HTML=0\
-  -s SINGLE_FILE=${WELDER_SINGLE_FILE}\
+  -s SINGLE_FILE=${ZERO_SINGLE_FILE}\
   -s TOTAL_MEMORY=128MB\
-  --shell-file ${WELDER_PLATFORM_DATA_DIR}/Shell.html\
+  --shell-file ${ZERO_PLATFORM_DATA_DIR}/Shell.html\
   -s FILESYSTEM=0\
   -s ERROR_ON_UNDEFINED_SYMBOLS=0\
 ")
 
-set(WELDER_LINKER_FLAGS_DEBUG "\
+set(ZERO_LINKER_FLAGS_DEBUG "\
   -s ASSERTIONS=2\
   -s GL_ASSERTIONS=1\
   -s DEMANGLE_SUPPORT=1\
@@ -57,7 +57,7 @@ set(WELDER_LINKER_FLAGS_DEBUG "\
   -s WARN_UNALIGNED=1\
 ")
 
-set(WELDER_LINKER_FLAGS_RELWITHDEBINFO "\
+set(ZERO_LINKER_FLAGS_RELWITHDEBINFO "\
   -s ASSERTIONS=2\
   -s GL_ASSERTIONS=1\
   -s DEMANGLE_SUPPORT=1\
@@ -66,34 +66,34 @@ set(WELDER_LINKER_FLAGS_RELWITHDEBINFO "\
   -s WARN_UNALIGNED=1\
 ")
 
-set(WELDER_C_CXX_FLAGS_DEBUG "\
+set(ZERO_C_CXX_FLAGS_DEBUG "\
   -Os\
   -g\
 ")
 
-set(WELDER_C_CXX_FLAGS_RELWITHDEBINFO "\
+set(ZERO_C_CXX_FLAGS_RELWITHDEBINFO "\
   -O1\
   -g\
 ")
 
-set(WELDER_C_CXX_FLAGS_RELEASE "\
+set(ZERO_C_CXX_FLAGS_RELEASE "\
   -O1\
 ")
 
-set(WELDER_C_CXX_FLAGS_MINSIZEREL "\
+set(ZERO_C_CXX_FLAGS_MINSIZEREL "\
   -Os\
 ")
 
-function(welder_toolchain_setup_library target internal)
+function(zero_toolchain_setup_library target internal)
 endfunction()
 
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}\
   --no-heap-copy\
 ")
 
-set(WELDER_C_CXX_EXTERNAL_FLAGS -Wno-everything)
+set(ZERO_C_CXX_EXTERNAL_FLAGS -Wno-everything)
 
-function(welder_use_precompiled_header target directory)
+function(zero_use_precompiled_header target directory)
   #add_library(${target}PrecompiledHeader)
   #
   #target_sources(${target}PrecompiledHeader
@@ -117,5 +117,5 @@ function(welder_use_precompiled_header target directory)
   #add_dependencies(${target} ${target}PrecompiledHeader)
 endfunction()
 
-function(welder_source_ignore_precompiled_header source)
+function(zero_source_ignore_precompiled_header source)
 endfunction()

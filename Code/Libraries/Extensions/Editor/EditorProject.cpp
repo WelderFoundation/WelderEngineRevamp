@@ -272,7 +272,7 @@ bool LauncherOpenProjectComposite::RunLauncherExe(StringParam exePath)
 
 bool LauncherOpenProjectComposite::RunFromInstalledPath()
 {
-  String installExe = Os::GetInstalledExecutable(sWelderOrganization, sLauncherName, sLauncherGuid);
+  String installExe = Os::GetInstalledExecutable(sZeroOrganization, sLauncherName, sLauncherGuid);
   if (installExe.Empty())
     return false;
 
@@ -302,7 +302,7 @@ void LauncherOpenProjectComposite::OnConnectionCompleted(Event* e)
 
 String GetLauncherLocationFromLauncherConfig()
 {
-  auto launcherConfig = LoadRemoteConfig(sWelderOrganization, sLauncherName);
+  auto launcherConfig = LoadRemoteConfig(sZeroOrganization, sLauncherName);
   if (launcherConfig == nullptr)
     return String();
 

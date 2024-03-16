@@ -1,7 +1,7 @@
 add_library(Widget)
 
-welder_setup_library(Widget ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(Widget ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(Widget ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(Widget ${CMAKE_CURRENT_LIST_DIR})
 
 target_sources(Widget
   PRIVATE

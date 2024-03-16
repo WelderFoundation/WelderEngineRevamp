@@ -10,7 +10,7 @@ namespace Zero
 #define WrapHex(a) InnerWrapHex(a)
 #define InnerWrapHex(s) 0x##s##ULL
 
-const String sWelderOrganization = "Welder";
+const String sZeroOrganization = "Zero";
 const String sEditorGuid = "51392222-AEDE-4530-8749-9DFAB5725FD7";
 const String sEditorName = "Editor";
 const String sLauncherGuid = "7489829B-8A03-4B26-B3AC-FDDC6668BAF7";
@@ -18,7 +18,7 @@ const String sLauncherName = "Launcher";
 
 String GetEditorFullName()
 {
-  return sWelderOrganization + sEditorName;
+  return sZeroOrganization + sEditorName;
 }
 
 String GetEditorExecutableFileName()
@@ -28,7 +28,7 @@ String GetEditorExecutableFileName()
 
 String GetLauncherFullName()
 {
-  return sWelderOrganization + sLauncherName;
+  return sZeroOrganization + sLauncherName;
 }
 
 String GetLauncherExecutableFileName()
@@ -82,47 +82,47 @@ uint GetConfigVersion()
 
 uint GetMajorVersion()
 {
-  return WelderMajorVersion;
+  return ZeroMajorVersion;
 }
 
 uint GetMinorVersion()
 {
-  return WelderMinorVersion;
+  return ZeroMinorVersion;
 }
 
 uint GetPatchVersion()
 {
-  return WelderPatchVersion;
+  return ZeroPatchVersion;
 }
 
 uint GetRevisionNumber()
 {
-  return WelderRevisionId;
+  return ZeroRevisionId;
 }
 
 u64 GetShortChangeSet()
 {
-  return WrapHex(WelderShortChangeSet);
+  return WrapHex(ZeroShortChangeSet);
 }
 
 cstr GetMajorVersionString()
 {
-  return Stringify(WelderMajorVersion);
+  return Stringify(ZeroMajorVersion);
 }
 
 cstr GetMinorVersionString()
 {
-  return Stringify(WelderMinorVersion);
+  return Stringify(ZeroMinorVersion);
 }
 
 cstr GetPatchVersionString()
 {
-  return Stringify(WelderPatchVersion);
+  return Stringify(ZeroPatchVersion);
 }
 
 cstr GetRevisionNumberString()
 {
-  return Stringify(WelderRevisionId);
+  return Stringify(ZeroRevisionId);
 }
 
 String GetBuildIdString()
@@ -141,22 +141,22 @@ String GetBuildIdString()
 
 cstr GetShortChangeSetString()
 {
-  return Stringify(WelderShortChangeSet);
+  return Stringify(ZeroShortChangeSet);
 }
 
 cstr GetChangeSetString()
 {
-  return Stringify(WelderChangeSet);
+  return Stringify(ZeroChangeSet);
 }
 
 cstr GetChangeSetDateString()
 {
-  return WelderChangeSetDate;
+  return ZeroChangeSetDate;
 }
 
 cstr GetConfigurationString()
 {
-  return WelderConfigName;
+  return ZeroConfigName;
 }
 
 cstr GetPlatformString()
@@ -170,20 +170,20 @@ cstr GetPlatformString()
 //   * This needs to match
 //   * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName.
 //   * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
-//   * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+//   * Example: ZeroEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
 //   */
 //  StringBuilder builder;
-//  builder.AppendFormat("%s.", GetApplicationName().c_str()); // Application [WelderEditor]
-//  builder.AppendFormat("%s.", WelderBranchName);             // Branch [master]
+//  builder.AppendFormat("%s.", GetApplicationName().c_str()); // Application [ZeroEditor]
+//  builder.AppendFormat("%s.", ZeroBranchName);             // Branch [master]
 //  builder.AppendFormat("%d.", GetMajorVersion());            // Major [1]
 //  builder.AppendFormat("%d.", GetMinorVersion());            // Minor [5]
 //  builder.AppendFormat("%d.", GetPatchVersion());            // Patch [0]
 //  builder.AppendFormat("%d.", GetRevisionNumber());          // Revision [1501]
 //  builder.AppendFormat("%s.", GetShortChangeSetString());    // ShortChangeset [fb02756c46a4]
-//  builder.AppendFormat("%llu.", WelderMsSinceEpoch);         // MsSinceEpoch [1574702096290]
-//  builder.AppendFormat("%s.", WelderTargetOsName);           // TargetOs [Windows]
-//  builder.AppendFormat("%s.", WelderArchitectureName);       // Architecture [x86]
-//  builder.AppendFormat("%s.", WelderConfigName);             // Config [Release]
+//  builder.AppendFormat("%llu.", ZeroMsSinceEpoch);         // MsSinceEpoch [1574702096290]
+//  builder.AppendFormat("%s.", ZeroTargetOsName);           // TargetOs [Windows]
+//  builder.AppendFormat("%s.", ZeroArchitectureName);       // Architecture [x86]
+//  builder.AppendFormat("%s.", ZeroConfigName);             // Config [Release]
 //  builder.Append("zip");
 //  String result = builder.ToString();
 //  return result;
@@ -195,20 +195,20 @@ String GetBuildVersionName()
    * This needs to match
    * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName.
    * Application.Major.Minor.Patch.Revision.Extension
-   * Example: WelderEditor.1.5.0.1501.zip
+   * Example: ZeroEditor.1.5.0.1501.zip
    */
   StringBuilder builder;
-  builder.AppendFormat("%s.", GetApplicationName().c_str()); // Application [WelderEditor]
-  //builder.AppendFormat("%s.", WelderBranchName);             // Branch [master]
+  builder.AppendFormat("%s.", GetApplicationName().c_str()); // Application [ZeroEditor]
+  //builder.AppendFormat("%s.", ZeroBranchName);             // Branch [master]
   builder.AppendFormat("%d.", GetMajorVersion());            // Major [1]
   builder.AppendFormat("%d.", GetMinorVersion());            // Minor [5]
   builder.AppendFormat("%d.", GetPatchVersion());            // Patch [0]
   builder.AppendFormat("%d.", GetRevisionNumber());          // Revision [1501]
   //builder.AppendFormat("%s.", GetShortChangeSetString());    // ShortChangeset [fb02756c46a4]
-  //builder.AppendFormat("%llu.", WelderMsSinceEpoch);         // MsSinceEpoch [1574702096290]
-  //builder.AppendFormat("%s.", WelderTargetOsName);           // TargetOs [Windows]
-  //builder.AppendFormat("%s.", WelderArchitectureName);       // Architecture [x86]
-  //builder.AppendFormat("%s.", WelderConfigName);             // Config [Release]
+  //builder.AppendFormat("%llu.", ZeroMsSinceEpoch);         // MsSinceEpoch [1574702096290]
+  //builder.AppendFormat("%s.", ZeroTargetOsName);           // TargetOs [Windows]
+  //builder.AppendFormat("%s.", ZeroArchitectureName);       // Architecture [x86]
+  //builder.AppendFormat("%s.", ZeroConfigName);             // Config [Release]
   builder.Append("zip");
   String result = builder.ToString();
   return result;

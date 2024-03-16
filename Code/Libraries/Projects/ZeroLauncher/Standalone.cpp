@@ -62,17 +62,17 @@ BuildId BuildId::GetCurrentApplicationId()
   // order to determine if a new major version is available which triggers a
   // re-install of the launcher.
 
-  id.mApplication = GetOrganizationApplicationName(); // Application [WelderEditor]
-  id.mBranch = WelderBranchName;                      // Branch [master]
+  id.mApplication = GetOrganizationApplicationName(); // Application [ZeroEditor]
+  id.mBranch = ZeroBranchName;                      // Branch [master]
   id.mMajorVersion = GetMajorVersion();               // Major [1]
   id.mMinorVersion = GetMinorVersion();               // Minor [5]
   id.mPatchVersion = GetPatchVersion();               // Patch [0]
   id.mRevisionId = GetRevisionNumber();               // Revision [1501]
   id.mShortChangeSet = GetShortChangeSetString();     // ShortChangeset [fb02756c46a4]
-  id.mMsSinceEpoch = WelderMsSinceEpoch;              // MsSinceEpoch [1574702096290]
-  id.mTargetOs = WelderTargetOsName;                  // TargetOs [Windows]
-  id.mArchitecture = WelderArchitectureName;          // Architecture [x86]
-  id.mConfig = WelderConfigName;                      // Config [Release]
+  id.mMsSinceEpoch = ZeroMsSinceEpoch;              // MsSinceEpoch [1574702096290]
+  id.mTargetOs = ZeroTargetOsName;                  // TargetOs [Windows]
+  id.mArchitecture = ZeroArchitectureName;          // Architecture [x86]
+  id.mConfig = ZeroConfigName;                      // Config [Release]
   id.mPackageExtension = "zip";                       // Extension [zip]
   return id;
 }
@@ -83,15 +83,15 @@ bool BuildId::Parse(StringParam buildName)
   // * This needs to match
   // * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
   // * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
-  // * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+  // * Example: ZeroEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
   // */
   /*
    * This needs to match
    * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
    * Application.Major.Minor.Patch.Revision.Extension
-   * Example: WelderEditor.1.5.0.1501.zip
+   * Example: ZeroEditor.1.5.0.1501.zip
    */
-  const Regex cBuildNameRegex("([a-zA-Z0-9_]+)\\." // Application [WelderEditor]
+  const Regex cBuildNameRegex("([a-zA-Z0-9_]+)\\." // Application [ZeroEditor]
                               //"([a-zA-Z0-9_]+)\\." // Branch [master]
                               "([0-9]+)\\."        // Major [1]
                               "([0-9]+)\\."        // Minor [5]
@@ -155,10 +155,10 @@ bool BuildId::ParseRequired(StringParam buildName)
 //   * This needs to match
 //   * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
 //   * Application.Branch.Major.Minor.Patch.Revision.ShortChangeset.MsSinceEpoch.TargetOs.Architecture.Config.Extension
-//   * Example: WelderEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
+//   * Example: ZeroEditor.master.1.5.0.1501.fb02756c46a4.1574702096290.Windows.x86.Release.zip
 //   */
 //  StringBuilder builder;
-//  builder.AppendFormat("%s.", mApplication.c_str());     // Application [WelderEditor]
+//  builder.AppendFormat("%s.", mApplication.c_str());     // Application [ZeroEditor]
 //  builder.AppendFormat("%s.", mBranch.c_str());          // Branch [master]
 //  builder.AppendFormat("%d.", mMajorVersion);            // Major [1]
 //  builder.AppendFormat("%d.", mMinorVersion);            // Minor [5]
@@ -179,10 +179,10 @@ String BuildId::GetFullId() const
    * This needs to match
    * index.js:pack/Standalone.cpp:BuildId::Parse/BuildId::GetFullId/BuildVersion.cpp:GetBuildVersionName
    * Application.Major.Minor.Patch.Revision.Extension
-   * Example: WelderEditor.1.5.0.1501.zip
+   * Example: ZeroEditor.1.5.0.1501.zip
    */
   StringBuilder builder;
-  builder.AppendFormat("%s.", mApplication.c_str());     // Application [WelderEditor]
+  builder.AppendFormat("%s.", mApplication.c_str());     // Application [ZeroEditor]
   //builder.AppendFormat("%s.", mBranch.c_str());          // Branch [master]
   builder.AppendFormat("%d.", mMajorVersion);            // Major [1]
   builder.AppendFormat("%d.", mMinorVersion);            // Minor [5]
@@ -281,15 +281,15 @@ bool BuildId::IsPlatformEmpty() const
 
 bool BuildId::IsForThisPlatform() const
 {
-  //return mTargetOs == WelderTargetOsName && mArchitecture == WelderArchitectureName && mConfig == WelderConfigName;
+  //return mTargetOs == ZeroTargetOsName && mArchitecture == ZeroArchitectureName && mConfig == ZeroConfigName;
   return true;
 }
 
 void BuildId::SetToThisPlatform()
 {
-  mTargetOs = WelderTargetOsName;
-  mArchitecture = WelderArchitectureName;
-  mConfig = WelderConfigName;
+  mTargetOs = ZeroTargetOsName;
+  mArchitecture = ZeroArchitectureName;
+  mConfig = ZeroConfigName;
 }
 
 String BuildId::GetChangeSetDate() const

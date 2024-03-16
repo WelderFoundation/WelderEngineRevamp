@@ -1,15 +1,15 @@
 add_library(RendererGL)
 
-welder_setup_library(RendererGL ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(RendererGL ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(RendererGL ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(RendererGL ${CMAKE_CURRENT_LIST_DIR})
 
 #Emscripten
 #SDLSTDEmpty
 #Windows
 #Linux
 
-if(${WELDER_TARGETOS} STREQUAL "Windows")
-  if(${WELDER_PLATFORM} STREQUAL "SDLSTDEmpty")
+if(${ZERO_TARGETOS} STREQUAL "Windows")
+  if(${ZERO_PLATFORM} STREQUAL "SDLSTDEmpty")
     set(RendererPlatformSource 
       ${CMAKE_CURRENT_LIST_DIR}/SDLSTDEmpty/OpenglRendererSDL.cpp
     )
@@ -18,16 +18,16 @@ if(${WELDER_TARGETOS} STREQUAL "Windows")
       ${CMAKE_CURRENT_LIST_DIR}/Windows/OpenglRendererWindows.cpp
     )
   endif()
-elseif(${WELDER_TARGETOS} STREQUAL "Emscripten")
+elseif(${ZERO_TARGETOS} STREQUAL "Emscripten")
   set(RendererPlatformSource 
     ${CMAKE_CURRENT_LIST_DIR}/Emscripten/OpenglRendererEmscripten.cpp
   )
-elseif(${WELDER_TARGETOS} STREQUAL "Linux")
+elseif(${ZERO_TARGETOS} STREQUAL "Linux")
   set(RendererPlatformSource 
     ${CMAKE_CURRENT_LIST_DIR}/SDLSTDEmpty/OpenglRendererSDL.cpp
   )
 else()
-  message(FATAL_ERROR "No renderer available for target '${WELDER_TARGETOS}'.")
+  message(FATAL_ERROR "No renderer available for target '${ZERO_TARGETOS}'.")
 endif()
 
 target_sources(RendererGL
@@ -51,7 +51,7 @@ target_link_libraries(RendererGL
     Glew
 )
 
-if(NOT ${WELDER_TARGETOS} STREQUAL "Windows" OR ${WELDER_PLATFORM} STREQUAL "SDLSTDEmpty")
+if(NOT ${ZERO_TARGETOS} STREQUAL "Windows" OR ${ZERO_PLATFORM} STREQUAL "SDLSTDEmpty")
   target_link_libraries(RendererGL
     PUBLIC
       SDL

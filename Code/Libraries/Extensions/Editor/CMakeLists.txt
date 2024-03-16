@@ -1,7 +1,7 @@
 add_library(Editor)
 
-welder_setup_library(Editor ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(Editor ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(Editor ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(Editor ${CMAKE_CURRENT_LIST_DIR})
 
 set(Editor_Property_Sources 
     ${CMAKE_CURRENT_LIST_DIR}/Property/BasicPropertyEditors.cpp

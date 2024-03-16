@@ -1,7 +1,7 @@
 add_library(Platform)
 
-welder_setup_library(Platform ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(Platform ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(Platform ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(Platform ${CMAKE_CURRENT_LIST_DIR})
 
 target_compile_definitions(Platform
   PUBLIC
@@ -51,7 +51,7 @@ target_link_libraries(Platform
     SDL
 )
 
-if (WELDER_TARGETOS STREQUAL "Linux")
+if (ZERO_TARGETOS STREQUAL "Linux")
   target_link_libraries(Platform
     PUBLIC
       stdc++fs

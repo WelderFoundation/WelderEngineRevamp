@@ -1,8 +1,8 @@
-# Welder Engine
+# Zero Engine
 
-The Welder Engine is a cross platform game engine that can be used to make simulations of any kind. Projects range from simple prototypes to professional 2D and 3D games, simple physics or graphics demonstrations to robust, realistic simulations.
+The Zero Engine is a cross platform game engine that can be used to make simulations of any kind. Projects range from simple prototypes to professional 2D and 3D games, simple physics or graphics demonstrations to robust, realistic simulations.
 
-![Editor](https://github.com/WelderFoundation/Media/blob/main/Editor/Editor-MineCartLevel2_2.png?raw=true)
+![Editor](https://github.com/ZeroEngineProject/Media/blob/main/Editor/Editor-MineCartLevel2_2.png?raw=true)
 
 # Features
 
@@ -41,13 +41,13 @@ Building on Windows:
 - Run the following in cmd:
 
 ```shell
-git clone https://github.com/WelderFoundation/WelderEngineRevamp.git
-cd WelderEngineRevamp
+git clone https://github.com/ZeroEngineProject/ZeroEngine.git
+cd ZeroEngine
 git submodule update --init --recursive
 npm install
 
 # Specify builder if not using the default. Ex: --builder="Visual Studio 17 2022"
 node index.js cmake
 
-.\Build\<target>\Welder.sln
+.\Build\<target>\Zero.sln
 ```

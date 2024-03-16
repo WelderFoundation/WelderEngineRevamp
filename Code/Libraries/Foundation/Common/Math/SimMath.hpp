@@ -4,7 +4,7 @@
 #include <xmmintrin.h>
 #include <emmintrin.h>
 
-#if defined(WelderTargetOsWindows)
+#if defined(ZeroTargetOsWindows)
 #  define ZeroPreAlign16 __declspec(align(16))
 #  define ZeroPostAlign16
 #else

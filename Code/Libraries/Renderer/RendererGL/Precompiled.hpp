@@ -2,7 +2,7 @@
 
 #include "RendererGLStandard.hpp"
 
-#ifdef WelderTargetOsEmscripten
+#ifdef ZeroTargetOsEmscripten
 #  define ZeroWebgl
 #else
 #  define ZeroGl
@@ -13,7 +13,7 @@
 #else
 // Include glew before OpenGl
 # include <GL/glew.h>
-# if defined(WelderTargetOsWindows)
+# if defined(ZeroTargetOsWindows)
 #  include <GL/wglew.h>
 # endif
 #endif

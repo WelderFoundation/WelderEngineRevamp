@@ -1,7 +1,7 @@
 add_library(RendererEmpty)
 
-welder_setup_library(RendererEmpty ${CMAKE_CURRENT_LIST_DIR} TRUE)
-welder_use_precompiled_header(RendererEmpty ${CMAKE_CURRENT_LIST_DIR})
+zero_setup_library(RendererEmpty ${CMAKE_CURRENT_LIST_DIR} TRUE)
+zero_use_precompiled_header(RendererEmpty ${CMAKE_CURRENT_LIST_DIR})
 
 target_sources(RendererEmpty
   PRIVATE
@@ -12,7 +12,7 @@ target_sources(RendererEmpty
     ${CMAKE_CURRENT_LIST_DIR}/Precompiled.hpp
 )
 
-welder_target_includes(RendererEmpty
+zero_target_includes(RendererEmpty
   PUBLIC
     RendererBase
 )

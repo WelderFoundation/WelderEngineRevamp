@@ -6,7 +6,7 @@ using namespace Zero;
 extern "C" int main(int argc, char* argv[])
 {
   CommandLineToStringArray(gCommandLineArguments, argv, argc);
-  SetupApplication(1, sWelderOrganization, sLauncherGuid, sLauncherName);
+  SetupApplication(1, sZeroOrganization, sEditorGuid, sEditorName);
 
-  return (new LauncherStartup())->Run();
+  return (new GameOrEditorStartup())->Run();
 }
